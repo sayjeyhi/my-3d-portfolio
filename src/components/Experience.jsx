@@ -1,8 +1,8 @@
-import { Float, MeshDistortMaterial, useScroll } from '@react-three/drei'
+import { Stage, useScroll } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { framerMotionConfig } from '../config'
 import { Avatar } from './Models/Avatar.jsx'
 import { Office } from './Models/Office.jsx'
@@ -27,8 +27,6 @@ export const Experience = props => {
     })
   }, [menuOpened])
 
-  const characterContainerAboutRef = useRef()
-
   const [characterAnimation, setCharacterAnimation] = useState('Typing')
   useEffect(() => {
     setCharacterAnimation('Falling')
@@ -50,33 +48,22 @@ export const Experience = props => {
 
     state.camera.position.x = cameraPositionX.get()
     state.camera.lookAt(cameraLookAtX.get(), 0, 0)
-
-    // const position = new THREE.Vector3();
-    // characterContainerAboutRef.current.getWorldPosition(position);
-    // console.log([position.x, position.y, position.z]);
-
-    // const quaternion = new THREE.Quaternion();
-    // characterContainerAboutRef.current.getWorldQuaternion(quaternion);
-    // const euler = new THREE.Euler();
-    // euler.setFromQuaternion(quaternion, "XYZ");
-
-    // console.log([euler.x, euler.y, euler.z]);
   })
 
   return (
     <>
       <motion.group
-        position={[-0.42, 0.12, 3.72]}
-        rotation={[-3.141592653589793, 1.2053981633974482, 3.141592653589793]}
-        animate={'' + section}
+        position={[0.45, 0.34, 3.8]}
+        rotation={[-3.141592653589793, 1.153981633974482, 3.141592653589793]}
+        animate={section.toString()}
         transition={{
           duration: 0.6
         }}
         variants={{
           0: {
-            scaleX: 1.2,
-            scaleY: 1.2,
-            scaleZ: 1.2
+            scaleX: 2.15,
+            scaleY: 2.15,
+            scaleZ: 2.15
           },
           1: {
             y: -viewport.height - 0.5,
@@ -108,15 +95,15 @@ export const Experience = props => {
         }}>
         <Avatar animation={characterAnimation} />
       </motion.group>
-      <ambientLight intensity={1} />
       <motion.group
-        position={[1.5, 2, 3]}
-        scale={[0.9, 0.9, 0.9]}
+        position={[1.4, 1.9, 4]}
         rotation-y={-Math.PI / 4}
-        animate={{
-          y: section === 0 ? 0 : -1
-        }}>
-        <Office section={section} />
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1.4 }}
+        transition={{ duration: 0.5 }}>
+        <Stage shadows intensity={0.5} adjustCamera={false}>
+          <Office section={section} />
+        </Stage>
       </motion.group>
 
       {/* SKILLS */}
@@ -127,18 +114,6 @@ export const Experience = props => {
           y: section === 1 ? -viewport.height : -1.5
         }}>
         <directionalLight position={[-5, 3, 5]} intensity={0.4} />
-        <Float>
-          <mesh position={[1, -3, -15]} scale={[2, 2, 2]}>
-            <sphereGeometry />
-            <MeshDistortMaterial opacity={0.8} transparent distort={0.4} speed={4} color={'red'} />
-          </mesh>
-        </Float>
-        <Float>
-          <mesh scale={[3, 3, 3]} position={[3, 1, -18]}>
-            <sphereGeometry />
-            <MeshDistortMaterial opacity={0.8} transparent distort={1} speed={5} color="yellow" />
-          </mesh>
-        </Float>
       </motion.group>
       <Projects />
     </>
