@@ -1,12 +1,12 @@
-import { Float, MeshDistortMaterial, MeshWobbleMaterial, useScroll } from '@react-three/drei'
+import { Float, MeshDistortMaterial, useScroll } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { useEffect, useRef, useState } from 'react'
 import { framerMotionConfig } from '../config'
-import { Avatar } from './3D/Avatar.jsx'
-import { Office } from './Office'
-import { Projects } from './Projects'
+import { Avatar } from './Models/Avatar.jsx'
+import { Office } from './Models/Office.jsx'
+import { Projects } from './Interface/Contents/components/Projects.jsx'
 
 export const Experience = props => {
   const { menuOpened } = props

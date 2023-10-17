@@ -3,10 +3,8 @@ import { Canvas } from '@react-three/fiber'
 import { MotionConfig } from 'framer-motion'
 import { Leva } from 'leva'
 import { useEffect, useState } from 'react'
-import { Cursor, CursorContextProvider } from './components/Cursor'
 import { Experience } from './components/Experience'
-import { Interface } from './components/Interface'
-import { Menu } from './components/Menu'
+import { Interface } from './components/Interface/Interface'
 import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
 
@@ -33,11 +31,14 @@ function App() {
               <Experience section={section} menuOpened={menuOpened} />
             </Scroll>
             <Scroll html>
-              <Interface setSection={setSection} />
+              <Interface
+                setSection={setSection}
+                menuOpened={menuOpened}
+                setMenuOpened={setMenuOpened}
+              />
             </Scroll>
           </ScrollControls>
         </Canvas>
-        <Menu onSectionChange={setSection} menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
       </MotionConfig>
       <Leva hidden />
     </>
