@@ -1,75 +1,116 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import throttle from 'lodash-es/throttle'
 
-const CURSOR_SPEED = 0.85;
+const isTouchDevice =
+  'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
-let mouseX = 0;
-let mouseY = 0;
-let outlineX = 0;
-let outlineY = 0;
+const CursorContext = createContext({ cursorActive: false, setCursorActive: state => state })
 
-export const Cursor = () => {
-  const cursorOutline = useRef();
-  const [hoverButton, setHoverButton] = useState(false);
-
-  const animate = () => {
-    let distX = mouseX - outlineX;
-    let distY = mouseY - outlineY;
-
-    outlineX = outlineX + distX * CURSOR_SPEED;
-    outlineY = outlineY + distY * CURSOR_SPEED;
-
-    cursorOutline.current.style.left = `${outlineX}px`;
-    cursorOutline.current.style.top = `${outlineY}px`;
-    requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    const mouseEventsListener = document.addEventListener(
-      "mousemove",
-      function (event) {
-        mouseX = event.pageX;
-        mouseY = event.pageY;
-      }
-    );
-    const animateEvent = requestAnimationFrame(animate);
-    return () => {
-      document.removeEventListener("mousemove", mouseEventsListener);
-      cancelAnimationFrame(animateEvent);
-    };
-  }, []);
-
-  useEffect(() => {
-    const mouseEventListener = document.addEventListener(
-      "mouseover",
-      function (e) {
-        if (
-          e.target.tagName.toLowerCase() === "button" ||
-          // check parent is button
-          e.target.parentElement.tagName.toLowerCase() === "button" ||
-          // check is input or textarea
-          e.target.tagName.toLowerCase() === "input" ||
-          e.target.tagName.toLowerCase() === "textarea"
-        ) {
-          setHoverButton(true);
-        } else {
-          setHoverButton(false);
-        }
-      }
-    );
-    return () => {
-      document.removeEventListener("mouseover", mouseEventListener);
-    };
-  }, []);
+export const CursorContextProvider = ({ children }) => {
+  const [cursorActive, setCursorActive] = useState(false)
 
   return (
-      <div
-        className={`z-50 fixed w-5 h-5 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all
-        ${
-          hoverButton
-            ? "bg-transparent border-4 border-gray-900 scale-150"
-            : "bg-indigo-500"
-        }`}
-        ref={cursorOutline}
-      />
-  );
-};
+    <CursorContext.Provider
+      value={{
+        cursorActive,
+        setCursorActive
+      }}>
+      {children}
+    </CursorContext.Provider>
+  )
+}
+const useMousePosition = () => {
+  const [position, setPosition] = useState({
+    clientX: 0,
+    clientY: 0
+  })
+
+  useEffect(() => {
+    const updatePosition = throttle(event => {
+      const { clientX, clientY } = event
+
+      setPosition({
+        clientX,
+        clientY
+      })
+    }, 10)
+
+    document.body.addEventListener('mousemove', updatePosition, false)
+    document.body.addEventListener('mouseenter', updatePosition, false)
+
+    return () => {
+      document.body.removeEventListener('mousemove', updatePosition)
+      document.body.removeEventListener('mouseenter', updatePosition)
+    }
+  }, [])
+
+  return position
+}
+
+export const Cursor = () => {
+  if (isTouchDevice) {
+    return null
+  }
+
+  const { clientX, clientY } = useMousePosition()
+  const { cursorActive: isCursorActive } = useContext(CursorContext)
+
+  return (
+    <svg
+      width={50}
+      height={50}
+      viewBox="0 0 50 50"
+      style={{
+        opacity: !clientX && !clientY ? 0 : 1,
+        zIndex: 9999,
+        position: 'absolute',
+        pointerEvents: 'none',
+        left: clientX,
+        top: clientY,
+        transform: `translate(-50%, -50%) scale(${isCursorActive ? 2.2 : 1})`,
+        stroke: isCursorActive ? 'rgb(49,79,227)' : 'transparent',
+        strokeWidth: isCursorActive ? 2 : 1,
+        fill: isCursorActive ? 'rgba(255,255,255,0.4)' : 'rgb(49,79,227)',
+        transition: 'transform .25s ease-in-out'
+      }}>
+      <circle cx="25" cy="25" r="8" />
+    </svg>
+  )
+}
+
+export const useCursorHandlers = (options = {}) => {
+  const context = useContext(CursorContext)
+  if (!context) {
+    throw new Error('useBrand must be used within a CursorContext')
+  }
+
+  const { setCursorActive } = context
+
+  const onMouseEnter = useCallback(
+    event => {
+      if (options.onMouseEnter) {
+        options.onMouseEnter(event)
+      }
+
+      setCursorActive(true)
+    },
+    [setCursorActive]
+  )
+
+  const onMouseLeave = useCallback(
+    event => {
+      if (options.onMouseLeave) {
+        options.onMouseLeave(event)
+      }
+
+      setCursorActive(false)
+    },
+    [setCursorActive]
+  )
+
+  if (isTouchDevice) {
+    return options
+  }
+
+  return { onMouseEnter, onMouseLeave }
+}

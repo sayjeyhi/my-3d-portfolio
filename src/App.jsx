@@ -1,32 +1,31 @@
-import { Scroll, ScrollControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { MotionConfig } from "framer-motion";
-import { Leva } from "leva";
-import { useEffect, useState } from "react";
-import { Cursor } from "./components/Cursor";
-import { Experience } from "./components/Experience";
-import { Interface } from "./components/Interface";
-import { Menu } from "./components/Menu";
-import { ScrollManager } from "./components/ScrollManager";
-import { framerMotionConfig } from "./config";
+import { Scroll, ScrollControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { MotionConfig } from 'framer-motion'
+import { Leva } from 'leva'
+import { useEffect, useState } from 'react'
+import { Cursor, CursorContextProvider } from './components/Cursor'
+import { Experience } from './components/Experience'
+import { Interface } from './components/Interface'
+import { Menu } from './components/Menu'
+import { ScrollManager } from './components/ScrollManager'
+import { framerMotionConfig } from './config'
 
 function App() {
-  const [section, setSection] = useState(0);
-  const [menuOpened, setMenuOpened] = useState(false);
+  const [section, setSection] = useState(0)
+  const [menuOpened, setMenuOpened] = useState(false)
 
   useEffect(() => {
-    setMenuOpened(false);
-  }, [section]);
+    setMenuOpened(false)
+  }, [section])
 
   return (
     <>
       <MotionConfig
         transition={{
-          ...framerMotionConfig,
-        }}
-      >
+          ...framerMotionConfig
+        }}>
         <Canvas shadows camera={{ position: [0, 3, 10], fov: 42 }}>
-          <color attach="background" args={["#f5efe6"]} />
+          <color attach="background" args={['#f5efe6']} />
 
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
@@ -38,16 +37,11 @@ function App() {
             </Scroll>
           </ScrollControls>
         </Canvas>
-        <Menu
-          onSectionChange={setSection}
-          menuOpened={menuOpened}
-          setMenuOpened={setMenuOpened}
-        />
-        <Cursor />
+        <Menu onSectionChange={setSection} menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
       </MotionConfig>
       <Leva hidden />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
