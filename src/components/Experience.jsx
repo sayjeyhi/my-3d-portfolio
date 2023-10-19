@@ -41,9 +41,15 @@ export const Experience = props => {
 
   const [characterAnimation, setCharacterAnimation] = useState('Standing')
   useEffect(() => {
+    let delayedAnimation = ''
     if (section !== 0) setCharacterAnimation('Falling')
+    if (section === 0) delayedAnimation = 'Typing'
+    if (section === 1) delayedAnimation = 'ShowOff'
+    if (section === 2) delayedAnimation = 'TellingASecret'
+    if (section === 3) delayedAnimation = 'PhoneCall'
+
     setTimeout(() => {
-      setCharacterAnimation(section === 0 ? 'Typing' : 'Standing')
+      setCharacterAnimation(delayedAnimation)
     }, 600)
   }, [section])
 
@@ -69,7 +75,7 @@ export const Experience = props => {
       <motion.group
         initial={'100'}
         position={[0.67, 2.07, 4]}
-        rotation={[-Math.PI, 1.0, Math.PI]}
+        rotation={[-3.14, 1.0, 3.14]}
         animate={`${section}`}
         transition={{
           duration: 0.6
@@ -96,24 +102,26 @@ export const Experience = props => {
             scaleZ: 2.9
           },
           2: {
-            x: -2,
+            x: -5,
             y: -viewport.height * 2 + 0.5,
-            z: 0,
+            z: 1,
             rotateX: 0,
             rotateY: Math.PI / 2,
-            rotateZ: 0
+            rotateZ: 0,
+            scaleX: 2,
+            scaleY: 2,
+            scaleZ: 2
           },
           3: {
-            y: -viewport.height * 3 + 1,
-            x: 2.6,
+            y: -viewport.height * 3.1 + 1,
+            x: 2.8,
             z: 3.5,
             rotateX: 0,
-            rotateY: -Math.PI / 9,
+            rotateY: -0.5,
             rotateZ: 0,
-
-            scaleX: 3,
-            scaleY: 3,
-            scaleZ: 3
+            scaleX: 3.5,
+            scaleY: 3.5,
+            scaleZ: 3.5
           }
         }}>
         <Stage shadows intensity={0.5} adjustCamera={false}>

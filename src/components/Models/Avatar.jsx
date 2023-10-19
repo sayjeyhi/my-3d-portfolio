@@ -17,16 +17,29 @@ export function Avatar(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('models/avatar.glb')
 
-  const { animations: typingAnimation } = useFBX('animations/Typing (1).fbx')
-  const { animations: standingAnimation } = useFBX('animations/Offensive Idle (1).fbx')
+  const { animations: typingAnimation } = useFBX('animations/typing-6.fbx')
+  const { animations: showOffAnimation } = useFBX('animations/ShowOff.fbx')
   const { animations: fallingAnimation } = useFBX('animations/Falling Idle (1).fbx')
+  const { animations: idleAnimation } = useFBX('animations/Standing Idle.fbx')
+  const { animations: tellingASecretAnimation } = useFBX('animations/Telling A Secret.fbx')
+  const { animations: phoneCallAnimation } = useFBX('animations/phone-call.fbx')
 
   typingAnimation[0].name = 'Typing'
-  standingAnimation[0].name = 'Standing'
+  showOffAnimation[0].name = 'ShowOff'
   fallingAnimation[0].name = 'Falling'
+  idleAnimation[0].name = 'Idle'
+  tellingASecretAnimation[0].name = 'TellingASecret'
+  phoneCallAnimation[0].name = 'PhoneCall'
 
   const { actions } = useAnimations(
-    [typingAnimation[0], standingAnimation[0], fallingAnimation[0]],
+    [
+      typingAnimation[0],
+      showOffAnimation[0],
+      fallingAnimation[0],
+      idleAnimation[0],
+      phoneCallAnimation[0],
+      tellingASecretAnimation[0]
+    ],
     group
   )
 
@@ -42,7 +55,7 @@ export function Avatar(props) {
 
   useEffect(() => {
     if (!actions[animation]) return
-    actions[animation].reset().fadeIn(0.5).play()
+    actions[animation].reset().fadeIn(0.5).play().setLoop(THREE.LoopPingPong)
     return () => {
       if (!actions[animation]) return
       actions[animation].reset().fadeOut(0.5)
