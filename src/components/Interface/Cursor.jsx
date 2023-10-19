@@ -57,9 +57,9 @@ export const Cursor = () => {
 
   return (
     <svg
-      width={50}
-      height={50}
-      viewBox="0 0 50 50"
+      width={60}
+      height={60}
+      viewBox="0 0 100 100"
       style={{
         opacity: !clientX && !clientY ? 0 : 1,
         zIndex: 9999,
@@ -67,13 +67,13 @@ export const Cursor = () => {
         pointerEvents: 'none',
         left: clientX,
         top: clientY,
-        transform: `translate(-50%, -50%) scale(${isCursorActive ? 2.2 : 1})`,
+        transform: `translate(-50%, -50%) scale(${isCursorActive ? 1.5 : 1})`,
         stroke: isCursorActive ? 'rgb(49,79,227)' : 'transparent',
         strokeWidth: isCursorActive ? 2 : 1,
         fill: isCursorActive ? 'rgba(255,255,255,0.4)' : 'rgb(49,79,227)',
         transition: 'transform .25s ease-in-out'
       }}>
-      <circle cx="25" cy="25" r="8" />
+      <circle cx="50" cy="50" r="16" />
     </svg>
   )
 }
