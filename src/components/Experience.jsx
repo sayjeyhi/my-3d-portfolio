@@ -39,30 +39,26 @@ export const Experience = props => {
     })
   }, [menuOpened])
 
-  const [characterAnimation, setCharacterAnimation] = useState('Typing')
+  const [characterAnimation, setCharacterAnimation] = useState('Standing')
   useEffect(() => {
-    console.log('===section', section)
-    setCharacterAnimation('Falling')
+    if (section !== 0) setCharacterAnimation('Falling')
     setTimeout(() => {
       setCharacterAnimation(section === 0 ? 'Typing' : 'Standing')
     }, 600)
   }, [section])
 
   useFrame(state => {
-    let curSection = Math.floor(data.scroll.current * data.pages)
+    let curSection = Math.floor(data.scroll.current * data.pages + 0.23)
 
     console.log('curSection', data)
     if (curSection > 3) {
       curSection = 3
     }
 
-    if (data.scroll.current > 0.05 && data.scroll.current < 0.2) {
-      setSection(1)
-    } else if (curSection !== section) {
+    if (curSection !== section) {
       setSection(curSection)
     }
 
-    console.log('cam pos', state.camera.position)
     state.camera.position.x = cameraPositionX.get()
     state.camera.position.z = cameraPositionZ.get()
     state.camera.lookAt(cameraLookAtX.get(), cameraLookAtY.get(), cameraLookAtZ.get())
@@ -71,28 +67,33 @@ export const Experience = props => {
   return (
     <>
       <motion.group
-        position={[0.45, 0.34, 3.8]}
-        rotation={[-3.141592653589793, 1.153981633974482, 3.141592653589793]}
+        initial={'100'}
+        position={[0.67, 2.07, 4]}
+        rotation={[-Math.PI, 1.0, Math.PI]}
         animate={`${section}`}
         transition={{
           duration: 0.6
         }}
         variants={{
+          100: {
+            opacity: 0
+          },
           0: {
+            opacity: 1,
             scaleX: 2.15,
             scaleY: 2.15,
             scaleZ: 2.15
           },
           1: {
-            y: -viewport.height + 1.2,
-            x: 0.3,
-            z: 7,
+            y: -viewport.height + 1,
+            x: 2.5,
+            z: 1,
             rotateX: 0,
             rotateY: 0,
             rotateZ: 0,
-            scaleX: 1,
-            scaleY: 1,
-            scaleZ: 1
+            scaleX: 2.9,
+            scaleY: 2.9,
+            scaleZ: 2.9
           },
           2: {
             x: -2,
@@ -103,15 +104,21 @@ export const Experience = props => {
             rotateZ: 0
           },
           3: {
-            y: -viewport.height * 2 + 1,
-            x: 0.3,
-            z: 8.5,
+            y: -viewport.height * 3 + 1,
+            x: 2.6,
+            z: 3.5,
             rotateX: 0,
-            rotateY: -Math.PI / 4,
-            rotateZ: 0
+            rotateY: -Math.PI / 9,
+            rotateZ: 0,
+
+            scaleX: 3,
+            scaleY: 3,
+            scaleZ: 3
           }
         }}>
-        <Avatar animation={characterAnimation} />
+        <Stage shadows intensity={0.5} adjustCamera={false}>
+          <Avatar animation={characterAnimation} />
+        </Stage>
       </motion.group>
       <motion.group
         position={[1.4, 1.9, 4]}

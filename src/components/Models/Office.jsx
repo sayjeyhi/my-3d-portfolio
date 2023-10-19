@@ -8,7 +8,7 @@ import React, { useEffect } from 'react'
 
 export function Office(props) {
   const { section } = props
-  const { nodes, materials } = useGLTF('models/office-3d-2223.glb')
+  const { nodes, materials } = useGLTF('models/office-3d-2224.glb')
 
   const textureOpacity = useMotionValue(0)
 
@@ -18,21 +18,15 @@ export function Office(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group position={[-0.609, 1.674, -0.949]} scale={1.199}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.MonitorBig.geometry}
-          material={materials['9']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.MonitorBig_1.geometry}
-          material={materials['9']}
-        />
-      </group>
-      <group position={[0.102, 1.258, -0.655]} rotation={[0, -0.288, 0]} scale={0.03}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Monitor_-_1'].geometry}
+        material={materials['9']}
+        position={[-0.609, 1.674, -0.949]}
+        scale={1.199}
+      />
+      <group position={[0.064, 1.251, -0.651]} rotation={[0, -0.288, 0]} scale={0.03}>
         <mesh
           castShadow
           receiveShadow
@@ -225,7 +219,10 @@ export function Office(props) {
           material={materials.yellow}
         />
       </group>
-      <group position={[-0.563, 0.856, 0.369]} rotation={[Math.PI, -1.518, Math.PI]} scale={0.229}>
+      <group
+        position={[-0.563, 0.741, 0.369]}
+        rotation={[Math.PI, -1.518, Math.PI]}
+        scale={[0.229, 0.195, 0.229]}>
         <mesh
           castShadow
           receiveShadow
@@ -351,7 +348,7 @@ export function Office(props) {
         geometry={nodes.Plane002.geometry}
         material={materials.yellow}
         position={[-0.885, 1.862, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.109]}
       />
       <mesh
@@ -369,7 +366,7 @@ export function Office(props) {
         geometry={nodes.Plane004.geometry}
         material={materials['yellow.002']}
         position={[-0.792, 1.758, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.115]}
       />
       <mesh
@@ -378,7 +375,7 @@ export function Office(props) {
         geometry={nodes.Plane005.geometry}
         material={materials['C-1']}
         position={[-0.748, 1.814, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.245]}
       />
       <mesh
@@ -387,7 +384,7 @@ export function Office(props) {
         geometry={nodes.Plane006.geometry}
         material={materials['C-1']}
         position={[-0.872, 1.601, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.121]}
       />
       <mesh
@@ -405,7 +402,7 @@ export function Office(props) {
         geometry={nodes.Plane008.geometry}
         material={materials['C-1']}
         position={[-0.789, 1.49, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.202]}
       />
       <mesh
@@ -414,7 +411,7 @@ export function Office(props) {
         geometry={nodes.Plane009.geometry}
         material={materials['C-1']}
         position={[-0.942, 1.656, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.049]}
       />
       <mesh
@@ -423,7 +420,7 @@ export function Office(props) {
         geometry={nodes.Plane010.geometry}
         material={materials['yellow.008']}
         position={[-0.665, 1.707, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.049]}
       />
       <mesh
@@ -432,7 +429,7 @@ export function Office(props) {
         geometry={nodes.Plane011.geometry}
         material={materials['yellow.009']}
         position={[-0.691, 1.601, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.049]}
       />
       <mesh
@@ -450,7 +447,7 @@ export function Office(props) {
         geometry={nodes.Plane013.geometry}
         material={materials['Material.013']}
         position={[-0.614, 1.935, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.03, 0.079, 0.427]}
       />
       <mesh
@@ -459,7 +456,7 @@ export function Office(props) {
         geometry={nodes.Plane014.geometry}
         material={materials['yellow.012']}
         position={[-0.966, 1.934, -0.941]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.008, 0.051, 0.009]}
       />
       <mesh
@@ -468,7 +465,7 @@ export function Office(props) {
         geometry={nodes.Plane015.geometry}
         material={materials['yellow.013']}
         position={[-0.942, 1.934, -0.941]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.008, 0.051, 0.009]}
       />
       <mesh
@@ -477,7 +474,7 @@ export function Office(props) {
         geometry={nodes.Plane016.geometry}
         material={materials['yellow.014']}
         position={[-0.919, 1.934, -0.941]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.008, 0.051, 0.009]}
       />
       <mesh
@@ -495,7 +492,7 @@ export function Office(props) {
         geometry={nodes.Plane018.geometry}
         material={materials['yellow.015']}
         position={[-0.792, 1.447, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.115]}
       />
       <mesh
@@ -513,7 +510,7 @@ export function Office(props) {
         geometry={nodes.Plane020.geometry}
         material={materials['C-1.002']}
         position={[-0.43, 1.656, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.049]}
       />
       <mesh
@@ -646,4 +643,4 @@ export function Office(props) {
   )
 }
 
-useGLTF.preload('models/office-3d-2223.glb')
+useGLTF.preload('models/office-3d-2224.glb')

@@ -12,7 +12,7 @@ body {
 }
 
 h1 {
-    font-family: VT323;
+    font-family: 'Stylish';
     font-size: 24px;
     font-style: normal;
     font-variant: normal;
@@ -21,7 +21,7 @@ h1 {
 }
 
 h3 {
-    font-family: VT323;
+    font-family: 'Stylish';
     font-size: 14px;
     font-style: normal;
     font-variant: normal;
@@ -30,7 +30,7 @@ h3 {
 }
 
 p {
-    font-family: VT323;
+    font-family: 'Stylish';
     font-size: 14px;
     font-style: normal;
     font-variant: normal;
@@ -39,7 +39,7 @@ p {
 }
 
 blockquote {
-    font-family: VT323;
+    font-family: 'Stylish';
     font-size: 21px;
     font-style: normal;
     font-variant: normal;
@@ -48,7 +48,7 @@ blockquote {
 }
 
 pre {
-    font-family: VT323;
+    font-family: 'Stylish';
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -57,5 +57,5 @@ pre {
 }
 
 button {
-  font-family: VT323;
+  font-family: 'Stylish';
 }
