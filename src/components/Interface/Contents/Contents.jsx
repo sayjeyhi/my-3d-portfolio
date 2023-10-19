@@ -4,10 +4,10 @@ import { ProjectsSection } from './sections/Projects.jsx'
 import { ContactSection } from './sections/Contact.jsx'
 
 export const Contents = props => {
-  const { setSection } = props
+  const { setSection, menuOpened } = props
   return (
     <div className="flex flex-col items-center w-screen">
-      <AboutMeSection setSection={setSection} />
+      <AboutMeSection menuOpened={menuOpened} setSection={setSection} />
       <SkillsSection />
       <ProjectsSection />
       <ContactSection />

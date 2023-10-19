@@ -7,7 +7,7 @@ export const Interface = props => {
   return (
     <CursorContextProvider>
       <Menu onSectionChange={setSection} menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
-      <Contents setSection={setSection} />
+      <Contents menuOpened={menuOpened} setSection={setSection} />
       <Cursor />
     </CursorContextProvider>
   )

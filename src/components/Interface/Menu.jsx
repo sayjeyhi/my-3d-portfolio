@@ -8,7 +8,7 @@ export const Menu = props => {
     <>
       <button
         onClick={() => setMenuOpened(!menuOpened)}
-        className="z-20 fixed top-12 right-12 p-3 bg-indigo-600 w-11 h-11 rounded-md"
+        className="z-20 fixed top-0 right-0 p-3 bg-lime-600 w-12 h-12"
         {...cursorHandlers}>
         <div
           className={`bg-white h-0.5 rounded-md w-full transition-all ${
@@ -23,7 +23,7 @@ export const Menu = props => {
         />
       </button>
       <div
-        className={`z-10 fixed top-0 right-0 bottom-0 bg-white transition-all overflow-hidden flex flex-col
+        className={`z-10 fixed top-0 right-0 bottom-0 bg-lime-600 transition-all overflow-hidden flex flex-col
       ${menuOpened ? 'w-80' : 'w-0'}`}>
         <div className="flex items-start justify-center flex-col gap-6 p-8">
           <MenuButton label="About" onClick={() => onSectionChange(0)} />
