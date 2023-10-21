@@ -1,12 +1,13 @@
-import { Stage, useScroll } from '@react-three/drei'
+import { Image, Stage, useScroll } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { useEffect, useState } from 'react'
 import { framerMotionConfig } from '../config'
+import { Projects } from './Interface/Contents/components/Projects.jsx'
 import { Avatar } from './Models/Avatar.jsx'
 import { Office } from './Models/Office.jsx'
-import { Projects } from './Interface/Contents/components/Projects.jsx'
+import { Amsterdam } from './Models/Amsterdam.jsx'
 
 export const Experience = props => {
   const { menuOpened } = props
@@ -42,15 +43,27 @@ export const Experience = props => {
   const [characterAnimation, setCharacterAnimation] = useState('Standing')
   useEffect(() => {
     let delayedAnimation = ''
-    if (section !== 0) setCharacterAnimation('Falling')
-    if (section === 0) delayedAnimation = 'Typing'
-    if (section === 1) delayedAnimation = 'ShowOff'
-    if (section === 2) delayedAnimation = 'TellingASecret'
-    if (section === 3) delayedAnimation = 'PhoneCall'
+    let changingAnimation = ''
+    let changingAnimationDuration = 600
 
+    if (section === 0) {
+      delayedAnimation = 'Typing'
+      changingAnimation = 'Falling'
+    } else if (section === 1) {
+      delayedAnimation = 'ShowOff'
+      changingAnimation = 'Falling'
+    } else if (section === 2) {
+      delayedAnimation = 'TellingASecret'
+      changingAnimation = 'Running'
+    } else if (section === 3) {
+      delayedAnimation = 'PhoneCall'
+      changingAnimation = 'Running'
+    }
+
+    setCharacterAnimation(changingAnimation)
     setTimeout(() => {
       setCharacterAnimation(delayedAnimation)
-    }, 600)
+    }, changingAnimationDuration)
   }, [section])
 
   useFrame(state => {
@@ -113,15 +126,15 @@ export const Experience = props => {
             scaleZ: 2
           },
           3: {
-            y: -viewport.height * 3.1 + 1,
-            x: 2.8,
-            z: 3.5,
+            y: -viewport.height * 2.82 + 1,
+            x: 1.5,
+            z: 7.5,
             rotateX: 0,
             rotateY: -0.5,
             rotateZ: 0,
-            scaleX: 3.5,
-            scaleY: 3.5,
-            scaleZ: 3.5
+            scaleX: 0.4,
+            scaleY: 0.4,
+            scaleZ: 0.4
           }
         }}>
         <Stage shadows intensity={0.5} adjustCamera={false}>
@@ -143,12 +156,23 @@ export const Experience = props => {
       <motion.group
         position={[0, -1.5, -10]}
         animate={{
-          z: section === 1 ? 0 : -10,
+          z: section === 1 ? 0 : -1,
           y: section === 1 ? -viewport.height : -1.5
         }}>
-        <directionalLight position={[-5, 3, 5]} intensity={0.4} />
+        <Projects />
       </motion.group>
-      <Projects />
+      {/* SKILLS */}
+      <motion.group
+        rotation-y={-Math.PI / 2.05}
+        rotation-z={0.95}
+        rotation-x={0.8}
+        animate={{
+          x: -Math.PI / 4.9,
+          y: section > 2 ? -viewport.height * 2.94 : -viewport.height * 5.7,
+          z: section > 2 ? Math.PI * 2.56 : -2
+        }}>
+        <Amsterdam />
+      </motion.group>
     </>
   )
 }

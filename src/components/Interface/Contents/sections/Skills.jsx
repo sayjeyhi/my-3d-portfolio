@@ -63,8 +63,10 @@ export const SkillsSection = () => {
 
 const Badge = ({ title, level }) => {
   return (
-    <span className="bg-lime-900 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-      {title} {level}%
+    <span
+      title={`${level}%`}
+      className="bg-lime-900 cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded inline-flex items-center">
+      {title}
     </span>
   )
 }

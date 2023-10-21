@@ -2,11 +2,12 @@ import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { MotionConfig } from 'framer-motion'
 import { Leva } from 'leva'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Experience } from './components/Experience'
 import { Interface } from './components/Interface/Interface'
 import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
+import { Loading } from './loading.jsx'
 
 function App() {
   const [section, setSection] = useState(0)
@@ -17,7 +18,7 @@ function App() {
   }, [section])
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <MotionConfig
         transition={{
           ...framerMotionConfig
@@ -46,7 +47,7 @@ function App() {
         </Canvas>
       </MotionConfig>
       <Leva hidden />
-    </>
+    </Suspense>
   )
 }
 

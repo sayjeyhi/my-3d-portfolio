@@ -20,25 +20,25 @@ export function Avatar(props) {
   const { animations: typingAnimation } = useFBX('animations/typing-6.fbx')
   const { animations: showOffAnimation } = useFBX('animations/ShowOff.fbx')
   const { animations: fallingAnimation } = useFBX('animations/Falling Idle (1).fbx')
-  const { animations: idleAnimation } = useFBX('animations/Standing Idle.fbx')
   const { animations: tellingASecretAnimation } = useFBX('animations/Telling A Secret.fbx')
   const { animations: phoneCallAnimation } = useFBX('animations/phone-call.fbx')
+  const { animations: runningAnimation } = useFBX('animations/Running.fbx')
 
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
   fallingAnimation[0].name = 'Falling'
-  idleAnimation[0].name = 'Idle'
   tellingASecretAnimation[0].name = 'TellingASecret'
   phoneCallAnimation[0].name = 'PhoneCall'
+  runningAnimation[0].name = 'Running'
 
   const { actions } = useAnimations(
     [
       typingAnimation[0],
       showOffAnimation[0],
       fallingAnimation[0],
-      idleAnimation[0],
       phoneCallAnimation[0],
-      tellingASecretAnimation[0]
+      tellingASecretAnimation[0],
+      runningAnimation[0]
     ],
     group
   )

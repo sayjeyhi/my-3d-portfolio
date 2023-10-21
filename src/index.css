@@ -56,6 +56,6 @@ pre {
     line-height: 18.5714px;
 }
 
-button {
+button, span {
   font-family: 'Stylish';
 }
