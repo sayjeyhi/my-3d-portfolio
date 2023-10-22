@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Section } from '../Section.jsx'
 
 const FRONT_SKILLS = [
@@ -27,8 +26,8 @@ const BACK_SKILLS = [
   { title: 'Kubernetes', level: 90 },
   { title: 'Helm', level: 90 },
   { title: 'Nodejs (sails, express, nest)', level: 90 },
-  { title: 'DB (MySQL, MongoDB)', level: 90 },
-  { title: 'Python, PHP, RoR, …', level: 90 }
+  { title: 'DB (MySQL, MongoDB, Postgres)', level: 90 },
+  { title: 'Python, PHP, RoR, Nodejs, …', level: 90 }
 ]
 
 const MANAGEMENT_SKILLS = [
@@ -54,9 +53,9 @@ const languages = [
 export const SkillsSection = () => {
   return (
     <Section>
-      <div className="px-6 py-4 mt-8 rounded-3xl shadow-primary text-lg text-white w-1/2">
+      <div className="px-2 py-4 mt-8 rounded-3xl shadow-primary text-lg text-white w-1/2">
         <div>
-          <h3 className="text-3xl font-bold text-primary">Skills</h3>
+          <h3 className="text-3xl font-extrabold text-blue-800">Skills</h3>
           <div className="mt-4 space-y-4">
             {FRONT_SKILLS.map((skill, index) => (
               <Badge key={index} title={skill.title} level={skill.level} />
@@ -74,13 +73,50 @@ export const SkillsSection = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-3xl font-bold mt-10 text-primary">Languages</h3>
+          <h3 className="text-3xl font-extrabold mt-10 text-blue-800">Languages</h3>
           <div className="mt-4 space-y-4">
             {languages.map((lng, index) => (
               <Badge key={index} title={lng.title} level={lng.level} />
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="blur-2xl absolute -mt-48 z-[-1] rotate-12">
+        <svg
+          id="svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          width="300"
+          height="300">
+          <path
+            d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
+            fill="#b1a5ff"
+          />
+        </svg>
+      </div>
+      <div className="blur-md absolute right-0 -mt-96 z-[-1] -rotate-12 opacity-60">
+        <svg
+          id="svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          width="200"
+          height="200">
+          <path
+            d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
+            fill="#EF9A9A"
+          />
+        </svg>
+      </div>
+      <div className="blur-xl absolute right-48 mt-96 z-[-1] -rotate-12 opacity-60">
+        <svg
+          id="svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          width="200"
+          height="200">
+          <circle cx="16" cy="16" r="16" fill="#9aefa4" />
+        </svg>
       </div>
     </Section>
   )
@@ -90,7 +126,7 @@ const Badge = ({ title, level }) => {
   return (
     <span
       title={`${level}%`}
-      className="bg-lime-900 cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded inline-flex items-center">
+      className="bg-secondary inter cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded-lg inline-flex items-center">
       {title}
     </span>
   )

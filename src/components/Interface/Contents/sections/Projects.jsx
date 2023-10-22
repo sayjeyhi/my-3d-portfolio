@@ -14,7 +14,7 @@ export const ProjectsSection = () => {
 
   return (
     <Section className="-mt-48">
-      <h3 className="text-5xl font-bold -mt-24">Books</h3>
+      <h3 className="text-5xl font-bold -mt-20 pb-6 pl-2">Books</h3>
       <div className="flex items-center align-middle justify-center mb-2">
         <BookCard
           name="Javascript fundamentals"

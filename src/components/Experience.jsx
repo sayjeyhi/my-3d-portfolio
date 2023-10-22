@@ -24,19 +24,19 @@ export const Experience = props => {
   const cameraLookAtZ = useMotionValue()
 
   useEffect(() => {
-    animate(cameraPositionX, menuOpened ? -4 : 1.2, {
+    animate(cameraPositionX, menuOpened ? -2 : 1.2, {
       ...framerMotionConfig
     })
-    animate(cameraPositionZ, menuOpened ? 4 : 9.2, {
+    animate(cameraPositionZ, menuOpened ? 5 : 9.2, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtX, menuOpened ? 10 : 0, {
+    animate(cameraLookAtX, menuOpened ? 9 : 0, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtY, menuOpened ? -0.2 : 0.6, {
+    animate(cameraLookAtY, menuOpened ? -0.3 : 0.6, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtZ, menuOpened ? 6 : -1, {
+    animate(cameraLookAtZ, menuOpened ? 10.5 : -1, {
       ...framerMotionConfig
     })
   }, [menuOpened])
@@ -61,7 +61,6 @@ export const Experience = props => {
   useFrame(() => {
     const sequenceLength = val(sheet.sequence.pointer.length)
     sheet.sequence.position = data.offset * sequenceLength
-    console.log(sheet.sequence.position)
 
     if (sheet.sequence.position < 0.5) {
       setCharacterAnimation('Typing')
@@ -69,9 +68,9 @@ export const Experience = props => {
       setCharacterAnimation('Falling')
     } else if (sheet.sequence.position < 4 && sheet.sequence.position > 2) {
       setCharacterAnimation('ShowOff')
-    } else if (sheet.sequence.position < 5 && sheet.sequence.position > 4) {
+    } else if (sheet.sequence.position < 5.8 && sheet.sequence.position > 4) {
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position < 6.9 && sheet.sequence.position > 5) {
+    } else if (sheet.sequence.position < 7.2 && sheet.sequence.position > 5.8) {
       setCharacterAnimation('TellingASecret')
     } else if (sheet.sequence.position < 9.8 && sheet.sequence.position > 6.9) {
       setCharacterAnimation('Running')
