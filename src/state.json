@@ -209,7 +209,7 @@
                   },
                   {
                     "id": "CI7b1coS-5",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -323,7 +323,7 @@
                   },
                   {
                     "id": "M0EmSmsIK5",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -437,7 +437,7 @@
                   },
                   {
                     "id": "hhl3PiMdMZ",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -605,7 +605,7 @@
                   },
                   {
                     "id": "xJwGLFGgfa",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -706,8 +706,8 @@
                     "value": -1.0592329714904354
                   },
                   {
-                    "id": "mr71kq_u7I",
-                    "position": 9.767,
+                    "id": "yiicYjUbJa",
+                    "position": 9.8,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -715,11 +715,23 @@
                       0.5,
                       0
                     ],
-                    "value": 1.3922674463053775
+                    "value": 1.3813279244996366
+                  },
+                  {
+                    "id": "mr71kq_u7I",
+                    "position": 9.9,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": 0.002267446305376574
                   },
                   {
                     "id": "ikTykuGbUH",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -821,7 +833,7 @@
                   },
                   {
                     "id": "1d9ExUC8J7",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -923,7 +935,7 @@
                   },
                   {
                     "id": "jI559CHQnj",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -1025,7 +1037,7 @@
                   },
                   {
                     "id": "_NSwzeCMRB",
-                    "position": 9.967,
+                    "position": 10.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -1774,6 +1786,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "A9xfQGyGrtrPv6q4",
     "dVOHHChIke85hAew",
     "WkBffdsjDsBLWnho",
     "QNSagi7QBZ_NgPQO",

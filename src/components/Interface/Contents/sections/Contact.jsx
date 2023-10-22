@@ -2,8 +2,8 @@ import { Section } from '../Section.jsx'
 
 export const ContactSection = () => {
   return (
-    <Section className="mt-[30rem] ml-24">
-      <div className="flex gap-3 py-5">
+    <Section className="mt-[31rem] ml-24">
+      <div className="flex gap-3 py-1">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
             <path
@@ -75,7 +75,7 @@ export const ContactSection = () => {
 const SocialButton = props => {
   return (
     <a title={props.title} href={props.link} target="_blank" rel="noreferrer">
-      <button className="px-4 py-4 mt-8 rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-2xl text-white outline-none focus:ring-4 transform hover:scale-90 transition-transform">
+      <button className="px-3 py-3 mt-8 rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-xl text-white outline-none focus:ring-4 transform hover:scale-90 transition-transform">
         {props.children}
       </button>
     </a>

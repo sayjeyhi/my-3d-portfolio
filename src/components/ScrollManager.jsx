@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 import { useEffect, useRef } from 'react'
 
 export const ScrollManager = props => {
-  const { section, onSectionChange } = props
+  const { section, onSectionChange, setMenuOpened } = props
 
   const data = useScroll()
   const lastScroll = useRef(0)

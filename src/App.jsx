@@ -10,13 +10,12 @@ import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
 import state from './state.json'
 
-// TODO: Remove this in production
-// import studio from '@theatre/studio'
-// import extension from '@theatre/r3f/dist/extension'
-// if (import.meta.env.DEV) {
-//   studio.initialize()
-//   studio.extend(extension)
-// }
+import studio from '@theatre/studio'
+import extension from '@theatre/r3f/dist/extension'
+if (import.meta.env.DEV) {
+  studio.initialize()
+  studio.extend(extension)
+}
 
 function App() {
   const [section, setSection] = useState(0)
@@ -39,7 +38,11 @@ function App() {
           <ambientLight intensity={0.25} />
 
           <ScrollControls pages={4} damping={0.1}>
-            <ScrollManager section={section} onSectionChange={setSection} />
+            <ScrollManager
+              setMenuOpened={setMenuOpened}
+              section={section}
+              onSectionChange={setSection}
+            />
             <Scroll>
               <Experience section={section} menuOpened={menuOpened} />
             </Scroll>
