@@ -13,6 +13,7 @@ import state from './state.json'
 // TODO: Remove this in production
 import studio from '@theatre/studio'
 import extension from '@theatre/r3f/dist/extension'
+import * as PropTypes from 'prop-types'
 if (import.meta.env.DEV) {
   studio.initialize()
   studio.extend(extension)
