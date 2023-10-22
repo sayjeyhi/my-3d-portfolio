@@ -1,18 +1,19 @@
-import { Image, Stage, useScroll } from '@react-three/drei'
+import { Stage, useScroll } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
-import { motion } from 'framer-motion-3d'
 import { useEffect, useState } from 'react'
 import { framerMotionConfig } from '../config'
-import { Projects } from './Interface/Contents/components/Projects.jsx'
 import { Avatar } from './Models/Avatar.jsx'
 import { Office } from './Models/Office.jsx'
 import { Amsterdam } from './Models/Amsterdam.jsx'
+import { useCurrentSheet } from '@theatre/r3f'
+import { val } from '@theatre/core'
 
 export const Experience = props => {
   const { menuOpened } = props
-  const { viewport } = useThree()
   const data = useScroll()
+  const sheet = useCurrentSheet()
+  const [animation, setCharacterAnimation] = useState('Standing')
 
   const [section, setSection] = useState(0)
 
@@ -40,36 +41,9 @@ export const Experience = props => {
     })
   }, [menuOpened])
 
-  const [characterAnimation, setCharacterAnimation] = useState('Standing')
-  useEffect(() => {
-    let delayedAnimation = ''
-    let changingAnimation = ''
-    let changingAnimationDuration = 600
-
-    if (section === 0) {
-      delayedAnimation = 'Typing'
-      changingAnimation = 'Falling'
-    } else if (section === 1) {
-      delayedAnimation = 'ShowOff'
-      changingAnimation = 'Falling'
-    } else if (section === 2) {
-      delayedAnimation = 'TellingASecret'
-      changingAnimation = 'Running'
-    } else if (section === 3) {
-      delayedAnimation = 'PhoneCall'
-      changingAnimation = 'Running'
-    }
-
-    setCharacterAnimation(changingAnimation)
-    setTimeout(() => {
-      setCharacterAnimation(delayedAnimation)
-    }, changingAnimationDuration)
-  }, [section])
-
   useFrame(state => {
     let curSection = Math.floor(data.scroll.current * data.pages + 0.23)
 
-    console.log('curSection', data)
     if (curSection > 3) {
       curSection = 3
     }
@@ -83,96 +57,40 @@ export const Experience = props => {
     state.camera.lookAt(cameraLookAtX.get(), cameraLookAtY.get(), cameraLookAtZ.get())
   })
 
+  // our callback will run on every animation frame
+  useFrame(() => {
+    const sequenceLength = val(sheet.sequence.pointer.length)
+    sheet.sequence.position = data.offset * sequenceLength
+    console.log(sheet.sequence.position)
+
+    if (sheet.sequence.position < 0.5) {
+      setCharacterAnimation('Typing')
+    } else if (sheet.sequence.position < 2 && sheet.sequence.position > 0.5) {
+      setCharacterAnimation('Falling')
+    } else if (sheet.sequence.position < 4 && sheet.sequence.position > 2) {
+      setCharacterAnimation('ShowOff')
+    } else if (sheet.sequence.position < 5 && sheet.sequence.position > 4) {
+      setCharacterAnimation('Running')
+    } else if (sheet.sequence.position < 6.9 && sheet.sequence.position > 5) {
+      setCharacterAnimation('TellingASecret')
+    } else if (sheet.sequence.position < 9.8 && sheet.sequence.position > 6.9) {
+      setCharacterAnimation('Running')
+    } else if (sheet.sequence.position > 9.8) {
+      setCharacterAnimation('PhoneCall')
+    }
+  })
+
   return (
     <>
-      <motion.group
-        initial={'100'}
-        position={[0.67, 2.07, 4]}
-        rotation={[-3.14, 1.0, 3.14]}
-        animate={`${section}`}
-        transition={{
-          duration: 0.6
-        }}
-        variants={{
-          100: {
-            opacity: 0
-          },
-          0: {
-            opacity: 1,
-            scaleX: 2.15,
-            scaleY: 2.15,
-            scaleZ: 2.15
-          },
-          1: {
-            y: -viewport.height + 1,
-            x: 2.5,
-            z: 1,
-            rotateX: 0,
-            rotateY: 0,
-            rotateZ: 0,
-            scaleX: 2.9,
-            scaleY: 2.9,
-            scaleZ: 2.9
-          },
-          2: {
-            x: -5,
-            y: -viewport.height * 2 + 0.5,
-            z: 1,
-            rotateX: 0,
-            rotateY: Math.PI / 2,
-            rotateZ: 0,
-            scaleX: 2,
-            scaleY: 2,
-            scaleZ: 2
-          },
-          3: {
-            y: -viewport.height * 2.82 + 1,
-            x: 1.5,
-            z: 7.5,
-            rotateX: 0,
-            rotateY: -0.5,
-            rotateZ: 0,
-            scaleX: 0.4,
-            scaleY: 0.4,
-            scaleZ: 0.4
-          }
-        }}>
-        <Stage shadows intensity={0.5} adjustCamera={false}>
-          <Avatar animation={characterAnimation} />
-        </Stage>
-      </motion.group>
-      <motion.group
-        position={[1.4, 1.9, 4]}
-        rotation-y={-Math.PI / 4}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1.4 }}
-        transition={{ duration: 0.5 }}>
-        <Stage shadows intensity={0.5} adjustCamera={false}>
-          <Office section={section} />
-        </Stage>
-      </motion.group>
-
-      {/* SKILLS */}
-      <motion.group
-        position={[0, -1.5, -10]}
-        animate={{
-          z: section === 1 ? 0 : -1,
-          y: section === 1 ? -viewport.height : -1.5
-        }}>
-        <Projects />
-      </motion.group>
-      {/* SKILLS */}
-      <motion.group
-        rotation-y={-Math.PI / 2.05}
-        rotation-z={0.95}
-        rotation-x={0.8}
-        animate={{
-          x: -Math.PI / 4.9,
-          y: section > 2 ? -viewport.height * 2.94 : -viewport.height * 5.7,
-          z: section > 2 ? Math.PI * 2.56 : -2
-        }}>
+      <Stage shadows intensity={0.5} adjustCamera={false}>
+        <Avatar animation={animation} />
+      </Stage>
+      <Stage shadows intensity={0.5} adjustCamera={false}>
+        <Office />
+      </Stage>
+      <Stage shadows intensity={0.5} adjustCamera={false}>
         <Amsterdam />
-      </motion.group>
+      </Stage>
     </>
   )
 }

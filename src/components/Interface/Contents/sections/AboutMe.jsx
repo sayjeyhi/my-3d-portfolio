@@ -1,5 +1,5 @@
 import { useCursorHandlers } from '../../Cursor.jsx'
-import { Section } from '../components/Section.jsx'
+import { Section } from '../Section.jsx'
 
 export const AboutMeSection = props => {
   const { setSection, menuOpened } = props

@@ -1,33 +1,40 @@
+import { useEffect, useState } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { MotionConfig } from 'framer-motion'
-import { Leva } from 'leva'
-import { Suspense, useEffect, useState } from 'react'
+import { SheetProvider, PerspectiveCamera } from '@theatre/r3f'
+import { getProject } from '@theatre/core'
 import { Experience } from './components/Experience'
 import { Interface } from './components/Interface/Interface'
 import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
-import { Loading } from './loading.jsx'
+import state from './state.json'
+
+// TODO: Remove this in production
+import studio from '@theatre/studio'
+import extension from '@theatre/r3f/dist/extension'
+if (import.meta.env.DEV) {
+  studio.initialize()
+  studio.extend(extension)
+}
 
 function App() {
   const [section, setSection] = useState(0)
   const [menuOpened, setMenuOpened] = useState(false)
+  const sheet = getProject('sayjeyhi.com', { state }).sheet('r3f')
 
   useEffect(() => {
     setMenuOpened(false)
   }, [section])
 
   return (
-    <Suspense fallback={<Loading />}>
-      <MotionConfig
-        transition={{
-          ...framerMotionConfig
-        }}>
-        <Canvas
-          gl={{ preserveDrawingBuffer: true }}
-          shadows
-          dpr={[1, 1.5]}
-          camera={{ position: [0, 3, 10], fov: 50 }}>
+    <MotionConfig
+      transition={{
+        ...framerMotionConfig
+      }}>
+      <Canvas gl={{ preserveDrawingBuffer: true }} shadows dpr={[1, 1.5]}>
+        <SheetProvider sheet={sheet}>
+          <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 3, 10]} />
           <color attach="background" args={['#ffffff']} />
           <ambientLight intensity={0.25} />
 
@@ -44,10 +51,9 @@ function App() {
               />
             </Scroll>
           </ScrollControls>
-        </Canvas>
-      </MotionConfig>
-      <Leva hidden />
-    </Suspense>
+        </SheetProvider>
+      </Canvas>
+    </MotionConfig>
   )
 }
 

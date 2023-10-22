@@ -1,13 +1,12 @@
-import { Section } from '../components/Section.jsx'
+import { Section } from '../Section.jsx'
 
 export const ContactSection = () => {
   return (
     <Section className="-mt-32">
-      <h3 className="text-5xl font-bold">Find me here</h3>
-      <p className="text-xl mt-2">
-        I am currently living in <span className="font-bold">Amsterdam, Netherlands</span> and I am
-        available for <span className="font-bold">remote work</span>.
-      </p>
+      <div className="bg-primary text-white rounded-full w-32 h-32 flex items-center justify-center">
+        <h3 className="text-5xl font-bold">Find me here</h3>
+      </div>
+
       <div className="flex gap-3 py-5">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -46,26 +45,26 @@ export const ContactSection = () => {
         </SocialButton>
       </div>
 
-      <p className="flex text-zinc-500 mt-12 items-center ml-1">
-        Crafted with{' '}
-        <svg
-          className="mx-1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24">
-          <g fill="red">
-            <path
-              fillRule="evenodd"
-              d="M8.106 18.247C5.298 16.083 2 13.542 2 9.137C2 4.274 7.5.825 12 5.501V20.5c-1 0-2-.77-3.038-1.59c-.277-.218-.564-.438-.856-.663Z"
-              clipRule="evenodd"
-              opacity=".5"
-            />
-            <path d="M15.038 18.91C17.981 16.592 22 14 22 9.138c0-4.863-5.5-8.312-10-3.636V20.5c1 0 2-.77 3.038-1.59Z" />
-          </g>
-        </svg>{' '}
-        By me, 2023
-      </p>
+      {/*<p className="flex text-zinc-500 mt-12 items-center ml-1">*/}
+      {/*  Crafted with{' '}*/}
+      {/*  <svg*/}
+      {/*    className="mx-1"*/}
+      {/*    xmlns="http://www.w3.org/2000/svg"*/}
+      {/*    width="20"*/}
+      {/*    height="20"*/}
+      {/*    viewBox="0 0 24 24">*/}
+      {/*    <g fill="red">*/}
+      {/*      <path*/}
+      {/*        fillRule="evenodd"*/}
+      {/*        d="M8.106 18.247C5.298 16.083 2 13.542 2 9.137C2 4.274 7.5.825 12 5.501V20.5c-1 0-2-.77-3.038-1.59c-.277-.218-.564-.438-.856-.663Z"*/}
+      {/*        clipRule="evenodd"*/}
+      {/*        opacity=".5"*/}
+      {/*      />*/}
+      {/*      <path d="M15.038 18.91C17.981 16.592 22 14 22 9.138c0-4.863-5.5-8.312-10-3.636V20.5c1 0 2-.77 3.038-1.59Z" />*/}
+      {/*    </g>*/}
+      {/*  </svg>{' '}*/}
+      {/*  By me, 2023*/}
+      {/*</p>*/}
     </Section>
   )
 }

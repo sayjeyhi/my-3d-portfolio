@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Section } from '../components/Section.jsx'
+import { Section } from '../Section.jsx'
 
 const skills = [
   {
@@ -39,9 +39,9 @@ export const SkillsSection = () => {
     <Section>
       <motion.div
         whileInView={'visible'}
-        className="px-6 py-4 mt-8 rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-lg text-white outline-none focus:ring-4">
+        className="px-6 py-4 mt-8 rounded-3xl bg-white shadow-primary text-lg text-white">
         <div>
-          <h3 className="text-3xl font-bold text-white">Skills</h3>
+          <h3 className="text-3xl font-bold text-primary">Skills</h3>
           <div className="mt-4 space-y-4">
             {skills.map((skill, index) => (
               <Badge key={index} title={skill.title} level={skill.level} />
@@ -49,7 +49,7 @@ export const SkillsSection = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-3xl font-bold mt-10 text-white">Languages</h3>
+          <h3 className="text-3xl font-bold mt-10 text-primary">Languages</h3>
           <div className="mt-4 space-y-4">
             {languages.map((lng, index) => (
               <Badge key={index} title={lng.title} level={lng.level} />
