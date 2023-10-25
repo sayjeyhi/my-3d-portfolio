@@ -17,12 +17,12 @@ export function Avatar(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('models/avatar.glb')
 
-  const { animations: typingAnimation } = useFBX('animations/typing-6.fbx')
-  const { animations: showOffAnimation } = useFBX('animations/Joyful Jump.fbx')
-  const { animations: fallingAnimation } = useFBX('animations/Falling Idle (1).fbx')
-  const { animations: tellingASecretAnimation } = useFBX('animations/Telling A Secret.fbx')
+  const { animations: fallingAnimation } = useFBX('animations/falling.fbx')
+  const { animations: showOffAnimation } = useFBX('animations/joyfull-jump.fbx')
   const { animations: phoneCallAnimation } = useFBX('animations/phone-call.fbx')
-  const { animations: runningAnimation } = useFBX('animations/Running.fbx')
+  const { animations: runningAnimation } = useFBX('animations/running.fbx')
+  const { animations: tellingASecretAnimation } = useFBX('animations/secret.fbx')
+  const { animations: typingAnimation } = useFBX('animations/typing.fbx')
 
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
@@ -92,4 +92,10 @@ export function Avatar(props) {
   )
 }
 
-useGLTF.preload('models/Avatar-2.glb')
+useGLTF.preload('models/avatar.glb')
+useFBX.preload('animations/typing.fbx')
+useFBX.preload('animations/joyfull-jump.fbx')
+useFBX.preload('animations/falling.fbx')
+useFBX.preload('animations/secret.fbx')
+useFBX.preload('animations/phone-call.fbx')
+useFBX.preload('animations/running.fbx')

@@ -7,12 +7,21 @@ import { useGLTF } from '@react-three/drei'
 import { editable as e } from '@theatre/r3f'
 import { animate, useMotionValue } from 'framer-motion'
 import { useFrame } from '@react-three/fiber'
-const audio = new Audio('/chicken.mp3')
+const chickenAudio = new Audio('/chicken.mp3')
+const fanAudio = new Audio('/fan.mp3')
+const keyboardAudio = new Audio('/keyboard.mp3')
 
 export function Office(props) {
+  const [isFanClicked, setIsFanClicked] = useState(false)
+  const [isChickenClicked, setIsChickenClicked] = useState(false)
+  const [isFanTurnedOn, setIsFanTurnedOn] = useState(false)
   const [clickTimer, setClickTimer] = useState(false)
   const timerRef = useRef(null)
+
+  const fanRef = useRef(null)
   const chickenRef = useRef(null)
+  const fanCube1Ref = useRef(null)
+  const fanCube2Ref = useRef(null)
   const chickenY = useMotionValue(1.282)
   const { nodes, materials } = useGLTF('models/office-3d-2224.glb')
 
@@ -28,7 +37,53 @@ export function Office(props) {
 
   useFrame(state => {
     chickenRef.current.position.y = chickenY.get()
+
+    if (isFanTurnedOn) {
+      fanCube1Ref.current.rotation.x += 0.1
+      fanCube2Ref.current.rotation.x += 0.1
+    }
+
+    if (!isFanClicked) {
+      if (Math.floor(state.clock.getElapsedTime()) % 5 === 0) {
+        fanRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 25) / 80 - 1.2
+      }
+    }
+    if (!isChickenClicked) {
+      if (Math.floor(state.clock.getElapsedTime()) % 5 === 3) {
+        chickenRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 20) / 100 + 0.543
+      }
+    }
+
+    if (Math.floor(state.clock.getElapsedTime()) % 3 === 0) {
+      // keyboardAudio.play()
+    }
   })
+
+  const handleChickenClick = () => {
+    setIsChickenClicked(true)
+    chickenAudio.currentTime = 0
+    chickenAudio.play()
+
+    setClickTimer(true)
+    timerRef.current = setTimeout(() => {
+      setClickTimer(false)
+    }, 300)
+  }
+
+  const handleFanClick = () => {
+    setIsFanClicked(true)
+    if (isFanTurnedOn) {
+      fanAudio.currentTime = 27
+    } else {
+      fanAudio.currentTime = 0
+      fanAudio.play()
+
+      setIsFanTurnedOn(true)
+    }
+    fanAudio.onended = () => {
+      setIsFanTurnedOn(false)
+    }
+  }
 
   return (
     <e.group theatreKey="Office" {...props} dispose={null}>
@@ -166,7 +221,12 @@ export function Office(props) {
           scale={0.379}
         />
       </group>
-      <group position={[-1.006, 2.642, 0.881]} rotation={[0, Math.PI / 2, 0]} scale={0.267}>
+      <group
+        ref={fanRef}
+        onClick={handleFanClick}
+        position={[-1.006, 2.642, 0.881]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={0.267}>
         <mesh
           castShadow
           receiveShadow
@@ -178,6 +238,7 @@ export function Office(props) {
           <mesh
             castShadow
             receiveShadow
+            ref={fanCube1Ref}
             geometry={nodes.Cube012.geometry}
             material={materials['white new']}
             position={[0, -0.519, 0.375]}
@@ -187,6 +248,7 @@ export function Office(props) {
           <mesh
             castShadow
             receiveShadow
+            ref={fanCube2Ref}
             geometry={nodes.Cube013.geometry}
             material={materials['white new']}
             position={[0, -0.622, 0.089]}
@@ -324,15 +386,7 @@ export function Office(props) {
       <e.group
         theatreKey="Chicken"
         ref={chickenRef}
-        onClick={() => {
-          audio.currentTime = 0
-          audio.play()
-
-          setClickTimer(true)
-          timerRef.current = setTimeout(() => {
-            setClickTimer(false)
-          }, 300)
-        }}
+        onClick={handleChickenClick}
         position={[0.543, 1.282, -0.583]}
         rotation={[1.169, -0.031, 0.073]}
         scale={0.03}>

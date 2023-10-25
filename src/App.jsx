@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
@@ -10,12 +10,12 @@ import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
 import state from './state.json'
 
-import studio from '@theatre/studio'
-import extension from '@theatre/r3f/dist/extension'
-if (import.meta.env.DEV) {
-  studio.initialize()
-  studio.extend(extension)
-}
+// import studio from '@theatre/studio'
+// import extension from '@theatre/r3f/dist/extension'
+// if (import.meta.env.DEV) {
+//   studio.initialize()
+//   studio.extend(extension)
+// }
 
 function App() {
   const [section, setSection] = useState(0)
@@ -48,6 +48,7 @@ function App() {
             </Scroll>
             <Scroll html>
               <Interface
+                section={section}
                 setSection={setSection}
                 menuOpened={menuOpened}
                 setMenuOpened={setMenuOpened}

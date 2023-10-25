@@ -1,4 +1,5 @@
 import { Section } from '../Section.jsx'
+import { AnimatePresence } from 'framer-motion'
 
 const FRONT_SKILLS = [
   { title: 'Javascript (ES6 and above)', level: 90 },
@@ -50,75 +51,81 @@ const languages = [
   }
 ]
 
-export const SkillsSection = () => {
+export const SkillsSection = ({ section }) => {
   return (
-    <Section>
-      <div className="px-2 py-4 mt-8 rounded-3xl shadow-primary text-lg text-white w-1/2">
-        <div>
-          <h3 className="text-3xl font-extrabold text-blue-800">Skills</h3>
-          <div className="mt-4 space-y-4">
-            {FRONT_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
-            ))}
+    <AnimatePresence>
+      {section !== 1 ? (
+        <Section key="placeholder" />
+      ) : (
+        <Section key="skills">
+          <div className="px-2 py-4 mt-8 rounded-3xl shadow-primary text-lg text-white w-1/2">
+            <div>
+              <h3 className="text-3xl font-extrabold text-blue-800">My skills</h3>
+              <div className="mt-4 space-y-4">
+                {FRONT_SKILLS.map((skill, index) => (
+                  <Badge key={index} title={skill.title} level={skill.level} />
+                ))}
+              </div>
+              <div className="mt-4 space-y-4">
+                {BACK_SKILLS.map((skill, index) => (
+                  <Badge key={index} title={skill.title} level={skill.level} />
+                ))}
+              </div>
+              <div className="mt-4 space-y-4">
+                {MANAGEMENT_SKILLS.map((skill, index) => (
+                  <Badge key={index} title={skill.title} level={skill.level} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-3xl font-extrabold mt-10 text-blue-800">Languages proficiency</h3>
+              <div className="mt-4 space-y-4">
+                {languages.map((lng, index) => (
+                  <Badge key={index} title={lng.title} level={lng.level} />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="mt-4 space-y-4">
-            {BACK_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
-            ))}
-          </div>
-          <div className="mt-4 space-y-4">
-            {MANAGEMENT_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3 className="text-3xl font-extrabold mt-10 text-blue-800">Languages</h3>
-          <div className="mt-4 space-y-4">
-            {languages.map((lng, index) => (
-              <Badge key={index} title={lng.title} level={lng.level} />
-            ))}
-          </div>
-        </div>
-      </div>
 
-      <div className="blur-2xl absolute -mt-48 z-[-1] rotate-12">
-        <svg
-          id="svg"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 32 32"
-          width="300"
-          height="300">
-          <path
-            d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
-            fill="#b1a5ff"
-          />
-        </svg>
-      </div>
-      <div className="blur-md absolute right-0 -mt-96 z-[-1] -rotate-12 opacity-60">
-        <svg
-          id="svg"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 32 32"
-          width="200"
-          height="200">
-          <path
-            d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
-            fill="#EF9A9A"
-          />
-        </svg>
-      </div>
-      <div className="blur-xl absolute right-48 mt-96 z-[-1] -rotate-12 opacity-60">
-        <svg
-          id="svg"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 32 32"
-          width="200"
-          height="200">
-          <circle cx="16" cy="16" r="16" fill="#9aefa4" />
-        </svg>
-      </div>
-    </Section>
+          <div className="blur-2xl absolute -mt-48 z-[-1] rotate-12">
+            <svg
+              id="svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="300"
+              height="300">
+              <path
+                d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
+                fill="#b1a5ff"
+              />
+            </svg>
+          </div>
+          <div className="blur-md absolute right-0 -mt-96 z-[-1] -rotate-12 opacity-60">
+            <svg
+              id="svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="200"
+              height="200">
+              <path
+                d="M3 30 A3 3 0 0 1 0.4 25.5 L13.4 2.5 A3 3 0 0 1 18.6 2.5 L31.6 25.5 A3 3 0 0 1 29 30 Z"
+                fill="#EF9A9A"
+              />
+            </svg>
+          </div>
+          <div className="blur-xl absolute right-48 mt-96 z-[-1] -rotate-12 opacity-60">
+            <svg
+              id="svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="200"
+              height="200">
+              <circle cx="16" cy="16" r="16" fill="#9aefa4" />
+            </svg>
+          </div>
+        </Section>
+      )}
+    </AnimatePresence>
   )
 }
 

@@ -11,12 +11,16 @@ export const Section = ({ className, children }) => {
         opacity: 0,
         y: 50
       }}
+      exit={{
+        opacity: 0,
+        y: 50
+      }}
       whileInView={{
         opacity: 1,
         y: 0,
         transition: {
-          duration: 1,
-          delay: 0.6
+          duration: 0.7,
+          delay: 0.5
         }
       }}>
       {children}

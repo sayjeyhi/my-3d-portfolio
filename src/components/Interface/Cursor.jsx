@@ -27,7 +27,7 @@ const useMousePosition = () => {
 
   useEffect(() => {
     const updatePosition = throttle(event => {
-      const { clientX, clientY } = event
+      const { clientX, clientY } = typeof event !== 'boolean' ? event : position
 
       setPosition({
         clientX,
@@ -37,7 +37,6 @@ const useMousePosition = () => {
 
     document.body.addEventListener('mousemove', updatePosition, false)
     document.body.addEventListener('mouseenter', updatePosition, false)
-
     return () => {
       document.body.removeEventListener('mousemove', updatePosition)
       document.body.removeEventListener('mouseenter', updatePosition)
@@ -52,8 +51,8 @@ export const Cursor = () => {
     return null
   }
 
-  const { clientX, clientY } = useMousePosition()
   const { cursorActive: isCursorActive } = useContext(CursorContext)
+  const { clientX, clientY } = useMousePosition()
 
   return (
     <svg

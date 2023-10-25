@@ -1,4 +1,3 @@
-import { useAtom } from 'jotai'
 import { Section } from '../Section.jsx'
 
 export const ProjectsSection = () => {
@@ -13,7 +12,7 @@ export const ProjectsSection = () => {
   }
 
   return (
-    <Section className="-mt-48">
+    <Section key="projects" className="-mt-48">
       <h3 className="text-5xl font-bold -mt-8 pb-6 pl-2">Books</h3>
       <div className="flex items-center align-middle justify-center mb-2">
         <BookCard

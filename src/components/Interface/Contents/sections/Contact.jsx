@@ -1,8 +1,9 @@
 import { Section } from '../Section.jsx'
+import { useCursorHandlers } from '../../Cursor.jsx'
 
 export const ContactSection = () => {
   return (
-    <Section className="mt-[31rem] ml-24">
+    <Section key="contact-me" className="mt-[31rem] ml-24">
       <div className="flex gap-3 py-1">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -73,9 +74,17 @@ export const ContactSection = () => {
 }
 
 const SocialButton = props => {
+  const cursorHandlers = useCursorHandlers()
+
   return (
-    <a title={props.title} href={props.link} target="_blank" rel="noreferrer">
-      <button className="px-3 py-3 mt-8 rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-xl text-white outline-none focus:ring-4 transform hover:scale-90 transition-transform">
+    <a
+      role="button"
+      title={props.title}
+      href={props.link}
+      target="_blank"
+      rel="noreferrer"
+      {...cursorHandlers}>
+      <button className="px-3 py-3 rounded-2xl bg-primary shadow-2xl scale-[0.80] ring-primary shadow-primary text-xl text-white outline-none focus:ring-4 transform transition-transform hover:scale-95">
         {props.children}
       </button>
     </a>

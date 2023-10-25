@@ -72,9 +72,9 @@ export const Experience = props => {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position < 7.2 && sheet.sequence.position > 5.8) {
       setCharacterAnimation('TellingASecret')
-    } else if (sheet.sequence.position < 9.8 && sheet.sequence.position > 6.9) {
+    } else if (sheet.sequence.position < 9.92 && sheet.sequence.position > 6.9) {
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position > 9.8) {
+    } else if (sheet.sequence.position > 9.92) {
       setCharacterAnimation('PhoneCall')
     }
   })
