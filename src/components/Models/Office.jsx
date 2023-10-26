@@ -7,23 +7,30 @@ import { useGLTF } from '@react-three/drei'
 import { editable as e } from '@theatre/r3f'
 import { animate, useMotionValue } from 'framer-motion'
 import { useFrame } from '@react-three/fiber'
+import * as Three from 'three'
 const chickenAudio = new Audio('/chicken.mp3')
 const fanAudio = new Audio('/fan.mp3')
 const keyboardAudio = new Audio('/keyboard.mp3')
+const switchAudio = new Audio('/switch.mp3')
 
 export function Office(props) {
   const [isFanClicked, setIsFanClicked] = useState(false)
   const [isChickenClicked, setIsChickenClicked] = useState(false)
   const [isFanTurnedOn, setIsFanTurnedOn] = useState(false)
   const [clickTimer, setClickTimer] = useState(false)
+  const [isStandLampOn, setIsStandLampOn] = useState(false)
   const timerRef = useRef(null)
 
+  const typingCursorRef = useRef(null)
   const fanRef = useRef(null)
   const chickenRef = useRef(null)
+  const standLampLightRef = useRef(null)
+  const lastMessageRef = useRef(null)
+  const lastMessage2Ref = useRef(null)
   const fanCube1Ref = useRef(null)
   const fanCube2Ref = useRef(null)
   const chickenY = useMotionValue(1.282)
-  const { nodes, materials } = useGLTF('models/office-3d-2224.glb')
+  const { nodes, materials } = useGLTF('models/office-final.glb')
 
   useEffect(() => {
     animate(chickenY, clickTimer ? 1.402 : 1.282, {
@@ -43,11 +50,31 @@ export function Office(props) {
       fanCube2Ref.current.rotation.x += 0.1
     }
 
+    /**
+     * Hide and show last messages
+     */
+    lastMessageRef.current.material.transparent = true
+    lastMessageRef.current.material.opacity = Math.sin(new Date().getTime() * 0.0025)
+    lastMessage2Ref.current.material.transparent = true
+    lastMessage2Ref.current.material.opacity = 1 + Math.sin(new Date().getTime() * 0.0025)
+
+    /**
+     * Hide and show typing cursor
+     */
+    typingCursorRef.current.visible = Math.floor(state.clock.getElapsedTime() * 4) % 4 < 2
+
+    /**
+     * Move AC while it is not clicked
+     */
     if (!isFanClicked) {
       if (Math.floor(state.clock.getElapsedTime()) % 5 === 0) {
         fanRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 25) / 80 - 1.2
       }
     }
+
+    /**
+     * Move chicken while it is not clicked
+     */
     if (!isChickenClicked) {
       if (Math.floor(state.clock.getElapsedTime()) % 5 === 3) {
         chickenRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 20) / 100 + 0.543
@@ -68,6 +95,20 @@ export function Office(props) {
     timerRef.current = setTimeout(() => {
       setClickTimer(false)
     }, 300)
+  }
+
+  const handleStandLampClick = () => {
+    switchAudio.play()
+    setIsStandLampOn(on => !on)
+    if (isStandLampOn) {
+      standLampLightRef.current.material = new Three.MeshStandardMaterial({
+        color: '#E44B1F'
+      })
+    } else {
+      standLampLightRef.current.material = new Three.MeshStandardMaterial({
+        color: '#ffff00'
+      })
+    }
   }
 
   const handleFanClick = () => {
@@ -95,7 +136,7 @@ export function Office(props) {
         position={[-0.609, 1.674, -0.949]}
         scale={1.199}
       />
-      <group position={[0.064, 1.251, -0.651]} rotation={[0, -0.288, 0]} scale={0.03}>
+      <group position={[0.064, 1.26, -0.587]} rotation={[0, -0.288, 0]} scale={0.03}>
         <mesh
           castShadow
           receiveShadow
@@ -353,6 +394,7 @@ export function Office(props) {
         </group>
       </group>
       <group
+        onClick={handleStandLampClick}
         position={[-1.626, 1.182, -0.589]}
         rotation={[0, -0.827, 0]}
         scale={[0.029, 0.035, 0.029]}>
@@ -371,6 +413,7 @@ export function Office(props) {
         <mesh
           castShadow
           receiveShadow
+          ref={standLampLightRef}
           geometry={nodes.Cylinder019_2.geometry}
           material={materials['C-1']}
         />
@@ -439,7 +482,7 @@ export function Office(props) {
         geometry={nodes.Plane003.geometry}
         material={materials['C-1']}
         position={[-0.859, 1.708, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.134]}
       />
       <mesh
@@ -583,7 +626,7 @@ export function Office(props) {
         geometry={nodes.Plane019.geometry}
         material={materials['yellow.016']}
         position={[-0.687, 1.656, -0.947]}
-        rotation={[-1.577, Math.PI / 2, 0]}
+        rotation={[-1.577, 1.571, 0]}
         scale={[0.013, 0.079, 0.198]}
       />
       <mesh
@@ -653,7 +696,7 @@ export function Office(props) {
         castShadow
         receiveShadow
         geometry={nodes.Plane027.geometry}
-        material={materials['yellow.002']}
+        material={materials['9']}
         position={[-0.024, 1.738, -0.955]}
         rotation={[-3.14, -1.259, 1.586]}
         scale={[0.028, 0.022, 0.029]}
@@ -697,6 +740,7 @@ export function Office(props) {
       <mesh
         castShadow
         receiveShadow
+        ref={lastMessage2Ref}
         geometry={nodes.Plane033.geometry}
         material={materials['5.004']}
         position={[0.292, 1.643, -0.837]}
@@ -706,6 +750,7 @@ export function Office(props) {
       <mesh
         castShadow
         receiveShadow
+        ref={lastMessageRef}
         geometry={nodes.Plane034.geometry}
         material={materials['5.005']}
         position={[0.312, 1.572, -0.826]}
@@ -721,8 +766,26 @@ export function Office(props) {
         rotation={[-3.14, -1.259, 1.586]}
         scale={[0.028, 0.022, 0.029]}
       />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane035.geometry}
+        material={materials['yellow.001']}
+        position={[-0.667, 1.447, -0.947]}
+        rotation={[-1.577, 1.571, 0]}
+        scale={[0.013, 0.079, 0.005]}
+        ref={typingCursorRef}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes['Monitor_-_1001'].geometry}
+        material={materials['9.001']}
+        position={[-0.609, 1.674, -0.949]}
+        scale={1.199}
+      />
     </e.group>
   )
 }
 
-useGLTF.preload('models/office-3d-2224.glb')
+useGLTF.preload('models/office-final.glb')
