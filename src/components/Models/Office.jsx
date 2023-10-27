@@ -23,6 +23,8 @@ export function Office(props) {
 
   const typingCursorRef = useRef(null)
   const fanRef = useRef(null)
+  const clockHourRef = useRef(null)
+  const clockMinsRef = useRef(null)
   const chickenRef = useRef(null)
   const standLampLightRef = useRef(null)
   const lastMessageRef = useRef(null)
@@ -32,6 +34,9 @@ export function Office(props) {
   const chickenY = useMotionValue(1.282)
   const { nodes, materials } = useGLTF('models/office-final.glb')
 
+  /**
+   * Animate chicken on click
+   */
   useEffect(() => {
     animate(chickenY, clickTimer ? 1.402 : 1.282, {
       type: 'linear',
@@ -42,12 +47,26 @@ export function Office(props) {
     })
   }, [clickTimer])
 
+  /**
+   * Rotate clock hands to current time
+   */
+  useEffect(() => {
+    const date = new Date()
+    const hours = date.getHours()
+    const mins = date.getMinutes()
+    const hoursAngle = (hours % 12) * 30 + mins * 0.5
+    const minsAngle = mins * 6
+
+    clockHourRef.current.rotation.z = ((hoursAngle * Math.PI) / 180) * -1
+    clockMinsRef.current.rotation.z = ((minsAngle * Math.PI) / 180) * -1
+  }, [])
+
   useFrame(state => {
     chickenRef.current.position.y = chickenY.get()
 
     if (isFanTurnedOn) {
-      fanCube1Ref.current.rotation.x += 0.1
-      fanCube2Ref.current.rotation.x += 0.1
+      fanCube1Ref.current.rotation.x = Math.sin(new Date().getTime() * 0.001) - 0.3
+      fanCube2Ref.current.rotation.x = Math.sin(new Date().getTime() * 0.001) - 0.3
     }
 
     /**
@@ -98,6 +117,7 @@ export function Office(props) {
   }
 
   const handleStandLampClick = () => {
+    switchAudio.currentTime = 0
     switchAudio.play()
     setIsStandLampOn(on => !on)
     if (isStandLampOn) {
@@ -105,8 +125,28 @@ export function Office(props) {
         color: '#E44B1F'
       })
     } else {
+      /**
+       * Add yellow light to stand lamp and add glow using shader
+       */
       standLampLightRef.current.material = new Three.MeshStandardMaterial({
-        color: '#ffff00'
+        color: '#ffff29',
+        shader: {
+          uniforms: {
+            uTime: { value: 0 },
+            uColor: { value: new Three.Color('#ffff29') }
+          },
+          vertexShader: `
+            varying vec2 vUv;
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            void main() {
+              vUv = uv;
+              vNormal = normal;
+              vPosition = position;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+          `
+        }
       })
     }
   }
@@ -179,26 +219,6 @@ export function Office(props) {
           receiveShadow
           geometry={nodes.ManitorSmall_1.geometry}
           material={materials['Material.004']}
-        />
-      </group>
-      <group position={[-0.959, 2.674, -1.022]} rotation={[0, 0.001, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane067.geometry}
-          material={materials['9']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane067_1.geometry}
-          material={materials['4.001']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane067_2.geometry}
-          material={materials['6.001']}
         />
       </group>
       <group position={[-0.534, 1.234, -0.645]} scale={0.039}>
@@ -784,6 +804,43 @@ export function Office(props) {
         position={[-0.609, 1.674, -0.949]}
         scale={1.199}
       />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube004.geometry}
+        material={materials['Material.007']}
+        position={[-1.125, 2.603, -0.931]}
+        rotation={[0, 0, 0.706]}
+        scale={[0.014, 0.041, 0.008]}
+        ref={clockHourRef}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube005.geometry}
+        material={materials['Material.007']}
+        position={[-1.125, 2.603, -0.922]}
+        rotation={[0, 0, -0.788]}
+        scale={[0.014, 0.069, 0.008]}
+        ref={clockMinsRef}
+      />
+      <group
+        position={[-1.125, 2.381, -0.962]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={[0.222, 0.065, 0.222]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Mesh003.geometry}
+          material={materials['Material.003']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Mesh003_1.geometry}
+          material={materials['Material.006']}
+        />
+      </group>
     </e.group>
   )
 }

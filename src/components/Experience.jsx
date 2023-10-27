@@ -30,13 +30,13 @@ export const Experience = props => {
     animate(cameraPositionZ, menuOpened ? 5 : 9.2, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtX, menuOpened ? 9 : 0, {
+    animate(cameraLookAtX, menuOpened ? 10 : 0, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtY, menuOpened ? -0.3 : 0.6, {
+    animate(cameraLookAtY, menuOpened ? -1 : 0.6, {
       ...framerMotionConfig
     })
-    animate(cameraLookAtZ, menuOpened ? 10.5 : -1, {
+    animate(cameraLookAtZ, menuOpened ? 10 : -1, {
       ...framerMotionConfig
     })
   }, [menuOpened])
