@@ -4,13 +4,13 @@ import { AnimatePresence } from 'framer-motion'
 const FRONT_SKILLS = [
   { title: 'Javascript (ES6 and above)', level: 90 },
   { title: 'Typescript', level: 90 },
-  { title: 'Reactjs', level: 90 },
+  { title: 'React.js', level: 90 },
   { title: 'React Native', level: 90 },
-  { title: 'Vuejs', level: 90 },
+  { title: 'Vue.js', level: 90 },
   { title: 'Redux (Toolkit, Saga)', level: 90 },
   { title: 'ReactQuery', level: 90 },
   { title: 'Test (unit, behavior, e2e)', level: 90 },
-  { title: 'Nextjs', level: 90 },
+  { title: 'Next.js', level: 90 },
   { title: 'Rest, gRPC, graphQL', level: 90 },
   { title: 'Socket (io, WS)', level: 90 },
   { title: 'PWA (workbox)', level: 90 },
@@ -28,13 +28,16 @@ const BACK_SKILLS = [
   { title: 'Helm', level: 90 },
   { title: 'Nodejs (sails, express, nest)', level: 90 },
   { title: 'DB (MySQL, MongoDB, Postgres)', level: 90 },
-  { title: 'Python, PHP, RoR, Nodejs, …', level: 90 }
+  { title: 'Python (fastAPI, django)', level: 90 },
+  { title: 'PHP (laravel, zf2)', level: 90 },
+  { title: 'Ruby (Rails)', level: 90 },
+  { title: 'Node.js (express, nest)', level: 90 }
 ]
 
 const MANAGEMENT_SKILLS = [
   { title: 'Scrum Player', level: 90 },
   { title: 'Agile Team Lead Certified', level: 90 },
-  { title: 'iSAQB Certified SA', level: 90 }
+  { title: 'iSAQB Certified SoftwareArchitect', level: 90 }
 ]
 const languages = [
   {
@@ -130,11 +133,20 @@ export const SkillsSection = ({ section }) => {
 }
 
 const Badge = ({ title, level }) => {
+  const handleTextToSpeech = () => {
+    const msg = new SpeechSynthesisUtterance()
+    msg.text = title
+    window.speechSynthesis.speak(msg)
+  }
+
   return (
-    <span
+    <div
+      role="button"
+      onMouseEnter={handleTextToSpeech}
+      onMouseLeave={() => window.speechSynthesis.cancel()}
       title={`${level}%`}
       className="bg-secondary inter cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded-lg inline-flex items-center">
       {title}
-    </span>
+    </div>
   )
 }

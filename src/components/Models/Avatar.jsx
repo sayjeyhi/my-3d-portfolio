@@ -6,6 +6,8 @@ import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { editable as e } from '@theatre/r3f'
 
+const keyboardAudio = new Audio('/keyboard.mp3')
+
 export function Avatar(props) {
   const { animation } = props
 
@@ -31,6 +33,7 @@ export function Avatar(props) {
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
 
+  console.log('===', typingAnimation[0])
   const { actions } = useAnimations(
     [
       typingAnimation[0],

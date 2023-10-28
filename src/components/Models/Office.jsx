@@ -10,7 +10,6 @@ import { useFrame } from '@react-three/fiber'
 import * as Three from 'three'
 const chickenAudio = new Audio('/chicken.mp3')
 const fanAudio = new Audio('/fan.mp3')
-const keyboardAudio = new Audio('/keyboard.mp3')
 const switchAudio = new Audio('/switch.mp3')
 
 export function Office(props) {

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
 import throttle from 'lodash-es/throttle'
 
 const isTouchDevice =
@@ -46,7 +46,12 @@ const useMousePosition = () => {
   return position
 }
 
-export const Cursor = () => {
+const audioSection1 = new Audio('/s1.mp3')
+const audioSection2 = new Audio('/s2.mp3')
+
+export const Cursor = ({ section, audioMuted }) => {
+  const intervalRefs = useRef([])
+  const isAudioActive = useRef(false)
   if (isTouchDevice) {
     return null
   }
@@ -54,26 +59,97 @@ export const Cursor = () => {
   const { cursorActive: isCursorActive } = useContext(CursorContext)
   const { clientX, clientY } = useMousePosition()
 
+  const fadeOutAudioVolume = (audio, { step, key, to } = { step: 0.009 }) =>
+    (intervalRefs.current[key] = setInterval(() => {
+      if (audio.volume - step > to && audio.volume > 0.001) {
+        audio.volume -= step
+      } else {
+        clearInterval(intervalRefs.current[key])
+        intervalRefs.current[key] = null
+      }
+    }, 200))
+  const fadeInAudioVolume = (audio, { step, key, to } = { step: 0.05 }) =>
+    (intervalRefs.current[key] = setInterval(() => {
+      if (audio.volume + step < to && audio.volume < 0.99) {
+        audio.volume += step
+      } else {
+        clearInterval(intervalRefs.current[key])
+        intervalRefs.current[key] = null
+      }
+    }, 20))
+
+  useEffect(() => {
+    if (audioMuted) {
+      audioSection1.pause()
+      audioSection2.pause()
+      return
+    } else {
+      if (audioSection1.paused) audioSection1.play()
+      if (audioSection2.paused) audioSection2.play()
+    }
+    audioSection1.loop = true
+    audioSection2.loop = true
+
+    if (section === 0) {
+      fadeInAudioVolume(audioSection1, { key: 'section1', to: 0.9, step: 0.1 })
+      fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
+    } else if (section === 1) {
+      fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
+      fadeInAudioVolume(audioSection2, { key: 'section2', to: 0.5, step: 0.09 })
+    }
+
+    const handleActivateAudio = () => {
+      if (isAudioActive.current) return
+      isAudioActive.current = true
+
+      // start all sounds
+      audioSection1.play()
+      audioSection2.play()
+    }
+    window.addEventListener('click', handleActivateAudio)
+    return () => {
+      window.removeEventListener('click', handleActivateAudio)
+    }
+  }, [section, audioMuted])
+
   return (
-    <svg
-      width={60}
-      height={60}
-      viewBox="0 0 100 100"
+    <div
       style={{
         opacity: !clientX && !clientY ? 0 : 1,
         zIndex: 9999,
         position: 'absolute',
         pointerEvents: 'none',
         left: clientX,
-        top: clientY,
-        transform: `translate(-50%, -50%) scale(${isCursorActive ? 1.5 : 1})`,
-        stroke: isCursorActive ? '#65a30c' : 'transparent',
-        strokeWidth: isCursorActive ? 3 : 1,
-        fill: isCursorActive ? 'rgba(255,255,255,0.4)' : '#65a30c',
-        transition: 'transform .25s ease-in-out'
+        top: clientY
       }}>
-      <circle cx="50" cy="50" r="16" />
-    </svg>
+      <svg
+        width={60}
+        height={60}
+        viewBox="0 0 100 100"
+        style={{
+          transform: `translate(-50%, -50%) scale(${isCursorActive ? 1.5 : 1})`,
+          transition: 'transform .25s ease-in-out',
+          stroke: isCursorActive ? '#65a30c' : 'transparent',
+          strokeWidth: isCursorActive ? 3 : 1,
+          fill: isCursorActive ? 'rgba(255,255,255,0.4)' : '#65a30c'
+        }}>
+        <circle cx="50" cy="50" r="16" />
+        {!isAudioActive.current && (
+          <circle
+            className="animate-ping origin-center"
+            cx="50"
+            cy="50"
+            r="16"
+            style={{ opacity: 0.25 }}
+          />
+        )}
+      </svg>
+      {!isAudioActive.current && (
+        <div className="text-gray-400 bold text-sm absolute w-[200px] -mt-10 -ml-[70px]">
+          Click to activate audio
+        </div>
+      )}
+    </div>
   )
 }
 

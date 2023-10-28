@@ -52,6 +52,12 @@ export const ContactSection = () => {
           <a href="https://sketchfab.com/IgorYerm" target="_blank" rel="noreferrer">
             Igor Yeram, Sketchfab
           </a>
+          &nbsp;
+          <br />
+          Sound effects from{' '}
+          <a href="https://pixabay.com/service/license-summary/" target="_blank" rel="noreferrer">
+            Pixabay
+          </a>
         </div>
         <div className="flex items-center ">
           Crafted with &nbsp;

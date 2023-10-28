@@ -5,7 +5,7 @@ import { ContactSection } from './sections/Contact.jsx'
 import { Cursor } from '../Cursor.jsx'
 
 export const Contents = props => {
-  const { setSection, menuOpened, section } = props
+  const { setSection, menuOpened, section, audioMuted } = props
 
   return (
     <div className="flex flex-col items-center w-screen">
@@ -13,7 +13,7 @@ export const Contents = props => {
       <SkillsSection section={section} />
       <ProjectsSection section={section} />
       <ContactSection section={section} />
-      <Cursor section={section} />
+      <Cursor audioMuted={audioMuted} section={section} />
     </div>
   )
 }
