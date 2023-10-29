@@ -10,7 +10,7 @@ import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
 
 export const Experience = props => {
-  const { menuOpened, gameState } = props
+  const { menuOpened, gameState, dispatchGameState } = props
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
@@ -83,6 +83,7 @@ export const Experience = props => {
         setCharacterAnimation('TellingASecret')
       }
     } else if (sheet.sequence.position < 9.92 && sheet.sequence.position > 6.9) {
+      if (gameState.gameMode) dispatchGameState({ type: 'end' })
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 9.92) {
       setCharacterAnimation('PhoneCall')

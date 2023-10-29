@@ -25,6 +25,13 @@ function reducer(state, action) {
         startTime: new Date().getTime(),
         isStarted: true
       }
+    case 'end':
+      return {
+        ...state,
+        startTime: 0,
+        isStarted: false,
+        gameMode: false
+      }
     case 'pause':
       return {
         ...state,
@@ -52,10 +59,15 @@ function reducer(state, action) {
       }
     case 'gameTick':
       const time = (new Date().getTime() - state.startTime) / 1000
+      const score = Math.floor(time * 12.5)
+
+      if (Math.ceil(score / 100) * 100 > Math.ceil(state.score / 100) * 100) {
+        document.getElementById('successAudioRef').play()
+      }
       return {
         ...state,
         time,
-        score: Math.floor(time * 12.5),
+        score,
         speed: Math.floor(time / 10 + 0.1)
       }
     default:
@@ -114,7 +126,12 @@ function App() {
               onSectionChange={setSection}
             />
             <Scroll>
-              <Experience section={section} menuOpened={menuOpened} gameState={gameState} />
+              <Experience
+                section={section}
+                menuOpened={menuOpened}
+                gameState={gameState}
+                dispatchGameState={dispatchGameState}
+              />
             </Scroll>
             <Scroll html>
               <Interface
