@@ -22,6 +22,7 @@ function reducer(state, action) {
     case 'start':
       return {
         ...state,
+        startTime: new Date().getTime(),
         isStarted: true
       }
     case 'pause':
@@ -40,7 +41,6 @@ function reducer(state, action) {
         isGameOver: true
       }
     case 'gameMode':
-      console.log('Setting game mode', action.payload)
       return {
         ...state,
         gameMode: action.payload
@@ -50,16 +50,13 @@ function reducer(state, action) {
         ...state,
         isJumping: action.payload
       }
-    case 'score':
+    case 'gameTick':
+      const time = (new Date().getTime() - state.startTime) / 1000
       return {
         ...state,
-        score: action.payload,
-        speed: action.payload / 1000 + 0.1
-      }
-    case 'time':
-      return {
-        ...state,
-        time: action.payload
+        time,
+        score: Math.floor(time * 12.5),
+        speed: Math.floor(time / 10 + 0.1)
       }
     default:
       throw new Error('Invalid action type')
@@ -77,6 +74,7 @@ function App() {
       gameMode: false,
       isStarted: false,
       isJumping: false,
+      startTime: 0,
       score: 0,
       time: 0,
       speed: 0.1,
@@ -86,6 +84,7 @@ function App() {
       gameMode: false,
       isStarted: false,
       isJumping: false,
+      startTime: 0,
       score: 0,
       time: 0,
       speed: 0.1,

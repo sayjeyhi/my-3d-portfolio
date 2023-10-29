@@ -7,8 +7,8 @@ export const Menu = props => {
 
   useEffect(() => {
     const audioMuted = window.localStorage.getItem('audioMuted')
-    if (audioMuted === 'false') {
-      setAudioMuted(false)
+    if (audioMuted === 'true') {
+      setAudioMuted(true)
     }
   }, [])
 
