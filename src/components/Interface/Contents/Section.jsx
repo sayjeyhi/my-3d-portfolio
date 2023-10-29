@@ -20,7 +20,7 @@ export const Section = ({ className, children }) => {
         y: 0,
         transition: {
           duration: 0.7,
-          delay: 0.5
+          delay: 0.7
         }
       }}>
       {children}

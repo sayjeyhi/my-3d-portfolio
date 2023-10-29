@@ -1,7 +1,7 @@
 import { Stage, useScroll } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 import { framerMotionConfig } from '../config'
 import { Avatar } from './Models/Avatar.jsx'
 import { Office } from './Models/Office.jsx'
@@ -10,7 +10,7 @@ import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
 
 export const Experience = props => {
-  const { menuOpened } = props
+  const { menuOpened, gameState } = props
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
@@ -71,7 +71,17 @@ export const Experience = props => {
     } else if (sheet.sequence.position < 5.8 && sheet.sequence.position > 4) {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position < 7.2 && sheet.sequence.position > 5.8) {
-      setCharacterAnimation('TellingASecret')
+      if (gameState.gameMode) {
+        if (gameState.isJumping) {
+          setCharacterAnimation('Jumping')
+        } else if (gameState.isStarted) {
+          setCharacterAnimation('Running')
+        } else {
+          setCharacterAnimation('Idle')
+        }
+      } else {
+        setCharacterAnimation('TellingASecret')
+      }
     } else if (sheet.sequence.position < 9.92 && sheet.sequence.position > 6.9) {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 9.92) {
@@ -82,13 +92,13 @@ export const Experience = props => {
   return (
     <>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Avatar animation={animation} />
+        <Avatar gameState={gameState} animation={animation} />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Office />
+        <Office section={section} />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Amsterdam />
+        <Amsterdam theatreKey="Amsterdam" />
       </Stage>
     </>
   )

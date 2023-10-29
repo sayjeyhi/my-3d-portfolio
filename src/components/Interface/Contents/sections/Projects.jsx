@@ -1,20 +1,12 @@
 import { Section } from '../Section.jsx'
+import { motion } from 'framer-motion'
+import { Game } from './Game.jsx'
 
-export const ProjectsSection = () => {
-  // const [currentProject, setCurrentProject] = useAtom(currentProjectAtom)
-  //
-  const nextProject = () => {
-    // setCurrentProject((currentProject + 1) % projects.length)
-  }
-
-  const previousProject = () => {
-    // setCurrentProject((currentProject - 1 + projects.length) % projects.length)
-  }
-
-  return (
+export const ProjectsSection = ({ dispatchGameState, gameState }) => {
+  return !gameState.gameMode ? (
     <Section key="projects" className="-mt-48">
       <h3 className="text-5xl font-bold -mt-8 pb-6 pl-2">Books</h3>
-      <div className="flex items-center align-middle justify-center mb-2">
+      <div className="flex align-middle justify-center mb-2">
         <BookCard
           name="Javascript fundamentals"
           subtitle="(250 pages)"
@@ -33,7 +25,13 @@ export const ProjectsSection = () => {
           img="books/js-questions.jpg"
           url="https://github.com/Mariotek/javascript-persian-interview-questions"
         />
+
+        <WhatElseCard onClick={() => dispatchGameState({ type: 'gameMode', payload: true })} />
       </div>
+    </Section>
+  ) : (
+    <Section key="projects-game">
+      <Game dispatchGameState={dispatchGameState} gameState={gameState} />
     </Section>
   )
 }
@@ -47,5 +45,87 @@ export const BookCard = ({ name, url, img, subtitle }) => {
         <h5 className="text-xs font-medium text-slate-400 mb-1">{subtitle}</h5>
       </div>
     </a>
+  )
+}
+
+export const WhatElseCard = ({ onClick }) => {
+  return (
+    <motion.div
+      className="flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-full border border-gray-100 bg-white shadow-xl w-60 h-60"
+      initial={{
+        opacity: 0,
+        x: 120
+      }}
+      exit={{
+        opacity: 0,
+        x: 50
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        transition: {
+          duration: 0.7,
+          delay: 1.2
+        }
+      }}
+      role="button"
+      onClick={onClick}>
+      <div className="border-gray-100 group-hover:border-gray-200 transition-all border-2 rounded-full p-8 border-dashed h-full w-full flex flex-col items-center justify-center">
+        <p className="text-xl mt-12">Interested?</p>
+        <div className="flex relative">
+          <button className="mt-4 py-2 px-3 rounded-3xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
+            Show me more
+          </button>
+
+          <svg
+            className="text-primary absolute -top-20 left-2 -translate-x-1/2 opacity-30 -rotate-[28deg]"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 512 512">
+            <path
+              fill="currentColor"
+              d="M483.13 245.38C461.92 149.49 430 98.31 382.65 84.33A107.13 107.13 0 0 0 352 80c-13.71 0-25.65 3.34-38.28 6.88C298.5 91.15 281.21 96 256 96s-42.51-4.84-57.76-9.11C185.6 83.34 173.67 80 160 80a115.74 115.74 0 0 0-31.73 4.32c-47.1 13.92-79 65.08-100.52 161C4.61 348.54 16 413.71 59.69 428.83a56.62 56.62 0 0 0 18.64 3.22c29.93 0 53.93-24.93 70.33-45.34c18.53-23.1 40.22-34.82 107.34-34.82c59.95 0 84.76 8.13 106.19 34.82c13.47 16.78 26.2 28.52 38.9 35.91c16.89 9.82 33.77 12 50.16 6.37c25.82-8.81 40.62-32.1 44-69.24c2.57-28.48-1.39-65.89-12.12-114.37ZM208 240h-32v32a16 16 0 0 1-32 0v-32h-32a16 16 0 0 1 0-32h32v-32a16 16 0 0 1 32 0v32h32a16 16 0 0 1 0 32Zm84 4a20 20 0 1 1 20-20a20 20 0 0 1-20 20Zm44 44a20 20 0 1 1 20-19.95A20 20 0 0 1 336 288Zm0-88a20 20 0 1 1 20-20a20 20 0 0 1-20 20Zm44 44a20 20 0 1 1 20-20a20 20 0 0 1-20 20Z"
+            />
+          </svg>
+
+          <svg
+            className="text-primary absolute -top-[85px] right-[-1px] opacity-25 rotate-[28deg]"
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="m11.3 9.8l-2-2q-.15-.15-.225-.337T9 7.075V3q0-.425.288-.713T10 2h4q.425 0 .713.288T15 3v4.075q0 .2-.075.388T14.7 7.8l-2 2q-.15.15-.325.213t-.375.062q-.2 0-.375-.062T11.3 9.8Zm2.9 2.9q-.15-.15-.212-.325T13.925 12q0-.2.063-.375t.212-.325l2-2q.15-.15.338-.225T16.925 9H21q.425 0 .713.288T22 10v4q0 .425-.288.713T21 15h-4.075q-.2 0-.388-.075T16.2 14.7l-2-2ZM2 14v-4q0-.425.288-.713T3 9h4.075q.2 0 .388.075T7.8 9.3l2 2q.15.15.213.325t.062.375q0 .2-.062.375T9.8 12.7l-2 2q-.15.15-.337.225T7.075 15H3q-.425 0-.713-.288T2 14Zm7 7v-4.075q0-.2.075-.388T9.3 16.2l2-2q.15-.15.325-.212t.375-.063q.2 0 .375.063t.325.212l2 2q.15.15.225.338t.075.387V21q0 .425-.288.713T14 22h-4q-.425 0-.713-.288T9 21Z"
+            />
+          </svg>
+          <svg
+            className="text-primary absolute -top-[112px] -translate-x-1/2 left-1/2 opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="m12 18.275l-4.15 2.5q-.275.175-.575.15t-.525-.2q-.225-.175-.35-.438t-.05-.587l1.1-4.725L3.775 11.8q-.25-.225-.312-.513t.037-.562q.1-.275.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15q.275 0 .537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45q.1.275.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437q-.225.175-.525.2t-.575-.15l-4.15-2.5Z"
+            />
+          </svg>
+
+          <svg
+            className="text-gray-200 absolute top-full left-1/2 group-hover:text-gray-300 transition-all -translate-x-1/2"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            key="1"
+            viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M16.15 13H5q-.425 0-.713-.288T4 12q0-.425.288-.713T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.313t.712.288L19.3 11.3q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7L16.15 13Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </motion.div>
   )
 }

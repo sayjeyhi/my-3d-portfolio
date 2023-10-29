@@ -50,8 +50,10 @@ const audioSection1 = new Audio('/s1.mp3')
 const audioSection2 = new Audio('/s2.mp3')
 
 export const Cursor = ({ section, audioMuted }) => {
+  const isMuted = window.localStorage.getItem('audioMuted')
+
   const intervalRefs = useRef([])
-  const isAudioActive = useRef(false)
+  const isAudioActive = useRef(isMuted !== 'false')
   if (isTouchDevice) {
     return null
   }
@@ -79,7 +81,7 @@ export const Cursor = ({ section, audioMuted }) => {
     }, 20))
 
   useEffect(() => {
-    if (audioMuted) {
+    if (audioMuted || isMuted === 'true') {
       audioSection1.pause()
       audioSection2.pause()
       return

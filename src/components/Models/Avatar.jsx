@@ -9,7 +9,7 @@ import { editable as e } from '@theatre/r3f'
 const keyboardAudio = new Audio('/keyboard.mp3')
 
 export function Avatar(props) {
-  const { animation } = props
+  const { animation, gameState } = props
 
   const { headFollow, cursorFollow, wireframe } = {
     headFollow: false,
@@ -25,15 +25,18 @@ export function Avatar(props) {
   const { animations: runningAnimation } = useFBX('animations/running.fbx')
   const { animations: tellingASecretAnimation } = useFBX('animations/secret.fbx')
   const { animations: typingAnimation } = useFBX('animations/typing.fbx')
-
+  const { animations: jumpAnimation } = useFBX('animations/Jumping (2).fbx')
+  const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
+  //
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
   fallingAnimation[0].name = 'Falling'
   tellingASecretAnimation[0].name = 'TellingASecret'
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
+  jumpAnimation[0].name = 'Jumping'
+  idleAnimation[0].name = 'Idle'
 
-  console.log('===', typingAnimation[0])
   const { actions } = useAnimations(
     [
       typingAnimation[0],
@@ -41,7 +44,9 @@ export function Avatar(props) {
       fallingAnimation[0],
       phoneCallAnimation[0],
       tellingASecretAnimation[0],
-      runningAnimation[0]
+      runningAnimation[0],
+      jumpAnimation[0],
+      idleAnimation[0]
     ],
     group
   )
@@ -65,9 +70,14 @@ export function Avatar(props) {
 
   useEffect(() => {
     if (!actions[animation]) return
-    const currentAnimation = actions[animation].reset().fadeIn(0.5).play()
+    const fadeDuration = animation === 'Jumping' ? 0.5 : 0.5
+    const currentAnimation = actions[animation].reset().fadeIn(fadeDuration).play()
     if (animation !== 'Running') {
       currentAnimation.setLoop(THREE.LoopPingPong)
+    }
+
+    if (animation === 'Jumping') {
+      currentAnimation.timeScale = 1 + gameState.speed
     }
     return () => {
       if (!actions[animation]) return

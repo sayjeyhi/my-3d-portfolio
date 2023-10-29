@@ -1,11 +1,20 @@
 import { useCursorHandlers } from './Cursor.jsx'
+import { useEffect } from 'react'
 
 export const Menu = props => {
   const { onSectionChange, menuOpened, setMenuOpened, audioMuted, setAudioMuted } = props
   const cursorHandlers = useCursorHandlers()
 
+  useEffect(() => {
+    const audioMuted = window.localStorage.getItem('audioMuted')
+    if (audioMuted === 'false') {
+      setAudioMuted(false)
+    }
+  }, [])
+
   const handleAudioMute = () => {
     setAudioMuted(!audioMuted)
+    window.localStorage.setItem('audioMuted', audioMuted ? 'false' : 'true')
   }
   return (
     <>

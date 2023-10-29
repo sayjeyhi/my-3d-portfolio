@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
@@ -17,10 +17,81 @@ import state from './state.json'
 //   studio.extend(extension)
 // }
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'start':
+      return {
+        ...state,
+        isStarted: true
+      }
+    case 'pause':
+      return {
+        ...state,
+        isPaused: true
+      }
+    case 'resume':
+      return {
+        ...state,
+        isPaused: false
+      }
+    case 'gameover':
+      return {
+        ...state,
+        isGameOver: true
+      }
+    case 'gameMode':
+      console.log('Setting game mode', action.payload)
+      return {
+        ...state,
+        gameMode: action.payload
+      }
+    case 'jump':
+      return {
+        ...state,
+        isJumping: action.payload
+      }
+    case 'score':
+      return {
+        ...state,
+        score: action.payload,
+        speed: action.payload / 1000 + 0.1
+      }
+    case 'time':
+      return {
+        ...state,
+        time: action.payload
+      }
+    default:
+      throw new Error('Invalid action type')
+  }
+}
+
 function App() {
   const [section, setSection] = useState(0)
   const [menuOpened, setMenuOpened] = useState(false)
   const sheet = getProject('sayjeyhi.com', { state }).sheet('r3f')
+
+  const [gameState, dispatchGameState] = useReducer(
+    reducer,
+    {
+      gameMode: false,
+      isStarted: false,
+      isJumping: false,
+      score: 0,
+      time: 0,
+      speed: 0.1,
+      isGameOver: false
+    },
+    () => ({
+      gameMode: false,
+      isStarted: false,
+      isJumping: false,
+      score: 0,
+      time: 0,
+      speed: 0.1,
+      isGameOver: false
+    })
+  )
 
   useEffect(() => {
     setMenuOpened(false)
@@ -44,10 +115,12 @@ function App() {
               onSectionChange={setSection}
             />
             <Scroll>
-              <Experience section={section} menuOpened={menuOpened} />
+              <Experience section={section} menuOpened={menuOpened} gameState={gameState} />
             </Scroll>
             <Scroll html>
               <Interface
+                gameState={gameState}
+                dispatchGameState={dispatchGameState}
                 section={section}
                 setSection={setSection}
                 menuOpened={menuOpened}

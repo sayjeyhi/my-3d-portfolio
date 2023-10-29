@@ -9,7 +9,7 @@ import { editable as e } from '@theatre/r3f'
 export function Amsterdam(props) {
   const { nodes, materials } = useGLTF('/models/base-ams-14.glb')
   return (
-    <e.group theatreKey="Amsterdam" {...props} dispose={null}>
+    <e.group theatreKey={props.theatreKey} {...props} dispose={null}>
       <group position={[0, 0, -0.024]} rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[-8.623, 1.298, 9.253]}>

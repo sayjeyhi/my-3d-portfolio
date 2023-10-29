@@ -58,7 +58,7 @@ export function Office(props) {
 
     clockHourRef.current.rotation.z = ((hoursAngle * Math.PI) / 180) * -1
     clockMinsRef.current.rotation.z = ((minsAngle * Math.PI) / 180) * -1
-  }, [])
+  }, [props.section])
 
   useFrame(state => {
     chickenRef.current.position.y = chickenY.get()
