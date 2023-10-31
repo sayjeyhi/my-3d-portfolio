@@ -14,6 +14,7 @@ export const Experience = props => {
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
+  const [isAvatarPixelated, setIsAvatarPixelated] = useState(false)
 
   const [section, setSection] = useState(0)
 
@@ -64,36 +65,30 @@ export const Experience = props => {
 
     if (sheet.sequence.position < 0.5) {
       setCharacterAnimation('Typing')
-    } else if (sheet.sequence.position < 2 && sheet.sequence.position > 0.5) {
+    } else if (sheet.sequence.position < 1.5 && sheet.sequence.position >= 0.5) {
       setCharacterAnimation('Falling')
-    } else if (sheet.sequence.position < 4 && sheet.sequence.position > 2) {
+    } else if (sheet.sequence.position < 2.5 && sheet.sequence.position >= 1.5) {
       setCharacterAnimation('ShowOff')
-    } else if (sheet.sequence.position < 5.8 && sheet.sequence.position > 4) {
+    } else if (sheet.sequence.position < 3.8 && sheet.sequence.position >= 2.5) {
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position < 7.2 && sheet.sequence.position > 5.8) {
-      if (gameState.gameMode) {
-        if (gameState.isJumping) {
-          setCharacterAnimation('Jumping')
-        } else if (gameState.isStarted) {
-          setCharacterAnimation('Running')
-        } else {
-          setCharacterAnimation('Idle')
-        }
-      } else {
-        setCharacterAnimation('TellingASecret')
-      }
-    } else if (sheet.sequence.position < 9.92 && sheet.sequence.position > 6.9) {
-      if (gameState.gameMode) dispatchGameState({ type: 'end' })
+    } else if (sheet.sequence.position < 4.24 && sheet.sequence.position >= 3.8) {
+      setCharacterAnimation('TellingASecret')
+    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.24) {
+      setCharacterAnimation('Idle') // Shooting
+      setIsAvatarPixelated(true)
+    } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
+      if (gameState.isStarted) dispatchGameState({ type: 'end' })
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position > 9.92) {
+    } else if (sheet.sequence.position > 10.08) {
       setCharacterAnimation('PhoneCall')
     }
+    console.log('PO', sheet.sequence.position)
   })
 
   return (
     <>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Avatar gameState={gameState} animation={animation} />
+        <Avatar gameState={gameState} animation={animation} pixelated={isAvatarPixelated} />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Office section={section} />

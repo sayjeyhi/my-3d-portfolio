@@ -11,11 +11,6 @@ const keyboardAudio = new Audio('/keyboard.mp3')
 export function Avatar(props) {
   const { animation, gameState } = props
 
-  const { headFollow, cursorFollow, wireframe } = {
-    headFollow: false,
-    cursorFollow: false,
-    wireframe: false
-  }
   const group = useRef()
   const { nodes, materials } = useGLTF('models/avatar.glb')
 
@@ -27,6 +22,7 @@ export function Avatar(props) {
   const { animations: typingAnimation } = useFBX('animations/typing.fbx')
   const { animations: jumpAnimation } = useFBX('animations/Jumping (2).fbx')
   const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
+  const { animations: shootAnimation } = useFBX('animations/shoot (1).fbx')
   //
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
@@ -35,6 +31,7 @@ export function Avatar(props) {
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
   jumpAnimation[0].name = 'Jumping'
+  shootAnimation[0].name = 'Shooting'
   idleAnimation[0].name = 'Idle'
 
   const { actions } = useAnimations(
@@ -46,7 +43,8 @@ export function Avatar(props) {
       tellingASecretAnimation[0],
       runningAnimation[0],
       jumpAnimation[0],
-      idleAnimation[0]
+      idleAnimation[0],
+      shootAnimation[0]
     ],
     group
   )
@@ -84,12 +82,6 @@ export function Avatar(props) {
       actions[animation].reset().fadeOut(0.5)
     }
   }, [animation])
-
-  useEffect(() => {
-    Object.values(materials).forEach(material => {
-      material.wireframe = wireframe
-    })
-  }, [wireframe])
 
   return (
     <group {...props} dispose={null} ref={group}>

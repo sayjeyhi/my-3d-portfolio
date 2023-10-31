@@ -57,13 +57,19 @@ function reducer(state, action) {
         ...state,
         isJumping: action.payload
       }
+    case 'shoot':
+      return {
+        ...state,
+        isJumping: action.payload
+      }
     case 'gameTick':
       const time = (new Date().getTime() - state.startTime) / 1000
       const score = Math.floor(time * 12.5)
-
-      if (Math.ceil(score / 100) * 100 > Math.ceil(state.score / 100) * 100) {
-        document.getElementById('successAudioRef').play()
+      const successAudioRef = document.getElementById('successAudioRef')
+      if (Math.ceil(score / 100) * 100 > Math.ceil(state.score / 100) * 100 && successAudioRef) {
+        successAudioRef.play()
       }
+
       return {
         ...state,
         time,
@@ -86,6 +92,7 @@ function App() {
       gameMode: false,
       isStarted: false,
       isJumping: false,
+      isShooting: false,
       startTime: 0,
       score: 0,
       time: 0,
@@ -96,6 +103,7 @@ function App() {
       gameMode: false,
       isStarted: false,
       isJumping: false,
+      isShooting: false,
       startTime: 0,
       score: 0,
       time: 0,
@@ -119,7 +127,7 @@ function App() {
           <color attach="background" args={['#ffffff']} />
           <ambientLight intensity={0.25} />
 
-          <ScrollControls pages={4} damping={0.1}>
+          <ScrollControls pages={6} damping={0.1}>
             <ScrollManager
               setMenuOpened={setMenuOpened}
               section={section}

@@ -1,9 +1,8 @@
 import { Section } from '../Section.jsx'
 import { motion } from 'framer-motion'
-import { Game } from './Game.jsx'
 
 export const ProjectsSection = ({ dispatchGameState, gameState }) => {
-  return !gameState.gameMode ? (
+  return (
     <Section key="projects" className="-mt-48">
       <h3 className="text-5xl font-bold -mt-8 pb-6 pl-2">Books</h3>
       <div className="flex align-middle justify-center mb-2">
@@ -26,12 +25,8 @@ export const ProjectsSection = ({ dispatchGameState, gameState }) => {
           url="https://github.com/Mariotek/javascript-persian-interview-questions"
         />
 
-        <WhatElseCard onClick={() => dispatchGameState({ type: 'gameMode', payload: true })} />
+        <WhatElseCard />
       </div>
-    </Section>
-  ) : (
-    <Section key="projects-game">
-      <Game dispatchGameState={dispatchGameState} gameState={gameState} />
     </Section>
   )
 }
@@ -48,9 +43,9 @@ export const BookCard = ({ name, url, img, subtitle }) => {
   )
 }
 
-export const WhatElseCard = ({ onClick }) => {
+export const WhatElseCard = () => {
   return (
-    <motion.div
+    <motion.a
       className="flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-full border border-gray-100 bg-white shadow-xl w-60 h-60"
       initial={{
         opacity: 0,
@@ -68,17 +63,19 @@ export const WhatElseCard = ({ onClick }) => {
           delay: 1.2
         }
       }}
-      role="button"
-      onClick={onClick}>
+      href="https://github.com/Mariotek"
+      target="_blank"
+      rel="nofollow noreferrer">
       <div className="border-gray-100 group-hover:border-gray-200 transition-all border-2 rounded-full p-8 border-dashed h-full w-full flex flex-col items-center justify-center">
-        <p className="text-xl mt-12">Interested?</p>
-        <div className="flex relative">
-          <button className="mt-4 py-2 px-3 rounded-3xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
-            Show me more
+        <p className="text-xl mt-12">Looks interesting?</p>
+        <div className="flex relative w-1/2">
+          <button className="mt-4 py-2 px-3 stylish rounded-3xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
+            Github
           </button>
 
+          {/* Game */}
           <svg
-            className="text-primary absolute -top-20 left-2 -translate-x-1/2 opacity-30 -rotate-[28deg]"
+            className="text-primary absolute -top-20 -left-[10px] -translate-x-1/2 opacity-30 -rotate-[28deg]"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
@@ -89,17 +86,20 @@ export const WhatElseCard = ({ onClick }) => {
             />
           </svg>
 
+          {/* Github */}
           <svg
-            className="text-primary absolute -top-[85px] right-[-1px] opacity-25 rotate-[28deg]"
+            className="text-primary absolute -top-[78px] right-[-25px] opacity-25 rotate-[28deg]"
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24">
+            width="30"
+            height="30"
+            viewBox="0 0 256 256">
             <path
               fill="currentColor"
-              d="m11.3 9.8l-2-2q-.15-.15-.225-.337T9 7.075V3q0-.425.288-.713T10 2h4q.425 0 .713.288T15 3v4.075q0 .2-.075.388T14.7 7.8l-2 2q-.15.15-.325.213t-.375.062q-.2 0-.375-.062T11.3 9.8Zm2.9 2.9q-.15-.15-.212-.325T13.925 12q0-.2.063-.375t.212-.325l2-2q.15-.15.338-.225T16.925 9H21q.425 0 .713.288T22 10v4q0 .425-.288.713T21 15h-4.075q-.2 0-.388-.075T16.2 14.7l-2-2ZM2 14v-4q0-.425.288-.713T3 9h4.075q.2 0 .388.075T7.8 9.3l2 2q.15.15.213.325t.062.375q0 .2-.062.375T9.8 12.7l-2 2q-.15.15-.337.225T7.075 15H3q-.425 0-.713-.288T2 14Zm7 7v-4.075q0-.2.075-.388T9.3 16.2l2-2q.15-.15.325-.212t.375-.063q.2 0 .375.063t.325.212l2 2q.15.15.225.338t.075.387V21q0 .425-.288.713T14 22h-4q-.425 0-.713-.288T9 21Z"
+              d="M216 104v8a56.06 56.06 0 0 1-48.44 55.47A39.8 39.8 0 0 1 176 192v40a8 8 0 0 1-8 8h-64a8 8 0 0 1-8-8v-16H72a40 40 0 0 1-40-40a24 24 0 0 0-24-24a8 8 0 0 1 0-16a40 40 0 0 1 40 40a24 24 0 0 0 24 24h24v-8a39.8 39.8 0 0 1 8.44-24.53A56.06 56.06 0 0 1 56 112v-8a58.14 58.14 0 0 1 7.69-28.32A59.78 59.78 0 0 1 69.07 28A8 8 0 0 1 76 24a59.75 59.75 0 0 1 48 24h24a59.75 59.75 0 0 1 48-24a8 8 0 0 1 6.93 4a59.74 59.74 0 0 1 5.37 47.68A58 58 0 0 1 216 104Z"
             />
           </svg>
+
+          {/* Star */}
           <svg
             className="text-primary absolute -top-[112px] -translate-x-1/2 left-1/2 opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -112,6 +112,7 @@ export const WhatElseCard = ({ onClick }) => {
             />
           </svg>
 
+          {/* Arrow */}
           <svg
             className="text-gray-200 absolute top-full left-1/2 group-hover:text-gray-300 transition-all -translate-x-1/2"
             xmlns="http://www.w3.org/2000/svg"
@@ -126,6 +127,6 @@ export const WhatElseCard = ({ onClick }) => {
           </svg>
         </div>
       </div>
-    </motion.div>
+    </motion.a>
   )
 }

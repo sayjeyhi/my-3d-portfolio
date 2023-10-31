@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
-import { OBSTACLE_TYPES } from './constants'
+import { DIANASOUR, FIRE, OBSTACLE_TYPES } from './constants'
+import { Section } from '../Section.jsx'
 
 const CLOUDS = [
   {
@@ -41,14 +42,15 @@ const OBSTACLES = [
   }
 ]
 
-export const Game = ({ dispatchGameState, gameState }) => {
+export const GameSection = ({ dispatchGameState, gameState }) => {
   const jumpAudioRef = useRef(null)
   const hitAudioRef = useRef(null)
   const victoryAudioRef = useRef(null)
   const gameTimerRef = useRef(null)
   const cloudControls = useAnimation()
   const groundControls = useAnimation()
-  const obstacleControls = useAnimation()
+  const dianasourControls = useAnimation()
+  const fireControls = useAnimation()
 
   useEffect(() => {
     const handleKeyPress = e => {
@@ -85,15 +87,25 @@ export const Game = ({ dispatchGameState, gameState }) => {
       x: '-100vw',
       transition: { duration: 9, repeat: Infinity, ease: 'linear' }
     }))
-    obstacleControls.start(i => ({
-      x: '-100vw',
-      transition: { duration: 9, repeat: Infinity, ease: 'linear' }
+
+    dianasourControls.start(i => ({
+      x: ['0vw', '-10vw', '0vw'],
+      scaleX: [-1, -1, -1],
+      transition: { duration: 3, repeat: Infinity, ease: 'linear' }
+    }))
+
+    // move file from dainasour mouth to left
+    fireControls.start(i => ({
+      x: ['-12vw', '-70vw'],
+      rotate: [90, 90, 90],
+      transition: { duration: 3, repeat: Infinity, ease: 'linear' }
     }))
 
     /**
      * Start the game time and increament on gameState.time and gameState.score
      */
     gameTimerRef.current = setInterval(() => {
+      console.log('=====.score: ', gameState.score)
       dispatchGameState({ type: 'gameTick' })
       if (gameState.score >= 100) {
         clearInterval(gameTimerRef.current)
@@ -102,7 +114,7 @@ export const Game = ({ dispatchGameState, gameState }) => {
   }
 
   useEffect(() => {
-    if (gameState.score >= 700) {
+    if (gameState.score >= 700 && gameState.isStarted) {
       victoryAudioRef.current.play()
       dispatchGameState({ type: 'end' })
       clearInterval(gameTimerRef.current)
@@ -120,15 +132,15 @@ export const Game = ({ dispatchGameState, gameState }) => {
     700: 'Personality'
   }
   return (
-    <>
+    <Section>
       <div id="offline-resources-2x" className="relative w-full h-3/4">
         {!gameState.isStarted && (
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-3xl text-gray-700">
-            Press Space key to start the game and see
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
+            Press Space key to start the game with interesting prizes! 🎁
           </div>
         )}
         {gameState.isStarted && (
-          <div className="absolute top-16 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-3xl text-gray-700">
+          <div className="absolute top-16 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
             Hit {Math.ceil(gameState.score / 100) * 100} scores and you will see my{' '}
             {prizes[Math.ceil(gameState.score / 100) * 100]}
           </div>
@@ -144,17 +156,21 @@ export const Game = ({ dispatchGameState, gameState }) => {
             <span className="text-lg">s</span>
           </div>
         )}
-        {OBSTACLES.map((obstacle, index) => (
-          <motion.img
-            key={index}
-            alt="obstacle"
-            id={obstacle.id}
-            animate={obstacleControls}
-            custom={index}
-            style={{ position: 'absolute', bottom: '-48px', left: obstacle.x }}
-            src={OBSTACLE_TYPES['ss'][Math.floor(Math.random() * OBSTACLE_TYPES['ss'].length)]}
-          />
-        ))}
+        <motion.img
+          src={DIANASOUR}
+          animate={dianasourControls}
+          alt="dianasour"
+          className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64"
+        />
+        <motion.img
+          src={FIRE}
+          animate={fireControls}
+          alt="dianasour"
+          className={`absolute bottom-32 right-16 rotate-90 w-24 h-24 ${
+            gameState.isStarted ? 'visible' : 'invisible'
+          }`}
+        />
+
         {CLOUDS.map((cloud, index) => (
           <motion.img
             key={index}
@@ -190,6 +206,6 @@ export const Game = ({ dispatchGameState, gameState }) => {
       <audio
         id="successAudioRef"
         src="data:audio/mpeg;base64,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"></audio>
-    </>
+    </Section>
   )
 }
