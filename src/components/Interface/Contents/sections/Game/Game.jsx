@@ -1,7 +1,23 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
-import { DIANASOUR, FIRE, OBSTACLE_TYPES } from './constants'
-import { Section } from '../Section.jsx'
+import { DIANASOUR, FIRE } from './constants'
+import { Section } from '../../Section.jsx'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { GameEducation } from './components/Education'
+import { GameExperience } from './components/Experience'
+import { GamePackages } from './components/Packages'
+import { GamePersonality } from './components/Personality'
+import { GameProjects } from './components/Projects'
+import { GameTalks } from './components/Talks'
+import { GameAwards } from './components/Awards'
+import {
+  gamePauseAtom,
+  gameIsShootingAtom,
+  gameIsStartedAtom,
+  gameReadOnlyStateAtom,
+  gameScoreAtom,
+  gameTimeAtom
+} from '../../../../../atoms/game'
 
 const CLOUDS = [
   {
@@ -31,106 +47,173 @@ const GROUNDS = [
   }
 ]
 
-const OBSTACLES = [
-  {
-    id: 'obstacle-1',
-    x: '100vw'
-  },
-  {
-    id: 'obstacle-2',
-    x: '40vw'
-  }
-]
+const GAME_PRIZES = {
+  100: <GameEducation />,
+  200: <GameProjects />,
+  300: <GameTalks />,
+  400: <GameAwards />,
+  500: <GamePackages />,
+  600: <GameExperience />,
+  700: <GamePersonality />
+}
 
-export const GameSection = ({ dispatchGameState, gameState }) => {
+export const GameSection = () => {
   const jumpAudioRef = useRef(null)
   const hitAudioRef = useRef(null)
   const victoryAudioRef = useRef(null)
   const gameTimerRef = useRef(null)
+  const dianaFireRef = useRef(null)
   const cloudControls = useAnimation()
   const groundControls = useAnimation()
   const dianasourControls = useAnimation()
   const fireControls = useAnimation()
 
+  const gameState = useAtomValue(gameReadOnlyStateAtom)
+  const setIsStarted = useSetAtom(gameIsStartedAtom)
+  const setIsPaused = useSetAtom(gamePauseAtom)
+  const setScore = useSetAtom(gameScoreAtom)
+  const setTime = useSetAtom(gameTimeAtom)
+  const setIsShooting = useSetAtom(gameIsShootingAtom)
+
+  /**
+   * Start the game animations
+   */
   useEffect(() => {
-    const handleKeyPress = e => {
-      if (e.keyCode === 32) {
-        e.preventDefault()
-        console.log('Space')
-        if (!gameState.isStarted) {
-          handleStartTheGame()
-        } else {
-          jumpAudioRef.current.currentTime = 0
-          jumpAudioRef.current.play()
-          dispatchGameState({ type: 'jump', payload: true })
-          setTimeout(() => {
-            dispatchGameState({ type: 'jump', payload: false })
-          }, 1100)
-        }
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
+    if (!gameState.isStarted) return
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [gameState.isStarted])
+    cloudControls.start(() => ({
+      x: '-100vw',
+      transition: { duration: 13, repeat: Infinity, ease: 'linear' }
+    }))
 
-  const handleStartTheGame = () => {
-    dispatchGameState({ type: 'start' })
-
-    cloudControls.start(i => ({
+    cloudControls.start(() => ({
       x: '-100vw',
       transition: { duration: 9, repeat: Infinity, ease: 'linear' }
     }))
-    groundControls.start(i => ({
+    groundControls.start(() => ({
       x: '-100vw',
       transition: { duration: 9, repeat: Infinity, ease: 'linear' }
     }))
 
-    dianasourControls.start(i => ({
+    dianasourControls.start(() => ({
       x: ['0vw', '-10vw', '0vw'],
       scaleX: [-1, -1, -1],
       transition: { duration: 3, repeat: Infinity, ease: 'linear' }
     }))
 
     // move file from dainasour mouth to left
-    fireControls.start(i => ({
+    fireControls.start(() => ({
       x: ['-12vw', '-70vw'],
       rotate: [90, 90, 90],
       transition: { duration: 3, repeat: Infinity, ease: 'linear' }
     }))
+  }, [gameState.isStarted])
+
+  useEffect(() => {
+    if (gameState.isStarted || gameTimerRef.current) {
+      clearInterval(gameTimerRef.current)
+    }
 
     /**
-     * Start the game time and increament on gameState.time and gameState.score
+     * Start the game tick
      */
     gameTimerRef.current = setInterval(() => {
-      console.log('=====.score: ', gameState.score)
-      dispatchGameState({ type: 'gameTick' })
-      if (gameState.score >= 100) {
+      if (gameState.isPaused || !gameState.isStarted) return
+
+      let prevScore = 0
+      let newScore = 0
+      setTime(time => time + 0.1)
+      setScore(score => {
+        prevScore = score
+        newScore = score + 0.2
+        return newScore
+      })
+      const successAudioRef = document.getElementById('successAudioRef')
+      if (
+        Math.ceil(newScore / 100) * 100 > Math.ceil(prevScore / 100) * 100 &&
+        successAudioRef &&
+        prevScore
+      ) {
+        successAudioRef.play()
+      }
+
+      /**
+       * Check if the game is arrived to the prize
+       */
+      if (prevScore > 50 && prevScore % 100 < 1) {
+        handleTogglePauseTheGame()
+      }
+
+      /**
+       * Check if the game is ended
+       */
+      if (prevScore >= 700) {
         clearInterval(gameTimerRef.current)
       }
     }, 100)
+  }, [gameState.isStarted, gameState.isPaused, setScore, setTime])
+
+  useEffect(() => {
+    const handleKeyPress = e => {
+      if (e.key === ' ') {
+        e.preventDefault()
+        if (gameState.isPaused) {
+          handleTogglePauseTheGame()
+        } else if (!gameState.isStarted) {
+          setIsStarted(true)
+        } else {
+          jumpAudioRef.current.currentTime = 0
+          jumpAudioRef.current.play()
+          setIsShooting(true)
+          setTimeout(() => {
+            setIsShooting(false)
+          }, 900)
+        }
+      } else if (e.key === 'Escape') {
+        handleTogglePauseTheGame()
+      }
+    }
+
+    window.removeEventListener('keydown', handleKeyPress)
+    window.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [gameState.isStarted, setIsStarted, setIsShooting, gameState.isPaused])
+
+  const handleTogglePauseTheGame = () => {
+    if (gameState.isPaused) {
+      setIsPaused(false)
+      setScore(score => score + 1)
+    } else {
+      setIsPaused(true)
+      clearInterval(gameTimerRef.current)
+    }
   }
 
   useEffect(() => {
     if (gameState.score >= 700 && gameState.isStarted) {
       victoryAudioRef.current.play()
-      dispatchGameState({ type: 'end' })
+      setIsStarted(false)
+      setScore(0)
+      setTime(0)
       clearInterval(gameTimerRef.current)
     }
-  }, [gameState.score])
+  }, [gameState.score, gameState.isStarted])
 
-  console.log('Gamestate: ', gameState)
   const prizes = {
     100: 'Education',
     200: 'Projects',
     300: 'Talks',
     400: 'Awards',
-    500: 'Npm Packages',
+    500: 'Packages',
     600: 'Experience',
     700: 'Personality'
   }
+
+  const showingReward = gameState.isPaused && gameState.score % 100 < 2
+
   return (
     <Section>
       <div id="offline-resources-2x" className="relative w-full h-3/4">
@@ -141,8 +224,14 @@ export const GameSection = ({ dispatchGameState, gameState }) => {
         )}
         {gameState.isStarted && (
           <div className="absolute top-16 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
-            Hit {Math.ceil(gameState.score / 100) * 100} scores and you will see my{' '}
-            {prizes[Math.ceil(gameState.score / 100) * 100]}
+            {showingReward ? (
+              <>Press Space key to continue</>
+            ) : (
+              <>
+                Hit {Math.ceil(gameState.score / 100) * 100} scores and you will see my{' '}
+                {prizes[Math.ceil(gameState.score / 100) * 100]}
+              </>
+            )}
           </div>
         )}
         {gameState.isStarted && (
@@ -165,9 +254,10 @@ export const GameSection = ({ dispatchGameState, gameState }) => {
         <motion.img
           src={FIRE}
           animate={fireControls}
+          ref={dianaFireRef}
           alt="dianasour"
-          className={`absolute bottom-32 right-16 rotate-90 w-24 h-24 ${
-            gameState.isStarted ? 'visible' : 'invisible'
+          className={`absolute bottom-32 right-32 rotate-90 w-24 h-24 ${
+            gameState.isStarted && !gameState.isPaused ? 'visible' : 'invisible'
           }`}
         />
 
@@ -193,7 +283,18 @@ export const GameSection = ({ dispatchGameState, gameState }) => {
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACWAAAAAYAQMAAABEalRSAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAAOtJREFUeF7tljEKwzAMRb/J0CWgI/QKOYAh1+pUcjQfpUfw2MFEHVyDQSQmQUNM9AYNcobnh4egU+YVqhAvZSpgsfolPnSv5d0nz3vHslgUdK81RLzyvHcsi+WBNxQh4Ln8pw4Wi7skAg9mXgHMrEACXJnbHIllsbqGAtwXhnYswzFzwPWxWEPc2CexoobkHM4ZpD6s2loWiyIEEwCChIomMiMEHqgP573C9eHkc5VLWh3XsljnGVoLWVl+31bp38piTVVuihtPOAm9kcRLbrFjEvqwamtZLK5eI8sSan9rXEK0LcNFrY5oWawf59S7YSRD7eMAAAAASUVORK5CYII="
           />
         ))}
+
+        <div
+          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-2 rounded-2xl min-h-[30rem] bg-white ${
+            showingReward ? 'visible' : 'invisible'
+          }`}>
+          <h2 className="text-center text-2xl text-primary font-bold bg-white p-2 w-1/4 absolute left-1/2 -translate-x-1/2 -top-[1.6rem]">
+            {prizes[Math.ceil(gameState.score / 100) * 100 - 100]}
+          </h2>
+          {GAME_PRIZES[Math.ceil(gameState.score / 100) * 100 - 100]}
+        </div>
       </div>
+
       <audio
         ref={jumpAudioRef}
         src="data:audio/mpeg;base64,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"></audio>

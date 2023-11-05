@@ -16,101 +16,12 @@ import state from './state.json'
 //   studio.initialize()
 //   studio.extend(extension)
 // }
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'start':
-      return {
-        ...state,
-        startTime: new Date().getTime(),
-        isStarted: true
-      }
-    case 'end':
-      return {
-        ...state,
-        startTime: 0,
-        isStarted: false,
-        gameMode: false
-      }
-    case 'pause':
-      return {
-        ...state,
-        isPaused: true
-      }
-    case 'resume':
-      return {
-        ...state,
-        isPaused: false
-      }
-    case 'gameover':
-      return {
-        ...state,
-        isGameOver: true
-      }
-    case 'gameMode':
-      return {
-        ...state,
-        gameMode: action.payload
-      }
-    case 'jump':
-      return {
-        ...state,
-        isJumping: action.payload
-      }
-    case 'shoot':
-      return {
-        ...state,
-        isJumping: action.payload
-      }
-    case 'gameTick':
-      const time = (new Date().getTime() - state.startTime) / 1000
-      const score = Math.floor(time * 12.5)
-      const successAudioRef = document.getElementById('successAudioRef')
-      if (Math.ceil(score / 100) * 100 > Math.ceil(state.score / 100) * 100 && successAudioRef) {
-        successAudioRef.play()
-      }
-
-      return {
-        ...state,
-        time,
-        score,
-        speed: Math.floor(time / 10 + 0.1)
-      }
-    default:
-      throw new Error('Invalid action type')
-  }
-}
+//
 
 function App() {
   const [section, setSection] = useState(0)
   const [menuOpened, setMenuOpened] = useState(false)
   const sheet = getProject('sayjeyhi.com', { state }).sheet('r3f')
-
-  const [gameState, dispatchGameState] = useReducer(
-    reducer,
-    {
-      gameMode: false,
-      isStarted: false,
-      isJumping: false,
-      isShooting: false,
-      startTime: 0,
-      score: 0,
-      time: 0,
-      speed: 0.1,
-      isGameOver: false
-    },
-    () => ({
-      gameMode: false,
-      isStarted: false,
-      isJumping: false,
-      isShooting: false,
-      startTime: 0,
-      score: 0,
-      time: 0,
-      speed: 0.1,
-      isGameOver: false
-    })
-  )
 
   useEffect(() => {
     setMenuOpened(false)
@@ -134,17 +45,10 @@ function App() {
               onSectionChange={setSection}
             />
             <Scroll>
-              <Experience
-                section={section}
-                menuOpened={menuOpened}
-                gameState={gameState}
-                dispatchGameState={dispatchGameState}
-              />
+              <Experience section={section} menuOpened={menuOpened} />
             </Scroll>
             <Scroll html>
               <Interface
-                gameState={gameState}
-                dispatchGameState={dispatchGameState}
                 section={section}
                 setSection={setSection}
                 menuOpened={menuOpened}

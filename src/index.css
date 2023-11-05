@@ -57,5 +57,9 @@ pre {
 }
 
 button, span:not(.inter), .stylish {
-  font-family: 'Stylish';
+    font-family: 'Stylish';
+}
+
+.inter * {
+    font-family: 'Inter';
 }

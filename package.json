@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-hookz/web": "^23.1.0",
     "@react-three/drei": "9.75.0",
     "@react-three/fiber": "8.13.3",
     "@theatre/core": "0.5",
@@ -17,10 +18,13 @@
     "framer-motion": "^10.12.16",
     "gsap": "^3.12.0",
     "jotai": "^2.1.1",
+    "jotai-optics": "^0.3.1",
     "lodash-es": "^4.17.21",
+    "optics-ts": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "0.146.0"
+    "three": "0.146.0",
+    "zustand": "^4.4.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

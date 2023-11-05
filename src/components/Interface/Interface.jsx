@@ -5,7 +5,8 @@ import { useState } from 'react'
 
 export const Interface = props => {
   const [audioMuted, setAudioMuted] = useState(false)
-  const { setSection, menuOpened, setMenuOpened, section, dispatchGameState, gameState } = props
+  const { setSection, menuOpened, setMenuOpened, section } = props
+
   return (
     <CursorContextProvider>
       <Menu
@@ -20,8 +21,6 @@ export const Interface = props => {
         menuOpened={menuOpened}
         setSection={setSection}
         section={section}
-        dispatchGameState={dispatchGameState}
-        gameState={gameState}
       />
     </CursorContextProvider>
   )

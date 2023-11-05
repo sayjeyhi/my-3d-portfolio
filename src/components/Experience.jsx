@@ -1,20 +1,23 @@
 import { Stage, useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
-import { useEffect, useState, useReducer } from 'react'
+import { useEffect, useState } from 'react'
 import { framerMotionConfig } from '../config'
 import { Avatar } from './Models/Avatar.jsx'
 import { Office } from './Models/Office.jsx'
 import { Amsterdam } from './Models/Amsterdam.jsx'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
+import { useAtom, useAtomValue } from 'jotai'
+import { gameIsShootingAtom, gameIsStartedAtom } from '../atoms/game'
 
 export const Experience = props => {
-  const { menuOpened, gameState, dispatchGameState } = props
+  const { menuOpened } = props
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
-  const [isAvatarPixelated, setIsAvatarPixelated] = useState(false)
+  const isShooting = useAtomValue(gameIsShootingAtom)
+  const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
 
   const [section, setSection] = useState(0)
 
@@ -74,21 +77,20 @@ export const Experience = props => {
     } else if (sheet.sequence.position < 4.24 && sheet.sequence.position >= 3.8) {
       setCharacterAnimation('TellingASecret')
     } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.24) {
-      setCharacterAnimation('Idle') // Shooting
-      setIsAvatarPixelated(true)
+      if (isShooting) setCharacterAnimation('Shooting')
+      else setCharacterAnimation('Idle') // Shooting
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
-      if (gameState.isStarted) dispatchGameState({ type: 'end' })
+      if (isStarted) setIsStarted(false)
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 10.08) {
       setCharacterAnimation('PhoneCall')
     }
-    console.log('PO', sheet.sequence.position)
   })
 
   return (
     <>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Avatar gameState={gameState} animation={animation} pixelated={isAvatarPixelated} />
+        <Avatar animation={animation} />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Office section={section} />

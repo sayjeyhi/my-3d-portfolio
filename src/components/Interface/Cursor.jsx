@@ -1,10 +1,19 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
 import throttle from 'lodash-es/throttle'
+import { useAtomValue } from 'jotai'
+import { gameIsStartedAtom } from '../../atoms/game'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
 const CursorContext = createContext({ cursorActive: false, setCursorActive: state => state })
+const audioSection1 = new Audio('/s1.mp3')
+const audioSection2 = new Audio('/s2.mp3')
+const gameSection = new Audio('/game.mp3')
+
+audioSection2.volume = 0
+audioSection1.volume = 0
+gameSection.volume = 0
 
 export const CursorContextProvider = ({ children }) => {
   const [cursorActive, setCursorActive] = useState(false)
@@ -46,10 +55,8 @@ const useMousePosition = () => {
   return position
 }
 
-const audioSection1 = new Audio('/s1.mp3')
-const audioSection2 = new Audio('/s2.mp3')
-
 export const Cursor = ({ section, audioMuted }) => {
+  const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isMuted = window.localStorage.getItem('audioMuted')
 
   const intervalRefs = useRef([])
@@ -84,18 +91,27 @@ export const Cursor = ({ section, audioMuted }) => {
     if (audioMuted || isMuted === 'true') {
       audioSection1.pause()
       audioSection2.pause()
+      gameSection.pause()
       return
     } else {
       if (audioSection1.paused) audioSection1.play()
       if (audioSection2.paused) audioSection2.play()
+      if (gameSection.paused) gameSection.play()
     }
     audioSection1.loop = true
     audioSection2.loop = true
+    gameSection.loop = true
 
-    if (section === 0) {
+    if (isGameStarted) {
+      fadeInAudioVolume(gameSection, { key: 'game', to: 0.9, step: 0.09 })
+      fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
+      fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
+    } else if (section === 0) {
       fadeInAudioVolume(audioSection1, { key: 'section1', to: 0.9, step: 0.1 })
       fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
+      fadeOutAudioVolume(gameSection, { key: 'game', to: 0, step: 0.09 })
     } else if (section === 1) {
+      fadeOutAudioVolume(gameSection, { key: 'game', to: 0, step: 0.1 })
       fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
       fadeInAudioVolume(audioSection2, { key: 'section2', to: 0.5, step: 0.09 })
     }
@@ -112,7 +128,7 @@ export const Cursor = ({ section, audioMuted }) => {
     return () => {
       window.removeEventListener('click', handleActivateAudio)
     }
-  }, [section, audioMuted])
+  }, [section, audioMuted, isGameStarted])
 
   return (
     <div

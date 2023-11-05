@@ -9,7 +9,7 @@ import { editable as e } from '@theatre/r3f'
 const keyboardAudio = new Audio('/keyboard.mp3')
 
 export function Avatar(props) {
-  const { animation, gameState } = props
+  const { animation } = props
 
   const group = useRef()
   const { nodes, materials } = useGLTF('models/avatar.glb')
@@ -32,6 +32,7 @@ export function Avatar(props) {
   runningAnimation[0].name = 'Running'
   jumpAnimation[0].name = 'Jumping'
   shootAnimation[0].name = 'Shooting'
+  shootAnimation[0].timeScale = 2
   idleAnimation[0].name = 'Idle'
 
   const { actions } = useAnimations(
@@ -74,9 +75,6 @@ export function Avatar(props) {
       currentAnimation.setLoop(THREE.LoopPingPong)
     }
 
-    if (animation === 'Jumping') {
-      currentAnimation.timeScale = 1 + gameState.speed
-    }
     return () => {
       if (!actions[animation]) return
       actions[animation].reset().fadeOut(0.5)

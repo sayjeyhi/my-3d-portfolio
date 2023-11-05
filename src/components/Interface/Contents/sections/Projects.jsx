@@ -1,7 +1,7 @@
 import { Section } from '../Section.jsx'
 import { motion } from 'framer-motion'
 
-export const ProjectsSection = ({ dispatchGameState, gameState }) => {
+export const ProjectsSection = () => {
   return (
     <Section key="projects" className="-mt-48">
       <h3 className="text-5xl font-bold -mt-8 pb-6 pl-2">Books</h3>

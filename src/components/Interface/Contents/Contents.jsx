@@ -1,24 +1,20 @@
-import { AboutMeSection } from './sections/AboutMe.jsx'
-import { SkillsSection } from './sections/Skills.jsx'
-import { ProjectsSection } from './sections/Projects.jsx'
-import { ContactSection } from './sections/Contact.jsx'
-import { GameSection } from './sections/Game.jsx'
-import { Cursor } from '../Cursor.jsx'
-import { Section } from './Section.jsx'
+import { AboutMeSection } from './sections/AboutMe'
+import { SkillsSection } from './sections/Skills'
+import { ProjectsSection } from './sections/Projects'
+import { ContactSection } from './sections/Contact'
+import { GameSection } from './sections/Game/Game'
+import { Cursor } from '../Cursor'
+import { Section } from './Section'
 
 export const Contents = props => {
-  const { setSection, menuOpened, section, audioMuted, dispatchGameState, gameState } = props
+  const { setSection, menuOpened, section, audioMuted } = props
 
   return (
     <div className="flex flex-col items-center w-screen">
       <AboutMeSection section={section} menuOpened={menuOpened} setSection={setSection} />
       <SkillsSection section={section} />
-      <ProjectsSection
-        section={section}
-        dispatchGameState={dispatchGameState}
-        gameState={gameState}
-      />
-      <GameSection section={section} dispatchGameState={dispatchGameState} gameState={gameState} />
+      <ProjectsSection section={section} />
+      <GameSection section={section} />
       <Section key="placeholder" />
       <ContactSection section={section} />
       <Cursor audioMuted={audioMuted} section={section} />
