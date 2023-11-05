@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export const Section = ({ className, children }) => {
+export const Section = ({ className, children, ...rest }) => {
   return (
     <motion.section
       className={
@@ -22,7 +22,8 @@ export const Section = ({ className, children }) => {
           duration: 0.7,
           delay: 0.7
         }
-      }}>
+      }}
+      {...rest}>
       {children}
     </motion.section>
   )

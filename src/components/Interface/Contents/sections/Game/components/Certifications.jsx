@@ -1,4 +1,5 @@
 import { HorizontalItem } from './Items.jsx'
+import { CERTIFICATIONS } from '../constants.js'
 
 const ShowCertification = ({ link }) => (
   <a href={link} target="_blank" rel="noreferrer">
@@ -19,161 +20,22 @@ const ShowCertification = ({ link }) => (
 
 export function GameCertifications() {
   return (
-    <ol className="items-start flex overflow-auto">
-      <HorizontalItem
-        icon="cert"
-        title="Software Architecture Foundation Level"
-        subtitle="iSAQB® – International Software Architecture Qualification"
-        date="Sep 2023"
-        description="iSAQB® Certified Professional for Software Architecture Foundation Level"
-        tags={['Software Architecture', 'iSAQB']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.isaqb.org/en/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/isaqb.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="Advanced Terraform"
-        subtitle="LinkedIn"
-        date="Nov 2022"
-        description="I passed the exam and got the certificate for Advanced Terraform"
-        tags={['Terraform', 'DevOps', 'Infrastructure as Code']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/tf.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="K8s: Microservices"
-        subtitle="LinkedIn"
-        date="Nov 2022"
-        description="I passed the exam and got the certificate for Kubernetes: Microservices"
-        tags={['K8s', 'Microservices', 'DevOps']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/k8s.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="K8s: Pkg Management with Helm"
-        subtitle="LinkedIn"
-        date="Nov 2022"
-        description="I passed the exam and got the certificate for Kubernetes: Package Management with Helm"
-        tags={['Kubernetes', 'Helm', 'DevOps']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/k8s.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="Tailwind CSS"
-        subtitle="LinkedIn"
-        date="Nov 2022"
-        description="I passed the exam and got the certificate for Tailwind CSS"
-        tags={['Tailwind', 'CSS', 'Frontend']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/tailwind.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="NGINX Web Server"
-        subtitle="LinkedIn"
-        date="Oct 2022"
-        description="I passed the exam and got the certificate for NGINX Web Server"
-        tags={['NGINX', 'Web Server', 'DevOps']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/nginx.jpg"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="Python Essentials"
-        subtitle="LinkedIn"
-        date="Oct 2022"
-        description="I passed the exam and got the certificate for Python Essentials"
-        tags={['Python', 'Backend', 'DevOps']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/python.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="Terraform"
-        subtitle="LinkedIn"
-        date="Oct 2022"
-        description="I passed the exam and got the certificate for Terraform"
-        tags={['Terraform', 'DevOps', 'Infrastructure as Code']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/tf.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="SEO manager"
-        subtitle="Issued May 2017"
-        date="May 2017"
-        description="I passed the exam and got the certificate for SEO manager"
-        tags={['SEO', 'Marketing']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/seo.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="PHP secure coding"
-        subtitle="Issued Oct 2016"
-        date="Oct 2016"
-        description="I passed the exam and got the certificate for PHP secure coding"
-        tags={['PHP', 'Backend']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/php.png"
-        smallImage
-      />
-      <HorizontalItem
-        icon="cert"
-        title="C# window application programmer"
-        subtitle="Issued Oct 2016"
-        date="Oct 2016"
-        description="I passed the exam and got the certificate for C# window application programmer"
-        tags={['C#', 'Backend']}
-        link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/"
-        btn={
-          <ShowCertification link="https://www.linkedin.com/in/jafar-rezaei/details/certifications/" />
-        }
-        image="./certifications/csharp.png"
-        smallImage
-      />
+    <ol className="items-start flex overflow-auto pb-4">
+      {CERTIFICATIONS.map(cert => (
+        <HorizontalItem
+          key={cert.title}
+          icon="cert"
+          title={cert.title}
+          subtitle={cert.subtitle}
+          date={cert.date}
+          description={cert.description}
+          tags={cert.tags}
+          link={cert.link}
+          btn={<ShowCertification link={cert.link} />}
+          image={cert.image}
+          smallImage
+        />
+      ))}
     </ol>
   )
 }

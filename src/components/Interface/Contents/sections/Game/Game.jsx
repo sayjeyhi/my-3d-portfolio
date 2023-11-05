@@ -48,11 +48,11 @@ const GROUNDS = [
 ]
 
 const GAME_PRIZES = {
-  400: <GameEducation />,
+  500: <GameEducation />,
   200: <GameProjects />,
   300: <GameTalks />,
-  100: <GameCertifications />,
-  500: <GameExperience />,
+  400: <GameCertifications />,
+  100: <GameExperience />,
   600: <GamePackages />,
   700: <GamePersonality />
 }
@@ -215,7 +215,12 @@ export const GameSection = () => {
   const showingReward = gameState.isPaused && gameState.score % 100 < 2
 
   return (
-    <Section>
+    <Section
+      style={{
+        background: showingReward
+          ? 'repeating-conic-gradient(hsl(0deg 0% 100% / 79%) 0deg 15deg, hsla(0,0%,100%,0) 0deg 30deg) #faff0059'
+          : ''
+      }}>
       <div id="offline-resources-2x" className="relative w-full h-3/4">
         {!gameState.isStarted && (
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
@@ -223,7 +228,7 @@ export const GameSection = () => {
           </div>
         )}
         {gameState.isStarted && (
-          <div className="absolute top-16 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
+          <div className="absolute top-12 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
             {showingReward ? (
               <>Press Space key to continue</>
             ) : (
@@ -285,10 +290,10 @@ export const GameSection = () => {
         ))}
 
         <div
-          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-3 rounded-2xl min-h-[30rem] bg-white ${
+          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-0 rounded-2xl min-h-[30rem] bg-white ${
             showingReward ? 'visible' : 'invisible'
           }`}>
-          <h2 className="text-center text-2xl text-primary font-bold bg-white p-2 w-1/4 absolute left-1/2 -translate-x-1/2 -top-[1.6rem]">
+          <h2 className="text-center text-3xl text-primary font-bold bg-white pt-4 rounded-tl-2xl rounded-tr-2xl w-1/4 absolute left-1/2 -translate-x-1/2 -top-[3.35rem] border-t-2 border-l-2 border-r-2 border-primary">
             {prizes[Math.ceil(gameState.score / 100) * 100 - 100]}
           </h2>
           {GAME_PRIZES[Math.ceil(gameState.score / 100) * 100 - 100]}
