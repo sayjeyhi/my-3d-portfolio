@@ -9,7 +9,7 @@ import { GamePackages } from './components/Packages'
 import { GamePersonality } from './components/Personality'
 import { GameProjects } from './components/Projects'
 import { GameTalks } from './components/Talks'
-import { GameAwards } from './components/Awards'
+import { GameCertifications } from './components/Certifications'
 import {
   gamePauseAtom,
   gameIsShootingAtom,
@@ -48,12 +48,12 @@ const GROUNDS = [
 ]
 
 const GAME_PRIZES = {
-  100: <GameEducation />,
+  400: <GameEducation />,
   200: <GameProjects />,
   300: <GameTalks />,
-  400: <GameAwards />,
-  500: <GamePackages />,
-  600: <GameExperience />,
+  100: <GameCertifications />,
+  500: <GameExperience />,
+  600: <GamePackages />,
   700: <GamePersonality />
 }
 
@@ -206,9 +206,9 @@ export const GameSection = () => {
     100: 'Education',
     200: 'Projects',
     300: 'Talks',
-    400: 'Awards',
-    500: 'Packages',
-    600: 'Experience',
+    400: 'Certifications',
+    500: 'Experience',
+    600: 'Packages',
     700: 'Personality'
   }
 
