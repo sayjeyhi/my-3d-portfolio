@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { DIANASOUR, FIRE } from './constants'
 import { Section } from '../../Section.jsx'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { GameEducation } from './components/Education'
 import { GameExperience } from './components/Experience'
-import { GamePackages } from './components/Packages'
-import { GamePersonality } from './components/Personality'
 import { GameProjects } from './components/Projects'
 import { GameTalks } from './components/Talks'
 import { GameCertifications } from './components/Certifications'
@@ -48,13 +46,11 @@ const GROUNDS = [
 ]
 
 const GAME_PRIZES = {
-  500: <GameEducation />,
+  100: <GameEducation />,
   200: <GameProjects />,
-  300: <GameTalks />,
-  400: <GameCertifications />,
-  100: <GameExperience />,
-  600: <GamePackages />,
-  700: <GamePersonality />
+  300: <GameCertifications />,
+  400: <GameTalks />,
+  500: <GameExperience />
 }
 
 export const GameSection = () => {
@@ -140,7 +136,7 @@ export const GameSection = () => {
       /**
        * Check if the game is arrived to the prize
        */
-      if (prevScore > 50 && prevScore % 100 < 1) {
+      if (prevScore > 50 && prevScore % 100 < 1 && prevScore < 502) {
         handleTogglePauseTheGame()
       }
 
@@ -205,14 +201,12 @@ export const GameSection = () => {
   const prizes = {
     100: 'Education',
     200: 'Projects',
-    300: 'Talks',
-    400: 'Certifications',
-    500: 'Experience',
-    600: 'Packages',
-    700: 'Personality'
+    300: 'Certifications',
+    400: 'Talks',
+    500: 'Experience'
   }
 
-  const showingReward = gameState.isPaused && gameState.score % 100 < 2
+  const showingReward = gameState.isPaused && gameState.score % 100 < 2 && gameState.score < 502
 
   return (
     <Section
@@ -227,7 +221,7 @@ export const GameSection = () => {
             Press Space key to start the game with interesting prizes! 🎁
           </div>
         )}
-        {gameState.isStarted && (
+        {gameState.isStarted && gameState.score < 502 && (
           <div className="absolute top-12 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700">
             {showingReward ? (
               <>Press Space key to continue</>
@@ -289,15 +283,34 @@ export const GameSection = () => {
           />
         ))}
 
-        <div
-          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-0 rounded-2xl min-h-[30rem] bg-white ${
-            showingReward ? 'visible' : 'invisible'
-          }`}>
-          <h2 className="text-center text-3xl text-primary font-bold bg-white pt-4 rounded-tl-2xl rounded-tr-2xl w-1/4 absolute left-1/2 -translate-x-1/2 -top-[3.35rem] border-t-2 border-l-2 border-r-2 border-primary">
-            {prizes[Math.ceil(gameState.score / 100) * 100 - 100]}
-          </h2>
-          {GAME_PRIZES[Math.ceil(gameState.score / 100) * 100 - 100]}
-        </div>
+        {showingReward ? (
+          <motion.div
+            initial={{
+              opacity: 0.5,
+              scale: 0.8,
+              y: 50
+            }}
+            exit={{
+              opacity: 0.5,
+              scale: 0.8,
+              y: 50
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              transition: {
+                duration: 0.4,
+                delay: 0
+              }
+            }}
+            className="absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-0 rounded-2xl min-h-[30rem] bg-white">
+            <h2 className="text-center text-3xl text-primary font-bold bg-white pt-4 rounded-tl-2xl rounded-tr-2xl w-1/4 absolute left-1/2 -translate-x-1/2 -top-[3.35rem] border-t-2 border-l-2 border-r-2 border-primary">
+              {prizes[Math.ceil(gameState.score / 100) * 100 - 100]}
+            </h2>
+            {GAME_PRIZES[Math.ceil(gameState.score / 100) * 100 - 100]}
+          </motion.div>
+        ) : null}
       </div>
 
       <audio
