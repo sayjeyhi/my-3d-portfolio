@@ -285,7 +285,7 @@ export const GameSection = () => {
         ))}
 
         <div
-          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-2 rounded-2xl min-h-[30rem] bg-white ${
+          className={`absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-3 rounded-2xl min-h-[30rem] bg-white ${
             showingReward ? 'visible' : 'invisible'
           }`}>
           <h2 className="text-center text-2xl text-primary font-bold bg-white p-2 w-1/4 absolute left-1/2 -translate-x-1/2 -top-[1.6rem]">
