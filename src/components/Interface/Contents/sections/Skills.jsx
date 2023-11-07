@@ -23,7 +23,11 @@ const BACK_SKILLS = [
   { title: 'Docker', level: 90 },
   { title: 'Terraform', level: 90 },
   { title: 'CI/CD (GitHub, GitLab)', level: 90 },
-  { title: 'Cloud (AWS, GCP)', level: 90 },
+  {
+    title: 'Cloud (AWS, GCP)',
+    titleSpoken: '<speak>Cloud (<say-as alias="characters">aws</say-as>, GCP)</speak>',
+    level: 90
+  },
   { title: 'Kubernetes', level: 90 },
   { title: 'Helm', level: 90 },
   { title: 'Nodejs (sails, express, nest)', level: 90 },
@@ -48,17 +52,32 @@ export const SkillsSection = () => {
           <h3 className="text-3xl font-extrabold text-blue-800">My skills</h3>
           <div className="mt-4 space-y-4">
             {FRONT_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
+              <Badge
+                key={index}
+                title={skill.title}
+                level={skill.level}
+                titleSpoken={skill.titleSpoken}
+              />
             ))}
           </div>
           <div className="mt-4 space-y-4">
             {BACK_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
+              <Badge
+                key={index}
+                title={skill.title}
+                level={skill.level}
+                titleSpoken={skill.titleSpoken}
+              />
             ))}
           </div>
           <div className="mt-4 space-y-4">
             {MANAGEMENT_SKILLS.map((skill, index) => (
-              <Badge key={index} title={skill.title} level={skill.level} />
+              <Badge
+                key={index}
+                title={skill.title}
+                level={skill.level}
+                titleSpoken={skill.titleSpoken}
+              />
             ))}
           </div>
         </div>
@@ -104,10 +123,10 @@ export const SkillsSection = () => {
   )
 }
 
-const Badge = ({ title, level }) => {
+const Badge = ({ titleSpoken, title, level }) => {
   const handleTextToSpeech = () => {
     const msg = new SpeechSynthesisUtterance()
-    msg.text = title
+    msg.text = titleSpoken || title
     window.speechSynthesis.speak(msg)
   }
 

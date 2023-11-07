@@ -1,8 +1,12 @@
 import { useCursorHandlers } from './Cursor.jsx'
 import { useEffect } from 'react'
+import { audioAtom } from '../../atoms/audio'
+import { useAtom } from 'jotai'
 
 export const Menu = props => {
-  const { onSectionChange, menuOpened, setMenuOpened, audioMuted, setAudioMuted } = props
+  const { onSectionChange, menuOpened, setMenuOpened } = props
+
+  const [audioMuted, setAudioMuted] = useAtom(audioAtom)
   const cursorHandlers = useCursorHandlers()
 
   useEffect(() => {

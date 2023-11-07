@@ -7,7 +7,7 @@ import { Cursor } from '../Cursor'
 import { Section } from './Section'
 
 export const Contents = props => {
-  const { setSection, menuOpened, section, audioMuted } = props
+  const { setSection, menuOpened, section } = props
 
   return (
     <div className="flex flex-col items-center w-screen">
@@ -17,7 +17,7 @@ export const Contents = props => {
       <GameSection section={section} />
       <Section key="placeholder" />
       <ContactSection section={section} />
-      <Cursor audioMuted={audioMuted} section={section} />
+      <Cursor section={section} />
     </div>
   )
 }

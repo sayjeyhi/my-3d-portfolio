@@ -8,8 +8,8 @@ import { Office } from './Models/Office.jsx'
 import { Amsterdam } from './Models/Amsterdam.jsx'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
-import { useAtom, useAtomValue } from 'jotai'
-import { gameIsShootingAtom, gameIsStartedAtom } from '../atoms/game'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { gameIsHit, gameIsShootingAtom, gameIsStartedAtom, gamePauseAtom } from '../atoms/game'
 
 export const Experience = props => {
   const { menuOpened } = props
@@ -17,7 +17,9 @@ export const Experience = props => {
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
   const isShooting = useAtomValue(gameIsShootingAtom)
-  const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
+  const isHit = useAtomValue(gameIsHit)
+  const isStarted = useAtomValue(gameIsStartedAtom)
+  const setIsPaused = useSetAtom(gamePauseAtom)
 
   const [section, setSection] = useState(0)
 
@@ -78,9 +80,10 @@ export const Experience = props => {
       setCharacterAnimation('TellingASecret')
     } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.24) {
       if (isShooting) setCharacterAnimation('Shooting')
+      else if (isHit) setCharacterAnimation('Hit')
       else setCharacterAnimation('Idle') // Shooting
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
-      if (isStarted) setIsStarted(false)
+      if (isStarted) setIsPaused(true)
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 10.08) {
       setCharacterAnimation('PhoneCall')

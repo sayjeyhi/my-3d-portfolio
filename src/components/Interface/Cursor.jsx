@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, useRef } f
 import throttle from 'lodash-es/throttle'
 import { useAtomValue } from 'jotai'
 import { gameIsStartedAtom } from '../../atoms/game'
+import { audioAtom } from '../../atoms/audio'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
@@ -55,8 +56,9 @@ const useMousePosition = () => {
   return position
 }
 
-export const Cursor = ({ section, audioMuted }) => {
+export const Cursor = ({ section }) => {
   const isGameStarted = useAtomValue(gameIsStartedAtom)
+  const audioMuted = useAtomValue(audioAtom)
   const isMuted = window.localStorage.getItem('audioMuted')
 
   const intervalRefs = useRef([])

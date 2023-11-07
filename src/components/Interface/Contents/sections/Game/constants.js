@@ -229,7 +229,7 @@ export const PROJECTS = [
     subtitle: 'An open-source project to help frontend developers',
     date: 'Oct 2019 - Jul 2020',
     description:
-      'We did this project as part of our development cycle for the Snapp market website v2, as a reusable tool that helps developers develop frontend apps, it has a bunch of UI components, Helpers, and React Hooks, with hard-crafted test cases.',
+      'This project was done as part of our development cycle at SnappMarket v2 website, it is reusable and helped developers, it has a bunch of components, helpers, and hooks, with hard-crafted tests.',
     skills: ['React.js', 'CI/CD'],
     link: 'https://github.com/snappmarket/frontend-toolbox',
     image: './projects/fe-toolbox.png',
@@ -396,5 +396,41 @@ export const EXPERIENCES = [
     skills: ['PHP', 'JavaScript', 'jquery', 'Photoshop', 'template', 'HTML', 'CSS'],
     link: 'https://www.ardabil.ir/',
     country: 'Iran'
+  }
+]
+
+export const SECTION_ITEMS = {
+  100: EDUCATIONS,
+  200: CERTIFICATIONS,
+  300: PROJECTS,
+  400: TALKS,
+  500: EXPERIENCES
+}
+
+export const CLOUDS = [
+  {
+    id: 'cloud-0',
+    x: '20%',
+    y: 0
+  },
+  {
+    id: 'cloud-1',
+    x: '70%',
+    y: 0
+  },
+  {
+    id: 'cloud-2',
+    x: '100vw',
+    y: 0
+  }
+]
+export const GROUNDS = [
+  {
+    id: 'ground-1',
+    x: '0'
+  },
+  {
+    id: 'ground-2',
+    x: '100%'
   }
 ]

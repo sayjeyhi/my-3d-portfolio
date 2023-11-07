@@ -15,7 +15,7 @@ export function Avatar(props) {
   const { nodes, materials } = useGLTF('models/avatar.glb')
 
   const { animations: fallingAnimation } = useFBX('animations/falling.fbx')
-  const { animations: showOffAnimation } = useFBX('animations/joyfull-jump.fbx')
+  const { animations: showOffAnimation } = useFBX('animations/Thoughtful Head Shake.fbx')
   const { animations: phoneCallAnimation } = useFBX('animations/phone-call.fbx')
   const { animations: runningAnimation } = useFBX('animations/running.fbx')
   const { animations: tellingASecretAnimation } = useFBX('animations/secret.fbx')
@@ -23,6 +23,7 @@ export function Avatar(props) {
   const { animations: jumpAnimation } = useFBX('animations/Jumping (2).fbx')
   const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
   const { animations: shootAnimation } = useFBX('animations/shoot (1).fbx')
+  const { animations: hitAnimation } = useFBX('animations/Stomach Hit.fbx')
   //
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
@@ -34,6 +35,7 @@ export function Avatar(props) {
   shootAnimation[0].name = 'Shooting'
   shootAnimation[0].timeScale = 2
   idleAnimation[0].name = 'Idle'
+  hitAnimation[0].name = 'Hit'
 
   const { actions } = useAnimations(
     [
@@ -45,7 +47,8 @@ export function Avatar(props) {
       runningAnimation[0],
       jumpAnimation[0],
       idleAnimation[0],
-      shootAnimation[0]
+      shootAnimation[0],
+      hitAnimation[0]
     ],
     group
   )
@@ -71,9 +74,22 @@ export function Avatar(props) {
     if (!actions[animation]) return
     const fadeDuration = animation === 'Jumping' ? 0.5 : 0.5
     const currentAnimation = actions[animation].reset().fadeIn(fadeDuration).play()
-    if (animation !== 'Running') {
+    if (animation !== 'Running' && animation !== 'ShowOff') {
       currentAnimation.setLoop(THREE.LoopPingPong)
     }
+
+    // if (animation === 'ShowOff') {
+    //   const mixer = currentAnimation.getMixer()
+    //
+    //   console.log('DDDDDD')
+    //   mixer.addEventListener('loop', function () {
+    //     console.log('DDDDDD loop')
+    //     currentAnimation.reset().pause()
+    //     setTimeout(() => {
+    //       currentAnimation.fadeIn(0.5).play()
+    //     }, 4000)
+    //   })
+    // }
 
     return () => {
       if (!actions[animation]) return
