@@ -2,15 +2,40 @@ import { Section } from '../Section.jsx'
 import { AnimatePresence } from 'framer-motion'
 
 const FRONT_SKILLS = [
-  { title: 'Javascript (ES6 and above)', level: 90 },
-  { title: 'Typescript', level: 90 },
-  { title: 'React.js', level: 90 },
-  { title: 'React Native', level: 90 },
-  { title: 'Vue.js', level: 90 },
+  {
+    title: 'Javascript (ES6 and above)',
+    titleSpoken:
+      '<speak>Javascript <break time="0.3s"/> including ecma script 6 and above, I also wrote a book called Javascript fundamentals in persian</speak>',
+    level: 90
+  },
+  {
+    title: 'Typescript',
+    titleSpoken:
+      '<speak>Typescript <break time="0.3s"/>, well <break time="0.15s"/> I am not a Typescript expert, but I have used it in different projects and libraries in last 5 years!</speak>',
+    level: 90
+  },
+  {
+    title: 'React.js',
+    titleSpoken:
+      '<speak>React.js <break time="0.3s"/>, React.js mainly used everywhere in my projects</speak>',
+    level: 90
+  },
+  {
+    title: 'React Native',
+    titleSpoken:
+      '<speak>React Native <break time="0.3s"/>, I am not a fan of it, but I used it for a couple of apps in my career</speak>',
+    level: 90
+  },
+  {
+    title: 'Vue.js',
+    titleSpoken:
+      '<speak>View J S <break time="0.3s"/>, I used view 2 and view 3, and I used view x and penia for state management</speak>',
+    level: 90
+  },
   { title: 'Redux (Toolkit, Saga)', level: 90 },
   { title: 'ReactQuery', level: 90 },
   { title: 'Test (unit, behavior, e2e)', level: 90 },
-  { title: 'Next.js', level: 90 },
+  { title: 'Next.js (13 and above)', level: 90 },
   { title: 'Rest, gRPC, graphQL', level: 90 },
   { title: 'Socket (io, WS)', level: 90 },
   { title: 'PWA (workbox)', level: 90 },
@@ -21,27 +46,60 @@ const FRONT_SKILLS = [
 ]
 const BACK_SKILLS = [
   { title: 'Docker', level: 90 },
-  { title: 'Terraform', level: 90 },
-  { title: 'CI/CD (GitHub, GitLab)', level: 90 },
+  {
+    title: 'Terraform',
+    titleSpoken:
+      '<speak>Terraform <break time="0.3s"/>, for our infrastructure in soft construct company, we were using Terraform to manage A W S and google cloud </speak>',
+    level: 90
+  },
+  {
+    title: 'CI/CD (GitHub, GitLab, bitbucket, jenkins)',
+    titleSpoken:
+      '<speak>CI/CD <break time="0.3s"/> including GitHub, GitLab, bitbucket and jenkins</speak>',
+    level: 90
+  },
   {
     title: 'Cloud (AWS, GCP)',
-    titleSpoken: '<speak>Cloud (<say-as alias="characters">aws</say-as>, GCP)</speak>',
+    titleSpoken: '<speak>Cloud <break time="0.3s"/> including A W S and Google Cloud</speak>',
     level: 90
   },
   { title: 'Kubernetes', level: 90 },
   { title: 'Helm', level: 90 },
-  { title: 'Nodejs (sails, express, nest)', level: 90 },
-  { title: 'DB (MySQL, MongoDB, Postgres)', level: 90 },
-  { title: 'Python (fastAPI, django)', level: 90 },
+  {
+    title: 'Nodejs (sails, express, nest)',
+    titleSpoken: '<speak>Node J S <break time="0.3s"/>sails J S, express J S and nest J S</speak>',
+    level: 90
+  },
+  {
+    title: 'DB (MySQL, MongoDB, Postgres)',
+    titleSpoken: '<speak>DB <break time="0.3s"/> My S Q L, Mongo DB and Post gres</speak>',
+    level: 90
+  },
+  {
+    title: 'Python (fastAPI, django)',
+    titleSpoken:
+      '<speak>Python (fast<say-as interpret-as="characters">api</say-as>, django)</speak>',
+    level: 90
+  },
   { title: 'PHP (laravel, zf2)', level: 90 },
   { title: 'Ruby (Rails)', level: 90 },
   { title: 'Node.js (express, nest)', level: 90 }
 ]
 
 const MANAGEMENT_SKILLS = [
-  { title: 'Scrum Player', level: 90 },
+  {
+    title: 'Scrum Player',
+    titleSpoken:
+      '<speak>Scrum Player<break time="0.3s"/>, I have been working with scrum for about 6 years already</speak>',
+    level: 90
+  },
   { title: 'Agile Team Lead Certified', level: 90 },
-  { title: 'iSAQB Certified SoftwareArchitect', level: 90 }
+  {
+    title: 'iSAQB Certified SoftwareArchitect',
+    titleSpoken:
+      '<speak><say-as interpret-as="characters">isaqb</say-as> Certified SoftwareArchitect</speak>',
+    level: 90
+  }
 ]
 
 export const SkillsSection = () => {
@@ -125,14 +183,35 @@ export const SkillsSection = () => {
 
 const Badge = ({ titleSpoken, title, level }) => {
   const handleTextToSpeech = () => {
-    const msg = new SpeechSynthesisUtterance()
-    msg.text = titleSpoken || title
-    window.speechSynthesis.speak(msg)
+    const utterThis = new SpeechSynthesisUtterance()
+    utterThis.text = titleSpoken || title
+    window.speechSynthesis.speak(utterThis)
+
+    const synth = window.speechSynthesis
+    const voices = synth.getVoices().sort(function (a, b) {
+      const aname = a.name.toUpperCase()
+      const bname = b.name.toUpperCase()
+
+      if (aname < bname) {
+        return -1
+      } else if (aname == bname) {
+        return 0
+      } else {
+        return +1
+      }
+    })
+
+    console.log('READ', titleSpoken || title, voices)
+
+    utterThis.onerror = function (event) {
+      console.error('SpeechSynthesisUtterance.onerror')
+    }
   }
 
   return (
     <div
       role="button"
+      onClick={handleTextToSpeech}
       onMouseEnter={handleTextToSpeech}
       onMouseLeave={() => window.speechSynthesis.cancel()}
       title={`${level}%`}

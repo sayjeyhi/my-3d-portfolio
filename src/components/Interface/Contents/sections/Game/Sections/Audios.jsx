@@ -1,4 +1,22 @@
+import { useAtomValue } from 'jotai'
+import { audioAtom } from '../../../../../../atoms/audio'
+import { useEffect } from 'react'
+
 export const Audios = ({ jumpAudioRef, victoryAudioRef, hitAudioRef }) => {
+  const isAudioMuted = useAtomValue(audioAtom)
+
+  useEffect(() => {
+    if (isAudioMuted) {
+      jumpAudioRef.current.volume = 0
+      victoryAudioRef.current.volume = 0
+      hitAudioRef.current.volume = 0
+    } else {
+      jumpAudioRef.current.volume = 0.5
+      victoryAudioRef.current.volume = 0.5
+      hitAudioRef.current.volume = 0.5
+    }
+  }, [isAudioMuted])
+
   return (
     <>
       <audio
