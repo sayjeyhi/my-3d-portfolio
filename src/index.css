@@ -63,3 +63,7 @@ button, span:not(.inter), .stylish {
 .inter * {
     font-family: 'Inter';
 }
+
+.reward-bg {
+    background: repeating-conic-gradient(hsl(0deg 0% 100% / 79%) 0deg 15deg, hsla(0,0%,100%,0) 0deg 30deg) #faff0059;
+}

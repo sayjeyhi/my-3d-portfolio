@@ -9,7 +9,12 @@ import { Amsterdam } from './Models/Amsterdam.jsx'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { gameIsHit, gameIsShootingAtom, gameIsStartedAtom, gamePauseAtom } from '../atoms/game'
+import {
+  gameIsPlayerHitAtom,
+  gameIsShootingAtom,
+  gameIsStartedAtom,
+  gamePauseAtom
+} from '../atoms/game'
 
 export const Experience = props => {
   const { menuOpened } = props
@@ -17,7 +22,7 @@ export const Experience = props => {
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
   const isShooting = useAtomValue(gameIsShootingAtom)
-  const isHit = useAtomValue(gameIsHit)
+  const isHit = useAtomValue(gameIsPlayerHitAtom)
   const isStarted = useAtomValue(gameIsStartedAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
 
@@ -74,14 +79,12 @@ export const Experience = props => {
       setCharacterAnimation('Falling')
     } else if (sheet.sequence.position < 2.5 && sheet.sequence.position >= 1.5) {
       setCharacterAnimation('ShowOff')
-    } else if (sheet.sequence.position < 3.8 && sheet.sequence.position >= 2.5) {
+    } else if (sheet.sequence.position < 3.7 && sheet.sequence.position >= 2.5) {
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position < 4.24 && sheet.sequence.position >= 3.8) {
+    } else if (sheet.sequence.position < 4.14 && sheet.sequence.position >= 3.7) {
       setCharacterAnimation('TellingASecret')
-    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.24) {
-      if (isShooting) setCharacterAnimation('Shooting')
-      else if (isHit) setCharacterAnimation('Hit')
-      else setCharacterAnimation('Idle') // Shooting
+    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.14) {
+      setCharacterAnimation('Running')
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
       if (isStarted) setIsPaused(true)
       setCharacterAnimation('Running')

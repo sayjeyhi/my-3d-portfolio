@@ -21,9 +21,9 @@ export function Avatar(props) {
   const { animations: tellingASecretAnimation } = useFBX('animations/secret.fbx')
   const { animations: typingAnimation } = useFBX('animations/typing.fbx')
   const { animations: jumpAnimation } = useFBX('animations/Jumping (2).fbx')
-  const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
-  const { animations: shootAnimation } = useFBX('animations/shoot (1).fbx')
-  const { animations: hitAnimation } = useFBX('animations/Stomach Hit.fbx')
+  // const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
+  // const { animations: shootAnimation } = useFBX('animations/shoot (1).fbx')
+  // const { animations: hitAnimation } = useFBX('animations/Stomach Hit.fbx')
   //
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
@@ -32,10 +32,7 @@ export function Avatar(props) {
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
   jumpAnimation[0].name = 'Jumping'
-  shootAnimation[0].name = 'Shooting'
-  shootAnimation[0].timeScale = 2
-  idleAnimation[0].name = 'Idle'
-  hitAnimation[0].name = 'Hit'
+  // idleAnimation[0].name = 'Idle'
 
   const { actions } = useAnimations(
     [
@@ -45,10 +42,7 @@ export function Avatar(props) {
       phoneCallAnimation[0],
       tellingASecretAnimation[0],
       runningAnimation[0],
-      jumpAnimation[0],
-      idleAnimation[0],
-      shootAnimation[0],
-      hitAnimation[0]
+      jumpAnimation[0]
     ],
     group
   )

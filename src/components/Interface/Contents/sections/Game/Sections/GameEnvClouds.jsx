@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai'
 import { CLOUDS } from '../constants'
 import { gameIsStartedAtom } from '../../../../../../atoms/game'
 
-export const GameEnvironmentClouds = () => {
+export const GameEnvClouds = () => {
   const cloudControls = useAnimation()
   const isGameStarted = useAtomValue(gameIsStartedAtom)
 

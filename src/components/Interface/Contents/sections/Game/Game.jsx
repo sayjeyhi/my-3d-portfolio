@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import { Section } from '../../Section.jsx'
 import { useAtomValue, useSetAtom } from 'jotai'
 import {
@@ -6,71 +6,33 @@ import {
   gameIsShootingAtom,
   gameIsStartedAtom,
   gameReadOnlyStateAtom,
-  gameScoreAtom,
-  gameTimeAtom
+  gameScoreAtom
 } from '../../../../../atoms/game'
 import { Audios } from './Sections/Audios.jsx'
 import { Rewards } from './Sections/Rewards.jsx'
 import { Controls } from './Sections/Controls.jsx'
 import { TopTexts } from './Sections/TopTexts.jsx'
-import { GameEnvironment } from './Sections/GameEnvironment.jsx'
+import { GameEnvClouds } from './Sections/GameEnvClouds.jsx'
+import { GameEnvDino } from './Sections/GameEnvDino.jsx'
+import { GameEnvPlayer } from './Sections/GameEnvPlayer.jsx'
+import { GameEnvDinoFire } from './Sections/GameEnvDinoFire.jsx'
+import { GameEnvPlayerFire } from './Sections/GameEnvPlayerFire.jsx'
+import { GameEnvGround } from './Sections/GameEnvGround.jsx'
+import { useGameInterval } from './useGameInterval'
 
 export const GameSection = () => {
+  const gameState = useAtomValue(gameReadOnlyStateAtom)
+  const setIsStarted = useSetAtom(gameIsStartedAtom)
+  const setIsShooting = useSetAtom(gameIsShootingAtom)
+
   const jumpAudioRef = useRef(null)
   const hitAudioRef = useRef(null)
   const victoryAudioRef = useRef(null)
-  const gameTimerRef = useRef(null)
+  const shootingTimerRef = useRef(null)
 
-  const gameState = useAtomValue(gameReadOnlyStateAtom)
-  const setIsStarted = useSetAtom(gameIsStartedAtom)
-  const setIsPaused = useSetAtom(gamePauseAtom)
-  const setScore = useSetAtom(gameScoreAtom)
-  const setTime = useSetAtom(gameTimeAtom)
-  const setIsShooting = useSetAtom(gameIsShootingAtom)
-
-  useEffect(() => {
-    if (gameState.isStarted || gameTimerRef.current) {
-      clearInterval(gameTimerRef.current)
-    }
-
-    /**
-     * Start the game tick
-     */
-    gameTimerRef.current = setInterval(() => {
-      if (gameState.isPaused || !gameState.isStarted) return
-
-      let prevScore = 0
-      let newScore = 0
-      setTime(time => time + 0.1)
-      setScore(score => {
-        prevScore = score
-        newScore = score + 0.2
-        return newScore
-      })
-      const successAudioRef = document.getElementById('successAudioRef')
-      if (
-        Math.ceil(newScore / 100) * 100 > Math.ceil(prevScore / 100) * 100 &&
-        successAudioRef &&
-        prevScore
-      ) {
-        successAudioRef.play()
-      }
-
-      /**
-       * Check if the game is arrived to the prize
-       */
-      if (prevScore > 50 && prevScore % 100 < 1 && prevScore < 502) {
-        handleTogglePauseTheGame()
-      }
-
-      /**
-       * Check if the game is ended
-       */
-      if (prevScore >= 700) {
-        clearInterval(gameTimerRef.current)
-      }
-    }, 1000)
-  }, [gameState.isStarted, gameState.isPaused, setScore, setTime])
+  const { handleTogglePauseTheGame } = useGameInterval({
+    victoryAudioRef
+  })
 
   useEffect(() => {
     const handleKeyPress = e => {
@@ -81,12 +43,16 @@ export const GameSection = () => {
         } else if (!gameState.isStarted) {
           setIsStarted(true)
         } else {
+          /**
+           * Shoot the fire
+           */
           jumpAudioRef.current.currentTime = 0
           jumpAudioRef.current.play()
           setIsShooting(true)
-          setTimeout(() => {
+          if (shootingTimerRef.current) clearTimeout(shootingTimerRef.current)
+          shootingTimerRef.current = setTimeout(() => {
             setIsShooting(false)
-          }, 900)
+          }, 300)
         }
       } else if (e.key === 'Escape') {
         handleTogglePauseTheGame()
@@ -101,39 +67,21 @@ export const GameSection = () => {
     }
   }, [gameState.isStarted, setIsStarted, setIsShooting, gameState.isPaused])
 
-  const handleTogglePauseTheGame = () => {
-    if (gameState.isPaused) {
-      setIsPaused(false)
-      setScore(score => score + 1)
-    } else {
-      setIsPaused(true)
-      clearInterval(gameTimerRef.current)
-    }
-  }
-
-  useEffect(() => {
-    if (gameState.score >= 700 && gameState.isStarted) {
-      victoryAudioRef.current.play()
-      setIsStarted(false)
-      setScore(0)
-      setTime(0)
-      clearInterval(gameTimerRef.current)
-    }
-  }, [gameState.score, gameState.isStarted])
-
-  const showingReward = gameState.isPaused && gameState.score % 100 < 2 && gameState.score < 502
+  const showingReward =
+    gameState.isPaused && gameState.score && gameState.score % 100 < 2 && gameState.score < 502
 
   return (
-    <Section
-      className={showingReward ? 'border-t-8 border-b-8 border-gray-300' : ''}
-      style={{
-        background: showingReward
-          ? 'repeating-conic-gradient(hsl(0deg 0% 100% / 79%) 0deg 15deg, hsla(0,0%,100%,0) 0deg 30deg) #faff0059'
-          : ''
-      }}>
+    <Section className={showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg' : ''}>
       <div className="relative w-full h-3/4">
         <TopTexts showingReward={showingReward} />
-        <GameEnvironment hitAudioRef={hitAudioRef} />
+
+        <GameEnvClouds />
+        <GameEnvDino />
+        <GameEnvPlayer />
+        <GameEnvDinoFire hitAudioRef={hitAudioRef} />
+        <GameEnvPlayerFire hitAudioRef={hitAudioRef} />
+        <GameEnvGround />
+
         <Controls />
         <Rewards showingReward={showingReward} />
       </div>

@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai'
 import { GROUNDS } from '../constants'
 import { gameIsStartedAtom } from '../../../../../../atoms/game'
 
-export const GameEnvironmentGround = ({ hitAudioRef }) => {
+export const GameEnvGround = ({ hitAudioRef }) => {
   const groundControls = useAnimation()
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   /**

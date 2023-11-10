@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai'
 import { DIANASOUR } from '../constants'
 import { gameDinosaurLifeAtom, gameIsStartedAtom } from '../../../../../../atoms/game'
 
-export const GameEnvironmentDino = () => {
+export const GameEnvDino = () => {
   const dinosaurControls = useAnimation()
 
   const dinosaurLife = useAtomValue(gameDinosaurLifeAtom)
