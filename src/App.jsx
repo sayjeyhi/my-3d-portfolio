@@ -16,7 +16,6 @@ import state from './state.json'
 //   studio.initialize()
 //   studio.extend(extension)
 // }
-//
 
 function App() {
   const [section, setSection] = useState(0)

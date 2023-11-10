@@ -6,6 +6,7 @@ export const gameStateAtom = atom({
   isPaused: false,
   isShooting: false,
   isPlayerHit: false,
+  isDinoHit: false,
   score: 0,
   time: 0,
   dinosaurLife: 100,
@@ -19,6 +20,7 @@ export const gamePauseAtom = focusAtom(gameStateAtom, optic => optic.prop('isPau
 
 export const gameIsShootingAtom = focusAtom(gameStateAtom, optic => optic.prop('isShooting'))
 export const gameIsPlayerHitAtom = focusAtom(gameStateAtom, optic => optic.prop('isPlayerHit'))
+export const gameIsDinoHitAtom = focusAtom(gameStateAtom, optic => optic.prop('isDinoHit'))
 
 export const gameScoreAtom = focusAtom(gameStateAtom, optic => optic.prop('score'))
 export const gameTimeAtom = focusAtom(gameStateAtom, optic => optic.prop('time'))

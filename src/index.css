@@ -65,5 +65,9 @@ button, span:not(.inter), .stylish {
 }
 
 .reward-bg {
-    background: repeating-conic-gradient(hsl(0deg 0% 100% / 79%) 0deg 15deg, hsla(0,0%,100%,0) 0deg 30deg) #faff0059;
+    background: repeating-conic-gradient(hsl(0deg 0% 100% / 79%) 0deg 15deg, hsla(0,0%,100%,0) 0deg 30deg) rgb(93 225 45 / 21%)
+}
+.pixel,
+.pixel > * {
+    font-family: 'VT323' !important;
 }

@@ -18,7 +18,7 @@ export const Controls = () => {
 
   return (
     <div className="flex justify-between items-center absolute -bottom-28 w-full left-0 right-0">
-      <div className="flex ml-18 items-center font-semibold text-gray-800">
+      <div className="flex ml-18 items-center font-semibold text-gray-800 pixel">
         Your Life:
         <div className="h-4 relative ml-2 w-48 rounded-full overflow-hidden">
           <div className="w-full h-full bg-gray-200 absolute"></div>

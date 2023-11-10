@@ -52,6 +52,7 @@ export const GameEnvDinoFire = ({ hitAudioRef }) => {
         (playerFire1AtomX && playerFire1AtomX - x > -2 && playerFire1AtomX - x < 0) ||
         (playerFire2AtomX && playerFire2AtomX - x > -2 && playerFire2AtomX - x < 0)
       ) {
+        console.log('Stop the fire')
         fireControls.stop()
         setHideFire(true)
       }

@@ -71,7 +71,8 @@ export const GameSection = () => {
     gameState.isPaused && gameState.score && gameState.score % 100 < 2 && gameState.score < 502
 
   return (
-    <Section className={showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg' : ''}>
+    <Section
+      className={showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg pixel' : ''}>
       <div className="relative w-full h-3/4">
         <TopTexts showingReward={showingReward} />
 

@@ -137,7 +137,7 @@
                   },
                   {
                     "id": "VaF762dLmQ",
-                    "position": 3.367,
+                    "position": 3.2,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -149,7 +149,7 @@
                   },
                   {
                     "id": "IcL8jh3XBG",
-                    "position": 4.033,
+                    "position": 3.8,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -623,7 +623,7 @@
                   },
                   {
                     "id": "UIdIZQpfXT",
-                    "position": 3.633,
+                    "position": 3.667,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -631,11 +631,23 @@
                       0.5,
                       0
                     ],
-                    "value": -1.446640990865038
+                    "value": -1.1866409908650377
                   },
                   {
                     "id": "HnKJU5aiD5",
-                    "position": 3.967,
+                    "position": 3.8,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": 1.8618799807115902
+                  },
+                  {
+                    "id": "smBGYCWN44",
+                    "position": 4,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -647,7 +659,7 @@
                   },
                   {
                     "id": "Qf3EyWTkVN",
-                    "position": 4.4,
+                    "position": 4.133,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -1666,18 +1678,6 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
-    "61hj-PWebvlJNSXt",
-    "i_wzbfT4k9C95WwD",
-    "7OYvuI8a3khs8Ggm",
-    "KZVQYK9EJZoTakB1",
-    "jyJaC-q2nRB7gRjy",
-    "c-TjTHcPap0ZVyYh",
-    "A9xfQGyGrtrPv6q4",
-    "dVOHHChIke85hAew",
-    "WkBffdsjDsBLWnho",
-    "QNSagi7QBZ_NgPQO",
-    "jMBEqDoMHm9yC_Xh",
-    "h3PIcsrniD9Rzoo0",
-    "M0GKWfUVfODaWHWq"
+    "8XcyLIXY3HVJ1ZZ2"
   ]
 }

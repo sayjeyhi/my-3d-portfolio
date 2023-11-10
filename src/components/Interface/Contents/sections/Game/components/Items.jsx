@@ -180,7 +180,7 @@ export function VerticalItem({ title, subtitle, date, description, isWithdrawal,
       </h3>
       <h4 className="mb-2 text-base text-gray-500 font-semibold">{subtitle}</h4>
       <time className="block mb-2 text-sm font-normal leading-none text-gray-400 ">{date}</time>
-      <p className="mb-4 text-sm font-normal text-gray-500 ">{description}</p>
+      <p className="mb-4 text-sm font-normal text-gray-600 ">{description}</p>
     </li>
   )
 }

@@ -81,9 +81,9 @@ export const Experience = props => {
       setCharacterAnimation('ShowOff')
     } else if (sheet.sequence.position < 3.7 && sheet.sequence.position >= 2.5) {
       setCharacterAnimation('Running')
-    } else if (sheet.sequence.position < 4.14 && sheet.sequence.position >= 3.7) {
+    } else if (sheet.sequence.position < 4.03 && sheet.sequence.position >= 3.7) {
       setCharacterAnimation('TellingASecret')
-    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.14) {
+    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.03) {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
       if (isStarted) setIsPaused(true)

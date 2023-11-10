@@ -1,13 +1,16 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion, useAnimation } from 'framer-motion'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { FIRE } from '../constants'
 import {
+  gameDinosaurLifeAtom,
+  gameIsDinoHitAtom,
   gameIsShootingAtom,
   gameIsStartedAtom,
   gamePauseAtom,
   gamePlayerFire1AtomX,
-  gamePlayerFire2AtomX
+  gamePlayerFire2AtomX,
+  gameScoreAtom
 } from '../../../../../../atoms/game'
 import { throttle } from 'lodash-es'
 
@@ -22,6 +25,9 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
   const isShooting = useAtomValue(gameIsShootingAtom)
   const setPlayerFire1AtomX = useSetAtom(gamePlayerFire1AtomX)
   const setPlayerFire2AtomX = useSetAtom(gamePlayerFire2AtomX)
+  const [isDinoHit, setIsDinoHit] = useAtom(gameIsDinoHitAtom)
+  const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
+  const setScore = useSetAtom(gameScoreAtom)
 
   useEffect(() => {
     if (!isShooting) {
@@ -43,7 +49,7 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
         setShowFire1(true)
         playerFireControls1.start(() => ({
           x: ['-67vw', '-12vw'],
-          y: [-30, 0],
+          y: [-30, 0, 0, 10],
           rotate: [-90, -90, -90],
           transition: { duration: 3, repeat: 0, ease: 'linear' }
         }))
@@ -51,39 +57,37 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
     }
   }, [isShooting])
 
+  const checkIsHitDino = useCallback(
+    x => {
+      if (x > -12.5 && isGameStarted && !isGamePaused && !isDinoHit) {
+        setIsDinoHit(true)
+        hitAudioRef.current.currentTime = 0
+        hitAudioRef.current.play()
+        setDinoLife(life => life - 1)
+        setScore(score => score + 6)
+        setTimeout(() => {
+          setIsDinoHit(false)
+        }, 500)
+      }
+    },
+    [isGameStarted, isGamePaused]
+  )
+
   const handleFire1Update = useCallback(
     throttle(e => {
       const x = parseInt(e.x + '')
       setPlayerFire1AtomX(x)
-
-      if (x > -12 && isGameStarted && !isGamePaused) {
-        // setIsHit(true)
-        // hitAudioRef.current.currentTime = 0
-        // hitAudioRef.current.play()
-        // setPlayerLifeAtom(life => life - 1)
-        // setTimeout(() => {
-        //   setIsHit(false)
-        // }, 200)
-      }
+      checkIsHitDino(x)
     }, 100),
-    [isGameStarted, isGamePaused]
+    [checkIsHitDino, setPlayerFire1AtomX]
   )
   const handleFire2Update = useCallback(
     throttle(e => {
       const x = parseInt(e.x + '')
       setPlayerFire2AtomX(x)
-
-      if (x > -12 && isGameStarted && !isGamePaused) {
-        // setIsHit(true)
-        // hitAudioRef.current.currentTime = 0
-        // hitAudioRef.current.play()
-        // setPlayerLifeAtom(life => life - 1)
-        // setTimeout(() => {
-        //   setIsHit(false)
-        // }, 200)
-      }
+      checkIsHitDino(x)
     }, 100),
-    [isGameStarted, isGamePaused]
+    [checkIsHitDino, setPlayerFire2AtomX]
   )
 
   return (

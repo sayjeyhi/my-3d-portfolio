@@ -51,9 +51,9 @@ export const Rewards = ({ showingReward }) => {
         }
       }}
       className="absolute top-[8rem] left-0 right-0 inter w-full border-primary border-2 p-5 pt-12 pb-0 rounded-2xl min-h-[30rem] bg-white">
-      <h2 className="text-center text-3xl text-primary font-bold bg-white pt-4 rounded-tl-2xl rounded-tr-2xl w-1/4 absolute left-1/2 -translate-x-1/2 -top-[3.6rem] border-t-2 border-l-2 border-r-2 border-primary">
+      <h2 className="text-center text-3xl text-primary font-bold bg-white pt-4 rounded-tl-2xl rounded-tr-2xl w-1/4 absolute left-1/2 -translate-x-1/2 -top-[3.6rem] border-t-2 border-l-2 border-r-2 border-primary pixel">
         {prizes[Math.ceil(score / 100) * 100 - 100]}
-        <span className="text-[20px] ml-4 relative -top-1">
+        <span className="text-[20px] ml-4 relative -top-1 pixel">
           ({SECTION_ITEMS[Math.ceil(score / 100) * 100 - 100].length} items)
         </span>
       </h2>
