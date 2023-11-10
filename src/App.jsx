@@ -1,11 +1,11 @@
-import { useEffect, useState, useReducer } from 'react'
+import { useEffect, useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { SheetProvider, PerspectiveCamera } from '@theatre/r3f'
+import { PerspectiveCamera, SheetProvider } from '@theatre/r3f'
 import { getProject } from '@theatre/core'
-import { Experience } from './components/Experience'
-import { Interface } from './components/Interface/Interface'
+import { Experience } from './components/3D/Experience'
+import { Interface } from './components/2D/Interface'
 import { ScrollManager } from './components/ScrollManager'
 import { framerMotionConfig } from './config'
 import state from './state.json'
@@ -30,7 +30,8 @@ function App() {
     <MotionConfig
       transition={{
         ...framerMotionConfig
-      }}>
+      }}
+    >
       <Canvas gl={{ preserveDrawingBuffer: true }} shadows dpr={[1, 1.5]}>
         <SheetProvider sheet={sheet}>
           <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 3, 10]} />

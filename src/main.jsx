@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
-import { Loading } from './loading.jsx'
+import { Loading } from './loading'
 import App from './App'
 import './index.css'
 
