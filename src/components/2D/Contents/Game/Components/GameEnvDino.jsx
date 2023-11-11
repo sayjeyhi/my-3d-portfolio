@@ -1,12 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useAtomValue } from 'jotai'
 import { DIANASOUR, DINO_HIT } from '../constants'
 import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
+import { useExplosion } from '@/components/2D/Contents/Game/useExplosion.js'
 
 export const GameEnvDino = () => {
+  const dinoHitRef = useRef(null)
   const dinosaurControls = useAnimation()
 
+  const explodeDino = useExplosion({ duration: 700, id: 'dino' })
   const dinosaurLife = useAtomValue(gameDinosaurLifeAtom)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isDinoHit = useAtomValue(gameIsDinoHitAtom)
@@ -27,11 +30,19 @@ export const GameEnvDino = () => {
     }))
   }, [isGameStarted])
 
+  useEffect(() => {
+    if (isDinoHit) {
+      explodeDino(dinoHitRef.current)
+    }
+  }, [isDinoHit])
+
   return (
     <motion.div
       animate={dinosaurControls}
       className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64">
       <img src={isDinoHit ? DINO_HIT : DIANASOUR} alt="dinosaur" />
+      <div ref={dinoHitRef}></div>
+
       <div className="h-4 ml-16 relative w-32 rounded-full overflow-hidden">
         <div className="w-full h-full bg-gray-200 absolute"></div>
         <div

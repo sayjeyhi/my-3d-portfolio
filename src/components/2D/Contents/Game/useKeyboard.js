@@ -11,6 +11,7 @@ export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
   useEffect(() => {
     const handleKeyPress = e => {
       if (e.key === ' ') {
+        console.log("  console.log('=====isStarted, isPaused', isPaused)", isStarted, isPaused)
         e.preventDefault()
         if (isPaused) {
           handleTogglePauseTheGame()

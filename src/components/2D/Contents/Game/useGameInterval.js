@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import {
   gameIsStartedAtom,
   gamePauseAtom,
@@ -22,6 +22,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   const setCurrentPrize = useSetAtom(currentPrizeAtom)
   const setIsPrizeVisible = useSetAtom(isPrizeVisibleAtom)
 
+  console.log('=====isStarted, isPaused', isPaused)
   const handleTogglePauseTheGame = useCallback(() => {
     if (isPaused) {
       setIsPrizeVisible(false)

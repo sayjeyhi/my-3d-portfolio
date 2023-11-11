@@ -25,7 +25,9 @@ export const GameSection = () => {
 
   return (
     <Section
-      className={showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg pixel' : ''}>
+      className={`mt-48 ${
+        showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg pixel' : ''
+      }`}>
       <div className="relative w-full h-3/4">
         <TopTexts showingReward={showingReward} />
 

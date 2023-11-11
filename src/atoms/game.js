@@ -1,20 +1,13 @@
 import { atom } from 'jotai'
 import { currentPrizeAtom, currentPrizeSetAtom } from './prizes'
 
-export const atomWithToggle = initialValue => {
-  const anAtom = atom(initialValue, (get, set, nextValue) => {
-    const update = nextValue ?? !get(anAtom)
-    set(anAtom, update)
-  })
-  return anAtom
-}
+export const gameIsStartedAtom = atom(false)
+export const gamePauseAtom = atom(false)
 
-export const gameIsStartedAtom = atomWithToggle(false)
-export const gamePauseAtom = atomWithToggle(false)
-
-export const gameIsShootingAtom = atomWithToggle(false)
-export const gameIsPlayerHitAtom = atomWithToggle(false)
-export const gameIsDinoHitAtom = atomWithToggle(false)
+export const gameIsShootingAtom = atom(false)
+export const gameIsPlayerHitAtom = atom(false)
+export const gameIsDinoHitAtom = atom(false)
+export const gameEnableRewardsAtom = atom(false)
 
 export const gameScoreAtom = atom(0)
 export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {

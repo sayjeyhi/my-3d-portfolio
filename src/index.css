@@ -77,3 +77,24 @@ span:not(.inter),
 .pixel > * {
   font-family: 'VT323' !important;
 }
+
+.exploding, .exploding:focus, .exploding:hover {
+  width: 0;
+}
+.exploding {
+  pointer-events: none;
+  position: relative;
+  will-change: transform;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.particle--fire {
+  border-radius: 50%;
+}

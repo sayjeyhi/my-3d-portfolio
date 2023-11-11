@@ -422,12 +422,12 @@ export const SECTION_ITEMS = {
 export const CLOUDS = [
   {
     id: 'cloud-0',
-    x: '20%',
+    x: '20vw',
     y: 0
   },
   {
     id: 'cloud-1',
-    x: '70%',
+    x: '70vw',
     y: 0
   },
   {

@@ -5,33 +5,21 @@ import { CLOUDS } from '../constants'
 import { gameIsStartedAtom } from '@/atoms/game'
 
 export const GameEnvClouds = () => {
-  const cloudControls1 = useAnimation()
-  const cloudControls2 = useAnimation()
-  const cloudControls3 = useAnimation()
+  const cloudControls = useAnimation()
   const isGameStarted = useAtomValue(gameIsStartedAtom)
 
   /**
    * Start the game animations
    */
-  const cloudControls = [cloudControls1, cloudControls2, cloudControls3]
   useEffect(() => {
     if (!isGameStarted) {
-      cloudControls.forEach(control => control.stop())
+      cloudControls.stop()
       return
     }
 
-    cloudControls1.start(() => ({
+    cloudControls.start(() => ({
       x: '-100vw',
       transition: { duration: 13, repeat: Infinity, ease: 'linear' }
-    }))
-
-    cloudControls2.start(() => ({
-      x: '-100vw',
-      transition: { duration: 9, repeat: Infinity, ease: 'linear' }
-    }))
-    cloudControls3.start(() => ({
-      x: '-100vw',
-      transition: { duration: 9, repeat: Infinity, ease: 'linear' }
     }))
   }, [isGameStarted])
 
@@ -40,7 +28,7 @@ export const GameEnvClouds = () => {
       <motion.img
         alt="cloud"
         id={cloud.id}
-        animate={cloudControls[index]}
+        animate={cloudControls}
         custom={index}
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAAAcAgMAAACR2TCnAAAABlBMVEUAAADa2to4qB92AAAAAXRSTlMAQObYZgAAAFFJREFUeF6VzTEKAFEIxNA03m+a3P8q2wqi/E35BIdeGXq3q5hnrwBs7mC5vIZzu/nnqI319vRtqHB731blwSHjx+22+Rdn94rzQq0ugKPVlz5onyJcGdu0NgAAAABJRU5ErkJggg=="
       />

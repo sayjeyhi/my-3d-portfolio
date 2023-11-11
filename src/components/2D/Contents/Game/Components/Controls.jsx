@@ -2,18 +2,20 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { audioAtom } from '@/atoms/audio'
 import {
   gameDinosaurLifeAtom,
+  gameEnableRewardsAtom,
   gameIsStartedAtom,
   gamePauseAtom,
   gamePlayerLifeAtom,
   gameSetScoreAtom,
   gameTimeAtom
 } from '@/atoms/game'
-import { currentPrizeSetAtom, isPrizeVisibleAtom, nextPrizeAtom } from '@/atoms/prizes'
+import { currentPrizeSetAtom, nextPrizeAtom } from '@/atoms/prizes'
 
 export const Controls = ({ handleTogglePauseTheGame }) => {
   const [audioMuted, setAudioMuted] = useAtom(audioAtom)
   const playerLifeAtom = useAtomValue(gamePlayerLifeAtom)
   const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
+  const [enabledRewards, setEnabledRewards] = useAtom(gameEnableRewardsAtom)
   const isPaused = useAtomValue(gamePauseAtom)
   const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
@@ -108,6 +110,25 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
               <path
                 fill="#fff"
                 d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+              />
+            </svg>
+          )}
+        </button>
+        <button
+          onClick={() => setEnabledRewards(enabled => !enabled)}
+          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
+          {enabledRewards ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="#fff"
+                d="M9.06 1.93C7.17 1.92 5.33 3.74 6.17 6H3a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h9V8h2v3h9a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2h-3.17C19 2.73 14.6.42 12.57 3.24L12 4l-.57-.78c-.63-.89-1.5-1.28-2.37-1.29M9 4c.89 0 1.34 1.08.71 1.71C9.08 6.34 8 5.89 8 5a1 1 0 0 1 1-1m6 0c.89 0 1.34 1.08.71 1.71c-.63.63-1.71.18-1.71-.71a1 1 0 0 1 1-1M2 12v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8h-9v8h-2v-8H2Z"
+              />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="#fff"
+                d="m1.11 3l3.03 3.04H3a2 2 0 0 0-2 2v2c0 .55.45 1 1 1h7.15l1 1H2v8c0 1.1.9 2 2 2h16c.05 0 .09-.01.13-.04l1.43 1.45l1.27-1.27L2.39 1.73L1.11 3M11 12.89l2 2v5.15h-2v-7.15m11-.85v6.76l-6.76-6.76H22m-1-6h-3.17C19 2.77 14.6.455 12.57 3.28l-.57.76l-.57-.78C10.8 2.37 9.93 2 9.06 1.97c-1-.01-1.98.53-2.56 1.33l1.54 1.54c.09-.46.46-.8.96-.8c.89 0 1.34 1.08.71 1.71c-.15.14-.32.25-.5.25l2.03 2.04H13V9.8l1.24 1.24H22c.55 0 1-.45 1-1v-2c0-1.11-.89-2-2-2m-5.29-.29c-.63.63-1.71.18-1.71-.71c0-.54.45-1 1-1c.89 0 1.34 1.08.71 1.71Z"
               />
             </svg>
           )}
