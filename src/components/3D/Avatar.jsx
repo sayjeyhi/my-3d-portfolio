@@ -6,8 +6,6 @@ import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { editable as e } from '@theatre/r3f'
 
-const keyboardAudio = new Audio('/keyboard.mp3')
-
 export function Avatar(props) {
   const { animation } = props
 
@@ -21,10 +19,7 @@ export function Avatar(props) {
   const { animations: tellingASecretAnimation } = useFBX('animations/secret.fbx')
   const { animations: typingAnimation } = useFBX('animations/typing.fbx')
   const { animations: jumpAnimation } = useFBX('animations/Jumping (2).fbx')
-  // const { animations: idleAnimation } = useFBX('animations/Idle.fbx')
-  // const { animations: shootAnimation } = useFBX('animations/shoot (1).fbx')
-  // const { animations: hitAnimation } = useFBX('animations/Stomach Hit.fbx')
-  //
+
   typingAnimation[0].name = 'Typing'
   showOffAnimation[0].name = 'ShowOff'
   fallingAnimation[0].name = 'Falling'
@@ -32,7 +27,6 @@ export function Avatar(props) {
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
   jumpAnimation[0].name = 'Jumping'
-  // idleAnimation[0].name = 'Idle'
 
   const { actions } = useAnimations(
     [
@@ -65,7 +59,7 @@ export function Avatar(props) {
   // })
 
   useEffect(() => {
-    if (!actions[animation]) return
+    if (!animation || !actions[animation]) return
     const fadeDuration = animation === 'Jumping' ? 0.5 : 0.5
     const currentAnimation = actions[animation].reset().fadeIn(fadeDuration).play()
     if (animation !== 'Running' && animation !== 'ShowOff') {

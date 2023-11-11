@@ -137,7 +137,10 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         </button>
 
         <button
-          onClick={() => setPrize(nextPrize)}
+          onClick={() => {
+            setPrize(nextPrize)
+            setEnabledRewards(true)
+          }}
           className="bg-primary h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
           Jump to {nextPrize}
         </button>

@@ -83,13 +83,14 @@ export const Experience = props => {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position < 4.03 && sheet.sequence.position >= 3.7) {
       setCharacterAnimation('TellingASecret')
-    } else if (sheet.sequence.position < 6.27 && sheet.sequence.position >= 4.03) {
-      setCharacterAnimation('Running')
-    } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 6.27) {
-      if (isStarted) setIsPaused(true)
+    } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 4.03) {
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 10.08) {
       setCharacterAnimation('PhoneCall')
+    }
+
+    if (sheet.sequence.position >= 7.5 && isStarted) {
+      if (isStarted) setIsPaused(true)
     }
   })
 

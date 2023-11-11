@@ -21,7 +21,7 @@ export const TopTexts = ({ showingReward }) => {
     <>
       {!isStarted && !hasWon && (
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
-          <span className="text-2xl text-orange-600 mt-3">
+          <span className="text-2xl text-orange-700 mt-3">
             Press <kbd>Space</kbd> to start the game with interesting prizes! 🎁
           </span>
           <br />
@@ -33,19 +33,19 @@ export const TopTexts = ({ showingReward }) => {
       )}
       {!isStarted && hasWon && (
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
-          <span className="block text-4xl text-orange-600 mt-3">
+          <span className="block text-4xl text-orange-700 mt-3">
             Congratulations! You have won the game! 🎉{' '}
           </span>
           <br /> Press <kbd>Space</kbd> key to restart the game with interesting prizes!
         </div>
       )}
-      {isStarted && ((isGameRewardsEnabled && score < 502) || !isGameRewardsEnabled) && (
+      {isStarted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
           {showingReward || isPaused ? (
             <>
               Press <kbd>Space</kbd> to continue the game...
             </>
-          ) : isGameRewardsEnabled ? (
+          ) : isGameRewardsEnabled && score < 502 ? (
             <>
               Hit {Math.ceil(score / 100) * 100} scores and you will see my {nextPrize}
             </>
