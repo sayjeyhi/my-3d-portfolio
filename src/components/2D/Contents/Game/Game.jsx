@@ -36,7 +36,7 @@ export const GameSection = () => {
         <GameEnvPlayerFire hitAudioRef={hitAudioRef} />
         <GameEnvGround />
 
-        <Controls />
+        <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />
         <Rewards showingReward={showingReward} />
       </div>
 

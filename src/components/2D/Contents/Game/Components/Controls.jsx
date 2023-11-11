@@ -10,11 +10,11 @@ import {
 } from '@/atoms/game'
 import { currentPrizeSetAtom, isPrizeVisibleAtom, nextPrizeAtom } from '@/atoms/prizes'
 
-export const Controls = () => {
+export const Controls = ({ handleTogglePauseTheGame }) => {
   const [audioMuted, setAudioMuted] = useAtom(audioAtom)
   const playerLifeAtom = useAtomValue(gamePlayerLifeAtom)
   const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
-  const pauseGame = useSetAtom(gamePauseAtom)
+  const isPaused = useAtomValue(gamePauseAtom)
   const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
   const setPrize = useSetAtom(currentPrizeSetAtom)
@@ -54,11 +54,25 @@ export const Controls = () => {
         {isStarted && (
           <>
             <button
-              onClick={() => pauseGame(a => !a)}
+              onClick={handleTogglePauseTheGame}
               className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z" />
-              </svg>
+              {!isPaused ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  className="scale-150"
+                  viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A.998.998 0 0 0 8 6.82z"
+                  />
+                </svg>
+              )}
             </button>
             <button
               onClick={() => {
