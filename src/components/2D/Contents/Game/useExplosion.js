@@ -29,7 +29,7 @@ class ExplodeElement {
     this.centerY = this.height / 2
   }
   explode(duration, id) {
-    let explodingState = 'exploding'
+    let explodingState = 'exploding' + id
 
     if (!this.element.classList.contains(explodingState)) {
       this.element.classList.add(explodingState)

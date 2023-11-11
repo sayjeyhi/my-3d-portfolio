@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useAtomValue, useSetAtom } from 'jotai'
 import {
+  gameHasWonAtom,
   gameIsStartedAtom,
   gamePauseAtom,
   gameScoreAtom,
@@ -21,8 +22,8 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   const setIsPaused = useSetAtom(gamePauseAtom)
   const setCurrentPrize = useSetAtom(currentPrizeAtom)
   const setIsPrizeVisible = useSetAtom(isPrizeVisibleAtom)
+  const setHasWon = useSetAtom(gameHasWonAtom)
 
-  console.log('=====isStarted, isPaused', isPaused)
   const handleTogglePauseTheGame = useCallback(() => {
     if (isPaused) {
       setIsPrizeVisible(false)
@@ -85,6 +86,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
       setScore(0)
       setTime(0)
       setCurrentPrize('')
+      setHasWon(true)
       clearInterval(gameTimerRef.current)
     }
   }, [score, isStarted])

@@ -2,14 +2,14 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { audioAtom } from '@/atoms/audio'
 import {
   gameDinosaurLifeAtom,
-  gameEnableRewardsAtom,
+  gameHasWonAtom,
   gameIsStartedAtom,
   gamePauseAtom,
   gamePlayerLifeAtom,
   gameSetScoreAtom,
   gameTimeAtom
 } from '@/atoms/game'
-import { currentPrizeSetAtom, nextPrizeAtom } from '@/atoms/prizes'
+import { currentPrizeSetAtom, gameEnableRewardsAtom, nextPrizeAtom } from '@/atoms/prizes'
 
 export const Controls = ({ handleTogglePauseTheGame }) => {
   const [audioMuted, setAudioMuted] = useAtom(audioAtom)
@@ -22,6 +22,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   const setPrize = useSetAtom(currentPrizeSetAtom)
   const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
   const setPlayerLife = useSetAtom(gamePlayerLifeAtom)
+  const setHasWon = useSetAtom(gameHasWonAtom)
   const nextPrize = useAtomValue(nextPrizeAtom)
 
   return (
@@ -83,6 +84,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
                 setDinoLife(100)
                 setPlayerLife(100)
                 setIsStarted(false)
+                setHasWon(false)
               }}
               className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">

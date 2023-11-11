@@ -1,7 +1,9 @@
 import { atom } from 'jotai'
-import { gameEnableRewardsAtom, gamePauseAtom } from '@/atoms/game.js'
+import { gamePauseAtom } from '@/atoms/game.js'
 
 export const prizeList = ['Education', 'Projects', 'Certifications', 'Talks', 'Experiences']
+
+export const gameEnableRewardsAtom = atom(false)
 
 export const currentPrizeAtom = atom('')
 export const currentPrizeSetAtom = atom(
