@@ -1,20 +1,26 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { audioAtom } from '@/atoms/audio'
 import {
+  gameDinosaurLifeAtom,
   gameIsStartedAtom,
   gamePauseAtom,
   gamePlayerLifeAtom,
-  gameScoreAtom,
+  gameSetScoreAtom,
   gameTimeAtom
 } from '@/atoms/game'
+import { currentPrizeSetAtom, isPrizeVisibleAtom, nextPrizeAtom } from '@/atoms/prizes'
 
 export const Controls = () => {
   const [audioMuted, setAudioMuted] = useAtom(audioAtom)
   const playerLifeAtom = useAtomValue(gamePlayerLifeAtom)
   const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
   const pauseGame = useSetAtom(gamePauseAtom)
-  const setScore = useSetAtom(gameScoreAtom)
+  const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
+  const setPrize = useSetAtom(currentPrizeSetAtom)
+  const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
+  const setPlayerLife = useSetAtom(gamePlayerLifeAtom)
+  const nextPrize = useAtomValue(nextPrizeAtom)
 
   return (
     <div className="flex justify-between items-center absolute -bottom-28 w-full left-0 right-0">
@@ -24,23 +30,20 @@ export const Controls = () => {
           <div className="w-full h-full bg-gray-200 absolute"></div>
           <div
             className={`h-full ${playerLifeAtom < 50 ? 'bg-red-500' : 'bg-primary'} absolute`}
-            style={{ width: `${playerLifeAtom}%` }}
-          ></div>
+            style={{ width: `${playerLifeAtom}%` }}></div>
         </div>
       </div>
       <div className="flex gap-2">
         {!isStarted && (
           <button
             onClick={() => setIsStarted(a => !a)}
-            className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center"
-          >
+            className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               className="scale-150"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A.998.998 0 0 0 8 6.82z"
@@ -52,8 +55,7 @@ export const Controls = () => {
           <>
             <button
               onClick={() => pauseGame(a => !a)}
-              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center"
-            >
+              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z" />
               </svg>
@@ -62,10 +64,11 @@ export const Controls = () => {
               onClick={() => {
                 setScore(0)
                 setTime(0)
+                setDinoLife(100)
+                setPlayerLife(100)
                 setIsStarted(false)
               }}
-              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center"
-            >
+              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -78,8 +81,7 @@ export const Controls = () => {
 
         <button
           onClick={() => setAudioMuted(a => !a)}
-          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center"
-        >
+          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
           {audioMuted ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
               <path
@@ -95,6 +97,12 @@ export const Controls = () => {
               />
             </svg>
           )}
+        </button>
+
+        <button
+          onClick={() => setPrize(nextPrize)}
+          className="bg-primary h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
+          Jump to {nextPrize}
         </button>
       </div>
       <div />

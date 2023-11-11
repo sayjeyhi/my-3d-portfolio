@@ -16,8 +16,7 @@ export const icons = {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
-      >
+        strokeWidth="2">
         <path d="M19.5 7A9 9 0 0 0 12 3a8.991 8.991 0 0 0-7.484 4" />
         <path d="M11.5 3a16.989 16.989 0 0 0-1.826 4M12.5 3a16.989 16.989 0 0 1 1.828 4M19.5 17a9 9 0 0 1-7.5 4a8.991 8.991 0 0 1-7.484-4" />
         <path d="M11.5 21a16.989 16.989 0 0 1-1.826-4m2.826 4a16.989 16.989 0 0 0 1.828-4M2 10l1 4l1.5-4L6 14l1-4m10 0l1 4l1.5-4l1.5 4l1-4M9.5 10l1 4l1.5-4l1.5 4l1-4" />
@@ -94,8 +93,7 @@ export const icons = {
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
-      viewBox="0 0 20 20"
-    >
+      viewBox="0 0 20 20">
       <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
     </svg>
   )
@@ -111,6 +109,7 @@ export function HorizontalItem({
   link,
   icon,
   smallImage,
+  titleDate,
   beforeTags,
   btn,
   defaultIcon = icons.default
@@ -121,6 +120,11 @@ export function HorizontalItem({
         <div className="z-10 flex items-center text-blue-500 justify-center w-12 h-12 bg-blue-50 rounded-xl ring-8 ring-white shrink-0">
           {icons[icon] || defaultIcon}
         </div>
+        {titleDate && (
+          <time className="block mb-2 text-xs font-normal pr-2 bg-white leading-none text-gray-400 absolute top-[1.14rem] left-[3.6rem]">
+            {titleDate}
+          </time>
+        )}
         <div className="hidden sm:flex w-full bg-gray-50 h-1"></div>
       </div>
       <div className="mt-3 sm:pr-8 ">
@@ -130,7 +134,11 @@ export function HorizontalItem({
             <h4 className="mb-2 text-xs text-gray-500">{subtitle}</h4>
           </a>
 
-          <time className="block mb-2 text-xs font-normal leading-none text-gray-400 ">{date}</time>
+          {date && (
+            <time className="block mb-2 text-xs font-normal leading-none text-gray-400 ">
+              {date}
+            </time>
+          )}
           <p className="text-sm font-normal text-gray-500 whitespace-pre-line">{description}</p>
         </div>
         <div>
@@ -139,8 +147,7 @@ export function HorizontalItem({
               <div
                 className={`w-full my-2 overflow-hidden rounded-lg border-2 border-gray-200 flex items-center justify-center ${
                   smallImage ? 'h-32' : 'h-48'
-                }`}
-              >
+                }`}>
                 <img src={image} alt={title} />
               </div>
             </a>
@@ -150,8 +157,7 @@ export function HorizontalItem({
             {tags.map(skill => (
               <span
                 key={skill}
-                className="bg-gray-400 text-white text-xs px-2.5 py-0.5 rounded inter hover:bg-gray-600 transition-all"
-              >
+                className="bg-gray-400 text-white text-xs px-2.5 py-0.5 rounded inter hover:bg-gray-600 transition-all">
                 {skill}
               </span>
             ))}

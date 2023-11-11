@@ -1,18 +1,12 @@
 import { gameIsStartedAtom, gameScoreAtom, gameTimeAtom } from '@/atoms/game'
 import { useAtomValue } from 'jotai'
-
-const PRIZES = {
-  100: 'Education',
-  200: 'Projects',
-  300: 'Certifications',
-  400: 'Talks',
-  500: 'Experiences'
-}
+import { nextPrizeAtom } from '@/atoms/prizes.js'
 
 export const TopTexts = ({ showingReward }) => {
   const isStarted = useAtomValue(gameIsStartedAtom)
   const time = useAtomValue(gameTimeAtom)
   const score = useAtomValue(gameScoreAtom)
+  const nextPrize = useAtomValue(nextPrizeAtom)
 
   return (
     <>
@@ -22,13 +16,12 @@ export const TopTexts = ({ showingReward }) => {
         </div>
       )}
       {isStarted && score < 502 && (
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
           {showingReward ? (
             <>Press Space key to continue</>
           ) : (
             <>
-              Hit {Math.ceil(score / 100) * 100} scores and you will see my{' '}
-              {PRIZES[Math.ceil(score / 100) * 100]}
+              Hit {Math.ceil(score / 100) * 100} scores and you will see my {nextPrize}
             </>
           )}
         </div>

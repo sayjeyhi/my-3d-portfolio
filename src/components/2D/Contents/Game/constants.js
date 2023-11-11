@@ -129,7 +129,7 @@ export const CERTIFICATIONS = [
     title: 'C# window application programmer',
     subtitle: 'Issued Oct 2016',
     date: 'Oct 2016',
-    description: 'I passed the exam and got the certificate for C# window application programmer',
+    description: 'I passed the exam and got the certificate for C# window application programmer.',
     tags: ['C#', 'Backend'],
     link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
     image: './certifications/csharp.png'
@@ -142,7 +142,7 @@ export const PROJECTS = [
     subtitle: 'Github action free monitoring tool',
     date: 'Jun 2023 - Present',
     description:
-      '⚡️ A fast bun-based checker/crawler/monitor tool that runs for free on Github actions',
+      '⚡️ A fast bun-based checker/crawler/monitor tool that runs for free on Github actions.',
     skills: ['REST APIs', 'CI/CD', 'GraphQL', 'Node.js', 'Bun.js', 'graphQL', 'monitoring'],
     image: './projects/Pulse-monitor.png',
     link: 'https://github.com/sayjeyhi/pulse-monitor',
@@ -166,7 +166,7 @@ export const PROJECTS = [
     subtitle: 'A group of open-source book writers for Javascript.',
     date: 'Feb 2019 - Present',
     description:
-      'Github organization to write open-source books in markdown and generate books with different formats in CI',
+      'Github organization to write open-source books in markdown and generate books with different formats in CI.',
     skills: ['Github', 'Software Development', 'Team Leadership'],
     image: './projects/Mariotek.png',
     link: 'https://github.com/Mariotek',
@@ -221,7 +221,7 @@ export const PROJECTS = [
     subtitle: 'A startup that I founded with my friends',
     date: 'Oct 2015 - Aug 2020',
     description:
-      'an introduction website to help business owners and other people find the best result for their life needs, it works like its name, CITY GRAM',
+      'an introduction website to help business owners and other people find the best result for their life needs, it works like its name, CITY GRAM.',
     skills: [
       'PHP',
       'Project Management',
@@ -265,7 +265,7 @@ export const PROJECTS = [
     subtitle: 'Old creative website made with my own js library',
     date: 'Jun 2018 - Aug 2018',
     description:
-      'My old creative website which I created using my own js library called jRun, it was a mini library like AMD and Require.js',
+      'My old creative website which I created using my own js library called jRun, it was a mini library like AMD and Requirejs.',
     skills: ['JavaScript', 'jQuery', 'CSS'],
     link: 'https://old.sayjeyhi.com/',
     image: './projects/Old-website.png',
@@ -412,11 +412,11 @@ export const EXPERIENCES = [
 ]
 
 export const SECTION_ITEMS = {
-  100: EDUCATIONS,
-  200: CERTIFICATIONS,
-  300: PROJECTS,
-  400: TALKS,
-  500: EXPERIENCES
+  Education: EDUCATIONS,
+  Certifications: CERTIFICATIONS,
+  Projects: PROJECTS,
+  Talks: TALKS,
+  Experiences: EXPERIENCES
 }
 
 export const CLOUDS = [

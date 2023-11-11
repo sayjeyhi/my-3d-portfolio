@@ -1,32 +1,44 @@
 import { atom } from 'jotai'
-import { focusAtom } from 'jotai-optics'
+import { currentPrizeAtom, currentPrizeSetAtom } from './prizes'
 
-export const gameStateAtom = atom({
-  isStarted: false,
-  isPaused: false,
-  isShooting: false,
-  isPlayerHit: false,
-  isDinoHit: false,
-  score: 0,
-  time: 0,
-  dinosaurLife: 100,
-  playerLife: 100
+export const atomWithToggle = initialValue => {
+  const anAtom = atom(initialValue, (get, set, nextValue) => {
+    const update = nextValue ?? !get(anAtom)
+    set(anAtom, update)
+  })
+  return anAtom
+}
+
+export const gameIsStartedAtom = atomWithToggle(false)
+export const gamePauseAtom = atomWithToggle(false)
+
+export const gameIsShootingAtom = atomWithToggle(false)
+export const gameIsPlayerHitAtom = atomWithToggle(false)
+export const gameIsDinoHitAtom = atomWithToggle(false)
+
+export const gameScoreAtom = atom(0)
+export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
+  set(gameScoreAtom, arg)
+  const currentPrize = get(currentPrizeAtom)
+  const newVal = get(gameScoreAtom)
+
+  if (newVal > 100 && newVal < 200 && currentPrize !== 'Education') {
+    set(currentPrizeSetAtom, 'Education')
+  } else if (newVal > 200 && newVal < 300 && currentPrize !== 'Projects') {
+    set(currentPrizeSetAtom, 'Projects')
+  } else if (newVal > 300 && newVal < 400 && currentPrize !== 'Certifications') {
+    set(currentPrizeSetAtom, 'Certifications')
+  } else if (newVal > 400 && newVal < 500 && currentPrize !== 'Talks') {
+    set(currentPrizeSetAtom, 'Talks')
+  } else if (newVal > 500 && currentPrize !== 'Experiences') {
+    set(currentPrizeSetAtom, 'Experiences')
+  }
 })
 
-export const gameReadOnlyStateAtom = atom(get => get(gameStateAtom))
+export const gameTimeAtom = atom(0)
 
-export const gameIsStartedAtom = focusAtom(gameStateAtom, optic => optic.prop('isStarted'))
-export const gamePauseAtom = focusAtom(gameStateAtom, optic => optic.prop('isPaused'))
-
-export const gameIsShootingAtom = focusAtom(gameStateAtom, optic => optic.prop('isShooting'))
-export const gameIsPlayerHitAtom = focusAtom(gameStateAtom, optic => optic.prop('isPlayerHit'))
-export const gameIsDinoHitAtom = focusAtom(gameStateAtom, optic => optic.prop('isDinoHit'))
-
-export const gameScoreAtom = focusAtom(gameStateAtom, optic => optic.prop('score'))
-export const gameTimeAtom = focusAtom(gameStateAtom, optic => optic.prop('time'))
-
-export const gameDinosaurLifeAtom = focusAtom(gameStateAtom, optic => optic.prop('dinosaurLife'))
-export const gamePlayerLifeAtom = focusAtom(gameStateAtom, optic => optic.prop('playerLife'))
+export const gameDinosaurLifeAtom = atom(100)
+export const gamePlayerLifeAtom = atom(100)
 
 /**
  * Fires location

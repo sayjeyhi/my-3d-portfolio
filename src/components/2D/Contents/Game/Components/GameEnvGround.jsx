@@ -11,7 +11,10 @@ export const GameEnvGround = ({ hitAudioRef }) => {
    * Start the game animations
    */
   useEffect(() => {
-    if (!isGameStarted) return
+    if (!isGameStarted) {
+      groundControls.stop()
+      return
+    }
 
     groundControls.start(() => ({
       x: '-100vw',

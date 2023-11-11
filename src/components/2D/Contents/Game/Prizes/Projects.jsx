@@ -9,7 +9,7 @@ export function GameProjects() {
           key={project.title}
           title={project.title}
           subtitle={project.subtitle}
-          date={project.date}
+          titleDate={project.date}
           description={project.description}
           tags={project.skills}
           link={project.link}

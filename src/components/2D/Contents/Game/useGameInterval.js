@@ -1,33 +1,40 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import {
   gameIsStartedAtom,
   gamePauseAtom,
-  gameReadOnlyStateAtom,
   gameScoreAtom,
+  gameSetScoreAtom,
   gameTimeAtom
 } from '@/atoms/game'
+import { currentPrizeAtom, isPrizeVisibleAtom } from '@/atoms/prizes.js'
 
 export const useGameInterval = ({ victoryAudioRef }) => {
   const gameTimerRef = useRef(null)
-  const gameState = useAtomValue(gameReadOnlyStateAtom)
-  const setScore = useSetAtom(gameScoreAtom)
+  const isStarted = useAtomValue(gameIsStartedAtom)
+  const isPaused = useAtomValue(gamePauseAtom)
+  const isPrizeVisible = useAtomValue(isPrizeVisibleAtom)
+  const score = useAtomValue(gameScoreAtom)
+  const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
   const setIsStarted = useSetAtom(gameIsStartedAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
+  const setCurrentPrize = useSetAtom(currentPrizeAtom)
+  const setIsPrizeVisible = useSetAtom(isPrizeVisibleAtom)
 
   const handleTogglePauseTheGame = useCallback(() => {
-    if (gameState.isPaused) {
+    if (isPaused) {
+      setIsPrizeVisible(false)
       setIsPaused(false)
       setScore(score => score + 1)
     } else {
       setIsPaused(true)
       clearInterval(gameTimerRef.current)
     }
-  }, [gameState.isPaused, setIsPaused, setScore, gameTimerRef.current])
+  }, [isPaused, setIsPaused, setScore, gameTimerRef.current])
 
   useEffect(() => {
-    if (gameState.isStarted || gameTimerRef.current) {
+    if (isStarted || gameTimerRef.current) {
       clearInterval(gameTimerRef.current)
     }
 
@@ -35,7 +42,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
      * Start the game tick
      */
     gameTimerRef.current = setInterval(() => {
-      if (gameState.isPaused || !gameState.isStarted) return
+      if (isPaused || !isStarted) return
 
       let prevScore = 0
       let newScore = 0
@@ -68,17 +75,20 @@ export const useGameInterval = ({ victoryAudioRef }) => {
         clearInterval(gameTimerRef.current)
       }
     }, 1000)
-  }, [gameState.isStarted, gameState.isPaused, setScore, setTime])
+  }, [isStarted, isPaused, setScore, setTime])
 
   useEffect(() => {
-    if (gameState.score >= 700 && gameState.isStarted) {
+    if (score >= 700 && isStarted) {
       victoryAudioRef.current.play()
       setIsStarted(false)
       setScore(0)
       setTime(0)
+      setCurrentPrize('')
       clearInterval(gameTimerRef.current)
     }
-  }, [gameState.score, gameState.isStarted])
+  }, [score, isStarted])
 
-  return { gameTimerRef, handleTogglePauseTheGame }
+  const showingReward = isPaused && isPrizeVisible
+
+  return { gameTimerRef, handleTogglePauseTheGame, showingReward }
 }
