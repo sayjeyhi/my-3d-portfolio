@@ -59,11 +59,11 @@ pre {
 button,
 span:not(.inter),
 .stylish {
-  font-family: 'Stylish';
+  font-family: 'Stylish',tahoma, arial, serif ;
 }
 
 .inter * {
-  font-family: 'Inter';
+  font-family: 'Inter',tahoma, arial, serif ;
 }
 
 .reward-bg {
@@ -75,7 +75,7 @@ span:not(.inter),
 }
 .pixel,
 .pixel > * {
-  font-family: 'VT323' !important;
+  font-family: 'VT323',tahoma, arial, serif  !important;
 }
 
 div[class^='exploding'], div[class*=' exploding'] {
@@ -107,11 +107,33 @@ kbd {
     0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
   color: #333;
   display: inline-block;
-  font-family: 'VT323' !important;
+  font-family: 'VT323',tahoma, arial, serif  !important;
   font-size: 0.85em;
   font-weight: 700;
   line-height: 1;
   padding: 2px 4px;
+  white-space: nowrap;
+}
+
+.control-buttons > button {
+  position: relative;
+}
+.control-buttons > button:not(.no-tooltip):hover:after {
+  background: #333;
+  background: rgba(0, 0, 0, .5);
+  border-radius: 5px;
+  bottom: -34px;
+  color: #fff;
+  content: attr(data-title);
+  font-family: 'VT323', tahoma, arial, serif !important;
+  font-size: 16px;
+  left: 0;
+  top: 110%;
+  padding: 5px 12px;
+  min-height: 35px;
+  position: absolute;
+  text-align: center;
+  z-index: 98;
   white-space: nowrap;
 }
 

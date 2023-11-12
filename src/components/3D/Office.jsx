@@ -8,9 +8,9 @@ import { editable as e } from '@theatre/r3f'
 import { animate, useMotionValue } from 'framer-motion'
 import { useFrame } from '@react-three/fiber'
 import * as Three from 'three'
-const chickenAudio = new Audio('/chicken.mp3')
-const fanAudio = new Audio('/fan.mp3')
-const switchAudio = new Audio('/switch.mp3')
+const chickenAudio = new Audio('/audio/chicken.mp3')
+const fanAudio = new Audio('/audio/fan.mp3')
+const switchAudio = new Audio('/audio/switch.mp3')
 
 export function Office(props) {
   const [isFanClicked, setIsFanClicked] = useState(false)
@@ -206,8 +206,7 @@ export function Office(props) {
       <group
         position={[0.198, 1.684, -0.882]}
         rotation={[0, -0.31, -Math.PI / 2]}
-        scale={[0.988, 1.199, 1.199]}
-      >
+        scale={[0.988, 1.199, 1.199]}>
         <mesh
           castShadow
           receiveShadow
@@ -264,8 +263,7 @@ export function Office(props) {
           material={materials['Green pandan long coach']}
           position={[0.255, 0.173, 0.274]}
           rotation={[0, -0.003, 0]}
-          scale={0.369}
-        >
+          scale={0.369}>
           <mesh
             castShadow
             receiveShadow
@@ -288,8 +286,7 @@ export function Office(props) {
         onClick={handleFanClick}
         position={[-1.006, 2.642, 0.881]}
         rotation={[0, Math.PI / 2, 0]}
-        scale={0.267}
-      >
+        scale={0.267}>
         <mesh
           castShadow
           receiveShadow
@@ -297,8 +294,7 @@ export function Office(props) {
           material={materials['white-cooler']}
           position={[6.696, 0.102, 6.913]}
           rotation={[0, -1.562, 0]}
-          scale={0.758}
-        >
+          scale={0.758}>
           <mesh
             castShadow
             receiveShadow
@@ -339,8 +335,7 @@ export function Office(props) {
       <group
         position={[1.086, 1.813, -1.091]}
         rotation={[Math.PI / 2, 0, -0.016]}
-        scale={[0.15, 0.15, 0.104]}
-      >
+        scale={[0.15, 0.15, 0.104]}>
         <mesh
           castShadow
           receiveShadow
@@ -363,8 +358,7 @@ export function Office(props) {
       <group
         position={[-0.563, 0.741, 0.369]}
         rotation={[Math.PI, -1.518, Math.PI]}
-        scale={[0.229, 0.195, 0.229]}
-      >
+        scale={[0.229, 0.195, 0.229]}>
         <mesh
           castShadow
           receiveShadow
@@ -422,8 +416,7 @@ export function Office(props) {
         onClick={handleStandLampClick}
         position={[-1.626, 1.182, -0.589]}
         rotation={[0, -0.827, 0]}
-        scale={[0.029, 0.035, 0.029]}
-      >
+        scale={[0.029, 0.035, 0.029]}>
         <mesh
           castShadow
           receiveShadow
@@ -458,8 +451,7 @@ export function Office(props) {
         onClick={handleChickenClick}
         position={[0.543, 1.282, -0.583]}
         rotation={[1.169, -0.031, 0.073]}
-        scale={0.03}
-      >
+        scale={0.03}>
         <mesh
           castShadow
           receiveShadow
@@ -834,8 +826,7 @@ export function Office(props) {
       <group
         position={[-1.125, 2.381, -0.962]}
         rotation={[Math.PI / 2, 0, 0]}
-        scale={[0.222, 0.065, 0.222]}
-      >
+        scale={[0.222, 0.065, 0.222]}>
         <mesh
           castShadow
           receiveShadow

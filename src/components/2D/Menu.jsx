@@ -1,24 +1,15 @@
-import { useEffect } from 'react'
-import { audioAtom } from '@/atoms/audio'
+import { isMusicEnabledAtom } from '@/atoms/audio'
 import { useAtom } from 'jotai'
 import { useCursorHandlers } from './Cursor'
 
 export const Menu = props => {
   const { onSectionChange, menuOpened, setMenuOpened } = props
 
-  const [audioMuted, setAudioMuted] = useAtom(audioAtom)
+  const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
   const cursorHandlers = useCursorHandlers()
 
-  useEffect(() => {
-    const audioMuted = window.localStorage.getItem('audioMuted')
-    if (audioMuted === 'true') {
-      setAudioMuted(true)
-    }
-  }, [])
-
   const handleAudioMute = () => {
-    setAudioMuted(!audioMuted)
-    window.localStorage.setItem('audioMuted', audioMuted ? 'false' : 'true')
+    setIsMusicEnabled(a => !a)
   }
   return (
     <>
@@ -42,7 +33,7 @@ export const Menu = props => {
         onClick={handleAudioMute}
         className="z-20 fixed top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
-        {audioMuted ? (
+        {!isMusicEnabled ? (
           <svg
             className="relative -top-[2px] -left-[2px]"
             xmlns="http://www.w3.org/2000/svg"

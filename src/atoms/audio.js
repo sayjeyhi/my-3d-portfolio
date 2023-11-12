@@ -1,3 +1,4 @@
-import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 
-export const audioAtom = atom(false)
+export const gameIsSoundsEnabledAtom = atomWithStorage('gameIsSoundsEnabled', false)
+export const isMusicEnabledAtom = atomWithStorage('isMusicEnabled', true)

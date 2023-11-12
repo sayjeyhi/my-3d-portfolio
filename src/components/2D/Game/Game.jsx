@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Section } from '../../Section'
+import { Section } from '../Section'
 import { Audios } from './Components/Audios'
 import { Rewards } from './Components/Rewards'
 import { Controls } from './Components/Controls'
@@ -11,7 +11,7 @@ import { GameEnvDinoFire } from './Components/GameEnvDinoFire'
 import { GameEnvPlayerFire } from './Components/GameEnvPlayerFire'
 import { GameEnvGround } from './Components/GameEnvGround'
 import { useGameInterval } from './useGameInterval'
-import { useKeyboard } from '@/components/2D/Contents/Game/useKeyboard.js'
+import { useKeyboard } from './useKeyboard'
 
 export const GameSection = () => {
   const jumpAudioRef = useRef(null)

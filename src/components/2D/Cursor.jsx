@@ -2,15 +2,15 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import throttle from 'lodash-es/throttle'
 import { useAtomValue } from 'jotai'
 import { gameIsStartedAtom } from '@/atoms/game'
-import { audioAtom } from '@/atoms/audio'
+import { isMusicEnabledAtom } from '@/atoms/audio'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
 const CursorContext = createContext({ cursorActive: false, setCursorActive: state => state })
-const audioSection1 = new Audio('/s1.mp3')
-const audioSection2 = new Audio('/s2.mp3')
-const gameSection = new Audio('/game.mp3')
+const audioSection1 = new Audio('/audio/s1.mp3')
+const audioSection2 = new Audio('/audio/s2.mp3')
+const gameSection = new Audio('/audio/game.mp3')
 
 audioSection2.volume = 0
 audioSection1.volume = 0
@@ -24,8 +24,7 @@ export const CursorContextProvider = ({ children }) => {
       value={{
         cursorActive,
         setCursorActive
-      }}
-    >
+      }}>
       {children}
     </CursorContext.Provider>
   )
@@ -59,11 +58,10 @@ const useMousePosition = () => {
 
 export const Cursor = ({ section }) => {
   const isGameStarted = useAtomValue(gameIsStartedAtom)
-  const audioMuted = useAtomValue(audioAtom)
-  const isMuted = window.localStorage.getItem('audioMuted')
+  const isMusicEnabled = useAtomValue(isMusicEnabledAtom)
 
   const intervalRefs = useRef([])
-  const isAudioActive = useRef(isMuted !== 'false')
+  const isAudioActive = useRef(!isMusicEnabled)
   if (isTouchDevice) {
     return null
   }
@@ -91,12 +89,13 @@ export const Cursor = ({ section }) => {
     }, 20))
 
   useEffect(() => {
-    if (audioMuted || isMuted === 'true') {
+    if (!isMusicEnabled) {
       audioSection1.pause()
       audioSection2.pause()
       gameSection.pause()
       return
     } else {
+      console.log('Playy')
       if (audioSection1.paused) audioSection1.play()
       if (audioSection2.paused) audioSection2.play()
       if (gameSection.paused) gameSection.play()
@@ -126,12 +125,13 @@ export const Cursor = ({ section }) => {
       // start all sounds
       audioSection1.play()
       audioSection2.play()
+      gameSection.play()
     }
     window.addEventListener('click', handleActivateAudio)
     return () => {
       window.removeEventListener('click', handleActivateAudio)
     }
-  }, [section, audioMuted, isGameStarted])
+  }, [section, isMusicEnabled, isGameStarted])
 
   return (
     <div
@@ -142,8 +142,7 @@ export const Cursor = ({ section }) => {
         pointerEvents: 'none',
         left: clientX,
         top: clientY
-      }}
-    >
+      }}>
       <svg
         width={60}
         height={60}
@@ -154,8 +153,7 @@ export const Cursor = ({ section }) => {
           stroke: isCursorActive ? '#65a30c' : 'transparent',
           strokeWidth: isCursorActive ? 3 : 1,
           fill: isCursorActive ? 'rgba(255,255,255,0.4)' : '#65a30c'
-        }}
-      >
+        }}>
         <circle cx="50" cy="50" r="16" />
         {!isAudioActive.current && (
           <circle

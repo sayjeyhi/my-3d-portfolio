@@ -12,7 +12,7 @@ import {
   gamePlayerLifeAtom
 } from '@/atoms/game'
 import { throttle } from 'lodash-es'
-import { useExplosion } from '@/components/2D/Contents/Game/useExplosion.js'
+import { useExplosion } from '../useExplosion'
 
 export const GameEnvDinoFire = ({ hitAudioRef }) => {
   const explodeRef = useRef(null)

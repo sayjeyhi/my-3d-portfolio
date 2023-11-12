@@ -1,5 +1,5 @@
-import { useCursorHandlers } from '../Cursor'
-import { Section } from '../Section'
+import { useCursorHandlers } from './Cursor'
+import { Section } from './Section'
 import { AnimatePresence } from 'framer-motion'
 
 export const AboutMeSection = props => {

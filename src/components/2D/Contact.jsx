@@ -1,5 +1,5 @@
-import { Section } from '../Section'
-import { useCursorHandlers } from '../Cursor'
+import { Section } from './Section'
+import { useCursorHandlers } from './Cursor'
 
 export const ContactSection = () => {
   return (

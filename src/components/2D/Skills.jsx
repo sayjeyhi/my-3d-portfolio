@@ -1,5 +1,4 @@
-import { Section } from '../Section'
-import { AnimatePresence } from 'framer-motion'
+import { Section } from './Section'
 
 const FRONT_SKILLS = [
   {
@@ -85,7 +84,6 @@ const BACK_SKILLS = [
   { title: 'Ruby (Rails)', level: 90 },
   { title: 'Node.js (express, nest)', level: 90 }
 ]
-
 const MANAGEMENT_SKILLS = [
   {
     title: 'Scrum Player',
@@ -188,21 +186,6 @@ const Badge = ({ titleSpoken, title, level }) => {
     window.speechSynthesis.speak(utterThis)
 
     const synth = window.speechSynthesis
-    const voices = synth.getVoices().sort(function (a, b) {
-      const aname = a.name.toUpperCase()
-      const bname = b.name.toUpperCase()
-
-      if (aname < bname) {
-        return -1
-      } else if (aname == bname) {
-        return 0
-      } else {
-        return +1
-      }
-    })
-
-    console.log('READ', titleSpoken || title, voices)
-
     utterThis.onerror = function (event) {
       console.error('SpeechSynthesisUtterance.onerror')
     }
