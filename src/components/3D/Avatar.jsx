@@ -26,7 +26,6 @@ export function Avatar(props) {
   tellingASecretAnimation[0].name = 'TellingASecret'
   phoneCallAnimation[0].name = 'PhoneCall'
   runningAnimation[0].name = 'Running'
-  jumpAnimation[0].name = 'Jumping'
 
   const { actions } = useAnimations(
     [

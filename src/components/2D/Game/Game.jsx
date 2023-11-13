@@ -12,6 +12,8 @@ import { GameEnvPlayerFire } from './Components/GameEnvPlayerFire'
 import { GameEnvGround } from './Components/GameEnvGround'
 import { useGameInterval } from './useGameInterval'
 import { useKeyboard } from './useKeyboard'
+import { GameEnvBird } from '@/components/2D/Game/Components/GameEnvBird.jsx'
+import { GameEnvGhost } from '@/components/2D/Game/Components/GameEnvGhost.jsx'
 
 export const GameSection = () => {
   const jumpAudioRef = useRef(null)
@@ -35,6 +37,8 @@ export const GameSection = () => {
         <GameEnvDino />
         <GameEnvPlayer />
         <GameEnvDinoFire hitAudioRef={hitAudioRef} />
+        <GameEnvBird hitAudioRef={hitAudioRef} />
+        <GameEnvGhost hitAudioRef={hitAudioRef} />
         <GameEnvPlayerFire hitAudioRef={hitAudioRef} />
         <GameEnvGround />
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { Scroll, ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
@@ -17,21 +17,20 @@ import state from './state.json'
 //   studio.extend(extension)
 // }
 
-function App() {
+export default function App() {
   const [section, setSection] = useState(0)
   const [menuOpened, setMenuOpened] = useState(false)
   const sheet = getProject('sayjeyhi.com', { state }).sheet('r3f')
 
-  useEffect(() => {
-    setMenuOpened(false)
-  }, [section])
+  // useEffect(() => {
+  //   setMenuOpened(false)
+  // }, [section])
 
   return (
     <MotionConfig
       transition={{
         ...framerMotionConfig
-      }}
-    >
+      }}>
       <Canvas gl={{ preserveDrawingBuffer: true }} shadows dpr={[1, 1.5]}>
         <SheetProvider sheet={sheet}>
           <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 3, 10]} />
@@ -61,5 +60,3 @@ function App() {
     </MotionConfig>
   )
 }
-
-export default App

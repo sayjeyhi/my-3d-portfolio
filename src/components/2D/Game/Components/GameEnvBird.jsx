@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { FIRE } from '../base64_files'
+import { BIRD } from '../base64_files'
 import {
   gameIsStartedAtom,
   gamePauseAtom,
@@ -14,29 +14,31 @@ import {
 import { throttle } from 'lodash-es'
 import { useExplosion } from '../useExplosion'
 
-export const GameEnvDinoFire = ({ hitAudioRef }) => {
+export const GameEnvBird = ({ hitAudioRef }) => {
   const explodeRef = useRef(null)
   const animationStarted = useRef(false)
-  const fireControls = useAnimation()
-  const [hideFire, setHideFire] = useState(false)
+
+  const birdControls = useAnimation()
+  const [hide, setHide] = useState(false)
 
   const deductPlayerLife = useSetAtom(gamePlayerLifeSetAtom)
+  const [playerCurrentAction, setPlayerCurrentAction] = useAtom(gamePlayerCurrentAction)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isGamePaused = useAtomValue(gamePauseAtom)
-  const [playerCurrentAction, setPlayerCurrentAction] = useAtom(gamePlayerCurrentAction)
   const playerFire1AtomX = useAtomValue(gamePlayerFire1AtomX)
   const playerFire2AtomX = useAtomValue(gamePlayerFire2AtomX)
 
-  const explodeFire = useExplosion({ duration: 800, id: 'fire' })
+  const explodeFire = useExplosion({ duration: 800, id: 'bird' })
 
   const startFire = useCallback(() => {
     if (!isGameStarted) {
+      birdControls.stop()
       return
     }
 
-    fireControls.start(() => ({
+    birdControls.start(() => ({
       x: ['-12vw', '-68vw'],
-      rotate: [90],
+      scaleX: [-1],
       transition: { duration: 3, repeat: 0, ease: 'linear' }
     }))
   }, [isGameStarted])
@@ -49,21 +51,22 @@ export const GameEnvDinoFire = ({ hitAudioRef }) => {
       return
     }
 
+    birdControls.stop()
     startFire()
   }, [isGameStarted, startFire])
 
   const handleDinoFireUpdate = useCallback(
     throttle(e => {
-      if (hideFire || !isGameStarted) return
+      if (hide || !isGameStarted) return
 
       const x = parseInt(e.x + '')
       if (
         (playerFire1AtomX && playerFire1AtomX - x > -2 && playerFire1AtomX - x < 0) ||
         (playerFire2AtomX && playerFire2AtomX - x > -2 && playerFire2AtomX - x < 0)
       ) {
-        setHideFire(true)
+        setHide(true)
         setTimeout(() => {
-          fireControls.stop()
+          birdControls.stop()
         }, 1000)
         explodeFire(explodeRef.current)
       }
@@ -90,8 +93,8 @@ export const GameEnvDinoFire = ({ hitAudioRef }) => {
       playerCurrentAction,
       isGameStarted,
       isGamePaused,
-      setPlayerCurrentAction(),
-      hideFire,
+      setPlayerCurrentAction,
+      hide,
       playerFire1AtomX,
       playerFire2AtomX
     ]
@@ -105,36 +108,23 @@ export const GameEnvDinoFire = ({ hitAudioRef }) => {
     if (!animationStarted.current) return
 
     animationStarted.current = false
-    setHideFire(false)
+    setHide(false)
     startFire()
   }, [startFire])
 
   return (
     <motion.div
-      key="dinosaurs-fire"
-      src={FIRE}
-      animate={fireControls}
-      alt="dinosaur"
+      key="dinosaurs-bird"
+      animate={birdControls}
       onUpdate={handleDinoFireUpdate}
       onAnimationStart={handleDinoFireAnimationStart}
       onAnimationComplete={handleDinoFireAnimationComplete}
-      className={`absolute bottom-24 right-32 rotate-90 w-24 h-24 ${
+      className={`absolute bottom-48 right-32 w-24 h-24 ${
         isGameStarted && !isGamePaused ? 'visible' : 'invisible'
       }`}>
       <div className="relative">
         <div ref={explodeRef} />
-        {!hideFire && <img src={FIRE} alt="dino-fire" />}
-        {!hideFire && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="-rotate-90 w-6 h-6 text-red-600 absolute top-[60px] left-[0px]"
-            viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="m21 11l2-2c-3.73-3.73-8.87-5.15-13.7-4.31l2.58 2.58c3.3-.02 6.61 1.22 9.12 3.73zm-2 2a9.895 9.895 0 0 0-3.72-2.33l3.02 3.02l.7-.69zM9 17l3 3l3-3a4.237 4.237 0 0 0-6 0zM3.41 1.64L2 3.05L5.05 6.1C3.59 6.83 2.22 7.79 1 9l2 2c1.23-1.23 2.65-2.16 4.17-2.78l2.24 2.24A9.823 9.823 0 0 0 5 13l2 2a6.999 6.999 0 0 1 4.89-2.06l7.08 7.08l1.41-1.41L3.41 1.64z"
-            />
-          </svg>
-        )}
+        {!hide && <img src={BIRD} alt="bird" />}
       </div>
     </motion.div>
   )

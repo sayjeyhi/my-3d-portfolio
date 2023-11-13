@@ -1,4 +1,4 @@
-import { Cursor, CursorContextProvider } from './Cursor'
+import { Cursor } from './Cursor'
 import { AboutMeSection } from '@/components/2D/AboutMe'
 import { SkillsSection } from '@/components/2D/Skills'
 import { ProjectsSection } from '@/components/2D/Projects'
@@ -11,8 +11,9 @@ import { Menu } from './Menu'
 export const Interface = props => {
   const { setSection, menuOpened, setMenuOpened, section } = props
 
+  console.log('=====srrrrr')
   return (
-    <CursorContextProvider>
+    <>
       <Menu onSectionChange={setSection} menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
       <div className="flex flex-col items-center w-screen">
         <AboutMeSection section={section} menuOpened={menuOpened} setSection={setSection} />
@@ -23,6 +24,6 @@ export const Interface = props => {
         <ContactSection section={section} />
         <Cursor section={section} />
       </div>
-    </CursorContextProvider>
+    </>
   )
 }

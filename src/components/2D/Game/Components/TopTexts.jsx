@@ -1,6 +1,7 @@
 import {
   gameHasWonAtom,
   gameIsStartedAtom,
+  gameLooseAtom,
   gamePauseAtom,
   gameScoreAtom,
   gameTimeAtom
@@ -15,11 +16,12 @@ export const TopTexts = ({ showingReward }) => {
   const nextPrize = useAtomValue(nextPrizeAtom)
   const isGameRewardsEnabled = useAtomValue(gameEnableRewardsAtom)
   const hasWon = useAtomValue(gameHasWonAtom)
+  const hasLoose = useAtomValue(gameLooseAtom)
   const isPaused = useAtomValue(gamePauseAtom)
 
   return (
     <>
-      {!isStarted && !hasWon && (
+      {!isStarted && !hasWon && !hasLoose && (
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
           <span className="text-2xl text-orange-700 mt-3">
             Press <kbd>Space</kbd> to start the game with interesting prizes! 🎁
@@ -31,10 +33,18 @@ export const TopTexts = ({ showingReward }) => {
           </span>
         </div>
       )}
-      {!isStarted && hasWon && (
+      {!isStarted && hasWon && !hasLoose && (
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
           <span className="block text-4xl text-orange-700 mt-3">
             Congratulations! You have won the game! 🎉{' '}
+          </span>
+          <br /> Press <kbd>Space</kbd> key to restart the game with interesting prizes!
+        </div>
+      )}
+      {!isStarted && !hasWon && hasLoose && (
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 stylish text-2xl text-gray-700 pixel">
+          <span className="block text-4xl text-red-800 mt-3">
+            Oh snap! You have lost the game! 😢
           </span>
           <br /> Press <kbd>Space</kbd> key to restart the game with interesting prizes!
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useAtomValue } from 'jotai'
-import { DIANASOUR, DINO_HIT } from '../constants'
+import { DIANASOUR, DINO_HIT } from '../base64_files'
 import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
 import { useExplosion } from '../useExplosion'
 

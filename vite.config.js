@@ -18,6 +18,9 @@ export default defineConfig({
           if (id.includes('three.js')) {
             return 'three'
           }
+          if (id.includes('base64_files.js')) {
+            return 'files_encoded'
+          }
         }
       }
     }

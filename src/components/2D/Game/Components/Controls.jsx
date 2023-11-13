@@ -26,6 +26,35 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   const setHasWon = useSetAtom(gameHasWonAtom)
   const nextPrize = useAtomValue(nextPrizeAtom)
 
+  const handleStartGame = () => {
+    setIsStarted(true)
+  }
+  const handleRestartTheGame = () => {
+    setScore(0)
+    setTime(0)
+    setDinoLife(100)
+    setPlayerLife(100)
+    setIsStarted(false)
+    setHasWon(false)
+  }
+
+  const handleToggleGameSounds = () => {
+    setIsGameSoundsEnabled(a => !a)
+  }
+
+  const handleToggleMusic = () => {
+    setIsMusicEnabled(a => !a)
+  }
+
+  const handleToggleGameRewardsModal = () => {
+    setEnabledRewards(enabled => !enabled)
+  }
+
+  const handleJumpToPrize = () => {
+    setPrize(nextPrize)
+    setEnabledRewards(true)
+  }
+
   return (
     <div className="flex justify-between items-center absolute -bottom-28 w-full left-0 right-0">
       <div className="flex ml-18 items-center font-semibold text-gray-800 pixel">
@@ -41,7 +70,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         {!isStarted && (
           <button
             data-title="Start the game"
-            onClick={() => setIsStarted(a => !a)}
+            onClick={handleStartGame}
             className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,14 +111,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
             </button>
             <button
               data-title="Restart the game"
-              onClick={() => {
-                setScore(0)
-                setTime(0)
-                setDinoLife(100)
-                setPlayerLife(100)
-                setIsStarted(false)
-                setHasWon(false)
-              }}
+              onClick={handleRestartTheGame}
               className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path
@@ -103,7 +125,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
 
         <button
           data-title="Toggle game sounds"
-          onClick={() => setIsGameSoundsEnabled(a => !a)}
+          onClick={handleToggleGameSounds}
           className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
           {isGameSoundsEnabled ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
@@ -123,7 +145,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         </button>
         <button
           data-title="Toggle background music"
-          onClick={() => setIsMusicEnabled(a => !a)}
+          onClick={handleToggleMusic}
           className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
           {isMusicEnabled ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -143,7 +165,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         </button>
         <button
           data-title="Toggle game rewards modal"
-          onClick={() => setEnabledRewards(enabled => !enabled)}
+          onClick={handleToggleGameRewardsModal}
           className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
           {enabledRewards ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -163,10 +185,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         </button>
 
         <button
-          onClick={() => {
-            setPrize(nextPrize)
-            setEnabledRewards(true)
-          }}
+          onClick={handleJumpToPrize}
           className="no-tooltip bg-primary h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
           Jump to {nextPrize}
         </button>

@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { FIRE } from '../constants'
+import { FIRE } from '../base64_files'
 import {
   gameDinosaurLifeAtom,
   gameIsDinoHitAtom,
-  gameIsShootingAtom,
   gameIsStartedAtom,
   gamePauseAtom,
+  gamePlayerCurrentAction,
   gamePlayerFire1AtomX,
   gamePlayerFire2AtomX,
-  gameScoreAtom,
-  gameSetScoreAtom
+  gameSetScoreAtom,
+  PLAYER_ACTIONS
 } from '@/atoms/game'
 import { throttle } from 'lodash-es'
 
@@ -23,7 +23,7 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
 
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isGamePaused = useAtomValue(gamePauseAtom)
-  const isShooting = useAtomValue(gameIsShootingAtom)
+  const playerCurrentAction = useAtomValue(gamePlayerCurrentAction)
   const setPlayerFire1AtomX = useSetAtom(gamePlayerFire1AtomX)
   const setPlayerFire2AtomX = useSetAtom(gamePlayerFire2AtomX)
   const [isDinoHit, setIsDinoHit] = useAtom(gameIsDinoHitAtom)
@@ -31,7 +31,7 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
   const setScore = useSetAtom(gameSetScoreAtom)
 
   useEffect(() => {
-    if (!isShooting) {
+    if (playerCurrentAction !== PLAYER_ACTIONS.shoot) {
       return
     }
 
@@ -56,7 +56,7 @@ export const GameEnvPlayerFire = ({ hitAudioRef }) => {
         }))
       }, 250)
     }
-  }, [isShooting])
+  }, [playerCurrentAction])
 
   const checkIsHitDino = useCallback(
     x => {

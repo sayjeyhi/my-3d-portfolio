@@ -1,13 +1,13 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import throttle from 'lodash-es/throttle'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { gameIsStartedAtom } from '@/atoms/game'
 import { isMusicEnabledAtom } from '@/atoms/audio'
+import { isCursorActiveAtom } from '@/atoms/cursor.js'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
-const CursorContext = createContext({ cursorActive: false, setCursorActive: state => state })
 const audioSection1 = new Audio('/audio/s1.mp3')
 const audioSection2 = new Audio('/audio/s2.mp3')
 const gameSection = new Audio('/audio/game.mp3')
@@ -16,19 +16,6 @@ audioSection2.volume = 0
 audioSection1.volume = 0
 gameSection.volume = 0
 
-export const CursorContextProvider = ({ children }) => {
-  const [cursorActive, setCursorActive] = useState(false)
-
-  return (
-    <CursorContext.Provider
-      value={{
-        cursorActive,
-        setCursorActive
-      }}>
-      {children}
-    </CursorContext.Provider>
-  )
-}
 const useMousePosition = () => {
   const [position, setPosition] = useState({
     clientX: 0,
@@ -66,7 +53,7 @@ export const Cursor = ({ section }) => {
     return null
   }
 
-  const { cursorActive: isCursorActive } = useContext(CursorContext)
+  const isCursorActive = useAtomValue(isCursorActiveAtom)
   const { clientX, clientY } = useMousePosition()
 
   const fadeOutAudioVolume = (audio, { step, key, to } = { step: 0.009 }) =>
@@ -175,12 +162,7 @@ export const Cursor = ({ section }) => {
 }
 
 export const useCursorHandlers = (options = {}) => {
-  const context = useContext(CursorContext)
-  if (!context) {
-    throw new Error('useBrand must be used within a CursorContext')
-  }
-
-  const { setCursorActive } = context
+  const setIsCursorActive = useSetAtom(isCursorActiveAtom)
 
   const onMouseEnter = useCallback(
     event => {
@@ -188,9 +170,9 @@ export const useCursorHandlers = (options = {}) => {
         options.onMouseEnter(event)
       }
 
-      setCursorActive(true)
+      setIsCursorActive(true)
     },
-    [setCursorActive]
+    [setIsCursorActive]
   )
 
   const onMouseLeave = useCallback(
@@ -199,9 +181,9 @@ export const useCursorHandlers = (options = {}) => {
         options.onMouseLeave(event)
       }
 
-      setCursorActive(false)
+      setIsCursorActive(false)
     },
-    [setCursorActive]
+    [setIsCursorActive]
   )
 
   if (isTouchDevice) {

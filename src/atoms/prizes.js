@@ -17,10 +17,16 @@ export const currentPrizeSetAtom = atom(
       index = -1
     }
 
+    /**
+     * Show reward modal
+     */
     if (enabledRewards) {
       set(isPrizeVisibleAtom, true)
       set(gamePauseAtom, true)
       set(nextPrizeAtom, prizeList[index + 1])
+
+      const successAudioRef = document.getElementById('successAudioRef')
+      if (successAudioRef) successAudioRef.play()
     }
   }
 )

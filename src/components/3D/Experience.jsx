@@ -9,20 +9,13 @@ import { Amsterdam } from './Amsterdam'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
 import { useAtomValue, useSetAtom } from 'jotai'
-import {
-  gameIsPlayerHitAtom,
-  gameIsShootingAtom,
-  gameIsStartedAtom,
-  gamePauseAtom
-} from '@/atoms/game'
+import { gameIsStartedAtom, gamePauseAtom, gamePlayerCurrentAction } from '@/atoms/game'
 
 export const Experience = props => {
   const { menuOpened } = props
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
-  const isShooting = useAtomValue(gameIsShootingAtom)
-  const isHit = useAtomValue(gameIsPlayerHitAtom)
   const isStarted = useAtomValue(gameIsStartedAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
 

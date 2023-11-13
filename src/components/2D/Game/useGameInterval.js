@@ -54,21 +54,6 @@ export const useGameInterval = ({ victoryAudioRef }) => {
         newScore = score + 0.2
         return newScore
       })
-      const successAudioRef = document.getElementById('successAudioRef')
-      if (
-        Math.ceil(newScore / 100) * 100 > Math.ceil(prevScore / 100) * 100 &&
-        successAudioRef &&
-        prevScore
-      ) {
-        successAudioRef.play()
-      }
-
-      /**
-       * Check if the game is arrived to the prize
-       */
-      if (prevScore > 50 && prevScore % 100 < 1 && prevScore < 502) {
-        handleTogglePauseTheGame()
-      }
 
       /**
        * Check if the game is ended
