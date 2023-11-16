@@ -98,10 +98,6 @@ export function Office(props) {
         chickenRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 20) / 100 + 0.543
       }
     }
-
-    if (Math.floor(state.clock.getElapsedTime()) % 3 === 0) {
-      // keyboardAudio.play()
-    }
   })
 
   const handleChickenClick = () => {

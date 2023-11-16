@@ -1,9 +1,12 @@
 import { useCursorHandlers } from './Cursor'
 import { Section } from './Section'
 import { AnimatePresence } from 'framer-motion'
+import { useAtom, useAtomValue } from 'jotai'
+import { currentSectionAtom, isSidebarOpenedAtom } from '@/atoms/menu.js'
 
 export const AboutMeSection = props => {
-  const { setSection, menuOpened, section } = props
+  const [section, setSection] = useAtom(currentSectionAtom)
+  const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const cursorHandlers = useCursorHandlers()
 
   return (

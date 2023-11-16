@@ -2,9 +2,11 @@ import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
 import { useEffect, useRef } from 'react'
+import { useAtom } from 'jotai'
+import { currentSectionAtom } from '@/atoms/menu.js'
 
 export const ScrollManager = props => {
-  const { section, onSectionChange, setMenuOpened } = props
+  const [section, setSection] = useAtom(currentSectionAtom)
 
   const data = useScroll()
   const lastScroll = useRef(0)
@@ -34,10 +36,10 @@ export const ScrollManager = props => {
 
     const curSection = Math.floor(data.scroll.current * data.pages)
     if (data.scroll.current > lastScroll.current && curSection === 0) {
-      onSectionChange(1)
+      setSection(1)
     }
     if (data.scroll.current < lastScroll.current && data.scroll.current < 1 / (data.pages - 1)) {
-      onSectionChange(0)
+      setSection(0)
     }
     lastScroll.current = data.scroll.current
   })

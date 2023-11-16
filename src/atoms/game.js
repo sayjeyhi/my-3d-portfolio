@@ -10,6 +10,17 @@ export const gameHasWonAtom = atom(false)
 export const gameLooseAtom = atom(false)
 
 /**
+ * Dino Weapons atoms
+ */
+const DINO_WEAPONS = {
+  FIRE: 'fire',
+  BIRD: 'bird',
+  GHOST: 'ghost'
+}
+export const gameDinoCurrentWeapon = atom(DINO_WEAPONS.GHOST)
+export const gameDinoFire = atom(false)
+
+/**
  * Actions atoms
  */
 export const PLAYER_ACTIONS = {
@@ -21,6 +32,21 @@ export const PLAYER_ACTIONS = {
   hit: 'hit'
 }
 export const gamePlayerCurrentAction = atom(PLAYER_ACTIONS.idle)
+
+let actionTimer = null
+export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, set, arg) => {
+  const currentAction = get(gamePlayerCurrentAction)
+
+  if (currentAction === arg) return
+  if (actionTimer) clearTimeout(actionTimer)
+
+  if (arg !== PLAYER_ACTIONS.idle) {
+    set(gamePlayerCurrentAction, arg)
+    setTimeout(() => {
+      set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
+    }, 300)
+  }
+})
 
 export const gameIsDinoHitAtom = atom(false)
 export const gameDinosaurLifeAtom = atom(100)
@@ -68,6 +94,9 @@ export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
     set(currentPrizeSetAtom, 'Talks')
   } else if (newVal > 500 && currentPrize !== 'Experiences') {
     set(currentPrizeSetAtom, 'Experiences')
+  }
+
+  if (newVal > 100) {
   }
 })
 export const gameTimeAtom = atom(0)

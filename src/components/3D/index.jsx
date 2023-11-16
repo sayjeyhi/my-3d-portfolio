@@ -1,4 +1,4 @@
-import { Stage, useScroll } from '@react-three/drei'
+import { Scroll, Stage, useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -9,10 +9,11 @@ import { Amsterdam } from './Amsterdam'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { gameIsStartedAtom, gamePauseAtom, gamePlayerCurrentAction } from '@/atoms/game'
+import { gameIsStartedAtom, gamePauseAtom } from '@/atoms/game'
+import { isSidebarOpenedAtom } from '@/atoms/menu.js'
 
-export const Experience = props => {
-  const { menuOpened } = props
+export const ThreeD = () => {
+  const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const data = useScroll()
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useState('Standing')
@@ -27,6 +28,7 @@ export const Experience = props => {
   const cameraLookAtY = useMotionValue()
   const cameraLookAtZ = useMotionValue()
 
+  console.count('====menuOpened')
   useEffect(() => {
     animate(cameraPositionX, menuOpened ? -2 : 1.2, {
       ...framerMotionConfig
@@ -88,7 +90,7 @@ export const Experience = props => {
   })
 
   return (
-    <>
+    <Scroll>
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Avatar animation={animation} />
       </Stage>
@@ -98,6 +100,6 @@ export const Experience = props => {
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Amsterdam theatreKey="Amsterdam" />
       </Stage>
-    </>
+    </Scroll>
   )
 }

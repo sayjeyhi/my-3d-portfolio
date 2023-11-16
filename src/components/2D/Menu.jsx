@@ -1,9 +1,11 @@
 import { isMusicEnabledAtom } from '@/atoms/audio'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { useCursorHandlers } from './Cursor'
+import { currentSectionAtom, isSidebarOpenedAtom } from '@/atoms/menu.js'
 
 export const Menu = props => {
-  const { onSectionChange, menuOpened, setMenuOpened } = props
+  const setSection = useSetAtom(currentSectionAtom)
+  const [menuOpened, setMenuOpened] = useAtom(isSidebarOpenedAtom)
 
   const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
   const cursorHandlers = useCursorHandlers()
@@ -71,10 +73,10 @@ export const Menu = props => {
         </div>
 
         <div className="flex items-start justify-center flex-col gap-6 p-8">
-          <MenuButton label="About" onClick={() => onSectionChange(0)} />
-          <MenuButton label="Skills" onClick={() => onSectionChange(1)} />
-          <MenuButton label="Projects" onClick={() => onSectionChange(2)} />
-          <MenuButton label="Contact" onClick={() => onSectionChange(3)} />
+          <MenuButton label="About" onClick={() => setSection(0)} />
+          <MenuButton label="Skills" onClick={() => setSection(1)} />
+          <MenuButton label="Projects" onClick={() => setSection(2)} />
+          <MenuButton label="Contact" onClick={() => setSection(3)} />
         </div>
       </div>
     </>

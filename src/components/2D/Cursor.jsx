@@ -4,6 +4,7 @@ import { useAtomValue, useSetAtom } from 'jotai'
 import { gameIsStartedAtom } from '@/atoms/game'
 import { isMusicEnabledAtom } from '@/atoms/audio'
 import { isCursorActiveAtom } from '@/atoms/cursor.js'
+import { currentSectionAtom } from '@/atoms/menu.js'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
@@ -43,7 +44,8 @@ const useMousePosition = () => {
   return position
 }
 
-export const Cursor = ({ section }) => {
+export const Cursor = () => {
+  const section = useAtomValue(currentSectionAtom)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isMusicEnabled = useAtomValue(isMusicEnabledAtom)
 
