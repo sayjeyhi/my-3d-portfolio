@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion'
 import { useAtomValue } from 'jotai'
 import { DIANASOUR, DINO_HIT } from '../base64_files'
 import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
-import { useExplosion } from '../useExplosion'
+import { useExplosion } from '../hooks/useExplosion'
 
 export const GameEnvDino = () => {
   const dinoHitRef = useRef(null)

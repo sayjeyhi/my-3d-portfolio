@@ -3,6 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai'
 import {
   gameHasWonAtom,
   gameIsStartedAtom,
+  gameLooseAtom,
   gamePauseAtom,
   gameScoreAtom,
   gameSetScoreAtom,
@@ -23,6 +24,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   const setCurrentPrize = useSetAtom(currentPrizeAtom)
   const setIsPrizeVisible = useSetAtom(isPrizeVisibleAtom)
   const setHasWon = useSetAtom(gameHasWonAtom)
+  const setHasLoose = useSetAtom(gameLooseAtom)
 
   const handleTogglePauseTheGame = useCallback(() => {
     if (isPaused) {
@@ -67,11 +69,6 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   useEffect(() => {
     if (score >= 700 && isStarted) {
       victoryAudioRef.current.play()
-      setIsStarted(false)
-      setScore(0)
-      setTime(0)
-      setCurrentPrize('')
-      setHasWon(true)
       clearInterval(gameTimerRef.current)
     }
   }, [score, isStarted])

@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import {
   gameIsStartedAtom,
   gamePauseAtom,
   PLAYER_ACTIONS,
-  gamePlayerSetCurrentAction
+  gamePlayerSetCurrentAction,
+  gameSetIsStartedAtom
 } from '@/atoms/game'
 
 export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
-  const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
+  const isStarted = useAtomValue(gameIsStartedAtom)
   const isPaused = useAtomValue(gamePauseAtom)
+  const setIsStarted = useSetAtom(gameSetIsStartedAtom)
   const setCurrentAction = useSetAtom(gamePlayerSetCurrentAction)
 
   useEffect(() => {

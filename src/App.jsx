@@ -33,6 +33,7 @@ function App() {
           <ScrollControls pages={6} damping={0.1}>
             <ScrollManager />
             <TwoD />
+            <ThreeD />
           </ScrollControls>
         </SheetProvider>
       </Canvas>

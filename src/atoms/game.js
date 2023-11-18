@@ -5,6 +5,17 @@ import { currentPrizeAtom, currentPrizeSetAtom } from './prizes'
  * Start atoms
  */
 export const gameIsStartedAtom = atom(false)
+export const gameSetIsStartedAtom = atom(gameIsStartedAtom, (get, set, arg) => {
+  set(gameIsStartedAtom, arg)
+  const newVal = get(gameIsStartedAtom)
+
+  if (newVal) {
+    set(gameDinoWeaponVisible, true)
+  } else {
+    resetGame(set)
+  }
+})
+
 export const gamePauseAtom = atom(false)
 export const gameHasWonAtom = atom(false)
 export const gameLooseAtom = atom(false)
@@ -12,13 +23,20 @@ export const gameLooseAtom = atom(false)
 /**
  * Dino Weapons atoms
  */
-const DINO_WEAPONS = {
+export const DINO_WEAPONS = {
   FIRE: 'fire',
   BIRD: 'bird',
   GHOST: 'ghost'
 }
-export const gameDinoCurrentWeapon = atom(DINO_WEAPONS.GHOST)
-export const gameDinoFire = atom(false)
+export const gameDinoCurrentWeapon = atom(DINO_WEAPONS.FIRE)
+export const gameDinoWeaponVisible = atom(false)
+export const gameSetDinoWeaponVisible = atom(gameDinoWeaponVisible, (get, set, arg) => {
+  const currentWeapon = get(gameDinoCurrentWeapon)
+
+  if (currentWeapon === DINO_WEAPONS.FIRE) set(gameDinoCurrentWeapon, DINO_WEAPONS.GHOST)
+  else if (currentWeapon === DINO_WEAPONS.GHOST) set(gameDinoCurrentWeapon, DINO_WEAPONS.BIRD)
+  else if (currentWeapon === DINO_WEAPONS.BIRD) set(gameDinoCurrentWeapon, DINO_WEAPONS.FIRE)
+})
 
 /**
  * Actions atoms
@@ -56,15 +74,13 @@ export const gamePlayerLifeSetAtom = atom(gamePlayerLifeAtom, (get, set, arg) =>
   const newLife = playerLife - arg
   set(gamePlayerLifeAtom, newLife)
 
+  /**
+   * Loose
+   */
   if (newLife < 5) {
+    resetGame(set)
+    set(gameHasWonAtom, false)
     set(gameLooseAtom, true)
-    set(gamePauseAtom, true)
-    set(gameIsStartedAtom, false)
-    set(gamePlayerCurrentAction, '')
-    set(gameIsDinoHitAtom, false)
-    set(gameDinosaurLifeAtom, 100)
-    set(gamePlayerLifeAtom, 100)
-    set(currentPrizeAtom, '')
   }
 })
 
@@ -96,7 +112,27 @@ export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
     set(currentPrizeSetAtom, 'Experiences')
   }
 
-  if (newVal > 100) {
+  /**
+   * Victory
+   */
+  if (newVal > 700) {
+    resetGame(set)
+    set(gameHasWonAtom, true)
+    set(gameLooseAtom, false)
   }
 })
+
 export const gameTimeAtom = atom(0)
+
+const resetGame = set => {
+  set(gamePauseAtom, false)
+  set(gameIsStartedAtom, false)
+  set(gamePlayerCurrentAction, '')
+  set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
+  set(gameIsDinoHitAtom, false)
+  set(gameDinosaurLifeAtom, 100)
+  set(gamePlayerLifeAtom, 100)
+  set(currentPrizeAtom, '')
+  set(gameScoreAtom, 0)
+  set(gameTimeAtom, 0)
+}

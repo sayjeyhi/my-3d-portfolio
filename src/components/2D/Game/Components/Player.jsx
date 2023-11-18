@@ -6,10 +6,11 @@ import {
   PLAYER_SHOOTING,
   PLAYER_SIT,
   PLAYER_JUMP,
-  PLAYER_DEFEND
+  PLAYER_DEFEND,
+  ARROW_SHOOTING
 } from '../base64_files'
 
-export const GameEnvPlayer = () => {
+export const Player = () => {
   const currentAction = useAtomValue(gamePlayerCurrentAction)
 
   let imgSrc = PLAYER_IDLE
@@ -34,14 +35,19 @@ export const GameEnvPlayer = () => {
       break
   }
 
-  console.log('currentAction', currentAction)
-
   return (
     <div
       className={`absolute ${
         currentAction === PLAYER_ACTIONS.jump ? 'bottom-6' : '-bottom-10'
       } left-16 w-80 h-80`}>
       <img src={imgSrc} alt="player" />
+      {currentAction === PLAYER_ACTIONS.shoot && (
+        <img
+          className="w-[180px] h-auto absolute left-[164px] top-[10px]"
+          src={ARROW_SHOOTING}
+          alt="player"
+        />
+      )}
     </div>
   )
 }
