@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAnimation } from 'framer-motion'
 import { useAtomValue, useSetAtom } from 'jotai'
 import {
+  DINO_WEAPONS,
   gameDinoWeaponVisible,
   gameIsStartedAtom,
   gamePauseAtom,
@@ -13,7 +14,9 @@ import {
 } from '@/atoms/game'
 import { throttle } from 'lodash-es'
 
-export const useEnemy = ({ hitAudioRef, animateOptions }) => {
+export const useEnemy = ({ name, hitAudioRef, animateOptions }) => {
+  const [playerCurrentPosition, setPlayerCurrentPosition] = useState(0)
+  const [dinosaurCurrentPosition, setDinosaurCurrentPosition] = useState(0)
   const animationControl = useAnimation()
 
   const deductPlayerLife = useSetAtom(gamePlayerLifeSetAtom)
@@ -24,7 +27,15 @@ export const useEnemy = ({ hitAudioRef, animateOptions }) => {
   const isEnemyVisible = useAtomValue(gameDinoWeaponVisible)
   const setDinoWeaponVisible = useSetAtom(gameSetDinoWeaponVisible)
 
-  const startFire = useCallback(() => {
+  useEffect(() => {
+    // get player current clientX
+    const playerX = document.getElementById('player').getBoundingClientRect().x
+    const dinosaurX = document.getElementById('dinosaur').getBoundingClientRect().x
+    setPlayerCurrentPosition(playerX)
+    setDinosaurCurrentPosition(dinosaurX)
+  }, [])
+
+  const startAnimation = useCallback(() => {
     if (!isGameStarted) {
       return
     }
@@ -43,22 +54,23 @@ export const useEnemy = ({ hitAudioRef, animateOptions }) => {
       return
     }
 
-    startFire()
-  }, [isGameStarted, startFire])
+    startAnimation()
+  }, [isGameStarted, startAnimation])
 
   const onAnimationUpdate = useCallback(
     throttle(e => {
       if (!isGameStarted) return
       const x = parseInt(e.x + '')
 
+      console.log('e', e, '  , player pos', playerCurrentPosition)
       if (
         x < -66 &&
         isGameStarted &&
         !isGamePaused &&
-        (playerCurrentAction !== PLAYER_ACTIONS.sit ||
-          playerCurrentAction === PLAYER_ACTIONS.defend ||
-          playerCurrentAction === PLAYER_ACTIONS.shoot ||
-          playerCurrentAction === PLAYER_ACTIONS.hit)
+        ((name === DINO_WEAPONS.BIRD && playerCurrentAction !== PLAYER_ACTIONS.sit) ||
+          (name === DINO_WEAPONS.GHOST && playerCurrentAction !== PLAYER_ACTIONS.jump) ||
+          playerCurrentAction !== PLAYER_ACTIONS.defend ||
+          playerCurrentAction !== PLAYER_ACTIONS.hit)
       ) {
         setPlayerCurrentAction(PLAYER_ACTIONS.hit)
         hitAudioRef.current.currentTime = 0
@@ -69,17 +81,24 @@ export const useEnemy = ({ hitAudioRef, animateOptions }) => {
         }, 200)
       }
     }, 100),
-    [playerCurrentAction, isGameStarted, isGamePaused, setPlayerCurrentAction]
+    [
+      playerCurrentAction,
+      isGameStarted,
+      isGamePaused,
+      setPlayerCurrentAction,
+      playerCurrentPosition
+    ]
   )
 
   const onAnimationComplete = useCallback(() => {
-    setDinoWeaponVisible(false)
+    console.log('DDDDDD onAnimationComplete')
+    setDinoWeaponVisible()
   }, [])
 
   return {
     animationControl,
     onAnimationUpdate,
     onAnimationComplete,
-    isEnemyVisible: isEnemyVisible && isGameStarted && !isGamePaused
+    isEnemyVisible: isEnemyVisible && isGameStarted
   }
 }

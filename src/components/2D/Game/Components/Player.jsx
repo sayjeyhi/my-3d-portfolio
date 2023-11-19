@@ -37,13 +37,14 @@ export const Player = () => {
 
   return (
     <div
+      id="player"
       className={`absolute ${
         currentAction === PLAYER_ACTIONS.jump ? 'bottom-6' : '-bottom-10'
       } left-16 w-80 h-80`}>
       <img src={imgSrc} alt="player" />
       {currentAction === PLAYER_ACTIONS.shoot && (
         <img
-          className="w-[180px] h-auto absolute left-[164px] top-[10px]"
+          className="w-[185px] h-auto absolute left-[160px] top-[-13px]"
           src={ARROW_SHOOTING}
           alt="player"
         />

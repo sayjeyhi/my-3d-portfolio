@@ -30,7 +30,7 @@ export const DINO_WEAPONS = {
 }
 export const gameDinoCurrentWeapon = atom(DINO_WEAPONS.FIRE)
 export const gameDinoWeaponVisible = atom(false)
-export const gameSetDinoWeaponVisible = atom(gameDinoWeaponVisible, (get, set, arg) => {
+export const gameSetDinoWeaponVisible = atom(gameDinoWeaponVisible, (get, set) => {
   const currentWeapon = get(gameDinoCurrentWeapon)
 
   if (currentWeapon === DINO_WEAPONS.FIRE) set(gameDinoCurrentWeapon, DINO_WEAPONS.GHOST)

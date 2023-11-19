@@ -19,7 +19,7 @@ export const EnemyGhost = ({ hitAudioRef }) => {
       animate={animationControl}
       onUpdate={onAnimationUpdate}
       onAnimationComplete={onAnimationComplete}
-      className={`absolute -bottom-16 right-32 w-44 h-44`}>
+      className={`absolute -bottom-16 right-32 w-44 h-44 will-change-transform`}>
       <div className="relative">
         <img src={GHOST} alt="ghost" />
         <svg

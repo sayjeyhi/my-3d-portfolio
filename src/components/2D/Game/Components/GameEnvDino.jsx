@@ -38,8 +38,9 @@ export const GameEnvDino = () => {
 
   return (
     <motion.div
+      id="dinosaur"
       animate={dinosaurControls}
-      className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64">
+      className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64 will-change-transform">
       <img src={isDinoHit ? DINO_HIT : DIANASOUR} alt="dinosaur" />
       <div ref={dinoHitRef}></div>
 

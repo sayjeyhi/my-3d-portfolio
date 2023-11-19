@@ -21,7 +21,7 @@ export const EnemyFire = ({ hitAudioRef }) => {
       alt="dinosaur"
       onUpdate={onAnimationUpdate}
       onAnimationComplete={onAnimationComplete}
-      className={`absolute bottom-24 right-32 rotate-90 w-24 h-24`}>
+      className={`absolute bottom-24 right-32 rotate-90 w-24 h-24 will-change-transform`}>
       <div className="relative">
         <img src={FIRE} alt="dino-fire" />
         <svg

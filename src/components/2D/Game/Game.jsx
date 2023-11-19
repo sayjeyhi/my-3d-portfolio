@@ -8,7 +8,7 @@ import { GameEnvClouds } from './Components/GameEnvClouds'
 import { GameEnvDino } from './Components/GameEnvDino'
 import { Player } from './Components/Player.jsx'
 import { EnemyFire } from './Components/EnemyFire.jsx'
-import { PlayerFire } from './Components/PlayerFire.jsx'
+import { PlayerArrow } from './Components/PlayerArrow.jsx'
 import { GameEnvGround } from './Components/GameEnvGround'
 import { useGameInterval } from './hooks/useGameInterval'
 import { useKeyboard } from './hooks/useKeyboard'
@@ -42,7 +42,7 @@ export const GameSection = () => {
         {dinoCurrentWeapon === DINO_WEAPONS.FIRE && <EnemyFire hitAudioRef={hitAudioRef} />}
         {dinoCurrentWeapon === DINO_WEAPONS.BIRD && <EnemyBird hitAudioRef={hitAudioRef} />}
         {dinoCurrentWeapon === DINO_WEAPONS.GHOST && <EnemyGhost hitAudioRef={hitAudioRef} />}
-        <PlayerFire hitAudioRef={hitAudioRef} />
+        <PlayerArrow hitAudioRef={hitAudioRef} />
         <GameEnvGround />
 
         <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />
