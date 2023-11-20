@@ -30,7 +30,7 @@ export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
       if (isStarted) {
         if (e.key === ' ') {
           /**
-           * Shoot the fire
+           * Shoot the arrow
            */
           jumpAudioRef.current.currentTime = 0
           jumpAudioRef.current.play()

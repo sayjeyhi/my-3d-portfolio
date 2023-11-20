@@ -53,16 +53,16 @@ export const gamePlayerCurrentAction = atom(PLAYER_ACTIONS.idle)
 
 let actionTimer = null
 export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, set, arg) => {
-  const currentAction = get(gamePlayerCurrentAction)
-
-  if (currentAction === arg) return
   if (actionTimer) clearTimeout(actionTimer)
 
+  set(gamePlayerCurrentAction, arg)
   if (arg !== PLAYER_ACTIONS.idle) {
-    set(gamePlayerCurrentAction, arg)
-    setTimeout(() => {
-      set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
-    }, 300)
+    actionTimer = setTimeout(
+      () => {
+        set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
+      },
+      arg === PLAYER_ACTIONS.shoot ? 300 : 500
+    )
   }
 })
 

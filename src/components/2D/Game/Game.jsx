@@ -21,6 +21,9 @@ export const GameSection = () => {
   const jumpAudioRef = useRef(null)
   const hitAudioRef = useRef(null)
   const victoryAudioRef = useRef(null)
+  const visibleEnemyRef = useRef(null)
+  const playerRef = useRef(null)
+  const dinoRef = useRef(null)
   const dinoCurrentWeapon = useAtomValue(gameDinoCurrentWeapon)
 
   const { handleTogglePauseTheGame, showingReward } = useGameInterval({
@@ -37,11 +40,32 @@ export const GameSection = () => {
         <TopTexts showingReward={showingReward} />
 
         <GameEnvClouds />
-        <GameEnvDino />
-        <Player />
-        {dinoCurrentWeapon === DINO_WEAPONS.FIRE && <EnemyFire hitAudioRef={hitAudioRef} />}
-        {dinoCurrentWeapon === DINO_WEAPONS.BIRD && <EnemyBird hitAudioRef={hitAudioRef} />}
-        {dinoCurrentWeapon === DINO_WEAPONS.GHOST && <EnemyGhost hitAudioRef={hitAudioRef} />}
+        <GameEnvDino dinoRef={dinoRef} />
+        <Player playerRef={playerRef} />
+        {dinoCurrentWeapon === DINO_WEAPONS.FIRE && (
+          <EnemyFire
+            dinoRef={dinoRef}
+            playerRef={playerRef}
+            visibleEnemyRef={visibleEnemyRef}
+            hitAudioRef={hitAudioRef}
+          />
+        )}
+        {dinoCurrentWeapon === DINO_WEAPONS.BIRD && (
+          <EnemyBird
+            dinoRef={dinoRef}
+            playerRef={playerRef}
+            visibleEnemyRef={visibleEnemyRef}
+            hitAudioRef={hitAudioRef}
+          />
+        )}
+        {dinoCurrentWeapon === DINO_WEAPONS.GHOST && (
+          <EnemyGhost
+            dinoRef={dinoRef}
+            playerRef={playerRef}
+            visibleEnemyRef={visibleEnemyRef}
+            hitAudioRef={hitAudioRef}
+          />
+        )}
         <PlayerArrow hitAudioRef={hitAudioRef} />
         <GameEnvGround />
 

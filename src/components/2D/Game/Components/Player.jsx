@@ -10,7 +10,7 @@ import {
   ARROW_SHOOTING
 } from '../base64_files'
 
-export const Player = () => {
+export const Player = ({ playerRef }) => {
   const currentAction = useAtomValue(gamePlayerCurrentAction)
 
   let imgSrc = PLAYER_IDLE
@@ -37,7 +37,7 @@ export const Player = () => {
 
   return (
     <div
-      id="player"
+      ref={playerRef}
       className={`absolute ${
         currentAction === PLAYER_ACTIONS.jump ? 'bottom-6' : '-bottom-10'
       } left-16 w-80 h-80`}>

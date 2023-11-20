@@ -5,7 +5,7 @@ import { DIANASOUR, DINO_HIT } from '../base64_files'
 import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
 import { useExplosion } from '../hooks/useExplosion'
 
-export const GameEnvDino = () => {
+export const GameEnvDino = ({ dinoRef }) => {
   const dinoHitRef = useRef(null)
   const dinosaurControls = useAnimation()
 
@@ -38,7 +38,7 @@ export const GameEnvDino = () => {
 
   return (
     <motion.div
-      id="dinosaur"
+      ref={dinoRef}
       animate={dinosaurControls}
       className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64 will-change-transform">
       <img src={isDinoHit ? DINO_HIT : DIANASOUR} alt="dinosaur" />

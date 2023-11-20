@@ -1,28 +1,35 @@
-import { motion } from 'framer-motion'
 import { FIRE } from '@/components/2D/Game/base64_files'
 import { useEnemy } from '@/components/2D/Game/hooks/useEnemy'
+import { DINO_WEAPONS } from '@/atoms/game.js'
+import { useState } from 'react'
 
-export const EnemyFire = ({ hitAudioRef }) => {
-  const { animationControl, onAnimationUpdate, onAnimationComplete, isEnemyVisible } = useEnemy({
+export const EnemyFire = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef }) => {
+  const [isEnemyDie, setIsEnemyDie] = useState(false)
+  const { isEnemyVisible } = useEnemy({
     hitAudioRef,
+    dinoRef,
+    playerRef,
+    visibleEnemyRef,
+    name: DINO_WEAPONS.FIRE,
     animateOptions: {
-      x: ['-12vw', '-68vw'],
-      rotate: [90]
+      x: [0, -window.innerWidth]
+    },
+    onEnemyDie: animationControl => {
+      setIsEnemyDie(true)
+      animationControl.pause()
     }
   })
 
   if (!isEnemyVisible) return null
 
   return (
-    <motion.div
-      key="dinosaurs-fire"
-      src={FIRE}
-      animate={animationControl}
-      alt="dinosaur"
-      onUpdate={onAnimationUpdate}
-      onAnimationComplete={onAnimationComplete}
-      className={`absolute bottom-24 right-32 rotate-90 w-24 h-24 will-change-transform`}>
-      <div className="relative">
+    <div
+      ref={visibleEnemyRef}
+      className={`absolute bottom-24 right-32 w-24 h-24 will-change-transform`}>
+      <div
+        className={`relative ${
+          isEnemyDie ? 'animate-[fall_1s_ease-in-out_infinite]' : 'rotate-90'
+        }`}>
         <img src={FIRE} alt="dino-fire" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +41,6 @@ export const EnemyFire = ({ hitAudioRef }) => {
           />
         </svg>
       </div>
-    </motion.div>
+    </div>
   )
 }

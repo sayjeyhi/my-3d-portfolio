@@ -1,24 +1,26 @@
-import { motion } from 'framer-motion'
 import { GHOST } from '@/components/2D/Game/base64_files'
 import { useEnemy } from '@/components/2D/Game/hooks/useEnemy'
+import { DINO_WEAPONS } from '@/atoms/game.js'
 
-export const EnemyGhost = ({ hitAudioRef }) => {
-  const { animationControl, onAnimationUpdate, onAnimationComplete, isEnemyVisible } = useEnemy({
+export const EnemyGhost = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef }) => {
+  const { isEnemyVisible } = useEnemy({
     hitAudioRef,
+    dinoRef,
+    playerRef,
+    visibleEnemyRef,
+    name: DINO_WEAPONS.GHOST,
     animateOptions: {
-      x: ['-12vw', '-68vw'],
+      x: [0, -window.innerWidth],
       y: [3, -5, 3, -5, 3]
-    }
+    },
+    onEnemyDie: () => {}
   })
 
   if (!isEnemyVisible) return null
 
   return (
-    <motion.div
-      key="dinosaurs-ghost"
-      animate={animationControl}
-      onUpdate={onAnimationUpdate}
-      onAnimationComplete={onAnimationComplete}
+    <div
+      ref={visibleEnemyRef}
       className={`absolute -bottom-16 right-32 w-44 h-44 will-change-transform`}>
       <div className="relative">
         <img src={GHOST} alt="ghost" />
@@ -32,6 +34,6 @@ export const EnemyGhost = ({ hitAudioRef }) => {
           />
         </svg>
       </div>
-    </motion.div>
+    </div>
   )
 }
