@@ -55,9 +55,20 @@ export const gamePlayerCurrentAction = atom(PLAYER_ACTIONS.idle)
 
 let actionTimer = null
 export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, set, arg) => {
-  if (actionTimer) clearTimeout(actionTimer)
+  const isJumpingRepeat =
+    arg === PLAYER_ACTIONS.jump && get(gamePlayerCurrentAction) === PLAYER_ACTIONS.jump
 
-  set(gamePlayerCurrentAction, arg)
+  if (!isJumpingRepeat) {
+    if (actionTimer) clearTimeout(actionTimer)
+
+    setTimeout(
+      () => {
+        set(gamePlayerCurrentAction, arg)
+      },
+      arg === PLAYER_ACTIONS.jump ? 100 : 0
+    )
+  }
+
   if (arg !== PLAYER_ACTIONS.idle) {
     actionTimer = setTimeout(
       () => {
