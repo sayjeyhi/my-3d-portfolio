@@ -24,9 +24,9 @@ export const gameLooseAtom = atom(false)
  * Dino Weapons atoms
  */
 export const DINO_WEAPONS = {
-  FIRE: 'fire',
-  BIRD: 'bird',
-  GHOST: 'ghost'
+  FIRE: 'Fire',
+  BIRD: 'Bird',
+  GHOST: 'Ghost'
 }
 export const gameDinoCurrentWeapon = atom(DINO_WEAPONS.FIRE)
 export const gameDinoWeaponVisible = atom(false)
@@ -47,7 +47,9 @@ export const PLAYER_ACTIONS = {
   defend: 'defend',
   sit: 'sit',
   idle: 'idle',
-  hit: 'hit'
+  hitFire: 'hit-fire',
+  hitGhost: 'hit-ghost',
+  hitBird: 'hit-bird'
 }
 export const gamePlayerCurrentAction = atom(PLAYER_ACTIONS.idle)
 

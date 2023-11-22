@@ -1,7 +1,9 @@
 import { useAtomValue } from 'jotai'
 import { gamePlayerCurrentAction, PLAYER_ACTIONS } from '@/atoms/game'
 import {
-  PLAYER_HIT,
+  PLAYER_HIT_BIRD,
+  PLAYER_HIT_FIRE,
+  PLAYER_HIT_GHOST,
   PLAYER_IDLE,
   PLAYER_SHOOTING,
   PLAYER_SIT,
@@ -15,8 +17,14 @@ export const Player = ({ playerRef }) => {
 
   let imgSrc = PLAYER_IDLE
   switch (currentAction) {
-    case PLAYER_ACTIONS.hit:
-      imgSrc = PLAYER_HIT
+    case PLAYER_ACTIONS.hitBird:
+      imgSrc = PLAYER_HIT_BIRD
+      break
+    case PLAYER_ACTIONS.hitFire:
+      imgSrc = PLAYER_HIT_FIRE
+      break
+    case PLAYER_ACTIONS.hitGhost:
+      imgSrc = PLAYER_HIT_GHOST
       break
     case PLAYER_ACTIONS.shoot:
       imgSrc = PLAYER_SHOOTING

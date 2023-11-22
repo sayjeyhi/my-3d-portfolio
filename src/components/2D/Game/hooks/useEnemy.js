@@ -62,6 +62,16 @@ export const useEnemy = ({
   }, [isGameStarted])
 
   /**
+   * Pause the game animations
+   */
+  useEffect(() => {
+    if (!animationControl.current) return
+
+    if (isGamePaused) animationControl.current.pause()
+    else if (!isGamePaused && isGameStarted) animationControl.current.play()
+  }, [isGamePaused])
+
+  /**
    * Check if the enemy hit the player
    */
   useEffect(() => {
@@ -84,8 +94,10 @@ export const useEnemy = ({
         const playerPositionX = playerRef.current.getBoundingClientRect().x
         const enemyPositionX = visibleEnemyRef.current.getBoundingClientRect().x
 
-        if (playerCurrentAction === PLAYER_ACTIONS.defend) playerWidth -= 50
+        if (playerCurrentAction === PLAYER_ACTIONS.defend) playerWidth -= 110
         else playerWidth -= 150
+
+        if (name === DINO_WEAPONS.GHOST) playerWidth -= 100
 
         if (!dinoPositionX || !playerPositionX || !enemyPositionX) return
 
@@ -105,7 +117,7 @@ export const useEnemy = ({
             ((name === DINO_WEAPONS.FIRE || name === DINO_WEAPONS.BIRD) &&
               playerCurrentAction !== PLAYER_ACTIONS.defend)
           ) {
-            setPlayerCurrentAction(PLAYER_ACTIONS.hit)
+            setPlayerCurrentAction(PLAYER_ACTIONS[`hit${name}`])
             hitAudioRef.current.currentTime = 0
             hitAudioRef.current.play()
             deductPlayerLife(1)
