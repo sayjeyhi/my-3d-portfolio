@@ -16,7 +16,7 @@ export const EnemyFire = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef }) 
     },
     onEnemyDie: animationControl => {
       setIsEnemyDie(true)
-      animationControl.pause()
+      if (animationControl) animationControl.pause()
     }
   })
 

@@ -19,6 +19,9 @@ export const gameSetIsStartedAtom = atom(gameIsStartedAtom, (get, set, arg) => {
 export const gamePauseAtom = atom(false)
 export const gameHasWonAtom = atom(false)
 export const gameLooseAtom = atom(false)
+export const gameReset = atom(gameIsStartedAtom, (get, set) => {
+  resetGame(set)
+})
 
 /**
  * Dino Weapons atoms
@@ -74,7 +77,7 @@ export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, se
       () => {
         set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
       },
-      arg === PLAYER_ACTIONS.shoot ? 300 : 500
+      arg === PLAYER_ACTIONS.shoot ? 300 : arg === PLAYER_ACTIONS.jump ? 600 : 500
     )
   }
 })
@@ -144,6 +147,7 @@ const resetGame = set => {
   set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
   set(gameIsDinoHitAtom, false)
   set(gameDinosaurLifeAtom, 100)
+  set(gameDinoCurrentWeapon, DINO_WEAPONS.FIRE)
   set(gamePlayerLifeAtom, 100)
   set(currentPrizeAtom, '')
   set(gameScoreAtom, 0)

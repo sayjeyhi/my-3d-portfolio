@@ -1,14 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { gameIsSoundsEnabledAtom, isMusicEnabledAtom } from '@/atoms/audio'
-import {
-  gameDinosaurLifeAtom,
-  gameHasWonAtom,
-  gameIsStartedAtom,
-  gamePauseAtom,
-  gamePlayerLifeAtom,
-  gameSetScoreAtom,
-  gameTimeAtom
-} from '@/atoms/game'
+import { gameIsStartedAtom, gamePauseAtom, gamePlayerLifeAtom, gameReset } from '@/atoms/game'
 import { currentPrizeSetAtom, gameEnableRewardsAtom, nextPrizeAtom } from '@/atoms/prizes'
 
 export const Controls = ({ handleTogglePauseTheGame }) => {
@@ -18,24 +10,15 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   const [isGameSoundsEnabled, setIsGameSoundsEnabled] = useAtom(gameIsSoundsEnabledAtom)
   const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
   const isPaused = useAtomValue(gamePauseAtom)
-  const setScore = useSetAtom(gameSetScoreAtom)
-  const setTime = useSetAtom(gameTimeAtom)
+  const resetGame = useSetAtom(gameReset)
   const setPrize = useSetAtom(currentPrizeSetAtom)
-  const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
-  const setPlayerLife = useSetAtom(gamePlayerLifeAtom)
-  const setHasWon = useSetAtom(gameHasWonAtom)
   const nextPrize = useAtomValue(nextPrizeAtom)
 
   const handleStartGame = () => {
     setIsStarted(true)
   }
   const handleRestartTheGame = () => {
-    setScore(0)
-    setTime(0)
-    setDinoLife(100)
-    setPlayerLife(100)
-    setIsStarted(false)
-    setHasWon(false)
+    resetGame()
   }
 
   const handleToggleGameSounds = () => {

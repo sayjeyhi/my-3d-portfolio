@@ -15,7 +15,7 @@ import { useKeyboard } from './hooks/useKeyboard'
 import { EnemyBird } from '@/components/2D/Game/Components/EnemyBird.jsx'
 import { EnemyGhost } from '@/components/2D/Game/Components/EnemyGhost.jsx'
 import { useAtomValue } from 'jotai'
-import { DINO_WEAPONS, gameDinoCurrentWeapon } from '@/atoms/game'
+import { DINO_WEAPONS, gameDinoCurrentWeapon, gameIsStartedAtom } from '@/atoms/game'
 
 export const GameSection = () => {
   const jumpAudioRef = useRef(null)
@@ -25,6 +25,7 @@ export const GameSection = () => {
   const playerRef = useRef(null)
   const dinoRef = useRef(null)
   const dinoCurrentWeapon = useAtomValue(gameDinoCurrentWeapon)
+  const isStarted = useAtomValue(gameIsStartedAtom)
 
   const { handleTogglePauseTheGame, showingReward } = useGameInterval({
     victoryAudioRef
@@ -42,31 +43,35 @@ export const GameSection = () => {
         <GameEnvClouds />
         <GameEnvDino dinoRef={dinoRef} />
         <Player playerRef={playerRef} />
-        {dinoCurrentWeapon === DINO_WEAPONS.FIRE && (
-          <EnemyFire
-            dinoRef={dinoRef}
-            playerRef={playerRef}
-            visibleEnemyRef={visibleEnemyRef}
-            hitAudioRef={hitAudioRef}
-          />
+        {isStarted && (
+          <>
+            {dinoCurrentWeapon === DINO_WEAPONS.FIRE && (
+              <EnemyFire
+                dinoRef={dinoRef}
+                playerRef={playerRef}
+                visibleEnemyRef={visibleEnemyRef}
+                hitAudioRef={hitAudioRef}
+              />
+            )}
+            {dinoCurrentWeapon === DINO_WEAPONS.BIRD && (
+              <EnemyBird
+                dinoRef={dinoRef}
+                playerRef={playerRef}
+                visibleEnemyRef={visibleEnemyRef}
+                hitAudioRef={hitAudioRef}
+              />
+            )}
+            {dinoCurrentWeapon === DINO_WEAPONS.GHOST && (
+              <EnemyGhost
+                dinoRef={dinoRef}
+                playerRef={playerRef}
+                visibleEnemyRef={visibleEnemyRef}
+                hitAudioRef={hitAudioRef}
+              />
+            )}
+          </>
         )}
-        {dinoCurrentWeapon === DINO_WEAPONS.BIRD && (
-          <EnemyBird
-            dinoRef={dinoRef}
-            playerRef={playerRef}
-            visibleEnemyRef={visibleEnemyRef}
-            hitAudioRef={hitAudioRef}
-          />
-        )}
-        {dinoCurrentWeapon === DINO_WEAPONS.GHOST && (
-          <EnemyGhost
-            dinoRef={dinoRef}
-            playerRef={playerRef}
-            visibleEnemyRef={visibleEnemyRef}
-            hitAudioRef={hitAudioRef}
-          />
-        )}
-        <PlayerArrow hitAudioRef={hitAudioRef} />
+        <PlayerArrow playerRef={playerRef} dinoRef={dinoRef} hitAudioRef={hitAudioRef} />
         <GameEnvGround />
 
         <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />

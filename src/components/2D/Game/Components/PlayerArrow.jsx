@@ -1,94 +1,61 @@
-import { useCallback, useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useEffect, useRef } from 'react'
+import { useAtomValue } from 'jotai'
 import { ARROW_FLYING } from '../base64_files'
-import {
-  gameDinosaurLifeAtom,
-  gameIsDinoHitAtom,
-  gameIsStartedAtom,
-  gamePauseAtom,
-  gamePlayerCurrentAction,
-  gamePlayerFire1AtomX,
-  gamePlayerFire2AtomX,
-  gameSetScoreAtom,
-  PLAYER_ACTIONS
-} from '@/atoms/game'
-import { throttle } from 'lodash-es'
+import { gamePlayerCurrentAction, PLAYER_ACTIONS } from '@/atoms/game'
+import { useArrow } from '@/components/2D/Game/hooks/useArrow.js'
 
-export const PlayerArrow = ({ hitAudioRef }) => {
-  const [showFire1, setShowFire1] = useState(false)
-  const [showFire2, setShowFire2] = useState(false)
-  const playerFireControls1 = useAnimation()
-  const playerFireControls2 = useAnimation()
+export const PlayerArrow = ({ hitAudioRef, playerRef, dinoRef }) => {
+  const playerArrow1 = useRef(null)
+  const playerArrow2 = useRef(null)
 
-  const isGameStarted = useAtomValue(gameIsStartedAtom)
-  const isGamePaused = useAtomValue(gamePauseAtom)
   const playerCurrentAction = useAtomValue(gamePlayerCurrentAction)
-  const setPlayerFire1AtomX = useSetAtom(gamePlayerFire1AtomX)
-  const setPlayerFire2AtomX = useSetAtom(gamePlayerFire2AtomX)
-  const [isDinoHit, setIsDinoHit] = useAtom(gameIsDinoHitAtom)
-  const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
-  const setScore = useSetAtom(gameSetScoreAtom)
+
+  const animationConfig = {
+    duration: 2.5,
+    hitAudioRef,
+    dinoRef,
+    playerRef
+  }
+  const { runAnimation: runArrow1, isActive: isArrow1Active } = useArrow(
+    playerArrow1,
+    animationConfig
+  )
+  const { runAnimation: runArrow2, isActive: isArrow2Active } = useArrow(
+    playerArrow2,
+    animationConfig
+  )
 
   useEffect(() => {
     if (playerCurrentAction !== PLAYER_ACTIONS.shoot) {
       return
     }
 
-    const animationConfig = {
-      x: ['-65vw', '-12vw'],
-      y: [-30],
-      transition: { duration: 2.5, repeat: 0, ease: 'linear' }
-    }
-
-    if (showFire1) {
+    if (!isArrow1Active) {
       setTimeout(() => {
-        setShowFire2(true)
-        playerFireControls2.start(() => animationConfig)
+        runArrow1({
+          x: [
+            playerRef?.current.getBoundingClientRect().x,
+            dinoRef?.current.getBoundingClientRect().x
+          ],
+          y: [-30]
+        })
       }, 250)
-    } else {
+    } else if (!isArrow2Active) {
       setTimeout(() => {
-        setShowFire1(true)
-        playerFireControls1.start(() => animationConfig)
+        runArrow2({
+          x: [
+            playerRef?.current.getBoundingClientRect().x,
+            dinoRef?.current.getBoundingClientRect().x
+          ],
+          y: [-30]
+        })
       }, 250)
     }
   }, [playerCurrentAction])
 
-  const checkIsHitDino = useCallback(
-    x => {
-      if (x > -12.5 && isGameStarted && !isGamePaused && !isDinoHit) {
-        setIsDinoHit(true)
-        hitAudioRef.current.currentTime = 0
-        hitAudioRef.current.play()
-        setDinoLife(life => life - 1)
-        setScore(score => score + 6)
-        setTimeout(() => {
-          setIsDinoHit(false)
-        }, 500)
-      }
-    },
-    [isGameStarted, isGamePaused]
-  )
-
-  const handleFire1Update = useCallback(
-    throttle(e => {
-      const x = parseInt(e.x + '')
-      setPlayerFire1AtomX(x)
-      checkIsHitDino(x)
-    }, 100),
-    [checkIsHitDino, setPlayerFire1AtomX]
-  )
-  const handleFire2Update = useCallback(
-    throttle(e => {
-      const x = parseInt(e.x + '')
-      setPlayerFire2AtomX(x)
-      checkIsHitDino(x)
-    }, 100),
-    [checkIsHitDino, setPlayerFire2AtomX]
-  )
   const content = (
     <div className="relative">
-      <img src={ARROW_FLYING} className="absolute top-[42px] " alt="player-fire" />
+      <img src={ARROW_FLYING} className="absolute top-[42px] " alt="player-arrow" />
       <div className="absolute top-[42px] left-[35px] p-1 bg-[#1e5b00] rotate-45 rounded-lg">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 -rotate-45" viewBox="0 0 24 24">
           <path
@@ -102,30 +69,20 @@ export const PlayerArrow = ({ hitAudioRef }) => {
 
   return (
     <>
-      <motion.div
-        animate={playerFireControls1}
-        onUpdate={handleFire1Update}
-        onAnimationComplete={() => {
-          setShowFire1(false)
-          playerFireControls1.stop()
-        }}
-        className={`absolute bottom-32 right-32 rotate-90 w-24 h-24 will-change-transform ${
-          isGameStarted && !isGamePaused && showFire1 ? 'visible' : 'invisible'
+      <div
+        ref={playerArrow1}
+        className={`absolute bottom-32 left-32 w-24 h-24 will-change-transform ${
+          isArrow1Active ? 'visible' : 'hidden'
         }`}>
         {content}
-      </motion.div>
-      <motion.div
-        animate={playerFireControls2}
-        onUpdate={handleFire2Update}
-        onAnimationComplete={() => {
-          setShowFire2(false)
-          playerFireControls2.stop()
-        }}
-        className={`absolute bottom-32 right-32 rotate-90 w-24 h-24 will-change-transform ${
-          isGameStarted && !isGamePaused && showFire2 ? 'visible' : 'invisible'
+      </div>
+      <div
+        ref={playerArrow2}
+        className={`absolute bottom-32 left-32 w-24 h-24 will-change-transform ${
+          isArrow2Active ? 'visible' : 'hidden'
         }`}>
         {content}
-      </motion.div>
+      </div>
     </>
   )
 }

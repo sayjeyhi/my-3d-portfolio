@@ -102,7 +102,6 @@ export const useEnemy = ({
         if (!dinoPositionX || !playerPositionX || !enemyPositionX) return
 
         if (enemyPositionX - playerWidth <= playerPositionX && isGameStarted && !isGamePaused) {
-          console.log('Hit candidate', name, playerCurrentAction)
           if (
             (name === DINO_WEAPONS.BIRD || name === DINO_WEAPONS.FIRE) &&
             playerCurrentAction === PLAYER_ACTIONS.defend

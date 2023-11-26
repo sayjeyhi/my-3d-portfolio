@@ -17,7 +17,7 @@ export const EnemyBird = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef }) 
     },
     onEnemyDie: animationControl => {
       setIsEnemyDie(true)
-      animationControl.pause()
+      if (animationControl) animationControl.pause()
     }
   })
 

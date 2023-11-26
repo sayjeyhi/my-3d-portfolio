@@ -1,33 +1,37 @@
 import { useEffect, useRef } from 'react'
-import { motion, useAnimation } from 'framer-motion'
 import { useAtomValue } from 'jotai'
 import { DIANASOUR, DINO_HIT } from '../base64_files'
 import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
 import { useExplosion } from '../hooks/useExplosion'
+import { useGameAnimation } from '@/components/2D/Game/hooks/useGameAnimation.js'
 
 export const GameEnvDino = ({ dinoRef }) => {
   const dinoHitRef = useRef(null)
-  const dinosaurControls = useAnimation()
 
   const explodeDino = useExplosion({ duration: 700, id: 'dino' })
   const dinosaurLife = useAtomValue(gameDinosaurLifeAtom)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isDinoHit = useAtomValue(gameIsDinoHitAtom)
 
+  const { runAnimation } = useGameAnimation(
+    dinoRef,
+    {
+      x: ['0vw', '-5vw', '0vw'],
+      scaleX: [-1, -1, -1]
+    },
+    {
+      duration: 3,
+      repeat: Infinity
+    }
+  )
+
   /**
    * Start the game animations
    */
   useEffect(() => {
-    if (!isGameStarted) {
-      dinosaurControls.stop()
-      return
-    }
+    if (!isGameStarted) return
 
-    dinosaurControls.start(() => ({
-      x: ['0vw', '-10vw', '0vw'],
-      scaleX: [-1, -1, -1],
-      transition: { duration: 3, repeat: Infinity, ease: 'linear' }
-    }))
+    runAnimation()
   }, [isGameStarted])
 
   useEffect(() => {
@@ -37,10 +41,9 @@ export const GameEnvDino = ({ dinoRef }) => {
   }, [isDinoHit])
 
   return (
-    <motion.div
+    <div
       ref={dinoRef}
-      animate={dinosaurControls}
-      className="absolute -bottom-8 right-16 -scale-x-100 w-64 h-64 will-change-transform">
+      className="absolute -bottom-8 right-8 -scale-x-100 w-64 h-64 will-change-transform">
       <img src={isDinoHit ? DINO_HIT : DIANASOUR} alt="dinosaur" />
       <div ref={dinoHitRef}></div>
 
@@ -50,6 +53,6 @@ export const GameEnvDino = ({ dinoRef }) => {
           className={`h-full ${dinosaurLife < 50 ? 'bg-red-500' : 'bg-primary'} absolute`}
           style={{ width: `${dinosaurLife}%` }}></div>
       </div>
-    </motion.div>
+    </div>
   )
 }
