@@ -8,12 +8,18 @@ export default {
         secondary: '#65a30c'
       },
       animation: {
-        fall: 'fall 0.5s ease-in-out'
+        fall: 'fall 0.5s ease-in-out',
+        jump: 'jump 0.5s ease-in-out'
       },
       keyframes: {
         fall: {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(500px)' }
+        },
+        jump: {
+          '0%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-250px)' },
+          '100%': { transform: 'translateY(0)' }
         }
       }
     }

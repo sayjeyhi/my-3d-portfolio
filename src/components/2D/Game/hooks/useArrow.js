@@ -70,7 +70,7 @@ export const useArrow = (el, config) => {
           setIsDinoHit(true)
           hitAudioRef.current.currentTime = 0
           hitAudioRef.current.play()
-          setDinoLife(life => life - 1)
+          setDinoLife(life => life - 4)
           setScore(score => score + 6)
           setTimeout(() => {
             setIsDinoHit(false)

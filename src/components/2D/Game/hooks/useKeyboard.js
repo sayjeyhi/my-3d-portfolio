@@ -16,6 +16,9 @@ export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
 
   useEffect(() => {
     const handleKeyPress = e => {
+      if (e.key === 'Tab') {
+        e.preventDefault()
+      }
       if (e.key === ' ') {
         if (isPaused) {
           handleTogglePauseTheGame()

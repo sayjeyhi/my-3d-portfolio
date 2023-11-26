@@ -3,12 +3,18 @@ import { gamePauseAtom } from '@/atoms/game.js'
 
 export const prizeList = ['Education', 'Projects', 'Certifications', 'Talks', 'Experiences']
 
-export const gameEnableRewardsAtom = atom(false)
+export const gameEnableRewardsAtom = atom(true)
 
 export const currentPrizeAtom = atom('')
 export const currentPrizeSetAtom = atom(
   get => get(currentPrizeAtom),
   (get, set, arg) => {
+    let playSuccessAudio = true
+    if (typeof arg === 'object') {
+      playSuccessAudio = arg.playSuccessAudio
+      arg = arg.value
+    }
+
     set(currentPrizeAtom, arg)
     const enabledRewards = get(gameEnableRewardsAtom)
     const val = get(currentPrizeAtom)
@@ -26,7 +32,7 @@ export const currentPrizeSetAtom = atom(
       set(nextPrizeAtom, prizeList[index + 1])
 
       const successAudioRef = document.getElementById('successAudioRef')
-      if (successAudioRef) successAudioRef.play()
+      if (successAudioRef && playSuccessAudio) successAudioRef.play()
     }
   }
 )

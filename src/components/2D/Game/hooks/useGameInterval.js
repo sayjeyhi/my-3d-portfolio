@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useAtomValue, useSetAtom } from 'jotai'
 import {
-  gameHasWonAtom,
   gameIsStartedAtom,
-  gameLooseAtom,
   gamePauseAtom,
   gameScoreAtom,
   gameSetScoreAtom,
   gameTimeAtom
 } from '@/atoms/game'
-import { currentPrizeAtom, isPrizeVisibleAtom } from '@/atoms/prizes.js'
+import { isPrizeVisibleAtom } from '@/atoms/prizes.js'
 
 export const useGameInterval = ({ victoryAudioRef }) => {
   const gameTimerRef = useRef(null)
@@ -19,12 +17,8 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   const score = useAtomValue(gameScoreAtom)
   const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
-  const setIsStarted = useSetAtom(gameIsStartedAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
-  const setCurrentPrize = useSetAtom(currentPrizeAtom)
   const setIsPrizeVisible = useSetAtom(isPrizeVisibleAtom)
-  const setHasWon = useSetAtom(gameHasWonAtom)
-  const setHasLoose = useSetAtom(gameLooseAtom)
 
   const handleTogglePauseTheGame = useCallback(() => {
     if (isPaused) {
@@ -53,7 +47,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
       setTime(time => time + 0.1)
       setScore(score => {
         prevScore = score
-        newScore = score + 0.2
+        newScore = score + 0.1
         return newScore
       })
 
@@ -63,7 +57,7 @@ export const useGameInterval = ({ victoryAudioRef }) => {
       if (prevScore >= 700) {
         clearInterval(gameTimerRef.current)
       }
-    }, 1000)
+    }, 400)
   }, [isStarted, isPaused, setScore, setTime])
 
   useEffect(() => {

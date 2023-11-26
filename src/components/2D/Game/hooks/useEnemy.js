@@ -31,7 +31,7 @@ export const useEnemy = ({
   const playerCurrentAction = useAtomValue(gamePlayerCurrentAction)
   const setPlayerCurrentAction = useSetAtom(gamePlayerSetCurrentAction)
   const isEnemyVisible = useAtomValue(gameDinoWeaponVisible)
-  const setDinoWeaponVisible = useSetAtom(gameSetDinoWeaponVisible)
+  const changeEnemy = useSetAtom(gameSetDinoWeaponVisible)
 
   /**
    * Start the game animations
@@ -101,7 +101,14 @@ export const useEnemy = ({
 
         if (!dinoPositionX || !playerPositionX || !enemyPositionX) return
 
-        if (enemyPositionX - playerWidth <= playerPositionX && isGameStarted && !isGamePaused) {
+        const enemyRealPositionX = enemyPositionX - playerWidth
+
+        if (
+          enemyRealPositionX <= playerPositionX &&
+          enemyRealPositionX >= 50 &&
+          isGameStarted &&
+          !isGamePaused
+        ) {
           if (
             (name === DINO_WEAPONS.BIRD || name === DINO_WEAPONS.FIRE) &&
             playerCurrentAction === PLAYER_ACTIONS.defend
@@ -112,17 +119,21 @@ export const useEnemy = ({
             }, 400)
           } else if (
             (name === DINO_WEAPONS.GHOST && playerCurrentAction !== PLAYER_ACTIONS.jump) ||
-            (name === DINO_WEAPONS.BIRD && playerCurrentAction !== PLAYER_ACTIONS.sit) ||
-            ((name === DINO_WEAPONS.FIRE || name === DINO_WEAPONS.BIRD) &&
-              playerCurrentAction !== PLAYER_ACTIONS.defend)
+            (name === DINO_WEAPONS.BIRD &&
+              playerCurrentAction !== PLAYER_ACTIONS.sit &&
+              playerCurrentAction !== PLAYER_ACTIONS.defend) ||
+            (name === DINO_WEAPONS.FIRE && playerCurrentAction !== PLAYER_ACTIONS.defend)
           ) {
             setPlayerCurrentAction(PLAYER_ACTIONS[`hit${name}`])
             hitAudioRef.current.currentTime = 0
             hitAudioRef.current.play()
-            deductPlayerLife(1)
-            setTimeout(() => {
-              setPlayerCurrentAction(PLAYER_ACTIONS.idle)
-            }, 200)
+            deductPlayerLife(8)
+            setTimeout(
+              () => {
+                setPlayerCurrentAction(PLAYER_ACTIONS.idle)
+              },
+              name === DINO_WEAPONS.GHOST ? 300 : 200
+            )
 
             onAnimationComplete()
           }
@@ -131,6 +142,8 @@ export const useEnemy = ({
         animationControlTimer.current = requestAnimationFrame(checkAnimationTick)
       }
     }
+
+    cancelAnimationFrame(animationControlTimer.current)
     checkAnimationTick()
   }, [animationControl, isGameStarted, isGamePaused, playerCurrentAction])
 
@@ -143,7 +156,7 @@ export const useEnemy = ({
       animationControl.current.cancel()
 
       animationControl.current = null
-      setDinoWeaponVisible()
+      changeEnemy()
 
       cancelAnimationFrame(animationControlTimer.current)
     }

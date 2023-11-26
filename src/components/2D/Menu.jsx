@@ -17,7 +17,7 @@ export const Menu = props => {
     <>
       <button
         onClick={() => setMenuOpened(!menuOpened)}
-        className="z-20 fixed top-4 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className="z-20 focus:outline-lime-700 fixed top-4 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         <div
           className={`bg-white h-0.5 rounded-md w-full transition-all ${
@@ -33,7 +33,7 @@ export const Menu = props => {
       </button>
       <button
         onClick={handleAudioMute}
-        className="z-20 fixed top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className="z-20 fixed focus:outline-lime-700 top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         {!isMusicEnabled ? (
           <svg

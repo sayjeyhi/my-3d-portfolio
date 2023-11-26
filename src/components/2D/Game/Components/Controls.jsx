@@ -1,7 +1,18 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { gameIsSoundsEnabledAtom, isMusicEnabledAtom } from '@/atoms/audio'
-import { gameIsStartedAtom, gamePauseAtom, gamePlayerLifeAtom, gameReset } from '@/atoms/game'
-import { currentPrizeSetAtom, gameEnableRewardsAtom, nextPrizeAtom } from '@/atoms/prizes'
+import {
+  gameDinoWeaponVisible,
+  gameIsStartedAtom,
+  gamePauseAtom,
+  gamePlayerLifeAtom,
+  gameReset
+} from '@/atoms/game'
+import {
+  currentPrizeSetAtom,
+  gameEnableRewardsAtom,
+  isPrizeVisibleAtom,
+  nextPrizeAtom
+} from '@/atoms/prizes'
 
 export const Controls = ({ handleTogglePauseTheGame }) => {
   const playerLifeAtom = useAtomValue(gamePlayerLifeAtom)
@@ -10,12 +21,15 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   const [isGameSoundsEnabled, setIsGameSoundsEnabled] = useAtom(gameIsSoundsEnabledAtom)
   const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
   const isPaused = useAtomValue(gamePauseAtom)
+  const setDinoWeaponVisible = useSetAtom(gameDinoWeaponVisible)
   const resetGame = useSetAtom(gameReset)
   const setPrize = useSetAtom(currentPrizeSetAtom)
   const nextPrize = useAtomValue(nextPrizeAtom)
 
   const handleStartGame = () => {
+    resetGame()
     setIsStarted(true)
+    setDinoWeaponVisible(true)
   }
   const handleRestartTheGame = () => {
     resetGame()
@@ -34,8 +48,11 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   }
 
   const handleJumpToPrize = () => {
-    setPrize(nextPrize)
     setEnabledRewards(true)
+    setPrize({
+      value: nextPrize,
+      playSuccessAudio: false
+    })
   }
 
   return (
@@ -54,7 +71,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
           <button
             data-title="Start the game"
             onClick={handleStartGame}
-            className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
+            className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl text-white flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -73,7 +90,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
             <button
               onClick={handleTogglePauseTheGame}
               data-title={isPaused ? 'Resume the game' : 'Pause the game'}
-              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
+              className="bg-primary focus:outline-lime-700 w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               {!isPaused ? (
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                   <path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z" />
@@ -95,7 +112,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
             <button
               data-title="Restart the game"
               onClick={handleRestartTheGame}
-              className="bg-primary w-10 h-10 rounded-2xl text-white flex justify-center items-center">
+              className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl text-white flex justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -109,7 +126,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         <button
           data-title="Toggle game sounds"
           onClick={handleToggleGameSounds}
-          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
+          className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl flex justify-center items-center">
           {isGameSoundsEnabled ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
               <path
@@ -129,7 +146,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         <button
           data-title="Toggle background music"
           onClick={handleToggleMusic}
-          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
+          className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl flex justify-center items-center">
           {isMusicEnabled ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -149,7 +166,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         <button
           data-title="Toggle game rewards modal"
           onClick={handleToggleGameRewardsModal}
-          className="bg-primary w-10 h-10 rounded-2xl flex justify-center items-center">
+          className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl flex justify-center items-center">
           {enabledRewards ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
               <path
@@ -169,7 +186,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
 
         <button
           onClick={handleJumpToPrize}
-          className="no-tooltip bg-primary h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
+          className="no-tooltip bg-primary ring-lime-600 focus:outline-lime-700 h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
           Jump to {nextPrize}
         </button>
       </div>

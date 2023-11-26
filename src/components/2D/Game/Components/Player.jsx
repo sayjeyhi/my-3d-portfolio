@@ -47,9 +47,13 @@ export const Player = ({ playerRef }) => {
     <div
       ref={playerRef}
       className={`absolute ${
-        currentAction === PLAYER_ACTIONS.jump ? 'bottom-6' : '-bottom-10'
+        currentAction === PLAYER_ACTIONS.jump ? '-bottom-24' : '-bottom-10'
       } left-16 w-80 h-80`}>
-      <img src={imgSrc} alt="player" />
+      <img
+        src={imgSrc}
+        alt="player"
+        className={currentAction === PLAYER_ACTIONS.jump ? 'animate-[jump_0.7s_ease-in-out_1]' : ''}
+      />
       {currentAction === PLAYER_ACTIONS.shoot && (
         <img
           className="w-[185px] h-auto absolute left-[160px] top-[-13px]"

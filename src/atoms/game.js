@@ -1,5 +1,5 @@
 import { atom } from 'jotai'
-import { currentPrizeAtom, currentPrizeSetAtom } from './prizes'
+import { currentPrizeAtom, currentPrizeSetAtom, isPrizeVisibleAtom } from './prizes'
 
 /**
  * Start atoms
@@ -101,13 +101,6 @@ export const gamePlayerLifeSetAtom = atom(gamePlayerLifeAtom, (get, set, arg) =>
 })
 
 /**
- * Fires location control atoms
- */
-export const gameDinoFireAtomX = atom(0)
-export const gamePlayerFire1AtomX = atom(0)
-export const gamePlayerFire2AtomX = atom(0)
-
-/**
  * Score and time atoms
  */
 export const gameScoreAtom = atom(0)
@@ -143,12 +136,13 @@ export const gameTimeAtom = atom(0)
 const resetGame = set => {
   set(gamePauseAtom, false)
   set(gameIsStartedAtom, false)
-  set(gamePlayerCurrentAction, '')
-  set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
+  set(isPrizeVisibleAtom, false)
   set(gameIsDinoHitAtom, false)
   set(gameDinosaurLifeAtom, 100)
-  set(gameDinoCurrentWeapon, DINO_WEAPONS.FIRE)
   set(gamePlayerLifeAtom, 100)
+  set(gamePlayerCurrentAction, PLAYER_ACTIONS.idle)
+  set(gameDinoCurrentWeapon, DINO_WEAPONS.FIRE)
+  set(gamePlayerCurrentAction, '')
   set(currentPrizeAtom, '')
   set(gameScoreAtom, 0)
   set(gameTimeAtom, 0)
