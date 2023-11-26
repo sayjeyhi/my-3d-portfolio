@@ -4,10 +4,7 @@ import { ARROW_FLYING } from '../base64_files'
 import { gamePlayerCurrentAction, PLAYER_ACTIONS } from '@/atoms/game'
 import { useArrow } from '@/components/2D/Game/hooks/useArrow.js'
 
-export const PlayerArrow = ({ hitAudioRef, playerRef, dinoRef }) => {
-  const playerArrow1 = useRef(null)
-  const playerArrow2 = useRef(null)
-
+export const PlayerArrow = ({ hitAudioRef, playerRef, dinoRef, playerArrow1, playerArrow2 }) => {
   const playerCurrentAction = useAtomValue(gamePlayerCurrentAction)
 
   const animationConfig = {
@@ -73,14 +70,16 @@ export const PlayerArrow = ({ hitAudioRef, playerRef, dinoRef }) => {
         ref={playerArrow1}
         className={`absolute bottom-32 left-32 w-24 h-24 will-change-transform ${
           isArrow1Active ? 'visible' : 'hidden'
-        }`}>
+        }`}
+        style={{ transform: 'none' }}>
         {content}
       </div>
       <div
         ref={playerArrow2}
         className={`absolute bottom-32 left-32 w-24 h-24 will-change-transform ${
           isArrow2Active ? 'visible' : 'hidden'
-        }`}>
+        }`}
+        style={{ transform: 'none' }}>
         {content}
       </div>
     </>

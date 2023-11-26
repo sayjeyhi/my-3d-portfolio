@@ -8,7 +8,12 @@ import {
   gameSetIsStartedAtom
 } from '@/atoms/game'
 
-export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
+export const useKeyboard = ({
+  handleTogglePauseTheGame,
+  jumpAudioRef,
+  playerArrow1,
+  playerArrow2
+}) => {
   const isStarted = useAtomValue(gameIsStartedAtom)
   const isPaused = useAtomValue(gamePauseAtom)
   const setIsStarted = useSetAtom(gameSetIsStartedAtom)
@@ -35,9 +40,14 @@ export const useKeyboard = ({ handleTogglePauseTheGame, jumpAudioRef }) => {
           /**
            * Shoot the arrow
            */
-          jumpAudioRef.current.currentTime = 0
-          jumpAudioRef.current.play()
-          setCurrentAction(PLAYER_ACTIONS.shoot)
+          if (
+            getComputedStyle(playerArrow1.current).display === 'none' ||
+            getComputedStyle(playerArrow2.current).display === 'none'
+          ) {
+            jumpAudioRef.current.currentTime = 0
+            jumpAudioRef.current.play()
+            setCurrentAction(PLAYER_ACTIONS.shoot)
+          }
           e.preventDefault()
         }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'a' || e.key === 'd') {

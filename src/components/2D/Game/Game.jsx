@@ -24,13 +24,16 @@ export const GameSection = () => {
   const visibleEnemyRef = useRef(null)
   const playerRef = useRef(null)
   const dinoRef = useRef(null)
+  const playerArrow1 = useRef(null)
+  const playerArrow2 = useRef(null)
+
   const dinoCurrentWeapon = useAtomValue(gameDinoCurrentWeapon)
   const isStarted = useAtomValue(gameIsStartedAtom)
 
   const { handleTogglePauseTheGame, showingReward } = useGameInterval({
     victoryAudioRef
   })
-  useKeyboard({ handleTogglePauseTheGame, jumpAudioRef })
+  useKeyboard({ handleTogglePauseTheGame, jumpAudioRef, playerArrow1, playerArrow2 })
 
   return (
     <Section
@@ -71,7 +74,13 @@ export const GameSection = () => {
             )}
           </>
         )}
-        <PlayerArrow playerRef={playerRef} dinoRef={dinoRef} hitAudioRef={hitAudioRef} />
+        <PlayerArrow
+          playerArrow1={playerArrow1}
+          playerArrow2={playerArrow2}
+          playerRef={playerRef}
+          dinoRef={dinoRef}
+          hitAudioRef={hitAudioRef}
+        />
         <GameEnvGround />
 
         <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />

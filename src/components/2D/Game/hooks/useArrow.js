@@ -65,7 +65,7 @@ export const useArrow = (el, config) => {
 
           setTimeout(() => {
             el.current.style.transform = 'none'
-          }, 100)
+          }, 60)
 
           setIsDinoHit(true)
           hitAudioRef.current.currentTime = 0
