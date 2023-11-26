@@ -88,21 +88,21 @@ export const gameIsDinoHitAtom = atom(false)
 export const gameDinosaurLifeAtom = atom(100)
 export const gameDinosaurLifeDeductAtom = atom(gameDinosaurLifeAtom, (get, set, arg) => {
   const dinoLife = get(gameDinosaurLifeAtom)
-  const newLife = dinoLife - arg
-  set(gameDinosaurLifeAtom, newLife)
-
   const usingHorse = get(gameUseDinoHorseAtom)
+  const newLife = dinoLife - arg
 
   /**
    * Win
    */
   if (newLife < 5 && !usingHorse) {
-    set(gameUseDinoHorseAtom, true)
     set(gameDinosaurLifeAtom, 100)
+    set(gameUseDinoHorseAtom, true)
   } else if (newLife < 5 && usingHorse) {
     resetGame(set)
     set(gameHasWonAtom, true)
     set(gameLooseAtom, false)
+  } else {
+    set(gameDinosaurLifeAtom, newLife)
   }
 })
 
@@ -148,6 +148,7 @@ export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
    */
   if (newVal > 700) {
     resetGame(set)
+    set(gamePauseAtom, true)
     set(gameHasWonAtom, true)
     set(gameLooseAtom, false)
   }

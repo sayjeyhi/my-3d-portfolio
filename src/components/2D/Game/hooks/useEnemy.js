@@ -152,11 +152,11 @@ export const useEnemy = ({
    */
   const onAnimationComplete = useCallback(() => {
     if (animationControl.current) {
+      changeEnemy()
       animationControl.current.stop()
       animationControl.current.cancel()
 
       animationControl.current = null
-      changeEnemy()
 
       cancelAnimationFrame(animationControlTimer.current)
     }

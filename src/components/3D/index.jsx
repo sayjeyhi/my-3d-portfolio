@@ -28,7 +28,6 @@ export const ThreeD = () => {
   const cameraLookAtY = useMotionValue()
   const cameraLookAtZ = useMotionValue()
 
-  console.count('====menuOpened')
   useEffect(() => {
     animate(cameraPositionX, menuOpened ? -2 : 1.2, {
       ...framerMotionConfig

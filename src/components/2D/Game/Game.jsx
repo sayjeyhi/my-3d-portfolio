@@ -16,6 +16,7 @@ import { EnemyBird } from '@/components/2D/Game/Components/EnemyBird.jsx'
 import { EnemyGhost } from '@/components/2D/Game/Components/EnemyGhost.jsx'
 import { useAtomValue } from 'jotai'
 import { DINO_WEAPONS, gameDinoCurrentWeapon, gameIsStartedAtom } from '@/atoms/game'
+import { Guide } from '@/components/2D/Game/Components/Guide.jsx'
 
 export const GameSection = () => {
   const jumpAudioRef = useRef(null)
@@ -85,6 +86,7 @@ export const GameSection = () => {
 
         <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />
         <Rewards showingReward={showingReward} />
+        <Guide dinoRef={dinoRef} />
       </div>
 
       <Audios
