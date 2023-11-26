@@ -122,14 +122,13 @@ kbd {
   background: #333;
   background: rgba(0, 0, 0, .5);
   border-radius: 5px;
-  bottom: -34px;
   color: #fff;
   content: attr(data-title);
   font-family: 'VT323', tahoma, arial, serif !important;
   font-size: 16px;
   left: 50%;
   transform: translateX(-50%);
-  top: 110%;
+  bottom: 110%;
   padding: 5px 12px;
   min-height: 35px;
   position: absolute;

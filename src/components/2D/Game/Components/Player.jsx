@@ -48,15 +48,19 @@ export const Player = ({ playerRef }) => {
       ref={playerRef}
       className={`absolute ${
         currentAction === PLAYER_ACTIONS.jump ? '-bottom-24' : '-bottom-10'
-      } left-16 w-80 h-80`}>
+      } left-16 w-72 h-72`}>
       <img
         src={imgSrc}
         alt="player"
-        className={currentAction === PLAYER_ACTIONS.jump ? 'animate-[jump_0.7s_ease-in-out_1]' : ''}
+        className={
+          currentAction === PLAYER_ACTIONS.jump
+            ? 'animate-[jump_0.6s_cubic-bezier(0,.85,.38,1)_1]'
+            : ''
+        }
       />
       {currentAction === PLAYER_ACTIONS.shoot && (
         <img
-          className="w-[185px] h-auto absolute left-[160px] top-[-13px]"
+          className="w-[179px] h-auto absolute left-[136px] top-[-27px]"
           src={ARROW_SHOOTING}
           alt="player"
         />

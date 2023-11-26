@@ -26,6 +26,8 @@ export const gameReset = atom(gameIsStartedAtom, (get, set) => {
 /**
  * Dino Weapons atoms
  */
+export const gameUseDinoHorseAtom = atom(false)
+
 export const DINO_WEAPONS = {
   FIRE: 'Fire',
   BIRD: 'Bird',
@@ -84,6 +86,26 @@ export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, se
 
 export const gameIsDinoHitAtom = atom(false)
 export const gameDinosaurLifeAtom = atom(100)
+export const gameDinosaurLifeDeductAtom = atom(gameDinosaurLifeAtom, (get, set, arg) => {
+  const dinoLife = get(gameDinosaurLifeAtom)
+  const newLife = dinoLife - arg
+  set(gameDinosaurLifeAtom, newLife)
+
+  const usingHorse = get(gameUseDinoHorseAtom)
+
+  /**
+   * Win
+   */
+  if (newLife < 5 && !usingHorse) {
+    set(gameUseDinoHorseAtom, true)
+    set(gameDinosaurLifeAtom, 100)
+  } else if (newLife < 5 && usingHorse) {
+    resetGame(set)
+    set(gameHasWonAtom, true)
+    set(gameLooseAtom, false)
+  }
+})
+
 export const gamePlayerLifeAtom = atom(100)
 export const gamePlayerLifeSetAtom = atom(gamePlayerLifeAtom, (get, set, arg) => {
   const playerLife = get(gamePlayerLifeAtom)
@@ -129,11 +151,19 @@ export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
     set(gameHasWonAtom, true)
     set(gameLooseAtom, false)
   }
+
+  /**
+   * Use the horse
+   */
+  if (newVal > 200 && !get(gameUseDinoHorseAtom)) {
+    set(gameUseDinoHorseAtom, true)
+  }
 })
 
 export const gameTimeAtom = atom(0)
 
 const resetGame = set => {
+  set(gameUseDinoHorseAtom, false)
   set(gamePauseAtom, false)
   set(gameIsStartedAtom, false)
   set(isPrizeVisibleAtom, false)

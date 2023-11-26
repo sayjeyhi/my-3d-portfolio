@@ -11,7 +11,7 @@ export const EnemyGhost = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef })
     name: DINO_WEAPONS.GHOST,
     animateOptions: {
       x: [0, -window.innerWidth],
-      y: [3, -5, 3, -5, 3]
+      y: [2, -6, 2, -6, 2]
     },
     onEnemyDie: () => {}
   })
@@ -21,7 +21,7 @@ export const EnemyGhost = ({ hitAudioRef, dinoRef, playerRef, visibleEnemyRef })
   return (
     <div
       ref={visibleEnemyRef}
-      className={`absolute -bottom-16 right-32 w-44 h-44 will-change-transform`}>
+      className={`absolute -bottom-16 right-32 w-40 h-40 will-change-transform`}>
       <div className="relative">
         <img src={GHOST} alt="ghost" />
         <svg

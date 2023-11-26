@@ -34,20 +34,20 @@ export const PlayerArrow = ({ hitAudioRef, playerRef, dinoRef }) => {
       setTimeout(() => {
         runArrow1({
           x: [
-            playerRef?.current.getBoundingClientRect().x,
+            playerRef?.current.getBoundingClientRect().x + 50,
             dinoRef?.current.getBoundingClientRect().x
           ],
-          y: [-30]
+          y: [-17, -10]
         })
       }, 250)
     } else if (!isArrow2Active) {
       setTimeout(() => {
         runArrow2({
           x: [
-            playerRef?.current.getBoundingClientRect().x,
+            playerRef?.current.getBoundingClientRect().x + 50,
             dinoRef?.current.getBoundingClientRect().x
           ],
-          y: [-30]
+          y: [-17, -10]
         })
       }, 250)
     }

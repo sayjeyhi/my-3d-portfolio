@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { animate } from 'framer-motion'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import {
-  gameDinosaurLifeAtom,
+  gameDinosaurLifeDeductAtom,
   gameIsDinoHitAtom,
   gameIsStartedAtom,
   gamePauseAtom,
@@ -16,7 +16,7 @@ export const useArrow = (el, config) => {
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isGamePaused = useAtomValue(gamePauseAtom)
   const [isDinoHit, setIsDinoHit] = useAtom(gameIsDinoHitAtom)
-  const setDinoLife = useSetAtom(gameDinosaurLifeAtom)
+  const deductDinoLife = useSetAtom(gameDinosaurLifeDeductAtom)
   const setScore = useSetAtom(gameSetScoreAtom)
   const { hitAudioRef, dinoRef, playerRef, ...options } = config
 
@@ -70,7 +70,7 @@ export const useArrow = (el, config) => {
           setIsDinoHit(true)
           hitAudioRef.current.currentTime = 0
           hitAudioRef.current.play()
-          setDinoLife(life => life - 4)
+          deductDinoLife(4)
           setScore(score => score + 6)
           setTimeout(() => {
             setIsDinoHit(false)

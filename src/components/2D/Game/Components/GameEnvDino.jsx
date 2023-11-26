@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { useAtomValue } from 'jotai'
-import { DIANASOUR, DINO_HIT } from '../base64_files'
-import { gameDinosaurLifeAtom, gameIsDinoHitAtom, gameIsStartedAtom } from '@/atoms/game'
+import { DIANASOUR, DINO_HIT, DINO_HORSE, DINO_HORSE_HIT } from '../base64_files'
+import {
+  gameDinosaurLifeAtom,
+  gameIsDinoHitAtom,
+  gameIsStartedAtom,
+  gameUseDinoHorseAtom
+} from '@/atoms/game'
 import { useExplosion } from '../hooks/useExplosion'
 import { useGameAnimation } from '@/components/2D/Game/hooks/useGameAnimation.js'
 
@@ -12,6 +17,7 @@ export const GameEnvDino = ({ dinoRef }) => {
   const dinosaurLife = useAtomValue(gameDinosaurLifeAtom)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
   const isDinoHit = useAtomValue(gameIsDinoHitAtom)
+  const usingHorse = useAtomValue(gameUseDinoHorseAtom)
 
   const { runAnimation } = useGameAnimation(
     dinoRef,
@@ -40,11 +46,18 @@ export const GameEnvDino = ({ dinoRef }) => {
     }
   }, [isDinoHit])
 
+  let dinoImgSrc = ''
+  if (usingHorse) {
+    dinoImgSrc = isDinoHit ? DINO_HORSE_HIT : DINO_HORSE
+  } else {
+    dinoImgSrc = isDinoHit ? DINO_HIT : DIANASOUR
+  }
+
   return (
     <div
       ref={dinoRef}
       className="absolute -bottom-8 right-8 -scale-x-100 w-64 h-64 will-change-transform">
-      <img src={isDinoHit ? DINO_HIT : DIANASOUR} alt="dinosaur" />
+      <img src={dinoImgSrc} alt="dinosaur" />
       <div ref={dinoHitRef}></div>
 
       <div className="h-4 ml-16 relative w-32 rounded-full overflow-hidden">

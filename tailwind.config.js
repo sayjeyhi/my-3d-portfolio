@@ -18,7 +18,7 @@ export default {
         },
         jump: {
           '0%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-250px)' },
+          '50%': { transform: 'translateY(-200px)' },
           '100%': { transform: 'translateY(0)' }
         }
       }
