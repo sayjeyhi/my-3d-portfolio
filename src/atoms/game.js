@@ -156,8 +156,9 @@ export const gameSetScoreAtom = atom(gameScoreAtom, (get, set, arg) => {
   /**
    * Use the horse
    */
-  if (newVal > 200 && !get(gameUseDinoHorseAtom)) {
+  if (newVal > 250 && !get(gameUseDinoHorseAtom)) {
     set(gameUseDinoHorseAtom, true)
+    set(gameDinosaurLifeAtom, 100)
   }
 })
 
