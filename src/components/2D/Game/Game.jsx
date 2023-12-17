@@ -86,7 +86,10 @@ export const GameSection = () => {
         <GameEnvGround />
 
         <Controls handleTogglePauseTheGame={handleTogglePauseTheGame} />
-        <Rewards showingReward={showingReward} />
+        <Rewards
+          showingReward={showingReward}
+          handleTogglePauseTheGame={handleTogglePauseTheGame}
+        />
         <Guide dinoRef={dinoRef} />
       </div>
 

@@ -161,7 +161,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
           )}
         </button>
         <button
-          data-title="Toggle game rewards modal"
+          data-title={`${enabledRewards ? 'Disable' : 'Enable'} showing game rewards modal`}
           onClick={handleToggleGameRewardsModal}
           className="bg-primary ring-lime-600 focus:outline-lime-700 w-10 h-10 rounded-2xl flex justify-center items-center">
           {enabledRewards ? (
