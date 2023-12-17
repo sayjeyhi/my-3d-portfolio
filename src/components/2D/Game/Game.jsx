@@ -38,6 +38,7 @@ export const GameSection = () => {
 
   return (
     <Section
+      id="game-section"
       className={`mt-48 ${
         showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg pixel' : ''
       }`}>

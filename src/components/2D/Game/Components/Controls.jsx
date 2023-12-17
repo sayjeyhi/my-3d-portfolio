@@ -5,18 +5,15 @@ import {
   gameIsStartedAtom,
   gamePauseAtom,
   gamePlayerLifeAtom,
-  gameReset
+  gameReset,
+  gameSetIsStartedAtom
 } from '@/atoms/game'
-import {
-  currentPrizeSetAtom,
-  gameEnableRewardsAtom,
-  isPrizeVisibleAtom,
-  nextPrizeAtom
-} from '@/atoms/prizes'
+import { currentPrizeSetAtom, gameEnableRewardsAtom, nextPrizeAtom } from '@/atoms/prizes'
 
 export const Controls = ({ handleTogglePauseTheGame }) => {
   const playerLifeAtom = useAtomValue(gamePlayerLifeAtom)
-  const [isStarted, setIsStarted] = useAtom(gameIsStartedAtom)
+  const isStarted = useAtomValue(gameIsStartedAtom)
+  const setIsStarted = useSetAtom(gameSetIsStartedAtom)
   const [enabledRewards, setEnabledRewards] = useAtom(gameEnableRewardsAtom)
   const [isGameSoundsEnabled, setIsGameSoundsEnabled] = useAtom(gameIsSoundsEnabledAtom)
   const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
