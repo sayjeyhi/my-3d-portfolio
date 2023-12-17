@@ -1,4 +1,6 @@
 import { Section } from './Section'
+import { useSetAtom } from 'jotai'
+import { isTalkingAtom } from '@/atoms/audio.js'
 
 const FRONT_SKILLS = [
   {
@@ -180,6 +182,8 @@ export const SkillsSection = () => {
 }
 
 const Badge = ({ titleSpoken, title, level }) => {
+  const setIsTalking = useSetAtom(isTalkingAtom)
+
   const handleTextToSpeech = () => {
     const utterThis = new SpeechSynthesisUtterance()
     utterThis.text = titleSpoken || title
@@ -189,6 +193,12 @@ const Badge = ({ titleSpoken, title, level }) => {
     utterThis.onerror = function (event) {
       console.error('SpeechSynthesisUtterance.onerror')
     }
+    utterThis.onstart = function (event) {
+      setIsTalking(true)
+    }
+    utterThis.onend = function (event) {
+      setIsTalking(false)
+    }
   }
 
   return (
@@ -196,7 +206,10 @@ const Badge = ({ titleSpoken, title, level }) => {
       role="button"
       onClick={handleTextToSpeech}
       onMouseEnter={handleTextToSpeech}
-      onMouseLeave={() => window.speechSynthesis.cancel()}
+      onMouseLeave={() => {
+        setIsTalking(false)
+        window.speechSynthesis.cancel()
+      }}
       title={`${level}%`}
       className="bg-secondary inter cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded-lg inline-flex items-center">
       {title}
