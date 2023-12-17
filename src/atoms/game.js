@@ -1,14 +1,24 @@
 import { atom } from 'jotai'
 import { currentPrizeAtom, currentPrizeSetAtom, isPrizeVisibleAtom } from './prizes'
+import { gsap } from 'gsap'
 
 /**
  * Start atoms
  */
+export const scrollIntoView = el => {
+  const gameSection = document.getElementById('game-section')
+  gsap.to(el, {
+    duration: 0.5,
+    scrollTop: gameSection.offsetTop
+  })
+}
+
 export const gameIsStartedAtom = atom(false)
 export const gameSetIsStartedAtom = atom(gameIsStartedAtom, (get, set, arg) => {
   set(gameIsStartedAtom, arg)
   const newVal = get(gameIsStartedAtom)
 
+  scrollIntoView(get(appScrollElement))
   if (newVal) {
     set(gameDinoWeaponVisible, true)
   } else {
@@ -20,8 +30,10 @@ export const gamePauseAtom = atom(false)
 export const gameHasWonAtom = atom(false)
 export const gameLooseAtom = atom(false)
 export const gameReset = atom(gameIsStartedAtom, (get, set) => {
+  scrollIntoView(get(appScrollElement))
   resetGame(set)
 })
+export const appScrollElement = atom(null)
 
 /**
  * Dino Weapons atoms
@@ -62,6 +74,8 @@ let actionTimer = null
 export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, set, arg) => {
   const isJumpingRepeat =
     arg === PLAYER_ACTIONS.jump && get(gamePlayerCurrentAction) === PLAYER_ACTIONS.jump
+
+  scrollIntoView(get(appScrollElement))
 
   if (!isJumpingRepeat) {
     if (actionTimer) clearTimeout(actionTimer)

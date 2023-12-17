@@ -54,12 +54,13 @@ export const ThreeD = () => {
     let oldMouseX = 0
     let oldMouseY = 0
     window.onmousemove = e => {
+      if (animation !== 'Typing' && animation !== 'PhoneCall') return
       cameraPositionX.set(cameraPositionX.get() + (e.x - oldMouseX) * 0.00008)
       camera.position.y -= (e.y - oldMouseY) * 0.0001
       oldMouseX = e.x
       oldMouseY = e.y
     }
-  }, [camera, menuOpened])
+  }, [animation, camera, menuOpened])
 
   useFrame(state => {
     let curSection = Math.floor(data.scroll.current * data.pages + 0.23)

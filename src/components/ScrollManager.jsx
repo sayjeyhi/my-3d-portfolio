@@ -4,9 +4,11 @@ import { gsap } from 'gsap'
 import { useEffect, useRef } from 'react'
 import { useAtom } from 'jotai'
 import { currentSectionAtom } from '@/atoms/menu.js'
+import { appScrollElement } from '@/atoms/game.js'
 
 export const ScrollManager = props => {
   const [section, setSection] = useAtom(currentSectionAtom)
+  const [_, setAppScrollElement] = useAtom(appScrollElement)
 
   const data = useScroll()
   const lastScroll = useRef(0)
@@ -16,6 +18,7 @@ export const ScrollManager = props => {
   data.fill.classList.add('absolute')
 
   useEffect(() => {
+    setAppScrollElement(data.el)
     gsap.to(data.el, {
       duration: 0.5 + (section || 1),
       scrollTop: section * data.el.clientHeight,
