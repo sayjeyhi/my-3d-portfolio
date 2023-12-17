@@ -55,8 +55,14 @@ export const ThreeD = () => {
     let oldMouseY = 0
     window.onmousemove = e => {
       if (animation !== 'Typing' && animation !== 'PhoneCall') return
-      cameraPositionX.set(cameraPositionX.get() + (e.x - oldMouseX) * 0.00008)
-      camera.position.y -= (e.y - oldMouseY) * 0.0001
+      let xAxesMultiplier = 0.00008
+      let yAxesMultiplier = 0.0001
+      if (animation === 'PhoneCall') {
+        xAxesMultiplier = 0.00002
+        yAxesMultiplier = 0.00003
+      }
+      cameraPositionX.set(cameraPositionX.get() + (e.x - oldMouseX) * xAxesMultiplier)
+      camera.position.y -= (e.y - oldMouseY) * yAxesMultiplier
       oldMouseX = e.x
       oldMouseY = e.y
     }
