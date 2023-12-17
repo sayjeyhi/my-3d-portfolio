@@ -85,8 +85,8 @@ export function Office(props) {
      * Move AC while it is not clicked
      */
     if (!isFanClicked) {
-      if (Math.floor(state.clock.getElapsedTime()) % 5 === 0) {
-        fanRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 25) / 80 - 1.2
+      if (Math.floor(state.clock.getElapsedTime()) % 8 === 0) {
+        fanRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 15) / 80 - 1.2
       }
     }
 
@@ -95,7 +95,7 @@ export function Office(props) {
      */
     if (!isChickenClicked) {
       if (Math.floor(state.clock.getElapsedTime()) % 5 === 3) {
-        chickenRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 20) / 100 + 0.543
+        chickenRef.current.position.x = Math.sin(state.clock.getElapsedTime() * 12) / 100 + 0.543
       }
     }
   })

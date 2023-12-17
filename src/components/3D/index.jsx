@@ -1,5 +1,5 @@
 import { Scroll, Stage, useScroll } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { animate, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { framerMotionConfig } from '@/config'
@@ -13,6 +13,7 @@ import { gameIsStartedAtom, gamePauseAtom } from '@/atoms/game'
 import { isSidebarOpenedAtom } from '@/atoms/menu.js'
 
 export const ThreeD = () => {
+  const { camera } = useThree()
   const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const data = useScroll()
   const sheet = useCurrentSheet()
@@ -22,7 +23,7 @@ export const ThreeD = () => {
 
   const [section, setSection] = useState(0)
 
-  const cameraPositionX = useMotionValue()
+  const cameraPositionX = useMotionValue(camera.position.x)
   const cameraPositionZ = useMotionValue()
   const cameraLookAtX = useMotionValue()
   const cameraLookAtY = useMotionValue()
@@ -45,6 +46,20 @@ export const ThreeD = () => {
       ...framerMotionConfig
     })
   }, [menuOpened])
+
+  /**
+   * Move camera based on mouse position
+   */
+  useEffect(() => {
+    let oldMouseX = 0
+    let oldMouseY = 0
+    window.onmousemove = e => {
+      cameraPositionX.set(cameraPositionX.get() + (e.x - oldMouseX) * 0.00008)
+      camera.position.y -= (e.y - oldMouseY) * 0.0001
+      oldMouseX = e.x
+      oldMouseY = e.y
+    }
+  }, [camera, menuOpened])
 
   useFrame(state => {
     let curSection = Math.floor(data.scroll.current * data.pages + 0.23)
