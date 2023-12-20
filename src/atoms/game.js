@@ -72,10 +72,18 @@ export const gamePlayerCurrentAction = atom(PLAYER_ACTIONS.idle)
 
 let actionTimer = null
 export const gamePlayerSetCurrentAction = atom(gamePlayerCurrentAction, (get, set, arg) => {
+  const currentAction = get(gamePlayerCurrentAction)
   const isJumpingRepeat =
     arg === PLAYER_ACTIONS.jump && get(gamePlayerCurrentAction) === PLAYER_ACTIONS.jump
 
   scrollIntoView(get(appScrollElement))
+
+  if (
+    (arg === PLAYER_ACTIONS.shoot || arg === PLAYER_ACTIONS.defend || arg === PLAYER_ACTIONS.sit) &&
+    currentAction === PLAYER_ACTIONS.jump
+  ) {
+    return
+  }
 
   if (!isJumpingRepeat) {
     if (actionTimer) clearTimeout(actionTimer)
