@@ -93,7 +93,7 @@ export const Cursor = () => {
     gameSection.loop = true
 
     if (isGameStarted) {
-      fadeInAudioVolume(gameSection, { key: 'game', to: 0.09, step: 0.09 })
+      fadeInAudioVolume(gameSection, { key: 'game', to: 0.6, step: 0.09 })
       fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
       fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
     } else if (section === 0) {
