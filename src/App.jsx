@@ -10,6 +10,7 @@ import state from './state.json'
 import { ThreeD } from '@/components/3D/index.jsx'
 import { useAtomValue } from 'jotai'
 import { isAmsterdamAtom } from '@/atoms/3d.js'
+// import { Perf } from 'r3f-perf'
 
 // import studio from '@theatre/studio'
 // import extension from '@theatre/r3f/dist/extension'
@@ -28,6 +29,7 @@ function App() {
         ...framerMotionConfig
       }}>
       <Canvas gl={{ preserveDrawingBuffer: true }} shadows dpr={[1, 1.5]}>
+        {/*<Perf />*/}
         <SheetProvider sheet={sheet}>
           <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 3, 10]} />
           <color attach="background" args={[isAmsterdam ? 'rgba(195,235,255,0.7)' : '#ffffff']} />

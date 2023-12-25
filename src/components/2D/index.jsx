@@ -29,7 +29,7 @@ export const TwoD = () => {
               onClick={() => {
                 setShowFullInformation(false)
               }}
-              className="absolute top-0 right-0 p-2 z-20 bg-white rounded-xl">
+              className="absolute top-0 right-0 p-2 z-20 bg-white rounded-bl-2xl">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-10 h-10"
@@ -78,6 +78,7 @@ export const TwoD = () => {
             />
             <GameExperience />
 
+            <br />
             <br />
             <br />
           </div>

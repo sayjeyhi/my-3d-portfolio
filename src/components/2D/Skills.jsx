@@ -5,8 +5,7 @@ import { isTalkingAtom } from '@/atoms/audio.js'
 const FRONT_SKILLS = [
   {
     title: 'Javascript (ES6 and above)',
-    titleSpoken:
-      '<speak>Javascript <break time="0.2s"/> I wrote a book called Javascript fundamentals in persian</speak>',
+    titleSpoken: '<speak>Javascript</speak>',
     level: 90
   },
   {
@@ -16,7 +15,7 @@ const FRONT_SKILLS = [
   },
   {
     title: 'React.js',
-    titleSpoken: '<speak>React.js, I wrote a book called react top interview questions</speak>',
+    titleSpoken: '<speak>React.js</speak>',
     level: 90
   },
   {
@@ -26,8 +25,7 @@ const FRONT_SKILLS = [
   },
   {
     title: 'Vue.js',
-    titleSpoken:
-      '<speak>View J S <break time="0.2s"/>, I used view 2 , view 3 , view x and penia</speak>',
+    titleSpoken: '<speak>View J S <break time="0.2s"/>, 2 , 3 , view x and penia</speak>',
     level: 90
   },
   { title: 'Redux (Toolkit, Saga)', level: 90 },

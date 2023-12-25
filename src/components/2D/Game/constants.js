@@ -23,16 +23,17 @@ export const CERTIFICATIONS = [
     date: 'Sep 2023',
     description: 'iSAQB® Certified Professional for Software Architecture Foundation Level',
     tags: ['Software Architecture', 'iSAQB'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.isaqb.org/en/',
+    link: 'https://tectrain.ch/de/certificate/847d3d2fb25342d96b2a',
     image: './certifications/isaqb.png'
   },
   {
     title: 'Advanced Terraform',
     subtitle: 'LinkedIn',
     date: 'Nov 2022',
-    description: 'I passed the linked course exam and got the certificate for Advanced Terraform',
+    description:
+      'After using Terraform for a while, I decided to pass the LinkedIn course and exam.',
     tags: ['Terraform', 'DevOps', 'Infrastructure as Code'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/76ca5435d0cc3159768db7196587fbe54d7766e3c7b2e7477aeb3eef86282bce',
     image: './certifications/tf.png'
   },
   {
@@ -42,7 +43,7 @@ export const CERTIFICATIONS = [
     description:
       'I passed the linked course exam and got the certificate for Kubernetes: Microservices',
     tags: ['K8s', 'Microservices', 'DevOps'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/b46fca3c8e46248680653cb0ded7a204a408d1340d57ed4e7ade5be85b2f6a0c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/k8s.png'
   },
   {
@@ -52,7 +53,7 @@ export const CERTIFICATIONS = [
     description:
       'I passed the exam and got the certificate for Kubernetes: Package Management with Helm',
     tags: ['Kubernetes', 'Helm', 'DevOps'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/5c81766f6c077055b51f979ca7e2360641d498e511ded43ac6688a7ecd4adf65?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/k8s.png'
   },
   {
@@ -62,7 +63,7 @@ export const CERTIFICATIONS = [
     description:
       'I have been using Tailwind in my projects for a long time and decided to learn more about it and get the certificate.',
     tags: ['Tailwind', 'CSS', 'Frontend'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/aab79cc92f337d82468629f0249598ac94941fae71e1b173c592e0dc032b7eba?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/tailwind.png'
   },
   {
@@ -72,7 +73,7 @@ export const CERTIFICATIONS = [
     description:
       'I was using NGINX for a long time and I decided to get the certificate for it and learn more about it.',
     tags: ['NGINX', 'Web Server', 'DevOps'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/1f16ab62a3aff0b23fa4a0a04e0a028391696394800154d4d000e304bb35ba63?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/nginx.jpg'
   },
   {
@@ -82,7 +83,7 @@ export const CERTIFICATIONS = [
     description:
       'I learned the basics of python and how to use it in my projects. I developed a REST API with python and fastAPI.',
     tags: ['Python', 'Backend', 'DevOps'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/d904ff27c33b852e44ffbbf14ed1ca0b5568e435b961b5b3ab80b291a76f6c18?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/python.png'
   },
   {
@@ -91,7 +92,7 @@ export const CERTIFICATIONS = [
     date: 'Oct 2022',
     description: 'This was my first course about Terraform and I learned the basics of Terraform.',
     tags: ['Terraform', 'DevOps', 'Infrastructure as Code'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/learning/certificates/7a4789828696cfa3064aee01a5ea7174aace0e02faac7dc61719c5faccb8af81?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B2xXZK5TeSVWZunpReSq2nw%3D%3D',
     image: './certifications/tf.png'
   },
   {
@@ -101,7 +102,7 @@ export const CERTIFICATIONS = [
     description:
       'This course was about SEO and how to manage SEO for websites. I learned a lot for that time and used it in my projects.',
     tags: ['SEO', 'Marketing'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/',
     image: './certifications/seo.png'
   },
   {
@@ -111,7 +112,7 @@ export const CERTIFICATIONS = [
     description:
       'I learned how to write secure code in PHP and how to prevent attacks. Cowered topics like SQL injection, XSS, CSRF, etc.',
     tags: ['PHP', 'Backend', 'Security', 'Full-Stack'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/',
     image: './certifications/php.png'
   },
   {
@@ -121,7 +122,7 @@ export const CERTIFICATIONS = [
     description:
       'I learned how to write window applications with C# and I built a windows app for my startup Citygram with C#.',
     tags: ['C#', 'Windows', 'Desktop', 'Backend'],
-    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/https://www.linkedin.com/in/sayjeyhi/',
+    link: 'https://www.linkedin.com/in/jafar-rezaei/details/certifications/',
     image: './certifications/csharp.png'
   }
 ]
@@ -156,7 +157,7 @@ export const PROJECTS = [
     subtitle: 'A group of open-source book writers for Javascript.',
     date: 'Feb 2019 - Present',
     description:
-      'Github organization to write open-source books in markdown and generate books with different formats in CI.',
+      'A Github organization created by me to write open-source books in markdown and generate books with different formats in CI.',
     skills: ['Github', 'Software Development', 'Team Leadership'],
     image: './projects/Mariotek.png',
     link: 'https://github.com/Mariotek',

@@ -35,7 +35,7 @@ export const Menu = props => {
       </button>
       <button
         onClick={handleAudioMute}
-        className="z-20 fixed focus:outline-lime-700 top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className="z-10 fixed focus:outline-lime-700 top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         {!isMusicEnabled ? (
           <svg
@@ -69,7 +69,7 @@ export const Menu = props => {
         <div className="mt-10 mb-10">
           <img className="rounded-full w-48 h-48 mx-auto" src="me.jpeg" alt="Jafar Rezaei" />
         </div>
-        <div className="flex items-start justify-center flex-col gap-4 px-8">
+        <div className="flex items-start justify-center flex-col gap-4 px-8 inter">
           <MenuButton label="About" onClick={() => setSection(0)} />
           <MenuButton label="Skills" onClick={() => setSection(1)} />
           <MenuButton label="Books" onClick={() => setSection(2)} />
@@ -78,7 +78,7 @@ export const Menu = props => {
           <button
             {...cursorHandlers}
             onClick={() => setShowFullInformation(true)}
-            className="w-full justify-center p-2 text-lg font-bold bg-white text-gray-500 rounded text-center transition-all hover:shadow-lg hover:shadow-amber-200 hover:text-gray-700">
+            className="w-full justify-center px-2 py-3 mt-3 text-md font-semibold bg-white text-gray-500 rounded  text-center transition-all hover:shadow-lg hover:shadow-amber-200 hover:text-gray-700">
             Full Information
           </button>
         </div>
@@ -90,13 +90,13 @@ export const Menu = props => {
             {...cursorHandlers}
             title="LinkedIn"
             rel="noreferrer"
-            className="text-white cursor-pointer hover:text-secondary transition-colors">
+            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="#fff"
               aria-label="LinkedIn"
               viewBox="0 0 512 512"
-              className="w-8 h-8"
+              className="w-9 h-9"
               id="linkedin">
               <rect width="512" height="512" fill="#0077b5" rx="15%"></rect>
               <circle cx="142" cy="138" r="37"></circle>
@@ -110,12 +110,12 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="GitHub"
-            className="text-white cursor-pointer hover:text-secondary transition-colors">
+            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-label="GitHub"
               viewBox="0 0 512 512"
-              className="w-8 h-8"
+              className="w-9 h-9"
               id="github">
               <rect width="512" height="512" fill="#1B1817" rx="15%"></rect>
               <path
@@ -129,10 +129,10 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="X (twitter)"
-            className="text-white cursor-pointer hover:text-secondary transition-colors">
+            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8"
+              className="w-9 h-9"
               aria-label="Twitter"
               viewBox="0 0 512 512"
               id="twitter">
@@ -148,9 +148,9 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="Stack Overflow"
-            className="text-white cursor-pointer hover:text-secondary transition-colors">
+            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
             <svg
-              className="w-8 h-8"
+              className="w-9 h-9"
               aria-label="Stack Overflow"
               viewBox="0 0 512 512"
               id="stackoverflow">
@@ -175,7 +175,7 @@ export const MenuButton = props => {
   return (
     <button
       onClick={onClick}
-      className={`text-2xl font-bold text-white cursor-pointer hover:text-secondary transition-colors ${className}`}
+      className={`text-xl font-bold text-white cursor-pointer hover:text-gray-700 transition-colors ${className}`}
       {...cursorHandlers}>
       {children || label}
     </button>

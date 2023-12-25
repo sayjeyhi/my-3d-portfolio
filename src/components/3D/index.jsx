@@ -15,13 +15,13 @@ import { avatarCurrentAnimationAtom, isAmsterdamAtom } from '@/atoms/3d.js'
 
 export const ThreeD = () => {
   const { camera } = useThree()
-  const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const data = useScroll()
   const [isAmsterdam, setIsAmsterdam] = useAtom(isAmsterdamAtom)
   const sheet = useCurrentSheet()
   const [animation, setCharacterAnimation] = useAtom(avatarCurrentAnimationAtom)
   const isStarted = useAtomValue(gameIsStartedAtom)
-  const setIsPaused = useSetAtom(gamePauseAtom)
+  const [isPaused, setIsPaused] = useAtom(gamePauseAtom)
+  const [menuOpened, setMenuOpened] = useAtom(isSidebarOpenedAtom)
 
   const [section, setSection] = useState(0)
 
@@ -94,6 +94,7 @@ export const ThreeD = () => {
     if (sheet.sequence.position < 0.5) {
       setCharacterAnimation('Typing')
     } else if (sheet.sequence.position < 1.5 && sheet.sequence.position >= 0.5) {
+      if (menuOpened) setMenuOpened(false)
       setCharacterAnimation('Falling')
     } else if (sheet.sequence.position < 2.5 && sheet.sequence.position >= 1.5) {
       setCharacterAnimation('ShowOff')
@@ -104,6 +105,8 @@ export const ThreeD = () => {
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 4.03) {
       if (!isAmsterdam && sheet.sequence.position > 6.1) setIsAmsterdam(true)
       else if (isAmsterdam && sheet.sequence.position <= 6.1) setIsAmsterdam(false)
+
+      if (!isPaused && sheet.sequence.position < 5.4) setIsPaused(true)
 
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 10.08) {

@@ -143,7 +143,9 @@ export function HorizontalItem({
               {date}
             </time>
           )}
-          <p className="text-sm font-normal text-gray-500 whitespace-pre-line">{description}</p>
+          <p className="text-xs font-normal inter text-gray-500 whitespace-pre-line">
+            {description}
+          </p>
         </div>
         <div>
           {!!image && (
