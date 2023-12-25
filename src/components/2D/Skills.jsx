@@ -6,7 +6,7 @@ const FRONT_SKILLS = [
   {
     title: 'Javascript (ES6 and above)',
     titleSpoken:
-      '<speak>Javascript <break time="0.2s"/> including ecma script 6 and above, I also wrote a book called Javascript fundamentals in persian</speak>',
+      '<speak>Javascript <break time="0.2s"/> I wrote a book called Javascript fundamentals in persian</speak>',
     level: 90
   },
   {
@@ -16,28 +16,26 @@ const FRONT_SKILLS = [
   },
   {
     title: 'React.js',
-    titleSpoken:
-      '<speak>React.js <break time="0.2s"/>, React.js mainly used everywhere in my projects</speak>',
+    titleSpoken: '<speak>React.js, I wrote a book called react top interview questions</speak>',
     level: 90
   },
   {
     title: 'React Native',
-    titleSpoken:
-      '<speak>React Native <break time="0.2s"/>, I am not a fan of it, but I used it for a couple of apps in my career</speak>',
+    titleSpoken: '<speak>React Native</speak>',
     level: 90
   },
   {
     title: 'Vue.js',
     titleSpoken:
-      '<speak>View J S <break time="0.2s"/>, I used view 2 and view 3, and I used view x and penia for state management</speak>',
+      '<speak>View J S <break time="0.2s"/>, I used view 2 , view 3 , view x and penia</speak>',
     level: 90
   },
   { title: 'Redux (Toolkit, Saga)', level: 90 },
-  { title: 'ReactQuery', level: 90 },
+  { title: 'ReactQuery', level: 75 },
   { title: 'Test (unit, behavior, e2e)', level: 90 },
-  { title: 'Next.js (13 and above)', level: 90 },
+  { title: 'Next.js (13 and above)', level: 85 },
   { title: 'Rest, gRPC, graphQL', level: 90 },
-  { title: 'Socket (io, WS)', level: 90 },
+  { title: 'Socket (io, WS)', level: 85 },
   { title: 'PWA (workbox)', level: 90 },
   {
     title: 'Three.js',
@@ -49,22 +47,22 @@ const BACK_SKILLS = [
   {
     title: 'Terraform',
     titleSpoken:
-      '<speak>Terraform <break time="0.2s"/>, for our infrastructure in soft construct company, we were using Terraform to manage A W S and google cloud </speak>',
-    level: 90
+      '<speak>Terraform <break time="0.2s"/> used Terraform to manage A W S and google cloud infrastructure</speak>',
+    level: 70
   },
   {
     title: 'CI/CD (GitHub, GitLab, bitbucket, jenkins)',
     titleSpoken:
       '<speak>CI/CD <break time="0.2s"/> including GitHub, GitLab, bitbucket and jenkins</speak>',
-    level: 90
+    level: 70
   },
   {
     title: 'Cloud (AWS, GCP)',
     titleSpoken: '<speak>Cloud <break time="0.2s"/> including A W S and Google Cloud</speak>',
-    level: 90
+    level: 70
   },
-  { title: 'Kubernetes', level: 90 },
-  { title: 'Helm', level: 90 },
+  { title: 'Kubernetes', level: 65 },
+  { title: 'Helm', level: 65 },
   {
     title: 'Nodejs (sails, express, nest)',
     titleSpoken: '<speak>Node J S <break time="0.2s"/>sails J S, express J S and nest J S</speak>',
@@ -73,16 +71,16 @@ const BACK_SKILLS = [
   {
     title: 'DB (MySQL, MongoDB, Postgres)',
     titleSpoken: '<speak>DB <break time="0.2s"/> My S Q L, Mongo DB and Post gres</speak>',
-    level: 90
+    level: 65
   },
   {
     title: 'Python (fastAPI, django)',
     titleSpoken:
       '<speak>Python (fast<say-as interpret-as="characters">api</say-as>, django)</speak>',
-    level: 90
+    level: 65
   },
-  { title: 'PHP (laravel, zf2)', level: 90 },
-  { title: 'Ruby (Rails)', level: 90 },
+  { title: 'PHP (laravel, zf2)', level: 70 },
+  { title: 'Ruby (Rails)', level: 65 },
   { title: 'Node.js (express, nest)', level: 90 }
 ]
 const MANAGEMENT_SKILLS = [

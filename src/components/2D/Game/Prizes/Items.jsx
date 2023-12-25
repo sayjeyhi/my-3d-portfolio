@@ -1,3 +1,5 @@
+import { useCursorHandlers } from '@/components/2D/Cursor.jsx'
+
 export const icons = {
   game: (
     <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -114,6 +116,8 @@ export function HorizontalItem({
   btn,
   defaultIcon = icons.default
 }) {
+  const cursorHandlers = useCursorHandlers()
+
   return (
     <li className={`relative sm:mb-0 shrink-0 w-96`}>
       <div className="flex items-center">
@@ -129,7 +133,7 @@ export function HorizontalItem({
       </div>
       <div className="mt-3 sm:pr-8 ">
         <div>
-          <a href={link} target="_blank" rel="noopener noreferrer" className="">
+          <a href={link} target="_blank" rel="noopener noreferrer" {...cursorHandlers}>
             <h3 className="text-lg font-semibold text-gray-900 ">{title}</h3>
             <h4 className="mb-2 text-xs text-gray-500">{subtitle}</h4>
           </a>
@@ -143,7 +147,7 @@ export function HorizontalItem({
         </div>
         <div>
           {!!image && (
-            <a href={link} target="_blank" rel="noopener noreferrer" className="">
+            <a href={link} target="_blank" rel="noopener noreferrer" {...cursorHandlers}>
               <div
                 className={`w-full my-2 overflow-hidden rounded-lg border-2 border-gray-200 flex items-center justify-center ${
                   smallImage ? 'h-32' : 'h-48'
@@ -156,6 +160,7 @@ export function HorizontalItem({
           <div className="flex flex-wrap mt-2 gap-1">
             {tags.map(skill => (
               <span
+                {...cursorHandlers}
                 key={skill}
                 className="bg-gray-400 text-white text-xs px-2.5 py-0.5 rounded inter hover:bg-gray-600 transition-all">
                 {skill}
@@ -190,7 +195,7 @@ export function VerticalItem({ title, subtitle, date, description, isWithdrawal,
       </h3>
       <h4 className="mb-2 text-base text-gray-500 font-semibold">{subtitle}</h4>
       <time className="block mb-2 text-sm font-normal leading-none text-gray-400 ">{date}</time>
-      <p className="mb-4 text-sm font-normal text-gray-600 ">{description}</p>
+      <p className="mb-4 text-sm font-normal text-gray-600 inter">{description}</p>
     </li>
   )
 }

@@ -40,7 +40,7 @@ export function GameExperience() {
             link={experience.link}
             defaultIcon={
               <div className="overflow-hidden rounded-lg flex items-center justify-center h-12 w-12 border-2 border-blue-50">
-                <img src={experience.logo} alt={experience.title} />
+                {experience.logo && <img src={experience.logo} alt={experience.title} />}
               </div>
             }
             beforeTags={

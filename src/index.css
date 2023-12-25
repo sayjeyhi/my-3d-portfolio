@@ -62,6 +62,7 @@ span:not(.inter),
   font-family: 'Stylish',tahoma, arial, serif ;
 }
 
+.inter,
 .inter * {
   font-family: 'Inter',tahoma, arial, serif ;
 }

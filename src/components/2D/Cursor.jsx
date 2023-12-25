@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import throttle from 'lodash-es/throttle'
-import { useAtomValue, useSetAtom } from 'jotai'
-import { gameIsStartedAtom } from '@/atoms/game'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { gameIsStartedAtom, gamePauseAtom } from '@/atoms/game'
 import { isMusicEnabledAtom } from '@/atoms/audio'
 import { isCursorActiveAtom } from '@/atoms/cursor.js'
-import { currentSectionAtom } from '@/atoms/menu.js'
+import { currentSectionAtom, isSidebarOpenedAtom, showFullInformationAtom } from '@/atoms/menu.js'
 
 const isTouchDevice =
   'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
@@ -47,7 +47,10 @@ const useMousePosition = () => {
 export const Cursor = () => {
   const section = useAtomValue(currentSectionAtom)
   const isGameStarted = useAtomValue(gameIsStartedAtom)
+  const isShowingFullInformationModal = useAtomValue(showFullInformationAtom)
+  const isGamePaused = useAtomValue(gamePauseAtom)
   const isMusicEnabled = useAtomValue(isMusicEnabledAtom)
+  const [menuOpened, setMenuOpened] = useAtom(isSidebarOpenedAtom)
 
   const intervalRefs = useRef([])
   const isAudioActive = useRef(!isMusicEnabled)
@@ -92,7 +95,8 @@ export const Cursor = () => {
     audioSection2.loop = true
     gameSection.loop = true
 
-    if (isGameStarted) {
+    if (isGameStarted && !isGamePaused) {
+      gameSection.currentTime = 0
       fadeInAudioVolume(gameSection, { key: 'game', to: 0.6, step: 0.09 })
       fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
       fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
@@ -100,8 +104,8 @@ export const Cursor = () => {
       fadeInAudioVolume(audioSection1, { key: 'section1', to: 0.9, step: 0.1 })
       fadeOutAudioVolume(audioSection2, { key: 'section2', to: 0, step: 0.09 })
       fadeOutAudioVolume(gameSection, { key: 'game', to: 0, step: 0.09 })
-    } else if (section === 1) {
-      fadeOutAudioVolume(gameSection, { key: 'game', to: 0, step: 0.1 })
+    } else {
+      fadeOutAudioVolume(gameSection, { key: 'game', to: 0, step: 0.05 })
       fadeOutAudioVolume(audioSection1, { key: 'section1', to: 0, step: 0.1 })
       fadeInAudioVolume(audioSection2, { key: 'section2', to: 0.5, step: 0.09 })
     }
@@ -119,7 +123,28 @@ export const Cursor = () => {
     return () => {
       window.removeEventListener('click', handleActivateAudio)
     }
-  }, [section, isMusicEnabled, isGameStarted])
+  }, [section, isMusicEnabled, isGameStarted, isGamePaused])
+
+  /**
+   * Close menu on outside click
+   */
+  useEffect(() => {
+    if (!menuOpened) return
+    const handleCloseMenu = e => {
+      const parent = e.target.parentElement
+      if (!menuOpened || e.target.id === 'menu-button' || parent.id === 'menu-button') return
+      setMenuOpened(false)
+    }
+    window.addEventListener('click', handleCloseMenu)
+    return () => {
+      window.removeEventListener('click', handleCloseMenu)
+    }
+  }, [menuOpened])
+
+  const getCursorColor = () => {
+    if (isShowingFullInformationModal) return '#3b82f6'
+    return '#65a30c'
+  }
 
   return (
     <div
@@ -138,9 +163,9 @@ export const Cursor = () => {
         style={{
           transform: `translate(-50%, -50%) scale(${isCursorActive ? 1.5 : 1})`,
           transition: 'transform .25s ease-in-out',
-          stroke: isCursorActive ? '#65a30c' : 'transparent',
+          stroke: isCursorActive ? getCursorColor() : 'transparent',
           strokeWidth: isCursorActive ? 3 : 1,
-          fill: isCursorActive ? 'rgba(255,255,255,0.4)' : '#65a30c'
+          fill: isCursorActive ? 'rgba(255,255,255,0.4)' : getCursorColor()
         }}>
         <circle cx="50" cy="50" r="16" />
         {!isAudioActive.current && (

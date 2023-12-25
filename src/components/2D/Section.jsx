@@ -20,11 +20,10 @@ export const Section = ({ className, children, ...rest }) => {
         y: 0,
         transition: {
           duration: 0.7,
-          delay: 0.7
+          delay: 0.2
         }
       }}
-      {...rest}
-    >
+      {...rest}>
       {children}
     </motion.section>
   )

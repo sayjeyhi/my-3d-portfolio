@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei'
 import { editable as e } from '@theatre/r3f'
 
 export function Amsterdam(props) {
-  const { nodes, materials } = useGLTF('/models/base-ams-14.glb')
+  const { nodes, materials } = useGLTF('/models/amsterdam-FINAL.glb')
   return (
     <e.group theatreKey={props.theatreKey} {...props} dispose={null}>
       <group position={[0, 0, -0.024]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -18,6 +18,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_01_New_color_palette_mat_0004.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -25,6 +26,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_07_New_color_palette_mat_0005.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -32,6 +34,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_10_New_color_palette_mat_0008.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -39,6 +42,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_14_New_color_palette_mat_0004.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -46,6 +50,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_16_New_color_palette_mat_0005.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -53,6 +58,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_19_New_color_palette_mat_0004.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -60,6 +66,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_23_New_color_palette_mat_0004.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -67,6 +74,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_25_New_color_palette_mat_0004.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -74,6 +82,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_10_New_color_palette_mat_0007.geometry}
               material={materials['New_color_palette_mat.002']}
+              position={[0, 0, -0.407]}
               scale={[1, 0.862, 1]}
             />
           </group>
@@ -156,7 +165,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_11_New_color_palette_mat_0002.geometry}
               material={materials['New_color_palette_mat.009']}
-              position={[3.802, 0, 0]}
+              position={[3.803, 0, 0]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -164,7 +173,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_29_New_color_palette_mat_0002.geometry}
               material={materials['New_color_palette_mat.009']}
-              position={[3.802, 0, 0]}
+              position={[3.803, 0, 0]}
               scale={[1, 0.862, 1]}
             />
           </group>
@@ -178,7 +187,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_10_New_color_palette_mat_0001.geometry}
               material={materials['New_color_palette_mat.010']}
-              position={[3.802, 0, 0]}
+              position={[3.803, 0, 0]}
               scale={[1, 0.862, 1]}
             />
             <mesh
@@ -186,7 +195,7 @@ export function Amsterdam(props) {
               receiveShadow
               geometry={nodes.Parts_geo_28_New_color_palette_mat_0001.geometry}
               material={materials['New_color_palette_mat.010']}
-              position={[3.802, 0, 0]}
+              position={[3.803, 0, 0]}
               scale={[1, 0.862, 1]}
             />
           </group>
@@ -275,7 +284,7 @@ export function Amsterdam(props) {
         castShadow
         receiveShadow
         geometry={nodes.Text001.geometry}
-        material={materials.Material}
+        material={materials['Material.001']}
         position={[2.926, 1.766, -1.697]}
         rotation={[1.572, 0.008, -2.845]}
         scale={0.066}
@@ -284,7 +293,7 @@ export function Amsterdam(props) {
         castShadow
         receiveShadow
         geometry={nodes.Text002.geometry}
-        material={materials.Material}
+        material={materials['Material.001']}
         position={[3.074, 1.884, -1.649]}
         rotation={[1.551, -0.01, -2.846]}
         scale={0.11}
@@ -314,6 +323,105 @@ export function Amsterdam(props) {
         material={materials['New_color_palette_mat.004']}
         position={[-8.576, 1.227, 9.205]}
       />
+      <group
+        position={[-6.883, 0.631, 0.599]}
+        rotation={[1.231, 0, 0]}
+        scale={[0.052, 0.052, 0.068]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Circle003.geometry}
+          material={materials['BLACK.001']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Circle003_1.geometry}
+          material={materials['GREY.001']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Circle003_2.geometry}
+          material={materials['NEON GREEN.001']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Circle003_3.geometry}
+          material={materials['ORANGE.002']}
+        />
+      </group>
+      <group position={[0, 0, -1.938]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.623, 1.298, 9.253]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Parts_geo_10_New_color_palette_mat_0003.geometry}
+              material={materials['New_color_palette_mat.005']}
+              position={[0, 0, -0.417]}
+              scale={[1, 0.862, 1]}
+            />
+          </group>
+        </group>
+      </group>
+      <group position={[0, 0, 5.838]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.623, 1.298, 9.253]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Parts_geo_20_New_color_palette_mat_0002.geometry}
+              material={materials['New_color_palette_mat.006']}
+              position={[0, 0, -0.407]}
+              scale={[1, 0.862, 1]}
+            />
+          </group>
+        </group>
+      </group>
+      <group position={[0, 0, 5.814]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.623, 1.298, 9.253]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Parts_geo_19_New_color_palette_mat_0001.geometry}
+              material={materials['New_color_palette_mat.007']}
+              position={[0, 0, -0.407]}
+              scale={[1, 0.862, 1]}
+            />
+          </group>
+        </group>
+      </group>
+      <group position={[0, 0, 3.917]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.623, 1.298, 9.253]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Parts_geo_26_New_color_palette_mat_0002.geometry}
+              material={materials['New_color_palette_mat.008']}
+              position={[0, 0, -0.495]}
+              scale={[1, 0.862, 1]}
+            />
+          </group>
+        </group>
+      </group>
+      <group position={[0, 0, 3.893]} rotation={[-Math.PI / 2, 0, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.623, 1.298, 9.253]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Parts_geo_25_New_color_palette_mat_0001.geometry}
+              material={materials['New_color_palette_mat.015']}
+              position={[0, 0, -0.495]}
+              scale={[1, 0.862, 1]}
+            />
+          </group>
+        </group>
+      </group>
       <group position={[-8.623, 1.298, 9.253]}>
         <group position={[-6.202, 0.01, -2.657]} scale={[0.924, 0.924, 0.722]}>
           <mesh
@@ -459,6 +567,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_02_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -466,6 +575,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_08_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -473,6 +583,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_11_New_color_palette_mat_0005.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -480,6 +591,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_13_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -487,6 +599,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_17_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -494,6 +607,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_20_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -501,6 +615,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_22_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -508,6 +623,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_26_New_color_palette_mat_0003.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.359]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -515,6 +631,7 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.Parts_geo_11_New_color_palette_mat_0006.geometry}
           material={materials.New_color_palette_mat}
+          position={[0, 0, -0.407]}
           scale={[1, 0.862, 1]}
         />
         <mesh
@@ -553,11 +670,22 @@ export function Amsterdam(props) {
           receiveShadow
           geometry={nodes.People_geo_09_Old_atlas_0.geometry}
           material={materials.Old_atlas}
-          position={[0.067, -0.047, 0]}
+          position={[-0.948, -0.063, 1.121]}
+          scale={1.128}
+        />
+      </group>
+      <group position={[-8.623, 1.298, 9.253]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Parts_geo_11_New_color_palette_mat_0004.geometry}
+          material={materials['New_color_palette_mat.001']}
+          position={[0, 0, -2.365]}
+          scale={[1, 0.862, 1]}
         />
       </group>
     </e.group>
   )
 }
 
-useGLTF.preload('/models/base-ams-14.glb')
+useGLTF.preload('/modesl/amsterdam-FINAL.glb')

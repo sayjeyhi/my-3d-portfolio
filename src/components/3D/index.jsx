@@ -8,16 +8,18 @@ import { Office } from './Office'
 import { Amsterdam } from './Amsterdam'
 import { useCurrentSheet } from '@theatre/r3f'
 import { val } from '@theatre/core'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { gameIsStartedAtom, gamePauseAtom } from '@/atoms/game'
 import { isSidebarOpenedAtom } from '@/atoms/menu.js'
+import { avatarCurrentAnimationAtom, isAmsterdamAtom } from '@/atoms/3d.js'
 
 export const ThreeD = () => {
   const { camera } = useThree()
   const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const data = useScroll()
+  const [isAmsterdam, setIsAmsterdam] = useAtom(isAmsterdamAtom)
   const sheet = useCurrentSheet()
-  const [animation, setCharacterAnimation] = useState('Standing')
+  const [animation, setCharacterAnimation] = useAtom(avatarCurrentAnimationAtom)
   const isStarted = useAtomValue(gameIsStartedAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
 
@@ -100,6 +102,9 @@ export const ThreeD = () => {
     } else if (sheet.sequence.position < 4.03 && sheet.sequence.position >= 3.7) {
       setCharacterAnimation('TellingASecret')
     } else if (sheet.sequence.position < 10.08 && sheet.sequence.position >= 4.03) {
+      if (!isAmsterdam && sheet.sequence.position > 6.1) setIsAmsterdam(true)
+      else if (isAmsterdam && sheet.sequence.position <= 6.1) setIsAmsterdam(false)
+
       setCharacterAnimation('Running')
     } else if (sheet.sequence.position > 10.08) {
       setCharacterAnimation('PhoneCall')
@@ -113,7 +118,7 @@ export const ThreeD = () => {
   return (
     <Scroll>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Avatar animation={animation} />
+        <Avatar />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Office section={section} />

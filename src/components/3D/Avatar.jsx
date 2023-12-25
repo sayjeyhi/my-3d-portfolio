@@ -8,6 +8,7 @@ import { editable as e } from '@theatre/r3f'
 import { useFrame } from '@react-three/fiber'
 import { useAtomValue } from 'jotai'
 import { isTalkingAtom } from '@/atoms/audio.js'
+import { avatarCurrentAnimationAtom } from '@/atoms/3d.js'
 
 const corresponding = [
   'viseme_PP',
@@ -23,8 +24,8 @@ const corresponding = [
   'viseme_TH'
 ]
 
-export function Avatar(props) {
-  const { animation } = props
+export function Avatar() {
+  const animation = useAtomValue(avatarCurrentAnimationAtom)
 
   const [blink, setBlink] = useState(false)
   const isTalking = useAtomValue(isTalkingAtom)
@@ -139,7 +140,7 @@ export function Avatar(props) {
   }, [])
 
   return (
-    <group {...props} dispose={null} ref={group}>
+    <group dispose={null} ref={group}>
       <e.group theatreKey="Avatar">
         <skinnedMesh
           ref={skinnedMesh}
