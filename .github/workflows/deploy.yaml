@@ -15,16 +15,19 @@ jobs:
           path: ${{ github.workspace }}/.cache
           key: ${{ runner.os }}-3d-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Setup node 🎱
-        uses: actions/setup-node@v2
+      - name: Setup Bun Runtime
+        uses: antongolub/action-setup-bun@v1
         with:
-          node-version: '13.x'
+          bun-version: 1.0.20
+          bun-repo: 'Jarred-Sumner/bun-releases-for-updater'
+          cache: false
+          cache-bin: false
 
-      - name: Install 🎢
-        run: yarn install --force
+      - name: Install packages
+        run: bun i
 
       - name: Build 🧩
-        run: yarn run build
+        run: bun run build
         env:
           CI: true
 
