@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Stylish" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=VT323" />
+    <title>Jafar Rezaei | 3D website | sayjeyhi.com</title>
+    <style>
+      .loader {
+        width: 88px;
+        height: 88px;
+        margin: auto;
+        position: relative;
+      }
+      .loader .box {
+        width: 88px;
+        height: 5px;
+        background: #000;
+        opacity: 0.25;
+        position: absolute;
+        top: 108px;
+        left: 0;
+        border-radius: 50%;
+        animation: shadow 0.5s linear infinite;
+        will-change: transform;
+      }
+      .loader .shadow {
+        width: 100%;
+        height: 100%;
+        background: #65a30c;
+        animation: bxSpin 0.5s linear infinite;
+        will-change: transform, border-radius;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 4px;
+      }
+      @keyframes bxSpin {
+        17% {
+          border-bottom-right-radius: 3px;
+        }
+        25% {
+          transform: translateY(9px) rotate(22.5deg);
+        }
+        50% {
+          transform: translateY(18px) scale(1, .9) rotate(45deg);
+          border-bottom-right-radius: 40px;
+        }
+        75% {
+          transform: translateY(9px) rotate(67.5deg);
+        }
+        100% {
+          transform: translateY(0) rotate(90deg);
+        }
+      }
+
+      @keyframes shadow {
+        0%, 100% {
+          transform: scale(1, 1);
+        }
+        50% {
+          transform: scale(1.2, 1);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-fbe82eaf.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-e03e42b3.js">
+    <link rel="modulepreload" crossorigin href="/assets/files_encoded-e34c7108.js">
+    <link rel="stylesheet" href="/assets/index-617cd329.css">
+  </head>
+  <body>
+    <div id="root" style="width: 100vw; height: 100vh">
+      <div style="display: flex; flex-direction:column;align-items: center; justify-content: center; width: 100%; height: 100%">
+        <div class="loader" >
+          <div class="box"></div>
+          <div class="shadow"></div>
+        </div>
+        <p style="font-family: 'Inter', tahoma, arial, serif">Loading...</p>
+      </div>
+    </div>
+    
+  </body>
+</html>
