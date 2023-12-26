@@ -1,4 +1,20 @@
-![Thumbnail video tutorial](https://github.com/wass08/r3f-portfolio-final/assets/6551176/10e190aa-de14-4f34-a6e7-fca23b73bb15)
+# My new 3D portfolio
+>  Built with React, Three.js [Live Demo](https://sayjeyhi.com/)
 
-[Video tutorial](https://youtu.be/LooODvrYXzE)
+## Installation
+You need to have bunjs installed, if you don't have it, install it [bun.sh](https://bun.sh)
+Then run the following command to install the dependencies
+
+```bash
+bun i
+```
+
+## Development
+You can run the following command to start the development server
+```bash
+bun dev
+```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 

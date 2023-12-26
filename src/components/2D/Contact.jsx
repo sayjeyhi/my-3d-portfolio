@@ -72,7 +72,7 @@ export const ContactSection = () => {
               <path d="M15.038 18.91C17.981 16.592 22 14 22 9.138c0-4.863-5.5-8.312-10-3.636V20.5c1 0 2-.77 3.038-1.59Z" />
             </g>
           </svg>
-          &nbsp; By me, 2023
+          &nbsp; By me in <strong>Amsterdam</strong>, 2023
         </div>
       </div>
     </Section>
