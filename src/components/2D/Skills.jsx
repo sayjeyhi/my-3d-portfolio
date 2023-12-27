@@ -4,7 +4,11 @@ import { isTalkingAtom } from '@/atoms/audio.js'
 
 const FRONT_SKILLS = [
   {
-    title: 'Javascript (ES6 and above)',
+    title: (
+      <>
+        Javascript <span className="hidden md:flex">&nbsp;(ES6 and above)</span>
+      </>
+    ),
     titleSpoken: '<speak>Javascript</speak>',
     level: 90
   },
@@ -28,13 +32,48 @@ const FRONT_SKILLS = [
     titleSpoken: '<speak>View J S <break time="0.2s"/>, 2 , 3 , view x and penia</speak>',
     level: 90
   },
-  { title: 'Redux (Toolkit, Saga)', level: 90 },
+  {
+    title: (
+      <>
+        Redux<span className="hidden md:flex">&nbsp;(Toolkit, Saga)</span>
+      </>
+    ),
+    level: 90
+  },
   { title: 'ReactQuery', level: 75 },
-  { title: 'Test (unit, behavior, e2e)', level: 90 },
-  { title: 'Next.js (13 and above)', level: 85 },
+  {
+    title: (
+      <>
+        Test<span className="hidden md:flex">&nbsp;(unit, behavior, e2e)</span>
+      </>
+    ),
+    level: 90
+  },
+  {
+    title: (
+      <>
+        Next.js<span className="hidden md:flex">&nbsp;(13 and above)</span>
+      </>
+    ),
+    level: 85
+  },
   { title: 'Rest, gRPC, graphQL', level: 90 },
-  { title: 'Socket (io, WS)', level: 85 },
-  { title: 'PWA (workbox)', level: 90 },
+  {
+    title: (
+      <>
+        Socket<span className="hidden md:flex">&nbsp;(io, WS)</span>
+      </>
+    ),
+    level: 85
+  },
+  {
+    title: (
+      <>
+        PWA<span className="hidden md:flex">&nbsp;(workbox)</span>
+      </>
+    ),
+    level: 90
+  },
   {
     title: 'Three.js',
     level: 40
@@ -49,37 +88,78 @@ const BACK_SKILLS = [
     level: 70
   },
   {
-    title: 'CI/CD (GitHub, GitLab, bitbucket, jenkins)',
+    title: (
+      <>
+        CI/CD<span className="hidden md:flex">&nbsp;(GitHub, GitLab, bitbucket, jenkins)</span>
+      </>
+    ),
     titleSpoken:
       '<speak>CI/CD <break time="0.2s"/> including GitHub, GitLab, bitbucket and jenkins</speak>',
     level: 70
   },
   {
-    title: 'Cloud (AWS, GCP)',
+    title: (
+      <>
+        Cloud<span className="hidden md:flex">&nbsp;(AWS, GCP)</span>
+      </>
+    ),
     titleSpoken: '<speak>Cloud <break time="0.2s"/> including A W S and Google Cloud</speak>',
     level: 70
   },
   { title: 'Kubernetes', level: 65 },
   { title: 'Helm', level: 65 },
   {
-    title: 'Nodejs (sails, express, nest)',
+    title: (
+      <>
+        Nodejs<span className="hidden md:flex">&nbsp;(sails, express, nest)</span>
+      </>
+    ),
     titleSpoken: '<speak>Node J S <break time="0.2s"/>sails J S, express J S and nest J S</speak>',
     level: 90
   },
   {
-    title: 'DB (MySQL, MongoDB, Postgres)',
+    title: (
+      <>
+        DB<span className="hidden md:flex">&nbsp;(MySQL, MongoDB, Postgres)</span>
+      </>
+    ),
     titleSpoken: '<speak>DB <break time="0.2s"/> My S Q L, Mongo DB and Post gres</speak>',
     level: 65
   },
   {
-    title: 'Python (fastAPI, django)',
+    title: (
+      <>
+        Python<span className="hidden md:flex">&nbsp;(fastAPI, django)</span>
+      </>
+    ),
     titleSpoken:
       '<speak>Python (fast<say-as interpret-as="characters">api</say-as>, django)</speak>',
     level: 65
   },
-  { title: 'PHP (laravel, zf2)', level: 70 },
-  { title: 'Ruby (Rails)', level: 65 },
-  { title: 'Node.js (express, nest)', level: 90 }
+  {
+    title: (
+      <>
+        PHP<span className="hidden md:flex">&nbsp;(laravel, zf2)</span>
+      </>
+    ),
+    level: 70
+  },
+  {
+    title: (
+      <>
+        Ruby<span className="hidden md:flex">&nbsp;(Rails)</span>
+      </>
+    ),
+    level: 65
+  },
+  {
+    title: (
+      <>
+        Node.js<span className="hidden md:flex">&nbsp;(express, nest)</span>
+      </>
+    ),
+    level: 90
+  }
 ]
 const MANAGEMENT_SKILLS = [
   {
@@ -99,10 +179,10 @@ const MANAGEMENT_SKILLS = [
 export const SkillsSection = () => {
   return (
     <Section key="skills">
-      <div className="px-2 py-4 -mt-24 rounded-3xl shadow-primary text-lg text-white w-1/2">
+      <div className="px-2 py-4 -mt-24 rounded-3xl shadow-primary text-lg text-white w-4/5 lg:w-1/2">
         <div>
-          <h3 className="text-3xl font-extrabold text-blue-800">My skills</h3>
-          <div className="mt-4 space-y-4">
+          <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 pb-3 lg:pb-6 ">Skills</h3>
+          <div className="mt-2 space-y-1 lg:space-y-4 lg:mt-4">
             {FRONT_SKILLS.map((skill, index) => (
               <Badge
                 key={index}
@@ -112,7 +192,7 @@ export const SkillsSection = () => {
               />
             ))}
           </div>
-          <div className="mt-4 space-y-4">
+          <div className="mt-2 space-y-1 lg:space-y-4 lg:mt-4">
             {BACK_SKILLS.map((skill, index) => (
               <Badge
                 key={index}
@@ -122,7 +202,7 @@ export const SkillsSection = () => {
               />
             ))}
           </div>
-          <div className="mt-4 space-y-4">
+          <div className="mt-2 space-y-1 lg:space-y-4 lg:mt-4">
             {MANAGEMENT_SKILLS.map((skill, index) => (
               <Badge
                 key={index}
@@ -211,7 +291,7 @@ const Badge = ({ titleSpoken, title, level }) => {
         window.speechSynthesis.cancel()
       }}
       title={`${level}%`}
-      className="bg-secondary inter cursor-pointer text-white text-sm font-medium mr-2 px-3 py-1 rounded-lg inline-flex items-center">
+      className="bg-secondary inter cursor-pointer text-white text-[10px] lg:text-sm font-medium mr-2 px-2 py-0 lg:px-3 lg:py-1 rounded-lg inline-flex items-center truncate">
       {title}
     </div>
   )

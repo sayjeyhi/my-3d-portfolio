@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 export const ProjectsSection = () => {
   return (
     <Section key="projects" className="-mt-48">
-      <h3 className="text-5xl font-bold -mt-8 pb-6 pl-2">Books</h3>
-      <div className="flex align-middle justify-center mb-2">
+      <h3 className="-mt-0 lg:-mt-8 pl-2 text-3xl lg:text-5xl font-bold text-gray-900 pb-3 lg:pb-6 ">
+        Books
+      </h3>
+      <div className="flex mb-2 overflow-x-auto overflow-y-visible w-full lg:pb-8">
         <BookCard
           name="Javascript fundamentals"
           subtitle="(250 pages)"
@@ -34,9 +36,9 @@ export const ProjectsSection = () => {
 export const BookCard = ({ name, url, img, subtitle }) => {
   return (
     <a href={url} target="_blank" rel="nofollow noreferrer">
-      <div className="relative p-2 mx-2 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+      <div className="w-48 lg:w-80 relative p-1 lg:p-2 mx-2 flex flex-col rounded-lg border border-gray-100 bg-white shadow-md">
         <img className="rounded-md" src={img} alt={name} />
-        <h4 className="text-md font-bold text-slate-900 mt-2">{name}</h4>
+        <h4 className="text-sm lg:text-base font-bold text-slate-900 mt-2">{name}</h4>
         <h5 className="text-xs font-medium text-slate-400 mb-1">{subtitle}</h5>
       </div>
     </a>
@@ -46,7 +48,7 @@ export const BookCard = ({ name, url, img, subtitle }) => {
 export const WhatElseCard = () => {
   return (
     <motion.a
-      className="flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-full border border-gray-100 bg-white shadow-xl w-60 h-60"
+      className="hidden lg:flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-full border border-gray-100 bg-white shadow-xl w-60 h-60"
       initial={{
         opacity: 0,
         x: 120

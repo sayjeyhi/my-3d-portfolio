@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import { ScrollControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera, SheetProvider } from '@theatre/r3f'

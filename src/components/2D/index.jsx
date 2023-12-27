@@ -24,7 +24,7 @@ export const TwoD = () => {
       <Menu />
       {showFullInformation && (
         <Section key="placeholder" className="fixed bg-white z-20 py-0">
-          <div className="overflow-y-auto max-w-full overflow-x-hidden pr-3">
+          <div className="overflow-y-auto max-w-full overflow-x-hidden px-3 lg:pl-0 lg:pr-3">
             <MenuButton
               onClick={() => {
                 setShowFullInformation(false)
@@ -99,7 +99,7 @@ export const TwoD = () => {
 
 const Title = ({ title, subTitle }) => (
   <div className="mb-5">
-    <h2 className="w-[100vw] text-left text-4xl font-bold text-blue-500 mt-8">{title}</h2>
+    <h2 className="w-[100vw] text-left text-4xl font-bold text-blue-500 mt-6 lg:mt-8">{title}</h2>
     {subTitle && (
       <p className="w-[100vw] text-left text-md font-bold text-gray-400">
         <span className="ml-2 mr-1">&gt; </span>

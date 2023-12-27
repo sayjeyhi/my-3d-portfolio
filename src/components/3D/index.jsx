@@ -57,8 +57,8 @@ export const ThreeD = () => {
     let oldMouseY = 0
     window.onmousemove = e => {
       if (animation !== 'Typing' && animation !== 'PhoneCall') return
-      let xAxesMultiplier = 0.00008
-      let yAxesMultiplier = 0.0001
+      let xAxesMultiplier = 0.00005
+      let yAxesMultiplier = 0.00006
       if (animation === 'PhoneCall') {
         xAxesMultiplier = 0.00002
         yAxesMultiplier = 0.00003
@@ -117,6 +117,12 @@ export const ThreeD = () => {
       if (isStarted) setIsPaused(true)
     }
   })
+
+  const isMobile = window.innerWidth < 1024 // 1024 is the breakpoint for mobile devices (LG tailwind)
+  const mobileScale = isMobile ? [0.0002, 0.0002, 0.0002] : 1
+  const scalingFactor = Math.min(Math.max(window.innerWidth / 1550, 0.8), 1)
+  const avatarScalingFactor = Math.min(Math.max(window.innerWidth / 1480, 0.8), 1)
+  const amsterdamScalingFactor = Math.min(Math.max(window.innerWidth / 1520, 0.8), 1)
 
   return (
     <Scroll>

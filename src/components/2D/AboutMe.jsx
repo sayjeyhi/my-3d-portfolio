@@ -15,12 +15,12 @@ export const AboutMeSection = props => {
         <Section key="placeholder" />
       ) : (
         <Section key="me">
-          <h1 className="text-7xl font-extrabold leading-none">
+          <h1 className="text-3xl font-extrabold leading-none md:text-5xl sm:text-3xl lg:text-7xl">
             Hi, I&apos;m
             <br />
             <span className="bg-amber-50 px-1">Jafar Rezaei</span>
           </h1>
-          <p className="text-2xl text-gray-600 mt-4">
+          <p className="text-xs w-1/2 lg:w-1/2 xl:w-2/3 2xl:w-full md:text-xl lg:text-2xl text-gray-600 mt-4">
             A curious person who wants to improve stuff.
             <br />
             I&apos;m a software engineer and I&apos;m interested in web development.
@@ -30,7 +30,7 @@ export const AboutMeSection = props => {
 
           <button
             onClick={() => setSection(1)}
-            className="px-6 py-4 mt-8 rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-2xl text-white outline-none focus:ring-4 transform active:scale-90 transition-transform"
+            className="transform px-2 py-1 lg:px-6 lg:py-4 mt-8 rounded-lg lg:rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-lg lg:text-2xl text-white outline-none focus:ring-4 active:scale-90 transition-transform"
             {...cursorHandlers}>
             Tell me more
           </button>

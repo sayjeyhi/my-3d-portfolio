@@ -40,10 +40,10 @@ export const GameSection = () => {
     <>
       <Section
         id="game-section"
-        className={`mt-48 bg-white relative ${
+        className={`mt-48 lg:bg-white relative ${
           showingReward ? 'border-t-8 border-b-8 border-gray-300 reward-bg pixel' : ''
         }`}>
-        <div className="relative w-full h-3/4">
+        <div className="relative w-full h-3/4 invisible lg:visible ">
           <TopTexts showingReward={showingReward} />
 
           <GameEnvClouds />
@@ -100,16 +100,12 @@ export const GameSection = () => {
           victoryAudioRef={victoryAudioRef}
         />
 
-        <div
-          className="w-full h-48 absolute top-full left-0 right-0"
-          style={{
-            background: 'linear-gradient(0deg, rgba(139,212,255,0.5) 0%, rgba(255,255,255,1) 100%)'
-          }}>
+        <div className="w-full h-48 absolute top-[90%] lg:top-full left-0 right-0 lg:bg-gradient-to-b from-white to-transparent">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             enableBackground="new 0 0 24 24"
             viewBox="0 0 24 24"
-            className="w-24 h-24 absolute top-12 right-1/4 mt-8 mr-8 opacity-60">
+            className="w-24 h-24 absolute top-12 right-[10px] md:right-[30px] lg:right-1/4 mt-8 opacity-60">
             <path
               fill="#ededed"
               d="M18.167 19H9a3.5 3.5 0 0 1-.937-6.873 5.998 5.998 0 0 1 11.407-1.585A4.329 4.329 0 0 1 18.167 19z"
@@ -123,7 +119,7 @@ export const GameSection = () => {
             xmlns="http://www.w3.org/2000/svg"
             enableBackground="new 0 0 24 24"
             viewBox="0 0 24 24"
-            className="w-24 h-24 absolute top-12 left-1/4 mt-8 mr-8 opacity-60 transform -scale-y-100 -rotate-180">
+            className="w-24 h-24 absolute top-12 left-[10px] md:left-[30px] lg:left-1/4 mt-8 opacity-60 transform -scale-y-100 -rotate-180">
             <path
               fill="#ededed"
               d="M18.167 19H9a3.5 3.5 0 0 1-.937-6.873 5.998 5.998 0 0 1 11.407-1.585A4.329 4.329 0 0 1 18.167 19z"

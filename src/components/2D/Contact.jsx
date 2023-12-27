@@ -3,7 +3,7 @@ import { useCursorHandlers } from './Cursor'
 
 export const ContactSection = () => {
   return (
-    <Section key="contact-me" className="mt-[18rem] ml-24">
+    <Section key="contact-me" className="mt-[12rem] ml-2 lg:mt-[18rem] lg:ml-24 ">
       <div className="flex gap-3 py-1">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -42,37 +42,25 @@ export const ContactSection = () => {
         </SocialButton>
       </div>
 
-      <div className="flex flex-col text-xs items-start text-gray-700 backdrop-blur-sm p-5 rounded-lg ml-1">
+      <div className="flex flex-col text-xs items-start text-gray-700 backdrop-blur-sm p-2 lg:p-5 rounded-lg ml-1">
         <div>
-          3D Models from &nbsp;
+          3D Models: &nbsp;
           <a href="https://icons8.com" target="_blank" rel="noreferrer">
             IconScout
           </a>
           &nbsp; and &nbsp;
           <a href="https://sketchfab.com/IgorYerm" target="_blank" rel="noreferrer">
-            Igor Yeram, Sketchfab
+            Igor Yeram
           </a>
           &nbsp;
           <br />
-          Sound effects from{' '}
+          Sound effects: &nbsp;
           <a href="https://pixabay.com/service/license-summary/" target="_blank" rel="noreferrer">
             Pixabay
           </a>
         </div>
         <div className="flex items-center ">
-          Crafted with &nbsp;
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <g fill="red">
-              <path
-                fillRule="evenodd"
-                d="M8.106 18.247C5.298 16.083 2 13.542 2 9.137C2 4.274 7.5.825 12 5.501V20.5c-1 0-2-.77-3.038-1.59c-.277-.218-.564-.438-.856-.663Z"
-                clipRule="evenodd"
-                opacity=".5"
-              />
-              <path d="M15.038 18.91C17.981 16.592 22 14 22 9.138c0-4.863-5.5-8.312-10-3.636V20.5c1 0 2-.77 3.038-1.59Z" />
-            </g>
-          </svg>
-          &nbsp; By me in <strong>Amsterdam</strong>, 2023
+          Designed and developed by Me in <strong className="mx-1">Amsterdam</strong>
         </div>
       </div>
     </Section>

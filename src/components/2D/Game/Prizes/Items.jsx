@@ -119,7 +119,7 @@ export function HorizontalItem({
   const cursorHandlers = useCursorHandlers()
 
   return (
-    <li className={`relative sm:mb-0 shrink-0 w-96`}>
+    <li className={`relative sm:mb-0 shrink-0 w-80 lg:w-96`}>
       <div className="flex items-center">
         <div className="z-10 flex items-center text-blue-500 justify-center w-12 h-12 bg-blue-50 rounded-xl ring-8 ring-white shrink-0">
           {icons[icon] || defaultIcon}
@@ -131,7 +131,7 @@ export function HorizontalItem({
         )}
         <div className="hidden sm:flex w-full bg-gray-50 h-1"></div>
       </div>
-      <div className="mt-3 sm:pr-8 ">
+      <div className="mt-3 pr-4 sm:pr-8 ">
         <div>
           <a href={link} target="_blank" rel="noopener noreferrer" {...cursorHandlers}>
             <h3 className="text-lg font-semibold text-gray-900 ">{title}</h3>
@@ -178,16 +178,19 @@ export function HorizontalItem({
 
 export function VerticalItem({ title, subtitle, date, description, isWithdrawal, isLast }) {
   return (
-    <li className={`ml-12 ${!isLast ? 'mb-8' : ''}`}>
-      <span className="absolute flex items-center justify-center w-12 h-12 bg-blue-50 text-blue-500 rounded-2xl -left-[1.6rem] ring-8 ring-white ">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 2048 2048">
+    <li className={`ml-2 md:ml-4 lg:ml-12 ${!isLast ? 'mb-8' : ''}`}>
+      <span className="absolute flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 bg-blue-50 text-blue-500 rounded lg:rounded-2xl -left-[1.6rem] ring-8 ring-white ">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6 lg:w-8 lg:h-8"
+          viewBox="0 0 2048 2048">
           <path
             fill="currentColor"
             d="M1582 1065q41 72 61 150t21 161v103l-640 321l-640-321q0-60 1-112t9-101t24-98t48-103L256 960v587q29 10 52 28t41 42t26 52t9 59v320H0v-320q0-30 9-58t26-53t40-42t53-28V896L0 832l1024-512l1024 512l-466 233zM256 1728q0-26-19-45t-45-19q-26 0-45 19t-19 45v192h128v-192zm30-896l738 369l738-369l-738-369l-738 369zm1250 568q0-77-15-143t-53-135l-444 222l-444-222q-33 58-50 122t-18 132v24l512 256l512-256z"
           />
         </svg>
       </span>
-      <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 ">
+      <h3 className="flex items-center mb-1 ml-2 lg:ml-0 text-lg font-semibold text-gray-900 ">
         {title}{' '}
         {isWithdrawal && (
           <span className="bg-gray-400 text-white text-xs mr-2 px-2.5 py-0.5 rounded inter ml-3">

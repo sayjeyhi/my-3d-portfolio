@@ -35,7 +35,7 @@ export const Menu = props => {
       </button>
       <button
         onClick={handleAudioMute}
-        className="z-10 fixed focus:outline-lime-700 top-16 mt-2 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className="z-10 fixed focus:outline-lime-700 top-4 right-16 mr-2 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         {!isMusicEnabled ? (
           <svg
@@ -64,8 +64,8 @@ export const Menu = props => {
         )}
       </button>
       <div
-        className={`z-10 fixed top-0 right-0 bottom-0 max-h-[100vh] bg-primary rounded-tl-2xl rounded-bl-2xl transition-all overflow-hidden flex flex-col justify-between
-      ${menuOpened ? 'w-80' : 'w-0'}`}>
+        className={`z-10 fixed top-0 right-0 bottom-0 max-h-[100vh] bg-primary rounded-none md:rounded-tl-2xl md:rounded-bl-2xl transition-all overflow-hidden flex flex-col justify-between
+      ${menuOpened ? 'w-full md:w-80' : 'w-0'}`}>
         <div className="mt-10 mb-10">
           <img className="rounded-full w-48 h-48 mx-auto" src="me.jpeg" alt="Jafar Rezaei" />
         </div>
