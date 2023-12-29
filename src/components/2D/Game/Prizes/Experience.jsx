@@ -11,7 +11,15 @@ export function GameExperience() {
         let [startDataString, endDateString] = experience.date.split(' - ')
         if (endDateString === 'Present') {
           endDateString = new Date().toISOString().split('T')[0]
+        } else {
+          const [endMonth, endYear] = endDateString.split(' ')
+          endDateString = `${endMonth} 1, ${endYear}`
         }
+        /**
+         * Fix issue with safari!
+         */
+        const [month, year] = startDataString.split(' ')
+        startDataString = `${month} 1, ${year}`
         const startDate = new Date(startDataString)
         const endDate = new Date(endDateString)
 

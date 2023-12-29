@@ -3,7 +3,7 @@ import { EDUCATIONS } from '../constants.js'
 
 export function GameEducation() {
   return (
-    <ol className="relative border-blue-50 border-l-4 pt-2 ml-7">
+    <ol className="relative border-blue-50 border-l-4 pt-2 ml-1 lg:ml-7">
       {EDUCATIONS.map((education, index) => (
         <VerticalItem
           key={index}

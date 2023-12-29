@@ -124,10 +124,26 @@ export const ThreeD = () => {
   const avatarScalingFactor = Math.min(Math.max(window.innerWidth / 1480, 0.8), 1)
   const amsterdamScalingFactor = Math.min(Math.max(window.innerWidth / 1520, 0.8), 1)
 
+  const isMobileSkills = isMobile && section === 1
+  const getAvatarPositionY = () => {
+    if (window.innerWidth < 768) return 0.47
+    if (window.innerWidth < 1024) return 0.45
+  }
+  const getAvatarPositionX = () => {
+    if (window.innerWidth < 300) return -1.4
+    if (window.innerWidth < 400) return -1.2
+    if (window.innerWidth < 540) return -0.75
+    if (window.innerWidth < 640) return -0.7
+    if (window.innerWidth < 768) return -1.2
+    if (window.innerWidth < 1024) return -0.5
+  }
   return (
     <Scroll>
       <Stage shadows intensity={0.5} adjustCamera={false}>
-        <Avatar />
+        <Avatar
+          position-y={isMobileSkills ? getAvatarPositionY() : 0}
+          position-x={isMobileSkills ? getAvatarPositionX() : 0}
+        />
       </Stage>
       <Stage shadows intensity={0.5} adjustCamera={false}>
         <Office section={section} />

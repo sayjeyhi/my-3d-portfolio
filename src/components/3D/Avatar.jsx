@@ -24,7 +24,7 @@ const corresponding = [
   'viseme_TH'
 ]
 
-export function Avatar({ scale }) {
+export function Avatar(props) {
   const animation = useAtomValue(avatarCurrentAnimationAtom)
 
   const [blink, setBlink] = useState(false)
@@ -140,7 +140,7 @@ export function Avatar({ scale }) {
   }, [])
 
   return (
-    <group dispose={null} scale={scale} ref={group}>
+    <group dispose={null} ref={group} {...props}>
       <e.group theatreKey="Avatar">
         <skinnedMesh
           ref={skinnedMesh}

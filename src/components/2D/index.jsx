@@ -26,7 +26,8 @@ export const TwoD = () => {
         <Section key="placeholder" className="fixed bg-white z-20 py-0">
           <div className="overflow-y-auto max-w-full overflow-x-hidden px-3 lg:pl-0 lg:pr-3">
             <MenuButton
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation()
                 setShowFullInformation(false)
               }}
               className="absolute top-0 right-0 p-2 z-20 bg-white rounded-bl-2xl">
@@ -99,10 +100,12 @@ export const TwoD = () => {
 
 const Title = ({ title, subTitle }) => (
   <div className="mb-5">
-    <h2 className="w-[100vw] text-left text-4xl font-bold text-blue-500 mt-6 lg:mt-8">{title}</h2>
+    <h2 className="w-[100vw] text-left text-3xl lg:text-4xl font-bold text-blue-500 mt-6 lg:mt-8">
+      {title}
+    </h2>
     {subTitle && (
-      <p className="w-[100vw] text-left text-md font-bold text-gray-400">
-        <span className="ml-2 mr-1">&gt; </span>
+      <p className="w-[100vw] text-left text-[12px] lg:text-md text-gray-400">
+        <span className="hidden lg:inline ml-2 mr-1">&gt; </span>
         {subTitle}
       </p>
     )}

@@ -11,14 +11,18 @@ export const Menu = props => {
   const [isMusicEnabled, setIsMusicEnabled] = useAtom(isMusicEnabledAtom)
   const cursorHandlers = useCursorHandlers()
 
-  const handleAudioMute = () => {
+  const handleAudioMute = e => {
+    e.stopPropagation()
     setIsMusicEnabled(a => !a)
   }
   return (
     <>
       <button
         id="menu-button"
-        onClick={() => setMenuOpened(!menuOpened)}
+        onClick={e => {
+          e.stopPropagation()
+          setMenuOpened(!menuOpened)
+        }}
         className="z-20 focus:outline-lime-700 fixed top-4 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         <div
@@ -35,31 +39,32 @@ export const Menu = props => {
       </button>
       <button
         onClick={handleAudioMute}
-        className="z-10 fixed focus:outline-lime-700 top-4 right-16 mr-2 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className="z-10 fixed text-white focus:outline-lime-700 top-4 right-16 mr-2 p-3 bg-primary w-12 h-12 rounded-2xl"
         {...cursorHandlers}>
         {!isMusicEnabled ? (
-          <svg
-            className="relative -top-[2px] -left-[2px]"
-            xmlns="http://www.w3.org/2000/svg"
-            width="27"
-            height="27"
-            viewBox="0 0 24 24">
-            <path
-              fill="#fff"
-              d="M4.34 2.93L2.93 4.34L7.29 8.7L7 9H3v6h4l5 5v-6.59l4.18 4.18c-.65.49-1.38.88-2.18 1.11v2.06a8.94 8.94 0 0 0 3.61-1.75l2.05 2.05l1.41-1.41L4.34 2.93zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zm-7-8l-1.88 1.88L12 7.76zm4.5 8A4.5 4.5 0 0 0 14 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M7.016 17.042C6.768 17 6.512 17 6 17c-1.374 0-2.06 0-2.66-.277a3.215 3.215 0 0 1-1.381-1.3c-.314-.582-.35-1.186-.424-2.395A17.127 17.127 0 0 1 1.5 12c0-.323.013-.671.035-1.029c.073-1.208.11-1.813.424-2.394a3.215 3.215 0 0 1 1.38-1.3C3.94 7 4.627 7 6 7c.512 0 .768 0 1.016-.042a3 3 0 0 0 .712-.214c.23-.101.444-.242.871-.524l.22-.144C11.36 4.399 12.632 3.56 13.7 3.925c.205.07.403.17.58.295c.835.587.972 1.879 1.094 4.357" />
+              <path
+                d="M15.5 8.5V12c0 .532-.035 1.488-.087 2.605c-.14 3.018-.21 4.526-1.133 5.175a2.317 2.317 0 0 1-.58.295c-.967.33-2.102-.328-4.2-1.702C8.833 17.915 7.4 17 7 17"
+                opacity=".5"
+                className=""
+              />
+              <path
+                strokeLinecap="round"
+                d="M20 18s1.5-1.8 1.5-6c0-2.433-.503-4.061-.927-5M18 15s.5-.9.5-3c0-.862-.084-1.522-.183-2"
+                opacity=".5"
+              />
+              <path strokeLinecap="round" d="M22 2L2 22" />
+            </g>
           </svg>
         ) : (
-          <svg
-            className="relative -top-[2px] -left-[2px]"
-            xmlns="http://www.w3.org/2000/svg"
-            width="27"
-            height="27"
-            viewBox="0 0 24 24">
-            <path
-              fill="#fff"
-              d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M1.535 10.971c.073-1.208.11-1.813.424-2.394a3.215 3.215 0 0 1 1.38-1.3C3.94 7 4.627 7 6 7c.512 0 .768 0 1.016-.042a3 3 0 0 0 .712-.214c.23-.101.444-.242.871-.524l.22-.144C11.36 4.399 12.632 3.56 13.7 3.925c.205.07.403.17.58.295c.922.648.993 2.157 1.133 5.174A68.21 68.21 0 0 1 15.5 12c0 .532-.035 1.488-.087 2.605c-.14 3.018-.21 4.526-1.133 5.175a2.314 2.314 0 0 1-.58.295c-1.067.364-2.339-.474-4.882-2.151L8.6 17.78c-.427-.282-.64-.423-.871-.525a3 3 0 0 0-.712-.213C6.768 17 6.512 17 6 17c-1.374 0-2.06 0-2.66-.277a3.215 3.215 0 0 1-1.381-1.3c-.314-.582-.35-1.186-.424-2.395A17.127 17.127 0 0 1 1.5 12c0-.323.013-.671.035-1.029Z" />
+              <path strokeLinecap="round" d="M20 6s1.5 1.8 1.5 6s-1.5 6-1.5 6" opacity=".4" />
+              <path strokeLinecap="round" d="M18 9s.5.9.5 3s-.5 3-.5 3" opacity=".7" />
+            </g>
           </svg>
         )}
       </button>

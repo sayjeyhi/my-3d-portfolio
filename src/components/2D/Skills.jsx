@@ -38,6 +38,7 @@ const FRONT_SKILLS = [
         Redux<span className="hidden md:flex">&nbsp;(Toolkit, Saga)</span>
       </>
     ),
+    titleSpoken: 'Redux',
     level: 90
   },
   { title: 'ReactQuery', level: 75 },
@@ -47,6 +48,7 @@ const FRONT_SKILLS = [
         Test<span className="hidden md:flex">&nbsp;(unit, behavior, e2e)</span>
       </>
     ),
+    titleSpoken: '<speak>Test</speak>',
     level: 90
   },
   {
@@ -55,6 +57,7 @@ const FRONT_SKILLS = [
         Next.js<span className="hidden md:flex">&nbsp;(13 and above)</span>
       </>
     ),
+    titleSpoken: '<speak>Next.js</speak>',
     level: 85
   },
   { title: 'Rest, gRPC, graphQL', level: 90 },
@@ -64,6 +67,7 @@ const FRONT_SKILLS = [
         Socket<span className="hidden md:flex">&nbsp;(io, WS)</span>
       </>
     ),
+    titleSpoken: '<speak>Socket</speak>',
     level: 85
   },
   {
@@ -72,6 +76,7 @@ const FRONT_SKILLS = [
         PWA<span className="hidden md:flex">&nbsp;(workbox)</span>
       </>
     ),
+    titleSpoken: '<speak>P W A</speak>',
     level: 90
   },
   {
@@ -142,6 +147,7 @@ const BACK_SKILLS = [
         PHP<span className="hidden md:flex">&nbsp;(laravel, zf2)</span>
       </>
     ),
+    titleSpoken: '<speak>PHP and frame works</speak>',
     level: 70
   },
   {
@@ -150,6 +156,7 @@ const BACK_SKILLS = [
         Ruby<span className="hidden md:flex">&nbsp;(Rails)</span>
       </>
     ),
+    titleSpoken: '<speak>Ruby and Rails</speak>',
     level: 65
   },
   {
@@ -158,6 +165,7 @@ const BACK_SKILLS = [
         Node.js<span className="hidden md:flex">&nbsp;(express, nest)</span>
       </>
     ),
+    titleSpoken: '<speak>Node J S <break time="0.2s"/>express J S and nest J S</speak>',
     level: 90
   }
 ]
@@ -179,7 +187,7 @@ const MANAGEMENT_SKILLS = [
 export const SkillsSection = () => {
   return (
     <Section key="skills">
-      <div className="px-2 py-4 -mt-24 rounded-3xl shadow-primary text-lg text-white w-4/5 lg:w-1/2">
+      <div className="px-2 py-4 -mt-24 rounded-3xl shadow-primary text-lg text-white w-3/5 sm:w-2/5 md:w-3/5 lg:w-1/2">
         <div>
           <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 pb-3 lg:pb-6 ">Skills</h3>
           <div className="mt-2 space-y-1 lg:space-y-4 lg:mt-4">

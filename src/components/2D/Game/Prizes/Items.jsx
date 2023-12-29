@@ -119,7 +119,7 @@ export function HorizontalItem({
   const cursorHandlers = useCursorHandlers()
 
   return (
-    <li className={`relative sm:mb-0 shrink-0 w-80 lg:w-96`}>
+    <li className={`relative sm:mb-0 shrink-0 w-64 sm:w-80 lg:w-96`}>
       <div className="flex items-center">
         <div className="z-10 flex items-center text-blue-500 justify-center w-12 h-12 bg-blue-50 rounded-xl ring-8 ring-white shrink-0">
           {icons[icon] || defaultIcon}
@@ -178,8 +178,8 @@ export function HorizontalItem({
 
 export function VerticalItem({ title, subtitle, date, description, isWithdrawal, isLast }) {
   return (
-    <li className={`ml-2 md:ml-4 lg:ml-12 ${!isLast ? 'mb-8' : ''}`}>
-      <span className="absolute flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 bg-blue-50 text-blue-500 rounded lg:rounded-2xl -left-[1.6rem] ring-8 ring-white ">
+    <li className={`ml-4 md:ml-6 lg:ml-12 ${!isLast ? 'mb-8' : ''}`}>
+      <span className="absolute flex items-center justify-center w-9 h-9 lg:w-12 lg:h-12 bg-blue-50 text-blue-500 rounded lg:rounded-2xl -left-[1.2rem] lg:-left-[1.6rem] ring-4 lg:ring-8 ring-white ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 lg:w-8 lg:h-8"

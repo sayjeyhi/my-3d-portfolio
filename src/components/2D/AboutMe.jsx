@@ -20,7 +20,7 @@ export const AboutMeSection = props => {
             <br />
             <span className="bg-amber-50 px-1">Jafar Rezaei</span>
           </h1>
-          <p className="text-xs w-1/2 lg:w-1/2 xl:w-2/3 2xl:w-full md:text-xl lg:text-2xl text-gray-600 mt-4">
+          <p className="text-xs sm:text-base w-1/2 lg:w-1/2 xl:w-2/3 2xl:w-full md:text-xl lg:text-2xl text-gray-600 mt-4">
             A curious person who wants to improve stuff.
             <br />
             I&apos;m a software engineer and I&apos;m interested in web development.
@@ -30,7 +30,7 @@ export const AboutMeSection = props => {
 
           <button
             onClick={() => setSection(1)}
-            className="transform px-2 py-1 lg:px-6 lg:py-4 mt-8 rounded-lg lg:rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-lg lg:text-2xl text-white outline-none focus:ring-4 active:scale-90 transition-transform"
+            className="transform px-2 py-1 lg:px-6 lg:py-4 mt-8 rounded-lg lg:rounded-3xl bg-primary shadow-2xl ring-primary shadow-primary text-base md:text-lg lg:text-2xl text-white outline-none focus:ring-4 active:scale-90 transition-transform"
             {...cursorHandlers}>
             Tell me more
           </button>

@@ -344,7 +344,7 @@ export const EXPERIENCES = [
     title: 'SoftConstruct',
     logo: '/others/softconstruct_com_logo.jpeg',
     subtitle: 'Frontend Team Lead',
-    date: 'Jan. 2021 - Present',
+    date: 'Jan. 2021 - Feb. 2023',
     description: `We were working on an AI-based intelligent chatbot called Hoory. I was Leading an eight-member team. We used React.js, redux, Metarepos, k8s, GCP, gRPC, and many edge technologies. I got promoted to the frontend team lead after 6 months, and again after 6 months, I got promoted to the frontend architect.`,
     skills: ['Docker', 'react', 'Vue', 'Node.js', 'AWS', 'Kubernetes', 'gRPC', 'gRPC-web'],
     link: 'https://www.softconstruct.io/',
