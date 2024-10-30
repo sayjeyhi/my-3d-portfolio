@@ -12,7 +12,6 @@ body {
 }
 
 h1 {
-  font-family: 'Stylish';
   font-size: 24px;
   font-style: normal;
   font-variant: normal;
@@ -21,7 +20,6 @@ h1 {
 }
 
 h3 {
-  font-family: 'Stylish';
   font-size: 14px;
   font-style: normal;
   font-variant: normal;
@@ -30,7 +28,6 @@ h3 {
 }
 
 p {
-  font-family: 'Stylish';
   font-size: 14px;
   font-style: normal;
   font-variant: normal;
@@ -39,7 +36,6 @@ p {
 }
 
 blockquote {
-  font-family: 'Stylish';
   font-size: 21px;
   font-style: normal;
   font-variant: normal;
@@ -48,18 +44,11 @@ blockquote {
 }
 
 pre {
-  font-family: 'Stylish';
   font-size: 13px;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
   line-height: 18.5714px;
-}
-
-button,
-span:not(.inter),
-.stylish {
-  font-family: 'Stylish',tahoma, arial, serif ;
 }
 
 .inter,
@@ -137,4 +126,151 @@ kbd {
   z-index: 98;
   white-space: nowrap;
 }
+
+.window {
+  position: relative;
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  border-radius: 0.8rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  /*background: #fff;*/
+  padding: 4rem 1.2rem 1.2rem;
+}
+
+.window:after {
+  content: "";
+  color: black;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 40px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgb(255, 95, 86);
+  box-shadow: rgb(255, 189, 46) 24px 0px 0px, rgb(39, 201, 63) 48px 0px 0px;
+}
+
+button:not(.outline-squircle,.skip-squircle), [role="button"]:not(.outline-squircle, .skip-squircle) {
+  mask-image: paint(squircle);
+  --squircle-smooth: 0.8;
+  --squircle-radius: 20px;
+}
+
+.outline-squircle {
+  background: paint(squircle);
+  --squircle-smooth: 0.8;
+  --squircle-radius: 20px;
+  --squircle-outline: 2px;
+  --squircle-fill: #61bb95;
+}
+
+.generic-squircle {
+  background: paint(squircle);
+  --squircle-fill: #E1FFF2;
+  filter: drop-shadow(-1px 10px 10px #a198b1);
+}
+
+#mouse-scroll {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+}
+
+#mouse-scroll .arrows {
+  position: relative;
+  bottom: 2px;
+}
+#mouse-scroll span{
+  display: block;
+  width: 5px;
+  height: 5px;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  margin: 0 0 2px 5px;
+}
+#mouse-scroll .mouse {
+  height: 21px;
+  width: 14px;
+  border-radius: 10px;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  border: 2px solid #000000;
+}
+#mouse-scroll .down-arrow-1 {
+  margin-top: 6px;
+}
+#mouse-scroll .down-arrow-1, #mouse-scroll .down-arrow-2, #mouse-scroll .down-arrow-3 {
+  animation: mouse-scroll 1s infinite;
+}
+#mouse-croll .down-arrow-1 {
+  -webkit-animation-delay: .1s;
+  -moz-animation-delay: .1s;
+  -webkit-animation-direction: alternate;
+}
+#mouse-scroll .down-arrow-2 {
+  -webkit-animation-delay: .2s;
+  -moz-animation-delay: .2s;
+  -webkit-animation-direction: alternate;
+}
+#mouse-scroll .down-arrow-3 {
+  -webkit-animation-delay: .3s;
+  -moz-animation-dekay: .3s;
+  -webkit-animation-direction: alternate;
+}
+#mouse-scroll .mouse-in {
+  height: 5px;
+  width: 2px;
+  display: block;
+  margin: 5px auto;
+  background: #000000;
+  position: relative;
+}
+#mouse-scroll .mouse-in {
+  animation: animated-mouse 1.2s ease infinite;
+  -webkit-animation: animated-mouse 1.2s ease infinite;
+}
+
+@keyframes animated-mouse {
+  from {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+@-webkit-keyframes mouse-scroll {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes mouse-scroll {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 

@@ -91,7 +91,6 @@ export const GameSection = () => {
             showingReward={showingReward}
             handleTogglePauseTheGame={handleTogglePauseTheGame}
           />
-          <Guide dinoRef={dinoRef} />
         </div>
 
         <Audios

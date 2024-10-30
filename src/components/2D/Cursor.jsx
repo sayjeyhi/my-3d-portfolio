@@ -150,8 +150,8 @@ export const Cursor = () => {
   }, [menuOpened])
 
   const getCursorColor = () => {
-    if (isShowingFullInformationModal) return '#3b82f6'
-    return '#65a30c'
+    // if (isShowingFullInformationModal) return '#3b82f6'
+    return '#fff'
   }
 
   return (
@@ -162,54 +162,21 @@ export const Cursor = () => {
         position: 'absolute',
         pointerEvents: 'none',
         left: clientX,
-        top: clientY
+        top: clientY,
+        mixBlendMode: 'difference'
       }}>
-      {!isAudioActive && (
-        <div className="text-primary bold text-sm absolute w-[200px] -mt-12 -ml-[13px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="animate-[pulse_1.4s_cubic-bezier(1,0,0,1)_infinite]"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24">
-            <g fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M7.016 17.042C6.768 17 6.512 17 6 17c-1.374 0-2.06 0-2.66-.277a3.215 3.215 0 0 1-1.381-1.3c-.314-.582-.35-1.186-.424-2.395A17.127 17.127 0 0 1 1.5 12c0-.323.013-.671.035-1.029c.073-1.208.11-1.813.424-2.394a3.215 3.215 0 0 1 1.38-1.3C3.94 7 4.627 7 6 7c.512 0 .768 0 1.016-.042a3 3 0 0 0 .712-.214c.23-.101.444-.242.871-.524l.22-.144C11.36 4.399 12.632 3.56 13.7 3.925c.205.07.403.17.58.295c.835.587.972 1.879 1.094 4.357" />
-              <path
-                d="M15.5 8.5V12c0 .532-.035 1.488-.087 2.605c-.14 3.018-.21 4.526-1.133 5.175a2.317 2.317 0 0 1-.58.295c-.967.33-2.102-.328-4.2-1.702C8.833 17.915 7.4 17 7 17"
-                opacity=".5"
-                className=""
-              />
-              <path
-                strokeLinecap="round"
-                d="M20 18s1.5-1.8 1.5-6c0-2.433-.503-4.061-.927-5M18 15s.5-.9.5-3c0-.862-.084-1.522-.183-2"
-                opacity=".5"
-              />
-              <path strokeLinecap="round" d="M22 2L2 22" />
-            </g>
-          </svg>
-        </div>
-      )}
       <svg
         width={60}
         height={60}
         viewBox="0 0 100 100"
         style={{
-          transform: `translate(-50%, -50%) scale(${isCursorActive ? 1.5 : 1})`,
+          transform: `translate(-50%, -50%) scale(${isCursorActive ? 2.3 : 1})`,
           transition: 'transform .25s ease-in-out',
-          stroke: isCursorActive ? getCursorColor() : 'transparent',
-          strokeWidth: isCursorActive ? 3 : 1,
-          fill: isCursorActive ? 'rgba(255,255,255,0.4)' : getCursorColor()
+          stroke: 'transparent',
+          strokeWidth: 1,
+          fill: getCursorColor()
         }}>
         <circle cx="50" cy="50" r="16" />
-        {!isAudioActive && (
-          <circle
-            className="animate-[ping_2s_cubic-bezier(0.18,0.89,0.32,1.27)_infinite] origin-center"
-            cx="50"
-            cy="50"
-            r="28"
-            style={{ opacity: 0.25 }}
-          />
-        )}
       </svg>
     </div>
   )

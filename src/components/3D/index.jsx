@@ -56,7 +56,7 @@ export const ThreeD = () => {
     let oldMouseX = 0
     let oldMouseY = 0
     window.onmousemove = e => {
-      if (animation !== 'Typing' && animation !== 'PhoneCall') return
+      if (animation !== 'PhoneCall') return
       let xAxesMultiplier = 0.00005
       let yAxesMultiplier = 0.00006
       if (animation === 'PhoneCall') {

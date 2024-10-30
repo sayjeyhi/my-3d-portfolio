@@ -53,6 +53,14 @@
     })(window,document,'script','dataLayer','GTM-WMZX9BLX');</script>
     <!-- End Google Tag Manager -->
 
+    <script>
+      if ("paintWorklet" in CSS) {
+        CSS.paintWorklet.addModule(
+          "https://www.unpkg.com/css-houdini-squircle@0.3.0/squircle.min.js"
+        );
+      }
+    </script>
+
     <style>
       .loader {
         width: 88px;

@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#e5a04c',
-        secondary: '#65a30c'
+        primary: '#26c883',
+        secondary: '#61bb95'
       },
       animation: {
         fall: 'fall 0.5s ease-in-out',

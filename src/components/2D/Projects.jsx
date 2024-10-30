@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 export const ProjectsSection = () => {
   return (
     <Section key="projects" className="-mt-48">
-      <h3 className="-mt-0 lg:-mt-8 pl-2 text-3xl lg:text-5xl font-bold text-gray-900 pb-3 lg:pb-6 ">
+      <h3 className="-mt-0 lg:-mt-8 pl-2 text-3xl lg:text-5xl font-bold text-primary pb-3 lg:pb-6 ">
         Books
       </h3>
-      <div className="flex mb-2 overflow-x-auto overflow-y-visible w-full lg:pb-8">
+      <div className="flex mb-2 overflow-x-auto overflow-y-visible w-full lg:pb-8 items-center">
         <BookCard
           name="Javascript fundamentals"
           subtitle="(250 pages)"
@@ -48,7 +48,7 @@ export const BookCard = ({ name, url, img, subtitle }) => {
 export const WhatElseCard = () => {
   return (
     <motion.a
-      className="hidden lg:flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-full border border-gray-100 bg-white shadow-xl w-60 h-60"
+      className="hidden lg:flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xl w-60 h-60"
       initial={{
         opacity: 0,
         x: 120
@@ -68,16 +68,16 @@ export const WhatElseCard = () => {
       href="https://github.com/Mariotek"
       target="_blank"
       rel="nofollow noreferrer">
-      <div className="border-gray-100 group-hover:border-gray-200 transition-all border-2 rounded-full p-8 border-dashed h-full w-full flex flex-col items-center justify-center">
-        <p className="text-xl mt-12">Looks interesting?</p>
+      <div className="border-gray-100 group-hover:border-gray-200 transition-all border-2 rounded-lg p-8 border-dashed h-full w-full flex flex-col items-center justify-center">
+        <p className="text-xl mt-12 text-center font-bold text-primary">Looks interesting?</p>
         <div className="flex relative w-1/2">
-          <button className="mt-4 py-2 px-3 stylish rounded-3xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
+          <button className="mt-4 skip-squircle py-2 px-3 stylish rounded-xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
             Github
           </button>
 
           {/* Game */}
           <svg
-            className="text-primary absolute -top-20 -left-[10px] -translate-x-1/2 opacity-30 -rotate-[28deg]"
+            className="text-primary absolute -top-24 -left-[10px] -translate-x-1/2 opacity-30 -rotate-[28deg]"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
@@ -90,7 +90,7 @@ export const WhatElseCard = () => {
 
           {/* Github */}
           <svg
-            className="text-primary absolute -top-[78px] right-[-25px] opacity-25 rotate-[28deg]"
+            className="text-primary absolute -top-24 right-[-25px] opacity-25 rotate-[28deg]"
             xmlns="http://www.w3.org/2000/svg"
             width="30"
             height="30"
@@ -103,7 +103,7 @@ export const WhatElseCard = () => {
 
           {/* Star */}
           <svg
-            className="text-primary absolute -top-[112px] -translate-x-1/2 left-1/2 opacity-50"
+            className="text-primary absolute -top-[130px] -translate-x-1/2 left-1/2 opacity-50"
             xmlns="http://www.w3.org/2000/svg"
             width="48"
             height="48"

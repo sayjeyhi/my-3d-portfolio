@@ -53,7 +53,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
   }
 
   return (
-    <div className="flex justify-between items-center absolute -bottom-28 w-full left-0 right-0">
+    <div className="flex justify-between items-center absolute -bottom-24 w-full left-0 right-0">
       <div className="flex ml-18 items-center font-semibold text-gray-800 pixel">
         Your Life:
         <div className="h-4 relative ml-2 w-48 rounded-full overflow-hidden">
@@ -184,7 +184,7 @@ export const Controls = ({ handleTogglePauseTheGame }) => {
         <button
           onClick={handleJumpToPrize}
           className="no-tooltip bg-primary ring-lime-600 focus:outline-lime-700 h-10 text-white rounded-2xl px-4 flex justify-center items-center pixel text-lg">
-          Jump to {nextPrize}
+          Show {nextPrize}
         </button>
       </div>
       <div />

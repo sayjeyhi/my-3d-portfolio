@@ -23,7 +23,11 @@ export const Menu = props => {
           e.stopPropagation()
           setMenuOpened(!menuOpened)
         }}
-        className="z-20 focus:outline-lime-700 fixed top-4 right-4 p-3 bg-primary w-12 h-12 rounded-2xl"
+        className={`z-20 focus:outline-lime-700 fixed top-4 p-3 w-12 h-12 rounded-xl ${
+          menuOpened
+            ? 'scale-75 outline-squircle right-[330px] [&>*]:bg-primary'
+            : 'bg-primary right-4'
+        }`}
         {...cursorHandlers}>
         <div
           className={`bg-white h-0.5 rounded-md w-full transition-all ${
@@ -69,10 +73,24 @@ export const Menu = props => {
         )}
       </button>
       <div
-        className={`z-10 fixed top-0 right-0 bottom-0 max-h-[100vh] bg-primary rounded-none md:rounded-tl-2xl md:rounded-bl-2xl transition-all overflow-hidden flex flex-col justify-between
+        className={`z-10 fixed top-0 right-0 bottom-0 max-h-[100vh] bg-gray-50 rounded-none transition-all overflow-hidden flex flex-col justify-between
       ${menuOpened ? 'w-full md:w-80' : 'w-0'}`}>
-        <div className="mt-10 mb-10">
-          <img className="rounded-full w-48 h-48 mx-auto" src="me.jpeg" alt="Jafar Rezaei" />
+        <div className="mt-10 mb-10 flex align-center justify-center">
+          <svg
+            {...cursorHandlers}
+            className="w-48 [&:hover]:scale-110 transition-all [&:hover]:grayscale"
+            viewBox="0 0 200 200">
+            <defs>
+              <pattern id="squircle" patternUnits="userSpaceOnUse" width="200" height="200">
+                <image xlinkHref="/me.jpeg" x="0" y="0" width="200" height="200"></image>
+              </pattern>
+            </defs>
+
+            <path
+              d="M100,200c43.8,0,68.2,0,84.1-15.9C200,168.2,200,143.8,200,100s0-68.2-15.9-84.1C168.2,0,143.8,0,100,0S31.8,0,15.9,15.9C0,31.8,0,56.2,0,100s0,68.2,15.9,84.1C31.8,200,56.2,200,100,200z"
+              fill="url(#squircle)"
+            />
+          </svg>
         </div>
         <div className="flex items-start justify-center flex-col gap-4 px-8 inter">
           <MenuButton label="About" onClick={() => setSection(0)} />
@@ -83,8 +101,8 @@ export const Menu = props => {
           <button
             {...cursorHandlers}
             onClick={() => setShowFullInformation(true)}
-            className="w-full justify-center px-2 py-3 mt-3 text-md font-semibold bg-white text-gray-500 rounded  text-center transition-all hover:shadow-lg hover:shadow-amber-200 hover:text-gray-700">
-            Full Information
+            className="outline-squircle w-full justify-center px-2 py-3 mt-12 block text-md font-bold text-primary border-primary rounded text-xl text-center transition-all">
+            Quick look
           </button>
         </div>
 
@@ -95,7 +113,7 @@ export const Menu = props => {
             {...cursorHandlers}
             title="LinkedIn"
             rel="noreferrer"
-            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
+            className="text-white cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="#fff"
@@ -115,7 +133,7 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="GitHub"
-            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
+            className="text-white cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-label="GitHub"
@@ -134,7 +152,7 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="X (twitter)"
-            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
+            className="text-white cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-9 h-9"
@@ -153,7 +171,7 @@ export const Menu = props => {
             {...cursorHandlers}
             rel="noreferrer"
             title="Stack Overflow"
-            className="text-white cursor-pointer opacity-80 hover:opacity-100 transition-colors">
+            className="text-white cursor-pointer">
             <svg
               className="w-9 h-9"
               aria-label="Stack Overflow"
@@ -180,7 +198,7 @@ export const MenuButton = props => {
   return (
     <button
       onClick={onClick}
-      className={`text-xl font-bold text-white cursor-pointer hover:text-gray-700 transition-colors ${className}`}
+      className={`text-xl text-black cursor-pointer transition-colors ${className}`}
       {...cursorHandlers}>
       {children || label}
     </button>

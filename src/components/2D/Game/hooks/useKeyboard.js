@@ -7,7 +7,6 @@ import {
   gamePlayerSetCurrentAction,
   gameSetIsStartedAtom
 } from '@/atoms/game'
-import { showGameGuideAtom } from '@/atoms/gameGuide.js'
 
 export const useKeyboard = ({
   handleTogglePauseTheGame,
@@ -18,7 +17,6 @@ export const useKeyboard = ({
   const isStarted = useAtomValue(gameIsStartedAtom)
   const [isPaused, setIsPaused] = useAtom(gamePauseAtom)
   const setIsStarted = useSetAtom(gameSetIsStartedAtom)
-  const setShowGuide = useSetAtom(showGameGuideAtom)
   const setCurrentAction = useSetAtom(gamePlayerSetCurrentAction)
 
   useEffect(() => {
@@ -51,23 +49,19 @@ export const useKeyboard = ({
             setCurrentAction(PLAYER_ACTIONS.shoot)
           }
           setIsPaused(false)
-          setShowGuide(false)
           e.preventDefault()
         }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'a' || e.key === 'd') {
           setCurrentAction(PLAYER_ACTIONS.defend)
           setIsPaused(false)
-          setShowGuide(false)
           e.preventDefault()
         } else if (e.key === 'ArrowUp' || e.key === 'w') {
           setCurrentAction(PLAYER_ACTIONS.jump)
           setIsPaused(false)
-          setShowGuide(false)
           e.preventDefault()
         } else if (e.key === 'ArrowDown' || e.key === 's') {
           setCurrentAction(PLAYER_ACTIONS.sit)
           setIsPaused(false)
-          setShowGuide(false)
           e.preventDefault()
         } else if (e.key === 'Escape') {
           handleTogglePauseTheGame()

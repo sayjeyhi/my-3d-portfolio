@@ -8,6 +8,7 @@ import {
 } from '@/atoms/game'
 import { useAtomValue } from 'jotai'
 import { gameEnableRewardsAtom, nextPrizeAtom } from '@/atoms/prizes.js'
+import { Guide } from '@/components/2D/Game/Components/Guide.jsx'
 
 export const TopTexts = ({ showingReward }) => {
   const isStarted = useAtomValue(gameIsStartedAtom)
@@ -27,10 +28,12 @@ export const TopTexts = ({ showingReward }) => {
             Press <kbd>Space</kbd> to start the game with interesting prizes! 🎁
           </span>
           <br />
-          <span className="text-lg">
-            {' '}
-            Use <kbd>Space</kbd> to shoot and defend yourself from the dinosaur. 🦖
-          </span>
+          {/*<span className="text-lg">*/}
+          {/*  {' '}*/}
+          {/*  Use <kbd>Space</kbd> to shoot and defend yourself from the dinosaur. 🦖*/}
+          {/*</span>*/}
+
+          <Guide />
         </div>
       )}
       {!isStarted && hasWon && !hasLoose && (

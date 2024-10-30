@@ -9,7 +9,6 @@ import {
   scrollIntoView
 } from '@/atoms/game'
 import { isPrizeVisibleAtom } from '@/atoms/prizes.js'
-import { showGuideAtom } from '@/atoms/gameGuide.js'
 import { useScroll } from '@react-three/drei'
 
 export const useGameInterval = ({ victoryAudioRef }) => {
@@ -19,7 +18,6 @@ export const useGameInterval = ({ victoryAudioRef }) => {
   const isPaused = useAtomValue(gamePauseAtom)
   const isPrizeVisible = useAtomValue(isPrizeVisibleAtom)
   const score = useAtomValue(gameScoreAtom)
-  const showGameGuide = useSetAtom(showGuideAtom)
   const setScore = useSetAtom(gameSetScoreAtom)
   const setTime = useSetAtom(gameTimeAtom)
   const setIsPaused = useSetAtom(gamePauseAtom)
@@ -64,19 +62,6 @@ export const useGameInterval = ({ victoryAudioRef }) => {
        */
       if (prevScore >= 700) {
         clearInterval(gameTimerRef.current)
-      }
-
-      /**
-       * Show the guide
-       */
-      if (prevTime >= 2 && prevTime < 2.1) {
-        showGameGuide('defend')
-      } else if (prevTime >= 6 && prevTime < 6.1) {
-        showGameGuide('jump')
-      } else if (prevTime >= 13 && prevTime < 13.1) {
-        showGameGuide('sit')
-      } else if (prevTime >= 18 && prevTime < 18.1) {
-        showGameGuide('shoot')
       }
     }, 400)
   }, [isStarted, isPaused, setScore, setTime])
