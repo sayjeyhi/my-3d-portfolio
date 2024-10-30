@@ -18,13 +18,15 @@ export const AboutMeSection = props => {
         <Section key="me">
           <div className="window">
             <h1 className="leading-none font-light text-xl sm:text-md">
-              <span className="bg-white">Hi, I&apos;m</span>
+              <span className="bg-white text-gray-700">
+                <strong className="font-medium">Hi</strong>, I&apos;m
+              </span>
               <br />
               <br />
               <NameWithRandomDarkColors />
               <br />
             </h1>
-            <p className="text-xs bg-white sm:text-base md:text-lg lg:text-lg text-black mt-6 pl-2 border-l-8 border-gray-300 border-opacity-50">
+            <p className="text-xs bg-white sm:text-base md:text-lg lg:text-lg text-gray-700 mt-6 pl-2 border-l-8 border-gray-300 border-opacity-50">
               <span {...cursorHandlers}>A published author with 10+ years in the field,</span>
               <br />
               <span {...cursorHandlers} className="bg-white">

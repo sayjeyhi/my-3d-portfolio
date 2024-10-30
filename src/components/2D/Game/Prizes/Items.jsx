@@ -121,7 +121,7 @@ export function HorizontalItem({
   return (
     <li className={`relative sm:mb-0 shrink-0 w-64 sm:w-80 lg:w-96`}>
       <div className="flex items-center">
-        <div className="z-10 flex items-center text-blue-500 justify-center w-12 h-12 bg-blue-50 rounded-xl ring-8 ring-white shrink-0">
+        <div className="z-10 flex items-center transition-all hover:scale-105 text-primary justify-center w-12 h-12 bg-blue-50 rounded-xl ring-8 ring-white shrink-0">
           {icons[icon] || defaultIcon}
         </div>
         {titleDate && (
@@ -135,7 +135,7 @@ export function HorizontalItem({
         <div>
           <a href={link} target="_blank" rel="noopener noreferrer" {...cursorHandlers}>
             <h3 className="text-lg font-semibold text-gray-900 ">{title}</h3>
-            <h4 className="mb-2 text-xs text-gray-500">{subtitle}</h4>
+            <h4 className="mb-2 text-xs text-gray-600">{subtitle}</h4>
           </a>
 
           {date && (
@@ -179,7 +179,7 @@ export function HorizontalItem({
 export function VerticalItem({ title, subtitle, date, description, isWithdrawal, isLast }) {
   return (
     <li className={`ml-4 md:ml-6 lg:ml-12 ${!isLast ? 'mb-8' : ''}`}>
-      <span className="absolute flex items-center justify-center w-9 h-9 lg:w-12 lg:h-12 bg-blue-50 text-blue-500 rounded lg:rounded-2xl -left-[1.2rem] lg:-left-[1.6rem] ring-4 lg:ring-8 ring-white ">
+      <span className="absolute flex items-center justify-center w-9 h-9 lg:w-12 lg:h-12 bg-blue-50 text-primary rounded lg:rounded-2xl -left-[1.2rem] lg:-left-[1.6rem] ring-4 lg:ring-8 ring-white ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 lg:w-8 lg:h-8"

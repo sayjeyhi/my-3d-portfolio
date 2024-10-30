@@ -1,7 +1,10 @@
 import { EXPERIENCES } from '../constants.js'
 import { HorizontalItem, icons } from './Items'
+import { useCursorHandlers } from '@/components/2D/Cursor.jsx'
 
 export function GameExperience() {
+  const cursorHandlers = useCursorHandlers()
+
   return (
     <ol className="items-start flex overflow-auto pb-5">
       {EXPERIENCES.map((experience, index) => {
@@ -52,7 +55,9 @@ export function GameExperience() {
               </div>
             }
             beforeTags={
-              <div className="flex items-center gap-3 text-xs text-gray-500 justify-center my-4 border rounded-xl">
+              <div
+                {...cursorHandlers}
+                className="flex items-center gap-2 text-xs text-gray-700 justify-center my-4 border rounded-xl">
                 For <span className="font-semibold inter">{diffInYearsAndMonths()}</span> in{' '}
                 {icons[experience.country]} {experience.country}
               </div>

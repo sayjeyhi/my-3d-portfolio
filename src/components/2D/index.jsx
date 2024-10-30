@@ -23,24 +23,21 @@ export const TwoD = () => {
     <Scroll html>
       <Menu />
       {showFullInformation && (
-        <Section key="placeholder" className="fixed bg-white z-20 py-0">
+        <Section key="placeholder" className="fixed bg-white z-20 !py-0">
           <div className="overflow-y-auto max-w-full overflow-x-hidden px-3 lg:pl-0 lg:pr-3">
-            <MenuButton
+            <button
               onClick={e => {
                 e.stopPropagation()
                 setShowFullInformation(false)
               }}
-              className="absolute top-0 right-0 p-2 z-20 bg-white rounded-bl-2xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-10 h-10"
-                viewBox="0 0 24 24"
-                id="close">
+              className="absolute top-0 right-0 text-primary p-2 z-20 bg-white rounded-bl-2xl scale-75 outline-squircle">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10" viewBox="0 0 24 24">
                 <path
-                  fill="#3b82f6"
-                  d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29ZM19,2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V5A3,3,0,0,0,19,2Zm1,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4H19a1,1,0,0,1,1,1Z"></path>
+                  fill="currentColor"
+                  d="m12 13.4l-2.917 2.925q-.277.275-.704.275t-.704-.275q-.275-.275-.275-.7t.275-.7L10.6 12L7.675 9.108Q7.4 8.831 7.4 8.404t.275-.704q.275-.275.7-.275t.7.275L12 10.625L14.892 7.7q.277-.275.704-.275t.704.275q.3.3.3.713t-.3.687L13.375 12l2.925 2.917q.275.277.275.704t-.275.704q-.3.3-.712.3t-.688-.3z"
+                />
               </svg>
-            </MenuButton>
+            </button>
 
             <br />
             <Title title="Educations" subTitle="My academic background" />
@@ -100,7 +97,7 @@ export const TwoD = () => {
 
 const Title = ({ title, subTitle }) => (
   <div className="mb-5">
-    <h2 className="w-[100vw] text-left text-3xl lg:text-4xl font-bold text-blue-500 mt-6 lg:mt-8">
+    <h2 className="w-[100vw] text-left text-3xl lg:text-4xl font-bold text-primary mt-6 lg:mt-8">
       {title}
     </h2>
     {subTitle && (

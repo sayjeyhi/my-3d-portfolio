@@ -305,7 +305,7 @@ export const TALKS = [
       'I had a talk about how to use React Three Fiber and how to create 3D scenes in React and how to use it in your project.',
     image: './talks/3d.png',
     tags: ['3d', 'react', 'threejs', 'r3f'],
-    link: 'https://3d.sayjeyhi.com/'
+    link: 'https://r3f-threejs.sayjeyhi.com/?slideIndex=0&stepIndex=0'
   }
 ]
 
@@ -313,7 +313,7 @@ export const EXPERIENCES = [
   {
     title: 'Lyreco Group',
     logo: '/others/lyreco_group_logo.jpeg',
-    subtitle: 'Senior Frontend Developer (via iO)',
+    subtitle: 'Squad Lead / Senior Software Engineer',
     date: 'May 2023 - Present',
     description: `We are working on a new e-commerce platform for Lyreco. I am working as a senior frontend developer in this project. We are using React.js, redux, and many other technologies. \n\nWe are working with a great team and we are using the latest technologies.`,
     skills: ['React', 'Next.js', 'TypeScript', 'i18n', 'testing', 'Docker', 'Kubernetes', 'Azure'],
@@ -343,7 +343,7 @@ export const EXPERIENCES = [
   {
     title: 'SoftConstruct',
     logo: '/others/softconstruct_com_logo.jpeg',
-    subtitle: 'Frontend Team Lead',
+    subtitle: 'Frontend Team Lead / Architect',
     date: 'Jan. 2021 - Feb. 2023',
     description: `We were working on an AI-based intelligent chatbot called Hoory. I was Leading an eight-member team. We used React.js, redux, Metarepos, k8s, GCP, gRPC, and many edge technologies. I got promoted to the frontend team lead after 6 months, and again after 6 months, I got promoted to the frontend architect.`,
     skills: ['Docker', 'react', 'Vue', 'Node.js', 'AWS', 'Kubernetes', 'gRPC', 'gRPC-web'],
