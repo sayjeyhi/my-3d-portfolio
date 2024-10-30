@@ -32,7 +32,7 @@ export const ContactSection = () => {
             />
           </svg>
         </SocialButton>
-        <SocialButton title="Mail" link="mailto:sayjeyhi.com">
+        <SocialButton title="Mail" link="mailto:sayjeyhi@gmail.com">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
             <path
               fill="#fff"
