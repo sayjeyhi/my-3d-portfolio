@@ -15,14 +15,14 @@ export const ProjectsSection = () => {
           url="https://github.com/Mariotek/better-understanding-of-javascript"
         />
         <BookCard
-          name="React.js Interview questions"
-          subtitle="420 questions"
+          name="React.js top question/answers"
+          subtitle="(420 questions)"
           img="books/react.jpeg"
           url="https://github.com/Mariotek/reactjs-persian-interview-questions"
         />
         <BookCard
-          name="Javascript Interview questions"
-          subtitle="Helped with translation"
+          name="Javascript top question/answers"
+          subtitle="(Helped with translation)"
           img="books/js-questions.jpg"
           url="https://github.com/Mariotek/javascript-persian-interview-questions"
         />

@@ -3,7 +3,7 @@ import { useCursorHandlers } from './Cursor'
 
 export const ContactSection = () => {
   return (
-    <Section key="contact-me" className="mt-[12rem] ml-2 lg:mt-[18rem] lg:ml-24 ">
+    <Section key="contact-me" className="mt-[10rem] ml-2 lg:mt-[16rem] lg:ml-24 ">
       <div className="flex gap-3 py-1">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
@@ -45,7 +45,7 @@ export const ContactSection = () => {
       <div className="flex flex-col text-xs items-start text-gray-700 backdrop-blur-sm p-2 lg:p-5 rounded-lg ml-1">
         <div>
           3D Models: &nbsp;
-          <a href="https://icons8.com" target="_blank" rel="noreferrer">
+          <a href="https://iconscout.com" target="_blank" rel="noreferrer">
             IconScout
           </a>
           &nbsp; and &nbsp;
@@ -54,7 +54,11 @@ export const ContactSection = () => {
           </a>
           &nbsp;
           <br />
-          Sound effects: &nbsp;
+          SVG icons: &nbsp;
+          <a href="https://icones.js.org/" target="_blank" rel="noreferrer">
+            icones.js
+          </a>{' '}
+          And Sound effects by &nbsp;
           <a href="https://pixabay.com/service/license-summary/" target="_blank" rel="noreferrer">
             Pixabay
           </a>
@@ -76,9 +80,10 @@ const SocialButton = props => {
       title={props.title}
       href={props.link}
       target="_blank"
+      className="skip-squircle"
       rel="noreferrer"
       {...cursorHandlers}>
-      <button className="px-3 py-3 rounded-2xl bg-primary shadow-2xl scale-[0.80] ring-primary shadow-primary text-xl text-white outline-none focus:ring-4 transform transition-transform hover:scale-95">
+      <button className="px-3 skip-squircle py-3 rounded-2xl bg-primary shadow-2xl scale-[0.80] ring-primary shadow-primary text-xl text-white outline-none focus:ring-4 transform transition-transform hover:scale-95">
         {props.children}
       </button>
     </a>
