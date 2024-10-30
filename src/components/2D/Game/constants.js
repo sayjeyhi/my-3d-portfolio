@@ -303,7 +303,7 @@ export const TALKS = [
     date: 'Jan 2024',
     description:
       'I had a talk about how to use React Three Fiber and how to create 3D scenes in React and how to use it in your project.',
-    image: './talks/3d.png',
+    image: './talks/3d.jpeg',
     tags: ['3d', 'react', 'threejs', 'r3f'],
     link: 'https://r3f-threejs.sayjeyhi.com/?slideIndex=0&stepIndex=0'
   }
