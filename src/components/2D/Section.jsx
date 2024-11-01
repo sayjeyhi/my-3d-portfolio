@@ -4,7 +4,7 @@ export const Section = ({ className, children, ...rest }) => {
   return (
     <motion.section
       className={
-        `h-screen w-screen p-2 sm:p-3 md:p-4 lg:p-6 max-w-screen-2xl mx-auto flex flex-col items-start justify-center ` +
+        `h-screen w-screen p-2 sm:p-3 md:p-4 lg:p-6 mx-auto flex flex-col items-start justify-center ` +
         className
       }
       initial={{

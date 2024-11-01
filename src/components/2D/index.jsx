@@ -1,4 +1,4 @@
-import { Cursor } from './Cursor'
+import { Cursor, useCursorHandlers } from './Cursor'
 import { AboutMeSection } from '@/components/2D/AboutMe'
 import { SkillsSection } from '@/components/2D/Skills'
 import { ProjectsSection } from '@/components/2D/Projects'
@@ -18,6 +18,7 @@ import { GameExperience } from '@/components/2D/Game/Prizes/Experience.jsx'
 
 export const TwoD = () => {
   const [showFullInformation, setShowFullInformation] = useAtom(showFullInformationAtom)
+  const cursorHandlers = useCursorHandlers()
 
   return (
     <Scroll html>
@@ -26,6 +27,7 @@ export const TwoD = () => {
         <Section key="placeholder" className="fixed bg-white z-20 !py-0">
           <div className="overflow-y-auto max-w-full overflow-x-hidden px-3 lg:pl-0 lg:pr-3">
             <button
+              {...cursorHandlers}
               onClick={e => {
                 e.stopPropagation()
                 setShowFullInformation(false)

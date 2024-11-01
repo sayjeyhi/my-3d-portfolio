@@ -15,7 +15,7 @@ export const AboutMeSection = props => {
       {menuOpened || section !== 0 ? (
         <Section key="placeholder" />
       ) : (
-        <Section key="me">
+        <Section className="max-w-screen-2xl" key="me">
           <div className="window">
             <h1 className="leading-none font-light text-xl sm:text-md">
               <span className="bg-white text-gray-700">

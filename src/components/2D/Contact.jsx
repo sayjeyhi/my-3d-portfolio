@@ -3,7 +3,7 @@ import { useCursorHandlers } from './Cursor'
 
 export const ContactSection = () => {
   return (
-    <Section key="contact-me" className="mt-[10rem] ml-2 lg:mt-[16rem] lg:ml-24 ">
+    <Section key="contact-me" className="mt-[10rem] ml-2 lg:mt-[16rem] lg:ml-24 max-w-screen-2xl">
       <div className="flex gap-3 py-1">
         <SocialButton title="Linkedin" link="https://www.linkedin.com/in/jafar-rezaei/">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">

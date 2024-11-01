@@ -189,7 +189,7 @@ const MANAGEMENT_SKILLS = [
 
 export const SkillsSection = () => {
   return (
-    <Section key="skills">
+    <Section key="skills" className="max-w-screen-2xl">
       <div className="px-2 py-4 -mt-24 rounded-3xl shadow-primary text-lg text-white w-3/5 sm:w-2/5 md:w-3/5 lg:w-1/2">
         <div>
           <h3 className="text-3xl lg:text-5xl font-bold text-primary pb-3 lg:pb-6 ">Skills</h3>

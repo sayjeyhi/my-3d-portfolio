@@ -3,27 +3,30 @@ import { motion } from 'framer-motion'
 
 export const ProjectsSection = () => {
   return (
-    <Section key="projects" className="-mt-48">
+    <Section key="projects" className="-mt-48 max-w-screen-2xl">
       <h3 className="-mt-0 lg:-mt-8 pl-2 text-3xl lg:text-5xl font-bold text-primary pb-3 lg:pb-6 ">
         Books
       </h3>
-      <div className="flex mb-2 overflow-x-auto overflow-y-visible w-full lg:pb-8 items-center">
+      <div className="flex justify-center mb-2 py-24 overflow-x-auto overflow-y-visible w-full lg:pb-8 items-center">
         <BookCard
           name="Javascript fundamentals"
           subtitle="(250 pages)"
-          img="books/javascript.jpg"
+          img="books/js-book-cover.jpeg"
+          className="js-book"
           url="https://github.com/Mariotek/better-understanding-of-javascript"
         />
         <BookCard
           name="React.js top question/answers"
           subtitle="(420 questions)"
-          img="books/react.jpeg"
+          img="books/react-cover.jpg"
+          className="react"
           url="https://github.com/Mariotek/reactjs-persian-interview-questions"
         />
         <BookCard
           name="Javascript top question/answers"
           subtitle="(Helped with translation)"
-          img="books/js-questions.jpg"
+          img="books/js-cover.jpeg"
+          className="js-qa"
           url="https://github.com/Mariotek/javascript-persian-interview-questions"
         />
 
@@ -33,13 +36,15 @@ export const ProjectsSection = () => {
   )
 }
 
-export const BookCard = ({ name, url, img, subtitle }) => {
+export const BookCard = ({ className, name, url, img, subtitle }) => {
   return (
-    <a href={url} target="_blank" rel="nofollow noreferrer">
-      <div className="w-48 lg:w-80 relative p-1 lg:p-2 mx-2 flex flex-col rounded-lg border border-gray-100 bg-white shadow-md">
-        <img className="rounded-md" src={img} alt={name} />
-        <h4 className="text-sm lg:text-base font-bold text-slate-900 mt-2">{name}</h4>
-        <h5 className="text-xs font-medium text-slate-400 mb-1">{subtitle}</h5>
+    <a href={url} target="_blank" rel="nofollow noreferrer" className="book-container">
+      <div className={`book ${className}`}>
+        <img alt={name} src={img} />
+      </div>
+      <div className="absolute -bottom-20 text-center">
+        <h4 className="text-sm lg:text-base font-bold text-slate-800">{name}</h4>
+        <p className="mt-2 text-xs font-light text-slate-400">{subtitle}</p>
       </div>
     </a>
   )
@@ -48,7 +53,7 @@ export const BookCard = ({ name, url, img, subtitle }) => {
 export const WhatElseCard = () => {
   return (
     <motion.a
-      className="hidden lg:flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xl w-60 h-60"
+      className="hidden lg:flex items-center group align-middle justify-center relative p-2 ml-6 max-w-xs flex-col overflow-hidden rounded-lg  w-60 h-60"
       initial={{
         opacity: 0,
         x: 120
@@ -68,10 +73,16 @@ export const WhatElseCard = () => {
       href="https://github.com/Mariotek"
       target="_blank"
       rel="nofollow noreferrer">
-      <div className="border-gray-100 group-hover:border-gray-200 transition-all border-2 rounded-lg p-8 border-dashed h-full w-full flex flex-col items-center justify-center">
+      <div className="group-hover:border-gray-200 transition-all rounded-lg p-8 h-full w-full flex flex-col items-center justify-center">
         <p className="text-xl mt-12 text-center font-bold text-primary">Looks interesting?</p>
         <div className="flex relative w-1/2">
-          <button className="mt-4 skip-squircle py-2 px-3 stylish rounded-xl bg-primary text-xl text-white outline-none focus:ring-4 transform group-hover:scale-95 transition-transform">
+          <button className="flex items-center gap-2 border mt-12 border-black rounded pr-2 skip-squircle font-semibold text-black text-base outline-none focus:ring-4 transform group-hover:scale-105 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="-2 -2 24 24">
+              <path
+                fill="currentColor"
+                d="M18.88 1.099Q17.78-.001 16.233 0H3.746Q2.198 0 1.099 1.099Q-.001 2.199 0 3.746v12.487q0 1.548 1.099 2.647q1.1 1.1 2.647 1.099H6.66q.285 0 .429-.02a.5.5 0 0 0 .286-.169q.143-.15.143-.435l-.007-.885q-.006-.846-.006-1.34l-.3.052q-.285.052-.721.046a5.6 5.6 0 0 1-.904-.091a2 2 0 0 1-.872-.39a1.65 1.65 0 0 1-.572-.8l-.13-.3a3.3 3.3 0 0 0-.41-.663q-.28-.364-.566-.494l-.09-.065a1 1 0 0 1-.17-.156a.7.7 0 0 1-.117-.182q-.039-.092.065-.15q.104-.06.378-.059l.26.04q.26.051.643.311a2.1 2.1 0 0 1 .631.677q.3.532.722.813q.423.28.852.28t.742-.065a2.6 2.6 0 0 0 .585-.196q.117-.871.637-1.34a9 9 0 0 1-1.333-.234a5.3 5.3 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872q-.416-.52-.683-1.365q-.266-.846-.266-1.952q0-1.573 1.027-2.68q-.48-1.183.091-2.652q.378-.118 1.119.175t1.086.5q.345.21.553.352a9.2 9.2 0 0 1 2.497-.338q1.288 0 2.498.338l.494-.312a7 7 0 0 1 1.197-.572q.689-.26 1.054-.143q.585 1.47.103 2.653q1.028 1.105 1.028 2.68q0 1.106-.267 1.957q-.266.852-.689 1.366a3.7 3.7 0 0 1-1.053.865q-.63.351-1.223.507a9 9 0 0 1-1.333.235q.675.585.676 1.846v3.11q0 .22.065.357a.36.36 0 0 0 .208.189q.143.052.254.064q.111.014.318.013h2.914q1.548 0 2.647-1.099t1.099-2.647V3.746q0-1.548-1.1-2.647z"
+              />
+            </svg>
             Github
           </button>
 
@@ -88,17 +99,25 @@ export const WhatElseCard = () => {
             />
           </svg>
 
-          {/* Github */}
+          {/* Mario */}
           <svg
-            className="text-primary absolute -top-24 right-[-25px] opacity-25 rotate-[28deg]"
             xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 256 256">
-            <path
-              fill="currentColor"
-              d="M216 104v8a56.06 56.06 0 0 1-48.44 55.47A39.8 39.8 0 0 1 176 192v40a8 8 0 0 1-8 8h-64a8 8 0 0 1-8-8v-16H72a40 40 0 0 1-40-40a24 24 0 0 0-24-24a8 8 0 0 1 0-16a40 40 0 0 1 40 40a24 24 0 0 0 24 24h24v-8a39.8 39.8 0 0 1 8.44-24.53A56.06 56.06 0 0 1 56 112v-8a58.14 58.14 0 0 1 7.69-28.32A59.78 59.78 0 0 1 69.07 28A8 8 0 0 1 76 24a59.75 59.75 0 0 1 48 24h24a59.75 59.75 0 0 1 48-24a8 8 0 0 1 6.93 4a59.74 59.74 0 0 1 5.37 47.68A58 58 0 0 1 216 104Z"
-            />
+            width="32"
+            height="32"
+            className="text-primary absolute -top-24 right-[-25px] opacity-25 rotate-[28deg]"
+            viewBox="0 0 24 24">
+            <g
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              color="currentColor">
+              <path d="M5.008 16.706c-.037-.38.049-.534.373-.75c3.928-2.61 10.295-2.608 13.337.009c.239.205.302.352.277.659c-.12 1.498-.524 3.228-1.78 4.21c-1.994 1.557-8.446 1.553-10.434 0c-1.243-.972-1.631-2.652-1.773-4.128M9.009 18H9m6 0h-.009" />
+              <path d="M5 18c-2-1-3-3.749-3-6C2 6.477 6.477 2 12 2s10 4.477 10 10c0 2.251-1 5-3 6" />
+              <circle cx="12" cy="7" r="3" />
+              <path d="M3.37 7c1.299.314 1.957 1.9 1.47 3.542c-.44 1.476-1.656 2.496-2.84 2.457M20.632 7c-1.3.314-1.959 1.9-1.471 3.542c.438 1.476 1.653 2.495 2.839 2.457" />
+            </g>
           </svg>
 
           {/* Star */}
@@ -116,7 +135,7 @@ export const WhatElseCard = () => {
 
           {/* Arrow */}
           <svg
-            className="text-gray-200 absolute top-full left-1/2 group-hover:text-gray-300 transition-all -translate-x-1/2"
+            className="text-gray-200 absolute top-0 left-1/2 group-hover:text-gray-300 transition-all -translate-x-1/2"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
