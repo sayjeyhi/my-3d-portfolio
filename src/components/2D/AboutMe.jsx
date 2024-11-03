@@ -15,7 +15,7 @@ export const AboutMeSection = props => {
       {menuOpened || section !== 0 ? (
         <Section key="placeholder" />
       ) : (
-        <Section className="max-w-screen-2xl" key="me">
+        <Section className={`max-w-screen-2xl ${props.className}`} key="me">
           <div className="window">
             <h1 className="leading-none font-light text-xl sm:text-md">
               <span className="bg-white text-gray-700">
@@ -42,8 +42,11 @@ export const AboutMeSection = props => {
             </div>
 
             <button
-              onClick={() => setSection(1)}
-              className="inline-flex generic-squircle transform px-2 py-1 font-bold lg:px-6 lg:py-4 mt-5 text-black text-base md:text-lg lg:text-xl active:scale-95 transition-transform"
+              onClick={() => {
+                if (props.ignoreScroll) return
+                setSection(1)
+              }}
+              className="inline-flex generic-squircle transform px-2 py-3 font-bold lg:px-6 lg:py-4 mt-5 text-black text-base md:text-lg lg:text-xl active:scale-95 transition-transform"
               {...cursorHandlers}>
               Up for a magical twist?
               <div id="mouse-scroll">
