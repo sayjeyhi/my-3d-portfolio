@@ -32,6 +32,27 @@ export const FullInfo = ({ before, setShowFullInformation, after }) => {
         )}
 
         <br />
+
+        <Title
+          title="Work experience"
+          subTitle="List of the companies I worked for (scroll horizontally)"
+        />
+        <GameExperience />
+        <br />
+        <br />
+        <br />
+
+        <Title title="Talks" subTitle="The talks I gave (less than a scrollable area :D )" />
+        <GameTalks />
+        <br />
+        <br />
+        <br />
+
+        <Title title="Certifications" subTitle="My certifications (scroll horizontally)" />
+        <GameCertifications />
+        <br />
+        <br />
+        <br />
         <Title title="Educations" subTitle="My academic background" />
         <GameEducation />
         <br />
@@ -42,24 +63,6 @@ export const FullInfo = ({ before, setShowFullInformation, after }) => {
           subTitle="The open source projects I worked on (scroll horizontally)"
         />
         <GameProjects />
-        <br />
-        <br />
-        <br />
-        <Title title="Certifications" subTitle="My certifications (scroll horizontally)" />
-        <GameCertifications />
-        <br />
-        <br />
-        <br />
-        <Title title="Talks" subTitle="The talks I gave (less than a scrollable area :D )" />
-        <GameTalks />
-        <br />
-        <br />
-        <br />
-        <Title
-          title="Work experience"
-          subTitle="List of the companies I worked for (scroll horizontally)"
-        />
-        <GameExperience />
         <br />
         <br />
         <br />
