@@ -134,7 +134,7 @@ kbd {
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  /*background: #fff;*/
+  background: #fff;
   padding: 4rem 1.2rem 1.2rem;
 }
 

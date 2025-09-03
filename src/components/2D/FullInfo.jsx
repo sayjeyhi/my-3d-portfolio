@@ -42,7 +42,7 @@ export const FullInfo = ({ before, setShowFullInformation, after }) => {
         <br />
         <br />
 
-        <Title title="Talks" subTitle="The talks I gave (less than a scrollable area :D )" />
+        <Title title="Talks" subTitle="The talks I gave here and there" />
         <GameTalks />
         <br />
         <br />

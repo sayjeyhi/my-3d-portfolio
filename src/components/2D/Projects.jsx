@@ -32,6 +32,16 @@ export const ProjectsSection = () => {
 
         <WhatElseCard />
       </div>
+
+      <div className="m-20 relative top-12">
+        <div className="w-max grid">
+          <div className="px-8 py-4 bg-gray-200 rounded-3xl rounded-tl-none justify-start  items-center gap-3 inline-flex">
+            <h5 className="text-gray-900 text-sm font-normal leading-snug">
+              I wrote them when AI was not able to make a book for you in minutes!
+            </h5>
+          </div>
+        </div>
+      </div>
     </Section>
   )
 }

@@ -4,7 +4,7 @@ import { TALKS } from '../constants.js'
 export function GameTalks() {
   return (
     <ol className="items-start flex overflow-auto pb-4">
-      {TALKS.map(talk => (
+      {TALKS.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(talk => (
         <HorizontalItem
           key={talk.title}
           title={talk.title}

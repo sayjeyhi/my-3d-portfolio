@@ -129,6 +129,17 @@ export const CERTIFICATIONS = [
 
 export const PROJECTS = [
   {
+    title: 'CVKit',
+    subtitle: 'A modern resume builder with AI',
+    date: 'Jul 2025 - Present',
+    description:
+      'Create the best-looking resume, add a job description, and let AI turn it into a winning masterpiece.',
+    skills: ['K8S', 'Nestjs', 'postgres', 'posthog', 'gemini', 'AI', 'react'],
+    image: './projects/CVkit.png',
+    link: 'https://cvkit.ai',
+    icon: 'website'
+  },
+  {
     title: 'Pulse Monitor',
     subtitle: 'Github action free monitoring tool',
     date: 'Jun 2023 - Present',
@@ -303,9 +314,59 @@ export const TALKS = [
     date: 'Jan 2024',
     description:
       'I had a talk about how to use React Three Fiber and how to create 3D scenes in React and how to use it in your project.',
-    image: './talks/3d.jpeg',
+    image: './talks/3d-rendering.png',
     tags: ['3d', 'react', 'threejs', 'r3f'],
     link: 'https://r3f-threejs.sayjeyhi.com/?slideIndex=0&stepIndex=0'
+  },
+  {
+    title: 'How to ship web apps - zero to hero',
+    subtitle: 'Kubernetes, Docker, CI/CD, and more',
+    description:
+      'A full day workshop organized for iO consultancy, teaching how to ship web apps from scratch to a group of 100+ developers. Covering Kubernetes, Docker, CI/CD, and more.',
+    date: 'Aug 2025',
+    image: './talks/shipping-apps-k8s.jpeg',
+    tags: ['Kubernetes', 'Docker', 'CI/CD', 'DevOps'],
+    link: 'https://k8s.catshoulder.dev/'
+  },
+  {
+    title: 'How to do Internationalization with CMS',
+    subtitle: 'A large scale web app case study',
+    description:
+      'How to use CMS for internationalization in web apps, covering best practices, tools, and strategies.',
+    date: 'April 2025',
+    image: './talks/io-i18n.jpeg',
+    tags: ['cms', 'i18n', 'internationalization', 'localization'],
+    link: 'https://i18n.catshoulder.dev/'
+  },
+  {
+    title: 'Internationalization in Enterprise Apps',
+    subtitle: 'Best practices, tools, and strategies',
+    description:
+      'A talk about how to implement internationalization in large scale enterprise applications, covering best practices, tools, and strategies.',
+    date: 'May 2025',
+    image: './talks/i18n.png',
+    tags: ['i18n', 'internationalization', 'localization', 'enterprise'],
+    link: 'https://i18n.catshoulder.dev/'
+  },
+  {
+    title: 'Automate everything (N8N)',
+    subtitle: 'Open-source workflow automation tool',
+    description:
+      'A talk about N8N, an open-source workflow automation tool, and how to use it to automate repetitive tasks and improve productivity.',
+    date: 'March 2025',
+    image: './talks/n8n.png',
+    tags: ['N8N', 'automation', 'workflow', 'productivity'],
+    link: 'https://n8n.catshoulder.dev/'
+  },
+  {
+    title: 'WebContainers and the server in client concept',
+    subtitle: 'Run Node.js in the browser',
+    description:
+      'How to use web containers and run Node.js in the browser, and the server in client concept in Frontmania meetup.',
+    link: 'https://webcontainer.catshoulder.dev/',
+    tags: ['WebContainers', 'Node.js', 'browser', 'frontend'],
+    image: './talks/webcontainer.jpeg',
+    date: 'Oct 2025'
   }
 ]
 

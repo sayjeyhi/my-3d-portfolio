@@ -1,14 +1,15 @@
 import { useCursorHandlers } from './Cursor'
 import { Section } from './Section'
 import { AnimatePresence } from 'framer-motion'
-import { useAtom, useAtomValue } from 'jotai'
-import { currentSectionAtom, isSidebarOpenedAtom } from '@/atoms/menu.js'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { currentSectionAtom, isSidebarOpenedAtom, showFullInformationAtom } from '@/atoms/menu.js'
 import NameWithRandomDarkColors from '@/components/2D/NameWithRandomColors'
 
 export const AboutMeSection = props => {
   const [section, setSection] = useAtom(currentSectionAtom)
   const menuOpened = useAtomValue(isSidebarOpenedAtom)
   const cursorHandlers = useCursorHandlers()
+  const setShowFullInformation = useSetAtom(showFullInformationAtom)
 
   return (
     <AnimatePresence>
@@ -16,7 +17,7 @@ export const AboutMeSection = props => {
         <Section key="placeholder" />
       ) : (
         <Section className={`max-w-screen-2xl ${props.className}`} key="me">
-          <div className="window">
+          <div className="window" tabIndex={0} onClick={() => setShowFullInformation(true)}>
             <h1 className="leading-none font-light text-xl sm:text-md">
               <span className="bg-white text-gray-700">
                 <strong className="font-medium">Hi</strong>, I&apos;m
@@ -37,12 +38,9 @@ export const AboutMeSection = props => {
               <br />
             </p>
 
-            <div className="italic text-white mt-5 text-base">
-              Maybe a &quot;Code Whisperer&quot;!?
-            </div>
-
             <button
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation()
                 if (props.ignoreScroll) return
                 setSection(1)
               }}
