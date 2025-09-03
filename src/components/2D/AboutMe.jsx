@@ -28,7 +28,7 @@ export const AboutMeSection = props => {
               <br />
             </h1>
             <p className="text-xs bg-white sm:text-base md:text-lg lg:text-lg text-gray-700 mt-6 pl-2 border-l-8 border-gray-300 border-opacity-50">
-              <span {...cursorHandlers}>A published author with 10+ years in the field,</span>
+              <span {...cursorHandlers}>A published author with 15+ years in the field,</span>
               <br />
               <span {...cursorHandlers} className="bg-white">
                 dedicated to learning, sharing insights,
