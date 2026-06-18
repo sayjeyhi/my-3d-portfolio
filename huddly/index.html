@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=block"
       rel="stylesheet"
     />
 
@@ -207,7 +207,7 @@
         display: block;
       }
       .logo-name {
-        font-family: "Syne", sans-serif;
+        font-family: sans-serif;
         font-weight: 800;
         font-size: 18px;
         letter-spacing: -0.3px;
@@ -255,7 +255,7 @@
       }
 
       .hl {
-        font-family: "Syne", sans-serif;
+        font-family: sans-serif;
         font-weight: 800;
         font-size: clamp(72px, 7.2vw, 118px);
         display: block;
@@ -608,6 +608,166 @@
           translate: 0 0;
         }
       }
+
+      /* ── Gate all animations until fonts are confirmed loaded ── */
+      body * {
+        animation-play-state: paused;
+      }
+      .fonts-loaded * {
+        animation-play-state: running;
+      }
+
+      /* ═══════════════════════════════
+       MOBILE (≤ 767 px)
+    ═══════════════════════════════ */
+      @media (max-width: 767px) {
+        html,
+        body {
+          height: auto;
+          overflow-x: hidden;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .vline {
+          display: none;
+        }
+
+        .blob-1 {
+          width: 300px;
+          height: 300px;
+          top: -100px;
+        }
+        .blob-2 {
+          width: 220px;
+          height: 220px;
+        }
+        .blob-3 {
+          width: 180px;
+          height: 180px;
+        }
+        .blob-4,
+        .blob-5 {
+          display: none;
+        }
+
+        .page {
+          grid-template-columns: 1fr;
+          height: auto;
+          min-height: 100dvh;
+        }
+
+        .left {
+          padding: 88px 24px 32px;
+        }
+
+        .logo {
+          left: 24px;
+          top: 24px;
+        }
+
+        .hl {
+          font-size: clamp(54px, 18vw, 84px);
+        }
+
+        .hl-3 {
+          font-size: clamp(50px, 16vw, 78px);
+        }
+
+        .headline {
+          margin-bottom: 22px;
+        }
+
+        .headline::before {
+          display: none;
+        }
+
+        .subtext {
+          max-width: 100%;
+          font-size: 14px;
+          margin-bottom: 28px;
+        }
+
+        .cta-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+          max-width: 280px;
+        }
+
+        .btn {
+          justify-content: center;
+        }
+
+        .proof {
+          margin-top: 20px;
+        }
+
+        /* Cards – horizontal scroll strip */
+        .right {
+          height: 210px;
+          overflow: hidden;
+        }
+
+        .deco-ring {
+          display: none;
+        }
+
+        .cards-scene {
+          position: static;
+          display: flex;
+          flex-direction: row;
+          gap: 12px;
+          padding: 14px 24px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          height: 100%;
+          align-items: stretch;
+        }
+        .cards-scene::-webkit-scrollbar {
+          display: none;
+        }
+
+        .card {
+          position: static !important;
+          flex-shrink: 0;
+          width: 156px !important;
+          scroll-snap-align: start;
+          rotate: 0deg !important;
+          animation: fadeOnly 0.5s ease forwards !important;
+        }
+
+        .c-pantomime {
+          animation-delay: 1.5s !important;
+        }
+        .c-spy {
+          animation-delay: 1.65s !important;
+        }
+        .c-lie {
+          animation-delay: 1.8s !important;
+        }
+        .c-forbidden {
+          animation-delay: 1.95s !important;
+        }
+        .c-sentence {
+          animation-delay: 2.1s !important;
+        }
+        .c-connect {
+          animation-delay: 2.25s !important;
+        }
+
+        .footer {
+          position: static;
+          padding: 16px 24px 40px;
+          flex-direction: column;
+          gap: 4px;
+          text-align: center;
+          align-items: center;
+        }
+      }
     </style>
   </head>
   <body>
@@ -632,7 +792,7 @@
       <div class="left">
         <div class="logo">
           <div class="logo-mark">
-            <img src="../assets/images/icon.png" alt="" />
+            <img src="https://sayjeyhi.com/react-logo@3x.png" alt="huddly" />
           </div>
           <span class="logo-name">Huddly</span>
         </div>
@@ -653,7 +813,7 @@
 
         <div class="cta-row">
           <a
-            href="https://apps.apple.com/nl/app/huddly/id6780376035?l=en-GB"
+            href="#"
             class="btn btn-primary"
             aria-label="Download on the App Store"
           >
@@ -756,5 +916,22 @@
       >
       <span class="footer-right">v1.2.0</span>
     </footer>
+
+    <script>
+      if (document.fonts) {
+        document.fonts.ready.then(function () {
+          document.body.classList.add("fonts-loaded");
+        });
+      } else {
+        document.body.classList.add("fonts-loaded");
+      }
+    </script>
+    <noscript
+      ><style>
+        body * {
+          animation-play-state: running !important;
+        }
+      </style></noscript
+    >
   </body>
 </html>
