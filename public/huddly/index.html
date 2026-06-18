@@ -1,481 +1,760 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Huddly — Party Games for Everyone</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huddly — Party Games for Everyone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    :root {
-      --red:    #ed2923;
-      --orange: #f08d2c;
-      --blue:   #1f6fb4;
-      --pink:   #d83a78;
-      --purple: #7b3fb0;
-      --green:  #5aa233;
-      --teal:   #2aa8a8;
-      --bg:     #0d0b09;
-      --fg:     #f0ebe3;
-      --muted:  rgba(240,235,227,0.42);
-    }
+      :root {
+        --red: #ed2923;
+        --orange: #f08d2c;
+        --blue: #1f6fb4;
+        --pink: #d83a78;
+        --purple: #7b3fb0;
+        --green: #5aa233;
+        --teal: #2aa8a8;
+        --bg: #0d0b09;
+        --fg: #f0ebe3;
+        --muted: rgba(240, 235, 227, 0.42);
+      }
 
-    html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'DM Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "DM Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    /* ── Gradient mesh ── */
-    .mesh {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
-      opacity: 0;
-      animation: meshFade 1.6s ease forwards 0.05s;
-    }
-    @keyframes meshFade { to { opacity: 1; } }
+      /* ── Gradient mesh ── */
+      .mesh {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        animation: meshFade 1.6s ease forwards 0.05s;
+      }
+      @keyframes meshFade {
+        to {
+          opacity: 1;
+        }
+      }
 
-    .blob {
-      position: absolute; border-radius: 50%;
-      filter: blur(130px); mix-blend-mode: screen;
-      will-change: transform;
-    }
-    .blob-1 { width: 640px; height: 640px; top: -260px; right: 18%;
-      background: radial-gradient(circle, rgba(237,41,35,0.22) 0%, transparent 68%); }
-    .blob-2 { width: 520px; height: 520px; bottom: -180px; right: 4%;
-      background: radial-gradient(circle, rgba(31,111,180,0.18) 0%, transparent 68%); }
-    .blob-3 { width: 440px; height: 440px; top: 28%; left: 28%;
-      background: radial-gradient(circle, rgba(123,63,176,0.16) 0%, transparent 68%); }
-    .blob-4 { width: 380px; height: 380px; bottom: 8%; left: 2%;
-      background: radial-gradient(circle, rgba(240,141,44,0.13) 0%, transparent 68%); }
-    .blob-5 { width: 280px; height: 280px; top: 58%; right: 40%;
-      background: radial-gradient(circle, rgba(42,168,168,0.12) 0%, transparent 68%); }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(130px);
+        mix-blend-mode: screen;
+        will-change: transform;
+      }
+      .blob-1 {
+        width: 640px;
+        height: 640px;
+        top: -260px;
+        right: 18%;
+        background: radial-gradient(
+          circle,
+          rgba(237, 41, 35, 0.22) 0%,
+          transparent 68%
+        );
+      }
+      .blob-2 {
+        width: 520px;
+        height: 520px;
+        bottom: -180px;
+        right: 4%;
+        background: radial-gradient(
+          circle,
+          rgba(31, 111, 180, 0.18) 0%,
+          transparent 68%
+        );
+      }
+      .blob-3 {
+        width: 440px;
+        height: 440px;
+        top: 28%;
+        left: 28%;
+        background: radial-gradient(
+          circle,
+          rgba(123, 63, 176, 0.16) 0%,
+          transparent 68%
+        );
+      }
+      .blob-4 {
+        width: 380px;
+        height: 380px;
+        bottom: 8%;
+        left: 2%;
+        background: radial-gradient(
+          circle,
+          rgba(240, 141, 44, 0.13) 0%,
+          transparent 68%
+        );
+      }
+      .blob-5 {
+        width: 280px;
+        height: 280px;
+        top: 58%;
+        right: 40%;
+        background: radial-gradient(
+          circle,
+          rgba(42, 168, 168, 0.12) 0%,
+          transparent 68%
+        );
+      }
 
-    /* ── Noise ── */
-    .noise {
-      position: fixed; inset: 0; pointer-events: none; z-index: 200;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
+      /* ── Noise ── */
+      .noise {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 200;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+      }
 
-    /* ── Vertical rule ── */
-    .vline {
-      position: fixed; top: 0; bottom: 0; left: 50%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.055) 20%, rgba(255,255,255,0.055) 80%, transparent 100%);
-      z-index: 1; pointer-events: none;
-      opacity: 0; animation: meshFade 1s ease forwards 0.8s;
-    }
+      /* ── Vertical rule ── */
+      .vline {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(255, 255, 255, 0.055) 20%,
+          rgba(255, 255, 255, 0.055) 80%,
+          transparent 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+        animation: meshFade 1s ease forwards 0.8s;
+      }
 
-    /* ── PAGE GRID ── */
-    .page {
-      position: relative; z-index: 2;
-      width: 100vw; height: 100vh;
-      display: grid;
-      grid-template-columns: 50% 50%;
-    }
+      /* ── PAGE GRID ── */
+      .page {
+        position: relative;
+        z-index: 2;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 50% 50%;
+      }
 
-    /* ═══════════════════════════════
+      /* ═══════════════════════════════
        LEFT COLUMN
     ═══════════════════════════════ */
-    .left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 56px 0 72px;
-      position: relative;
-    }
+      .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 56px 0 72px;
+        position: relative;
+      }
 
-    /* Logo */
-    .logo {
-      position: absolute; top: 40px; left: 72px;
-      display: flex; align-items: center; gap: 11px;
-      opacity: 0; transform: translateY(16px);
-      animation: riseUp 0.55s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
-    }
-    .logo-mark {
-      width: 38px; height: 38px; border-radius: 10px;
-      overflow: hidden; background: var(--red);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 24px rgba(237,41,35,0.4);
-      flex-shrink: 0;
-    }
-    .logo-mark img { width: 38px; height: 38px; object-fit: cover; display: block; }
-    .logo-name {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: 18px; letter-spacing: -0.3px; color: var(--fg);
-    }
+      /* Logo */
+      .logo {
+        position: absolute;
+        top: 40px;
+        left: 72px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: riseUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+      }
+      .logo-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 8px 24px rgba(237, 41, 35, 0.4);
+        flex-shrink: 0;
+      }
+      .logo-mark img {
+        width: 38px;
+        height: 38px;
+        object-fit: cover;
+        display: block;
+      }
+      .logo-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: -0.3px;
+        color: var(--fg);
+      }
 
-    /* Eyebrow */
-    .eyebrow {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 3.5px; text-transform: uppercase;
-      color: var(--red); margin-bottom: 22px;
-      opacity: 0;
-      animation: riseUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards 0.9s;
-    }
+      /* Eyebrow */
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: 22px;
+        opacity: 0;
+        animation: riseUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+      }
 
-    /* Giant headline — three stacked lines */
-    .headline {
-      display: flex; flex-direction: column;
-      line-height: 0.9; letter-spacing: -0.04em;
-      margin-bottom: 30px;
-      position: relative;
-    }
+      /* Giant headline — three stacked lines */
+      .headline {
+        display: flex;
+        flex-direction: column;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        margin-bottom: 30px;
+        position: relative;
+      }
 
-    /* Huge watermark numeral behind headline */
-    .headline::before {
-      content: "6";
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: min(32vw, 420px);
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.025);
-      position: absolute;
-      right: -14%; top: 50%; transform: translateY(-50%);
-      pointer-events: none; user-select: none;
-      opacity: 0; animation: meshFade 1.2s ease forwards 1.6s;
-    }
+      /* Huge watermark numeral behind headline */
+      .headline::before {
+        content: "6";
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: min(32vw, 420px);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.025);
+        position: absolute;
+        right: -14%;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        user-select: none;
+        opacity: 0;
+        animation: meshFade 1.2s ease forwards 1.6s;
+      }
 
-    .hl {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(72px, 7.2vw, 118px);
-      display: block;
-    }
-    .hl-1 {
-      color: transparent;
-      -webkit-text-stroke: 1.5px rgba(240,235,227,0.55);
-      opacity: 0; transform: translateY(50px);
-      animation: riseUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards 1.05s;
-    }
-    .hl-2 {
-      color: var(--fg);
-      opacity: 0; transform: translateY(50px);
-      animation: riseUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards 1.25s;
-    }
-    .hl-3 {
-      color: var(--red);
-      font-style: italic;
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(68px, 6.8vw, 112px);
-      opacity: 0; transform: translateY(50px);
-      animation: riseUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards 1.45s;
-    }
+      .hl {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(72px, 7.2vw, 118px);
+        display: block;
+      }
+      .hl-1 {
+        color: transparent;
+        -webkit-text-stroke: 1.5px rgba(240, 235, 227, 0.55);
+        opacity: 0;
+        transform: translateY(50px);
+        animation: riseUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.05s;
+      }
+      .hl-2 {
+        color: var(--fg);
+        opacity: 0;
+        transform: translateY(50px);
+        animation: riseUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.25s;
+      }
+      .hl-3 {
+        color: var(--red);
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(68px, 6.8vw, 112px);
+        opacity: 0;
+        transform: translateY(50px);
+        animation: riseUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.45s;
+      }
 
-    /* Sub copy */
-    .subtext {
-      font-size: 15px; line-height: 1.7; font-weight: 300;
-      color: var(--muted); max-width: 360px;
-      margin-bottom: 38px;
-      opacity: 0;
-      animation: fadeOnly 0.8s ease forwards 1.75s;
-    }
-    .subtext strong { color: var(--fg); font-weight: 500; }
+      /* Sub copy */
+      .subtext {
+        font-size: 15px;
+        line-height: 1.7;
+        font-weight: 300;
+        color: var(--muted);
+        max-width: 360px;
+        margin-bottom: 38px;
+        opacity: 0;
+        animation: fadeOnly 0.8s ease forwards 1.75s;
+      }
+      .subtext strong {
+        color: var(--fg);
+        font-weight: 500;
+      }
 
-    /* CTA buttons */
-    .cta-row {
-      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-      opacity: 0; transform: translateY(22px);
-      animation: riseUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards 2.0s;
-    }
+      /* CTA buttons */
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        opacity: 0;
+        transform: translateY(22px);
+        animation: riseUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 2s;
+      }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
-      padding: 13px 26px; border-radius: 100px;
-      text-decoration: none; cursor: pointer; border: none;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--red); color: #fff;
-      box-shadow: 0 12px 36px rgba(237,41,35,0.35);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 48px rgba(237,41,35,0.5);
-    }
-    .btn-ghost {
-      background: rgba(255,255,255,0.06); color: var(--fg);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .btn-ghost:hover {
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.1);
-    }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 13px 26px;
+        border-radius: 100px;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          background 0.25s ease;
+        white-space: nowrap;
+      }
+      .btn-primary {
+        background: var(--red);
+        color: #fff;
+        box-shadow: 0 12px 36px rgba(237, 41, 35, 0.35);
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 48px rgba(237, 41, 35, 0.5);
+      }
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--fg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .btn-ghost:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.1);
+      }
 
-    /* Social proof */
-    .proof {
-      margin-top: 32px; display: flex; align-items: center; gap: 14px;
-      opacity: 0; animation: fadeOnly 1s ease forwards 2.4s;
-    }
-    .stars { color: #f9c846; font-size: 13px; letter-spacing: 1.5px; }
-    .proof-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.12); }
-    .proof-text { font-size: 12px; color: var(--muted); font-weight: 300; }
+      /* Social proof */
+      .proof {
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        opacity: 0;
+        animation: fadeOnly 1s ease forwards 2.4s;
+      }
+      .stars {
+        color: #f9c846;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+      }
+      .proof-divider {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .proof-text {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 300;
+      }
 
-    /* ═══════════════════════════════
+      /* ═══════════════════════════════
        RIGHT COLUMN — card mosaic
     ═══════════════════════════════ */
-    .right {
-      position: relative; overflow: hidden;
-    }
+      .right {
+        position: relative;
+        overflow: hidden;
+      }
 
-    /* Deco circles */
-    .deco-ring {
-      position: absolute; border-radius: 50%;
-      border: 1px dashed rgba(255,255,255,0.04);
-      pointer-events: none;
-      top: 50%; left: 50%;
-    }
-    .ring-1 { width: 560px; height: 560px; transform: translate(-50%, -50%); }
-    .ring-2 { width: 340px; height: 340px; transform: translate(-50%, -50%); }
-    .ring-3 { width: 180px; height: 180px; transform: translate(-50%, -50%); }
+      /* Deco circles */
+      .deco-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px dashed rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+        top: 50%;
+        left: 50%;
+      }
+      .ring-1 {
+        width: 560px;
+        height: 560px;
+        transform: translate(-50%, -50%);
+      }
+      .ring-2 {
+        width: 340px;
+        height: 340px;
+        transform: translate(-50%, -50%);
+      }
+      .ring-3 {
+        width: 180px;
+        height: 180px;
+        transform: translate(-50%, -50%);
+      }
 
-    .cards-scene { position: absolute; inset: 0; }
+      .cards-scene {
+        position: absolute;
+        inset: 0;
+      }
 
-    /* ── Base card ── */
-    .card {
-      position: absolute;
-      border-radius: 22px;
-      padding: 22px 22px 20px;
-      display: flex; flex-direction: column; gap: 8px;
-      cursor: default;
-      opacity: 0;
-      rotate: var(--r, 0deg);
-      will-change: scale, opacity;
-      transition: scale 0.32s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .card:hover { scale: 1.07; }
+      /* ── Base card ── */
+      .card {
+        position: absolute;
+        border-radius: 22px;
+        padding: 22px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        cursor: default;
+        opacity: 0;
+        rotate: var(--r, 0deg);
+        will-change: scale, opacity;
+        transition: scale 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .card:hover {
+        scale: 1.07;
+      }
 
-    .card-badge {
-      position: absolute; top: 14px; right: 16px;
-      font-size: 9.5px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: rgba(255,255,255,0.4);
-      font-family: 'DM Sans', sans-serif;
-    }
-    .card-icon { font-size: 30px; line-height: 1; }
-    .card-title {
-      font-family: 'Syne', sans-serif; font-weight: 700;
-      font-size: 16px; color: #fff; line-height: 1.15; margin-top: 4px;
-    }
-    .card-sub {
-      font-size: 11.5px; color: rgba(255,255,255,0.65);
-      line-height: 1.5; font-weight: 300;
-    }
+      .card-badge {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        font-family: "DM Sans", sans-serif;
+      }
+      .card-icon {
+        font-size: 30px;
+        line-height: 1;
+      }
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        color: #fff;
+        line-height: 1.15;
+        margin-top: 4px;
+      }
+      .card-sub {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.5;
+        font-weight: 300;
+      }
 
-    /* ── Individual cards — position + color + rotation var + entry offsets ── */
-    .c-pantomime { --r:  3deg;    --tx:  70px; --ty: -30px; }
-    .c-spy       { --r: -5deg;   --tx: -60px; --ty:  30px; }
-    .c-forbidden { --r:  3deg;    --tx:  70px; --ty:  20px; }
-    .c-lie       { --r: -3.5deg; --tx:  40px; --ty:  50px; }
-    .c-sentence  { --r: -5deg;   --tx: -60px; --ty:  40px; }
-    .c-connect   { --r:  3deg;    --tx:  70px; --ty:  40px; }
+      /* ── Individual cards — position + color + rotation var + entry offsets ── */
+      .c-pantomime {
+        --r: 3deg;
+        --tx: 70px;
+        --ty: -30px;
+      }
+      .c-spy {
+        --r: -5deg;
+        --tx: -60px;
+        --ty: 30px;
+      }
+      .c-forbidden {
+        --r: 3deg;
+        --tx: 70px;
+        --ty: 20px;
+      }
+      .c-lie {
+        --r: -3.5deg;
+        --tx: 40px;
+        --ty: 50px;
+      }
+      .c-sentence {
+        --r: -5deg;
+        --tx: -60px;
+        --ty: 40px;
+      }
+      .c-connect {
+        --r: 3deg;
+        --tx: 70px;
+        --ty: 40px;
+      }
 
-    .c-pantomime {
-      width: 215px;
-      background: linear-gradient(138deg, #f08d2c 0%, #e07520 100%);
-      box-shadow: 0 24px 64px rgba(240,141,44,0.38), inset 0 1px 0 rgba(255,255,255,0.15);
-      top: 7%; right: 8%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.15s;
-    }
-    .c-spy {
-      width: 198px;
-      background: linear-gradient(138deg, #1f6fb4 0%, #155598 100%);
-      box-shadow: 0 24px 64px rgba(31,111,180,0.38), inset 0 1px 0 rgba(255,255,255,0.12);
-      top: 20%; left: 3%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.3s;
-    }
-    .c-forbidden {
-      width: 196px;
-      background: linear-gradient(138deg, #d83a78 0%, #be2862 100%);
-      box-shadow: 0 24px 64px rgba(216,58,120,0.38), inset 0 1px 0 rgba(255,255,255,0.12);
-      top: 50%; right: 5%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.45s;
-    }
-    .c-lie {
-      width: 190px;
-      background: linear-gradient(138deg, #7b3fb0 0%, #632f98 100%);
-      box-shadow: 0 24px 64px rgba(123,63,176,0.38), inset 0 1px 0 rgba(255,255,255,0.12);
-      top: 35%; right: 30%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.6s;
-    }
-    .c-sentence {
-      width: 192px;
-      background: linear-gradient(138deg, #5aa233 0%, #478026 100%);
-      box-shadow: 0 24px 64px rgba(90,162,51,0.38), inset 0 1px 0 rgba(255,255,255,0.12);
-      bottom: 9%; left: 7%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.75s;
-    }
-    .c-connect {
-      width: 186px;
-      background: linear-gradient(138deg, #2aa8a8 0%, #1a8f8f 100%);
-      box-shadow: 0 24px 64px rgba(42,168,168,0.38), inset 0 1px 0 rgba(255,255,255,0.12);
-      bottom: 12%; right: 14%;
-      animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards 2.9s;
-    }
+      .c-pantomime {
+        width: 215px;
+        background: linear-gradient(138deg, #f08d2c 0%, #e07520 100%);
+        box-shadow:
+          0 24px 64px rgba(240, 141, 44, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        top: 7%;
+        right: 8%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.15s;
+      }
+      .c-spy {
+        width: 198px;
+        background: linear-gradient(138deg, #1f6fb4 0%, #155598 100%);
+        box-shadow:
+          0 24px 64px rgba(31, 111, 180, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        top: 20%;
+        left: 3%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.3s;
+      }
+      .c-forbidden {
+        width: 196px;
+        background: linear-gradient(138deg, #d83a78 0%, #be2862 100%);
+        box-shadow:
+          0 24px 64px rgba(216, 58, 120, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        top: 50%;
+        right: 5%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.45s;
+      }
+      .c-lie {
+        width: 190px;
+        background: linear-gradient(138deg, #7b3fb0 0%, #632f98 100%);
+        box-shadow:
+          0 24px 64px rgba(123, 63, 176, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        top: 35%;
+        right: 30%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.6s;
+      }
+      .c-sentence {
+        width: 192px;
+        background: linear-gradient(138deg, #5aa233 0%, #478026 100%);
+        box-shadow:
+          0 24px 64px rgba(90, 162, 51, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        bottom: 9%;
+        left: 7%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.75s;
+      }
+      .c-connect {
+        width: 186px;
+        background: linear-gradient(138deg, #2aa8a8 0%, #1a8f8f 100%);
+        box-shadow:
+          0 24px 64px rgba(42, 168, 168, 0.38),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        bottom: 12%;
+        right: 14%;
+        animation: cardIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.9s;
+      }
 
-    /* ── Footer ── */
-    .footer {
-      position: fixed; bottom: 30px; left: 72px; right: 40px;
-      display: flex; justify-content: space-between; align-items: center;
-      opacity: 0; animation: fadeOnly 1s ease forwards 3.1s;
-      z-index: 3;
-    }
-    .footer-left { font-size: 11px; color: rgba(255,255,255,0.18); font-weight: 300; }
-    .footer-right {
-      font-size: 11px; color: rgba(255,255,255,0.18); font-weight: 500;
-      font-family: 'Syne', sans-serif; letter-spacing: 1px;
-    }
+      /* ── Footer ── */
+      .footer {
+        position: fixed;
+        bottom: 30px;
+        left: 72px;
+        right: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0;
+        animation: fadeOnly 1s ease forwards 3.1s;
+        z-index: 3;
+      }
+      .footer-left {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.18);
+        font-weight: 300;
+      }
+      .footer-right {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.18);
+        font-weight: 500;
+        font-family: "Syne", sans-serif;
+        letter-spacing: 1px;
+      }
 
-    /* ── Keyframes ── */
-    @keyframes riseUp {
-      from { opacity: 0; transform: translateY(44px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeOnly {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+      /* ── Keyframes ── */
+      @keyframes riseUp {
+        from {
+          opacity: 0;
+          transform: translateY(44px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeOnly {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 
-    /* Card entry: three different trajectories */
-    @keyframes cardIn {
-      from { opacity: 0; translate: var(--tx) var(--ty); }
-      to   { opacity: 1; translate: 0 0; }
-    }
-  </style>
-</head>
-<body>
+      /* Card entry: three different trajectories */
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          translate: var(--tx) var(--ty);
+        }
+        to {
+          opacity: 1;
+          translate: 0 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Gradient mesh -->
+    <div class="mesh" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+    </div>
 
-  <!-- Gradient mesh -->
-  <div class="mesh" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-    <div class="blob blob-5"></div>
-  </div>
+    <!-- Noise overlay -->
+    <div class="noise" aria-hidden="true"></div>
 
-  <!-- Noise overlay -->
-  <div class="noise" aria-hidden="true"></div>
+    <!-- Vertical center rule -->
+    <div class="vline" aria-hidden="true"></div>
 
-  <!-- Vertical center rule -->
-  <div class="vline" aria-hidden="true"></div>
-
-  <!-- Page -->
-  <div class="page">
-
-    <!-- ── LEFT ── -->
-    <div class="left">
-
-      <div class="logo">
-        <div class="logo-mark">
-          <img src="../assets/images/icon.png" alt="" />
+    <!-- Page -->
+    <div class="page">
+      <!-- ── LEFT ── -->
+      <div class="left">
+        <div class="logo">
+          <div class="logo-mark">
+            <img src="../assets/images/icon.png" alt="" />
+          </div>
+          <span class="logo-name">Huddly</span>
         </div>
-        <span class="logo-name">Huddly</span>
+
+        <p class="eyebrow">Party Games &middot; iOS &amp; Android</p>
+
+        <h1 class="headline">
+          <span class="hl hl-1">Make</span>
+          <span class="hl hl-2">Every</span>
+          <span class="hl hl-3">Night.</span>
+        </h1>
+
+        <p class="subtext">
+          <strong>Many games. One app. Zero planning.</strong><br />
+          Charades, Spy, Forbidden Words, Lie Detector, Sentence Builder,
+          Connect — the whole party in your pocket.
+        </p>
+
+        <div class="cta-row">
+          <a
+            href="https://apps.apple.com/nl/app/huddly/id6780376035?l=en-GB"
+            class="btn btn-primary"
+            aria-label="Download on the App Store"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+              />
+            </svg>
+            App Store
+          </a>
+          <a href="#" class="btn btn-ghost" aria-label="Get it on Google Play">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M3.18 23.76c.28.15.6.19.92.1l12.46-7.08-2.59-2.6-10.79 9.58zM.89 1.31C.34 1.64 0 2.23 0 2.96v18.08c0 .73.34 1.32.89 1.65l.1.06 10.13-10.14v-.23L.98 2.25l-.09.06zM20.44 10.26l-2.59-1.47-2.92 2.92 2.92 2.91 2.62-1.49c.75-.43.75-1.42-.03-1.87zM3.18.24l12.46 7.08-2.59 2.59L2.27.15c.31-.09.63-.05.91.09z"
+              />
+            </svg>
+            Play Store
+          </a>
+        </div>
+
+        <div class="proof">
+          <span class="stars">★★★★★</span>
+          <span class="proof-divider"></span>
+          <span class="proof-text">Free &middot; No account needed</span>
+        </div>
       </div>
+      <!-- /left -->
 
-      <p class="eyebrow">Party Games &middot; iOS &amp; Android</p>
+      <!-- ── RIGHT ── -->
+      <div class="right" aria-hidden="true">
+        <!-- Decorative rings -->
+        <div class="deco-ring ring-1"></div>
+        <div class="deco-ring ring-2"></div>
+        <div class="deco-ring ring-3"></div>
 
-      <h1 class="headline">
-        <span class="hl hl-1">Make</span>
-        <span class="hl hl-2">Every</span>
-        <span class="hl hl-3">Night.</span>
-      </h1>
+        <div class="cards-scene">
+          <div class="card c-pantomime">
+            <span class="card-badge">01</span>
+            <span class="card-icon">🎭</span>
+            <span class="card-title">Charades</span>
+            <span class="card-sub">Act it out, let your team guess</span>
+          </div>
 
-      <p class="subtext">
-        <strong>Many games. One app. Zero planning.</strong><br />
-        Charades, Spy, Forbidden Words, Lie Detector, Sentence Builder, Connect —
-        the whole party in your pocket.
-      </p>
+          <div class="card c-spy">
+            <span class="card-badge">02</span>
+            <span class="card-icon">🔍</span>
+            <span class="card-title">Spy</span>
+            <span class="card-sub">Find the word, expose the spy</span>
+          </div>
 
-      <div class="cta-row">
-        <a href="https://apps.apple.com/nl/app/huddly/id6780376035?l=en-GB" class="btn btn-primary" aria-label="Download on the App Store">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-          App Store
-        </a>
-        <a href="#" class="btn btn-ghost" aria-label="Get it on Google Play">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M3.18 23.76c.28.15.6.19.92.1l12.46-7.08-2.59-2.6-10.79 9.58zM.89 1.31C.34 1.64 0 2.23 0 2.96v18.08c0 .73.34 1.32.89 1.65l.1.06 10.13-10.14v-.23L.98 2.25l-.09.06zM20.44 10.26l-2.59-1.47-2.92 2.92 2.92 2.91 2.62-1.49c.75-.43.75-1.42-.03-1.87zM3.18.24l12.46 7.08-2.59 2.59L2.27.15c.31-.09.63-.05.91.09z"/>
-          </svg>
-          Play Store
-        </a>
+          <div class="card c-lie">
+            <span class="card-badge">03</span>
+            <span class="card-icon">🤥</span>
+            <span class="card-title">Lie Detector</span>
+            <span class="card-sub">Who's bluffing? You decide</span>
+          </div>
+
+          <div class="card c-forbidden">
+            <span class="card-badge">04</span>
+            <span class="card-icon">🚫</span>
+            <span class="card-title">Forbidden Word</span>
+            <span class="card-sub">Describe it — without those words</span>
+          </div>
+
+          <div class="card c-sentence">
+            <span class="card-badge">05</span>
+            <span class="card-icon">💬</span>
+            <span class="card-title">Sentence</span>
+            <span class="card-sub">Build a story together, word by word</span>
+          </div>
+
+          <div class="card c-connect">
+            <span class="card-badge">06</span>
+            <span class="card-icon">🧩</span>
+            <span class="card-title">Connect</span>
+            <span class="card-sub">Get 10 words and link them</span>
+          </div>
+        </div>
+        <!-- /cards-scene -->
       </div>
+      <!-- /right -->
+    </div>
+    <!-- /page -->
 
-      <div class="proof">
-        <span class="stars">★★★★★</span>
-        <span class="proof-divider"></span>
-        <span class="proof-text">Free &middot; No account needed</span>
-      </div>
-
-    </div><!-- /left -->
-
-    <!-- ── RIGHT ── -->
-    <div class="right" aria-hidden="true">
-
-      <!-- Decorative rings -->
-      <div class="deco-ring ring-1"></div>
-      <div class="deco-ring ring-2"></div>
-      <div class="deco-ring ring-3"></div>
-
-      <div class="cards-scene">
-
-        <div class="card c-pantomime">
-          <span class="card-badge">01</span>
-          <span class="card-icon">🎭</span>
-          <span class="card-title">Charades</span>
-          <span class="card-sub">Act it out, let your team guess</span>
-        </div>
-
-        <div class="card c-spy">
-          <span class="card-badge">02</span>
-          <span class="card-icon">🔍</span>
-          <span class="card-title">Spy</span>
-          <span class="card-sub">Find the word, expose the spy</span>
-        </div>
-
-        <div class="card c-lie">
-          <span class="card-badge">03</span>
-          <span class="card-icon">🤥</span>
-          <span class="card-title">Lie Detector</span>
-          <span class="card-sub">Who's bluffing? You decide</span>
-        </div>
-
-        <div class="card c-forbidden">
-          <span class="card-badge">04</span>
-          <span class="card-icon">🚫</span>
-          <span class="card-title">Forbidden Word</span>
-          <span class="card-sub">Describe it — without those words</span>
-        </div>
-
-        <div class="card c-sentence">
-          <span class="card-badge">05</span>
-          <span class="card-icon">💬</span>
-          <span class="card-title">Sentence</span>
-          <span class="card-sub">Build a story together, word by word</span>
-        </div>
-
-        <div class="card c-connect">
-          <span class="card-badge">06</span>
-          <span class="card-icon">🧩</span>
-          <span class="card-title">Connect</span>
-          <span class="card-sub">Get 10 words and link them</span>
-        </div>
-
-      </div><!-- /cards-scene -->
-    </div><!-- /right -->
-  </div><!-- /page -->
-
-  <footer class="footer">
-    <span class="footer-left">&copy; 2025 Huddly &mdash; Made with love for gatherings</span>
-    <span class="footer-right">v1.2.0</span>
-  </footer>
-
-</body>
+    <footer class="footer">
+      <span class="footer-left"
+        >&copy; 2025 Huddly &mdash; Made with love for gatherings</span
+      >
+      <span class="footer-right">v1.2.0</span>
+    </footer>
+  </body>
 </html>
