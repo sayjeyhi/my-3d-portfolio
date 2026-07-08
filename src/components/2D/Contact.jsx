@@ -64,7 +64,7 @@ export const ContactSection = () => {
           </a>
         </div>
         <div className="flex items-center ">
-          Designed and developed by Me in <strong className="mx-1">Amsterdam</strong>
+          Designed and developed by Me in <strong className="mx-1">Amsterdam</strong> 2023
         </div>
       </div>
     </Section>
